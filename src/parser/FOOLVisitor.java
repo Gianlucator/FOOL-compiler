@@ -1,4 +1,4 @@
-// Generated from FOOL.g4 by ANTLR 4.6
+// Generated from C:/Users/Stefano/Documents/GitHub/FOOL2017/src/parser\FOOL.g4 by ANTLR 4.6
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -24,6 +24,37 @@ public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLetInExp(FOOLParser.LetInExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code classDefinitionExp}
+	 * labeled alternative in {@link FOOLParser#prog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassDefinitionExp(FOOLParser.ClassDefinitionExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLParser#classdef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassdef(FOOLParser.ClassdefContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLParser#classfield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassfield(FOOLParser.ClassfieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLParser#classdec}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassdec(FOOLParser.ClassdecContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLParser#classasm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassasm(FOOLParser.ClassasmContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FOOLParser#let}.
 	 * @param ctx the parse tree
@@ -62,6 +93,13 @@ public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunDeclaration(FOOLParser.FunDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code classAssignment}
+	 * labeled alternative in {@link FOOLParser#dec}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassAssignment(FOOLParser.ClassAssignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FOOLParser#type}.
 	 * @param ctx the parse tree
@@ -128,4 +166,10 @@ public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunExp(FOOLParser.FunExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLParser#funexp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunexp(FOOLParser.FunexpContext ctx);
 }

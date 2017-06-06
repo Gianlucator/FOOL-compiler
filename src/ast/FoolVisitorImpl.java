@@ -236,18 +236,18 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		//get the invocation arguments
 		ArrayList<Node> args = new ArrayList<Node>();
 		
-		for(ExpContext exp : ctx.exp())
+		for(ExpContext exp : ctx.funexp().exp())
 			args.add(visit(exp));
 		
 		//especial check for stdlib func
 		//this is WRONG, THIS SHOULD BE DONE IN A DIFFERENT WAY
 		//JUST IMAGINE THERE ARE 800 stdlib functions...
-		if(ctx.ID().getText().equals("print"))
+		if(ctx.funexp().ID().getText().equals("print"))
 			res = new PrintNode(args.get(0));
 		
 		else
 			//instantiate the invocation
-			res = new CallNode(ctx.ID().getText(), args);
+			res = new CallNode(ctx.funexp().ID().getText(), args);
 		
 		return res;
 	}
