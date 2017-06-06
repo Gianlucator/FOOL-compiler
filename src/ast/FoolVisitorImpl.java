@@ -131,8 +131,12 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 			//it is a simple expression
 			return visit( ctx.left );
 		}else{
+			if(ctx.term().equals(ctx.MINUS())){
+				//return new MinusNode(visit(ctx.left), visit(ctx.right));
+			}else if(ctx.term().equals(ctx.PLUS()){
+				return new PlusNode(visit(ctx.left), visit(ctx.right));
+			}
 			//it is a binary expression, you should visit left and right
-			return new PlusNode(visit(ctx.left), visit(ctx.right));
 		}
 		
 	}
