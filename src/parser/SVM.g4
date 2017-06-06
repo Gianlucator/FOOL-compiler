@@ -52,6 +52,7 @@ assembly:
 	  | STOREHP         {code[i++] = STOREHP;}   //
 	  | PRINT           {code[i++] = PRINT;}
 	  | HALT            {code[i++] = HALT;}
+	  // cicla sulle label e le sostituisce alla riga di codice corrispondente
 	  )* { for (Integer refAdd: labelRef.keySet()) {
 	              code[refAdd]=labelAdd.get(labelRef.get(refAdd));
 		     } 

@@ -13,7 +13,16 @@ grammar FOOL;
   
 prog   : exp SEMIC                 #singleExp
        | let exp SEMIC             #letInExp
+       | classdef SEMIC            #classDefinitionExp
        ;
+
+classdef    : CLASS ID CLPAR (classfield)* CRPAR
+            ;
+
+classfield  : (vardec
+            | varasm) SEMIC
+            | fun
+            ;
 
 let       : LET (dec SEMIC)+ IN ;
 
@@ -21,7 +30,7 @@ vardec  : type ID ;
 
 varasm     : vardec ASM exp ;
 
-fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)? exp ;
+fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)? CLPAR exp CRPAR ;
 
 dec   : varasm           #varAssignment
       | fun              #funDeclaration
@@ -79,7 +88,8 @@ FUN    : 'fun' ;
 INT    : 'int' ;
 BOOL   : 'bool' ;
 
-
+// OOP
+CLASS  : 'class';
 
 //Numbers
 fragment DIGIT : '0'..'9';    
