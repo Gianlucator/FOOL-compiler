@@ -1,26 +1,12 @@
 package ast;
 
+import java.lang.instrument.ClassDefinition;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import parser.*;
-import parser.FOOLParser.BaseExpContext;
-import parser.FOOLParser.BoolValContext;
-import parser.FOOLParser.DecContext;
-import parser.FOOLParser.ExpContext;
-import parser.FOOLParser.FactorContext;
-import parser.FOOLParser.FunContext;
-import parser.FOOLParser.FunExpContext;
-import parser.FOOLParser.IfExpContext;
-import parser.FOOLParser.IntValContext;
-import parser.FOOLParser.LetInExpContext;
-import parser.FOOLParser.SingleExpContext;
-import parser.FOOLParser.TermContext;
-import parser.FOOLParser.TypeContext;
-import parser.FOOLParser.VarExpContext;
-import parser.FOOLParser.VarasmContext;
-import parser.FOOLParser.VardecContext;
+import parser.FOOLParser.*;
 import util.SemanticError;
 
 public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
@@ -30,7 +16,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		
 		//resulting node of the right type
 		ProgLetInNode res;
-		
+
 		//list of declarations in @res
 		ArrayList<Node> declarations = new ArrayList<Node>();
 		
@@ -133,10 +119,12 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		}else{
 			if(ctx.term().equals(ctx.MINUS())){
 				//return new MinusNode(visit(ctx.left), visit(ctx.right));
-			}else if(ctx.term().equals(ctx.PLUS()){
+			}else if(ctx.term().equals(ctx.PLUS())){
 				return new PlusNode(visit(ctx.left), visit(ctx.right));
 			}
 			//it is a binary expression, you should visit left and right
+			return new PlusNode(visit(ctx.left), visit(ctx.right));
+
 		}
 		
 	}
@@ -254,9 +242,37 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		return res;
 	}
 
-	public Node visitClassDefinitionExp() {
-		Node res = null;
+	@Override
+	public Node visitClassDefinitionExp(ClassDefinitionExpContext ctx) {
 
-		return res;
+		//list of declarations in @res
+		ArrayList<Node> classes = new ArrayList<>();
+
+		for (ClassdefContext cd : ctx.classdef()) {
+			classes.add(visit(cd));
+		}
+
+		Node prog = visit(ctx.prog());
+
+		return new ProgClassDefinitionNode(classes, prog);
+	}
+
+
+	@Override
+	public Node visitClassdef(ClassdefContext ctx) {
+
+		String id = ctx.ID(0).getText();
+		String inherited = ctx.ID(1).getText();
+
+		ArrayList<Node> fields = new ArrayList<>();
+		ArrayList<Node> methods = new ArrayList<>();
+		for (VarasmContext vasm : ctx.varasm()) {
+			fields.add(visit(vasm));
+		}
+		for (FunContext fc : ctx.fun()) {
+			methods.add(visit(fc));
+		}
+
+		return new ClassNode(id, inherited, fields, methods);
 	}
 }

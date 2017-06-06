@@ -38,12 +38,6 @@ public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassdef(FOOLParser.ClassdefContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FOOLParser#classfield}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitClassfield(FOOLParser.ClassfieldContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link FOOLParser#classdec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

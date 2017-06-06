@@ -10,20 +10,17 @@ grammar FOOL;
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
-  
-prog   : exp SEMIC                 #singleExp
-       | let exp SEMIC             #letInExp
-       | classdef SEMIC (prog)?    #classDefinitionExp
+
+
+
+prog   : exp SEMIC                   #singleExp
+       | let exp SEMIC               #letInExp
+       | (classdef SEMIC)+ (prog)?   #classDefinitionExp
        ;
 
 /* OOP */
 
-classdef    : CLASS ID (INHERITS ID)? CLPAR (classfield)* CRPAR
-            ;
-
-classfield  : (vardec
-            | varasm) SEMIC
-            | fun
+classdef    : CLASS ID (INHERITS ID)? CLPAR (varasm SEMIC)* (fun)* CRPAR
             ;
 
 classdec : ID ID ;
@@ -38,7 +35,7 @@ vardec  : type ID ;
 
 varasm  : vardec ASM exp ;
 
-fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)? CLPAR exp CRPAR ;
+fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)?  exp ;
 
 dec   : varasm           #varAssignment
       | fun              #funDeclaration
@@ -48,7 +45,6 @@ dec   : varasm           #varAssignment
    
 type   : INT  
        | BOOL
-       | ID
       ;  
     
 exp    :  ('-')? left=term ((PLUS | MINUS) right=exp)?
