@@ -24,9 +24,7 @@ import parser.FOOLParser.VardecContext;
 import util.SemanticError;
 
 public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
-	
-	
-	
+
 	@Override
 	public Node visitLetInExp(LetInExpContext ctx) {
 		
@@ -236,20 +234,25 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		//get the invocation arguments
 		ArrayList<Node> args = new ArrayList<Node>();
 		
-		for(ExpContext exp : ctx.funexp().exp())
+		for(ExpContext exp : ctx.funcall().exp())
 			args.add(visit(exp));
 		
 		//especial check for stdlib func
 		//this is WRONG, THIS SHOULD BE DONE IN A DIFFERENT WAY
 		//JUST IMAGINE THERE ARE 800 stdlib functions...
-		if(ctx.funexp().ID().getText().equals("print"))
+		if(ctx.funcall().ID().getText().equals("print"))
 			res = new PrintNode(args.get(0));
 		
 		else
 			//instantiate the invocation
-			res = new CallNode(ctx.funexp().ID().getText(), args);
+			res = new CallNode(ctx.funcall().ID().getText(), args);
 		
 		return res;
 	}
-	
+
+	public Node visitClassDefinitionExp() {
+		Node res = null;
+
+		return res;
+	}
 }

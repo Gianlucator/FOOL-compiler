@@ -13,7 +13,7 @@ grammar FOOL;
   
 prog   : exp SEMIC                 #singleExp
        | let exp SEMIC             #letInExp
-       | classdef SEMIC (prog)?            #classDefinitionExp
+       | classdef SEMIC (prog)?    #classDefinitionExp
        ;
 
 /* OOP */
@@ -28,7 +28,7 @@ classfield  : (vardec
 
 classdec : ID ID ;
 
-classasm : classdec ASM funexp ;
+classasm : classdec ASM funcall ;
 
 /* OOP */
 
@@ -61,14 +61,14 @@ factor : left=value (EQ right=value)?
       ;     
    
 value  :  INTEGER                           #intVal
-      | ( TRUE | FALSE )                   #boolVal
-      | LPAR exp RPAR                      #baseExp
+      | ( TRUE | FALSE )                    #boolVal
+      | LPAR exp RPAR                       #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR  #ifExp
-      | ID                                             #varExp
-      | funexp         #funExp
+      | ID                                  #varExp
+      | funcall                             #funExp
       ;
 
-funexp : ID ( LPAR (exp (COMMA exp)* )? RPAR )? ;
+funcall : ID ( LPAR (exp (COMMA exp)* )? RPAR )? ;
 
    
 /*------------------------------------------------------------------

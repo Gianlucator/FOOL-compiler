@@ -167,9 +167,9 @@ public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunExp(FOOLParser.FunExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FOOLParser#funexp}.
+	 * Visit a parse tree produced by {@link FOOLParser#funcall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunexp(FOOLParser.FunexpContext ctx);
+	T visitFuncall(FOOLParser.FuncallContext ctx);
 }

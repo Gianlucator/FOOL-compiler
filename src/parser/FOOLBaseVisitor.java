@@ -185,5 +185,5 @@ public class FOOLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements F
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunexp(FOOLParser.FunexpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFuncall(FOOLParser.FuncallContext ctx) { return visitChildren(ctx); }
 }

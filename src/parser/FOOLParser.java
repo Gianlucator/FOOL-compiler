@@ -25,10 +25,10 @@ public class FOOLParser extends Parser {
 		RULE_prog = 0, RULE_classdef = 1, RULE_classfield = 2, RULE_classdec = 3, 
 		RULE_classasm = 4, RULE_let = 5, RULE_vardec = 6, RULE_varasm = 7, RULE_fun = 8, 
 		RULE_dec = 9, RULE_type = 10, RULE_exp = 11, RULE_term = 12, RULE_factor = 13, 
-		RULE_value = 14, RULE_funexp = 15;
+		RULE_value = 14, RULE_funcall = 15;
 	public static final String[] ruleNames = {
 		"prog", "classdef", "classfield", "classdec", "classasm", "let", "vardec", 
-		"varasm", "fun", "dec", "type", "exp", "term", "factor", "value", "funexp"
+		"varasm", "fun", "dec", "type", "exp", "term", "factor", "value", "funcall"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -460,8 +460,8 @@ public class FOOLParser extends Parser {
 			return getRuleContext(ClassdecContext.class,0);
 		}
 		public TerminalNode ASM() { return getToken(FOOLParser.ASM, 0); }
-		public FunexpContext funexp() {
-			return getRuleContext(FunexpContext.class,0);
+		public FuncallContext funcall() {
+			return getRuleContext(FuncallContext.class,0);
 		}
 		public ClassasmContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -493,7 +493,7 @@ public class FOOLParser extends Parser {
 			setState(74);
 			match(ASM);
 			setState(75);
-			funexp();
+			funcall();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1296,8 +1296,8 @@ public class FOOLParser extends Parser {
 		}
 	}
 	public static class FunExpContext extends ValueContext {
-		public FunexpContext funexp() {
-			return getRuleContext(FunexpContext.class,0);
+		public FuncallContext funcall() {
+			return getRuleContext(FuncallContext.class,0);
 		}
 		public FunExpContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
@@ -1398,7 +1398,7 @@ public class FOOLParser extends Parser {
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(158);
-				funexp();
+				funcall();
 				}
 				break;
 			}
@@ -1414,7 +1414,7 @@ public class FOOLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class FunexpContext extends ParserRuleContext {
+	public static class FuncallContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(FOOLParser.ID, 0); }
 		public TerminalNode LPAR() { return getToken(FOOLParser.LPAR, 0); }
 		public TerminalNode RPAR() { return getToken(FOOLParser.RPAR, 0); }
@@ -1428,28 +1428,28 @@ public class FOOLParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(FOOLParser.COMMA, i);
 		}
-		public FunexpContext(ParserRuleContext parent, int invokingState) {
+		public FuncallContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_funexp; }
+		@Override public int getRuleIndex() { return RULE_funcall; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FOOLListener ) ((FOOLListener)listener).enterFunexp(this);
+			if ( listener instanceof FOOLListener ) ((FOOLListener)listener).enterFuncall(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FOOLListener ) ((FOOLListener)listener).exitFunexp(this);
+			if ( listener instanceof FOOLListener ) ((FOOLListener)listener).exitFuncall(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FOOLVisitor ) return ((FOOLVisitor<? extends T>)visitor).visitFunexp(this);
+			if ( visitor instanceof FOOLVisitor ) return ((FOOLVisitor<? extends T>)visitor).visitFuncall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final FunexpContext funexp() throws RecognitionException {
-		FunexpContext _localctx = new FunexpContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_funexp);
+	public final FuncallContext funcall() throws RecognitionException {
+		FuncallContext _localctx = new FuncallContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_funcall);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);

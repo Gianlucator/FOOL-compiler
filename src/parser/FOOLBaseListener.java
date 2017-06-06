@@ -304,13 +304,13 @@ public class FOOLBaseListener implements FOOLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunexp(FOOLParser.FunexpContext ctx) { }
+	@Override public void enterFuncall(FOOLParser.FuncallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunexp(FOOLParser.FunexpContext ctx) { }
+	@Override public void exitFuncall(FOOLParser.FuncallContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
