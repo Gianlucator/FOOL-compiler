@@ -47,9 +47,6 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitVarasm(VarasmContext ctx) {
 		
-		//declare the result node
-		VarNode result;
-		
 		//visit the type
 		Node typeNode = visit(ctx.vardec().type());
 		
@@ -59,6 +56,13 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		//build the varNode
 		return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
 	}
+
+	@Override
+    public Node visitVardec(VardecContext ctx) {
+	    Node typeNode = visit(ctx.type());
+
+	    return new VarDecNode(ctx.ID().getText(), typeNode);
+    }
 	
 	@Override
 	public Node visitFun(FunContext ctx) {

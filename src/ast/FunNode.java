@@ -37,48 +37,49 @@ public class FunNode implements Node {
 	  //env.offset = -2;
 	  HashMap<String,STentry> hm = env.symTable.get(env.nestingLevel);
       STentry entry = new STentry(env.nestingLevel,env.offset--); //separo introducendo "entry"
-      
-      if ( hm.put(id,entry) != null )
-        res.add(new SemanticError("Fun id "+id+" already declared"));
-      else{
-    	  //creare una nuova hashmap per la symTable
-	      env.nestingLevel++;
-	      HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
-	      env.symTable.add(hmn);
-	      
-	      ArrayList<Node> parTypes = new ArrayList<Node>();
-	      int paroffset=1;
-	      
-	      //check args
-	      for(Node a : parlist){
-	    	  ParNode arg = (ParNode) a;
-	    	  parTypes.add(arg.getType());
-	    	  if ( hmn.put(arg.getId(),new STentry(env.nestingLevel,arg.getType(),paroffset++)) != null  )
-	    		  System.out.println("Parameter id "+arg.getId()+" already declared");
-              
-	      }
-	      
-	      //set func type
-	      entry.addType( new ArrowTypeNode(parTypes, type) );
-	      
-	    //check semantics in the dec list
-	      if(declist.size() > 0){
-	    	  env.offset = -2;
-	    	  //if there are children then check semantics for every child and save the results
-	    	  for(Node n : declist)
+
+      if (hm.put(id, entry) != null) {
+          res.add(new SemanticError("Fun id " + id + " already declared"));
+      } else {
+          //creare una nuova hashmap per la symTable
+          env.nestingLevel++;
+          HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
+          env.symTable.add(hmn);
+
+          ArrayList<Node> parTypes = new ArrayList<Node>();
+          int paroffset=1;
+
+          //check args
+          for(Node a : parlist){
+              ParNode arg = (ParNode) a;
+              parTypes.add(arg.getType());
+              if ( hmn.put(arg.getId(),new STentry(env.nestingLevel,arg.getType(),paroffset++)) != null  ) {
+                  System.out.println("Parameter id "+arg.getId()+" already declared");
+              }
+
+          }
+
+          //set func type
+          entry.addType( new ArrowTypeNode(parTypes, type) );
+
+          //check semantics in the dec list
+          if(declist.size() > 0){
+              env.offset = -2;
+              //if there are children then check semantics for every child and save the results
+              for(Node n : declist)
 	    		  res.addAll(n.checkSemantics(env));
-	      }
-	     
-	      //check body
-	      res.addAll(body.checkSemantics(env));
-	      
-	      //close scope
-	      env.symTable.remove(env.nestingLevel--);
-	      
+          }
+
+          //check body
+          res.addAll(body.checkSemantics(env));
+
+          //close scope
+          env.symTable.remove(env.nestingLevel--);
+
       }
-      
+
       return res;
-	}
+  }
   
   public void addPar (Node p) {
     parlist.add(p);

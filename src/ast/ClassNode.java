@@ -54,10 +54,10 @@ public class ClassNode implements Node {
         if (id.equals(superclass))
             res.add(new SemanticError(id + " cannot extend itself."));
         else {
-            env.nestingLevel++;
+            //env.nestingLevel++;
 
             //controllare ID superclasse
-            if ((env.symTable.get(0)).get(superclass) == null)
+            if (!superclass.equals("") && (env.symTable.get(0)).get(superclass) == null)
                 res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
 
             if ((env.symTable.get(0).put(id, entry)) != null)
@@ -77,7 +77,7 @@ public class ClassNode implements Node {
 
 
 
-            env.nestingLevel--;
+            //env.nestingLevel--;
         }
 
         return res;

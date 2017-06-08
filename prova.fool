@@ -1,5 +1,7 @@
-class Sovrano(int o) {
-    int f(int x) 2 * x;
+class Sovrano(int a) {
+
+    int f(int x) 2 * 2;
+    int r(int y) 2 * y;
 };
 
-2 + 1;
+2 * 2;
