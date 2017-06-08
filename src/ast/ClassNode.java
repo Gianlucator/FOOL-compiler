@@ -57,13 +57,14 @@ public class ClassNode implements Node {
                 res.add(new SemanticError("Class " + id + " has been already declared"));
 
             //checksemantics field e methods classe attuale
+            for (Node field : fields)
+                res.addAll(field.checkSemantics(env));
 
+            for (Node method : methods)
+                res.addAll(method.checkSemantics(env));
 
             env.nestingLevel--;
-
         }
-        //fields e metodi non ripetuti
-        //
 
         return res;
     }

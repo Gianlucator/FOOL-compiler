@@ -12,8 +12,8 @@ grammar FOOL;
  * PARSER RULES
  *------------------------------------------------------------------*/
   
-prog   : exp SEMIC                 		#singleExp
-       | let exp SEMIC                 	#letInExp
+prog   : exp SEMIC                 		    #singleExp
+       | let exp SEMIC                 	    #letInExp
        | (classdec)+ SEMIC (let)? exp SEMIC	#classExp
        ;
 
@@ -33,7 +33,7 @@ dec   : varasm           #varAssignment
          
    
 type   : INT  
-        | BOOL 
+        | BOOL
         | ID
       ;  
     
@@ -46,15 +46,15 @@ term   : left=factor ((TIMES | DIV) right=term)?
 factor : left=value (EQ right=value)?
       ;     
    
-value  :  INTEGER                        		      #intVal
-      | ( TRUE | FALSE )                  		      #boolVal
-      | LPAR exp RPAR                      			  #baseExp
-      | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR  #ifExp
-      | ID                                             #varExp
-      | THIS											  #thisExp
-      | ID ( LPAR (exp (COMMA exp)* )? RPAR )          #funExp
-      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	  #methodExp     
-      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			  #newExp 
+value  :  INTEGER                        		                                    #intVal
+      | ( TRUE | FALSE )                  		                                    #boolVal
+      | LPAR exp RPAR                      			                                #baseExp
+      | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR #ifExp
+      | ID                                                                          #varExp
+      | THIS											                            #thisExp
+      | ID ( LPAR (exp (COMMA exp)* )? RPAR )                                       #funExp
+      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                    #methodExp
+      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                            #newExp
       ; 
 
    

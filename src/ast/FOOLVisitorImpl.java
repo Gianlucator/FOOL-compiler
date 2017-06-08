@@ -1,11 +1,14 @@
 package ast;
 
+import parser.FOOLBaseVisitor;
+import parser.FOOLParser;
 import parser.FOOLVisitor;
 import parser.FOOLParser.*;
 import parser.FOOLLexer.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class FOOLVisitorImpl implements FOOLVisitor<Node> {
+public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 
 	@Override
 	public Node visitLetInExp(LetInExpContext ctx) {
@@ -123,6 +126,9 @@ public class FOOLVisitorImpl implements FOOLVisitor<Node> {
 
 		}
 		
+
+
+
 	}
 	
 	@Override
@@ -211,7 +217,12 @@ public class FOOLVisitorImpl implements FOOLVisitor<Node> {
 		return new IdNode(ctx.ID().getText());
 
 	}
-	
+
+	@Override
+	public Node visitThisExp(ThisExpContext ctx) {
+		return super.visitThisExp(ctx);
+	}
+
 	@Override
 	public Node visitFunExp(FunExpContext ctx) {
 		//this corresponds to a function invocation
@@ -238,6 +249,33 @@ public class FOOLVisitorImpl implements FOOLVisitor<Node> {
 		return res;
 	}
 
+	// (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )
+
+	@Override
+	public Node visitMethodExp(MethodExpContext ctx) {
+        String objectName;
+        String methodName;
+        ArrayList<Node> args = new ArrayList<>();
+
+	    if (ctx.THIS() != null) {
+	        objectName = ctx.THIS().getText();
+	        methodName = ctx.ID().get(0).getText();
+        } else {
+            objectName = ctx.ID().get(0).getText();
+            methodName = ctx.ID().get(1).getText();
+        }
+
+        for (ExpContext exp : ctx.exp())
+	        args.add(visit(exp));
+
+		return new CallMethodNode(objectName, methodName, args);
+	}
+
+	@Override
+	public Node visitNewExp(NewExpContext ctx) {
+		return super.visitNewExp(ctx);
+	}
+
 	@Override
 	public Node visitClassExp(ClassExpContext ctx) {
 
@@ -248,9 +286,13 @@ public class FOOLVisitorImpl implements FOOLVisitor<Node> {
 			classes.add(visit(cd));
 		}
 
-		Node prog = visit(ctx.let());
+		Node body;
+		if (ctx.let() != null)
+			body = visit(ctx.let());
+		else
+			body = visit(ctx.exp());
 
-		return new ProgClassDefinitionNode(classes, prog);
+		return new ProgClassDefinitionNode(classes, body);
 	}
 
 
@@ -258,12 +300,14 @@ public class FOOLVisitorImpl implements FOOLVisitor<Node> {
 	public Node visitClassdec(ClassdecContext ctx) {
 
 		String id = ctx.ID(0).getText();
-		String inherited = ctx.ID(1).getText();
+		String inherited = "";
+		if (ctx.ID(1) != null)
+			inherited = ctx.ID(1).getText();
 
 		ArrayList<Node> fields = new ArrayList<>();
 		ArrayList<Node> methods = new ArrayList<>();
-		for (VardecContext vasm : ctx.vardec()) {
-			fields.add(visit(vasm));
+		for (VardecContext vardec : ctx.vardec()) {
+			fields.add(visit(vardec));
 		}
 		for (FunContext fc: ctx.fun()) {
 			methods.add(visit(fc));
