@@ -1,4 +1,4 @@
-class Sovrano {
+class Sovrano(int o) {
     int f(int x) 2 * x;
 };
 
