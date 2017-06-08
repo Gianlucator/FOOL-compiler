@@ -23,6 +23,10 @@ public class FunNode implements Node {
     declist=d;
     body=b;
   }
+
+  public String getFunName() {
+  	return id;
+  }
   
   @Override
 	public ArrayList<SemanticError> checkSemantics(Environment env) {

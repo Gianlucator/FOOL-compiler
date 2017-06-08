@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import parser.ExecuteVM;
-import parser.SVMLexer;
-import parser.SVMParser;
+import parser.*;
 import util.Environment;
 import util.SemanticError;
 import ast.Node;
+import ast.FOOLVisitorImpl;
 
 public class Test {
     public static void main(String[] args) throws Exception {
@@ -30,7 +29,7 @@ public class Test {
         
 	        FOOLParser parser = new FOOLParser(tokens);
 	        
-	        FoolVisitorImpl visitor = new FoolVisitorImpl();
+	        FOOLVisitorImpl visitor = new FOOLVisitorImpl();
 	        
 	        Node ast = visitor.visit(parser.prog()); //generazione AST 
 

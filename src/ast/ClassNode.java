@@ -22,6 +22,13 @@ public class ClassNode implements Node {
         this.methods = methods;
     }
 
+    public ArrayList<Node> getFields(){
+        return fields;
+    }
+
+    public ArrayList<Node> getMethods(){
+        return methods;
+    }
 
     @Override
     public String toPrint(String indent) {
@@ -56,12 +63,19 @@ public class ClassNode implements Node {
             if ((env.symTable.get(0).put(id, entry)) != null)
                 res.add(new SemanticError("Class " + id + " has been already declared"));
 
+            if (!superclass.equals("")){
+                fields.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getFields());
+                methods.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getMethods());
+            }
+
             //checksemantics field e methods classe attuale
             for (Node field : fields)
                 res.addAll(field.checkSemantics(env));
 
             for (Node method : methods)
                 res.addAll(method.checkSemantics(env));
+
+
 
             env.nestingLevel--;
         }

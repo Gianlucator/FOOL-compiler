@@ -1,3 +1,4 @@
+
 grammar FOOL;
 
 @lexer::members {
@@ -10,41 +11,30 @@ grammar FOOL;
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
-
-
-
-prog   : exp SEMIC                   #singleExp
-       | let exp SEMIC               #letInExp
-       | (classdef SEMIC)+ (prog)?   #classDefinitionExp
+  
+prog   : exp SEMIC                 		    #singleExp
+       | let exp SEMIC                 	    #letInExp
+       | (classdec)+ SEMIC (let)? exp SEMIC	#classExp
        ;
 
-/* OOP */
-
-classdef    : CLASS ID (INHERITS ID)? CLPAR (varasm SEMIC)* (fun)* CRPAR
-            ;
-
-classdec : ID ID ;
-
-classasm : classdec ASM funcall ;
-
-/* OOP */
+classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)?  (CLPAR (fun SEMIC)+ CRPAR)? ;
 
 let       : LET (dec SEMIC)+ IN ;
 
 vardec  : type ID ;
 
-varasm  : vardec ASM exp ;
+varasm     : vardec ASM exp ;
 
-fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)?  exp ;
+fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)? exp ;
 
 dec   : varasm           #varAssignment
       | fun              #funDeclaration
-      | classasm         #classAssignment
       ;
          
    
 type   : INT  
-       | BOOL
+        | BOOL
+        | ID
       ;  
     
 exp    :  ('-')? left=term ((PLUS | MINUS) right=exp)?
@@ -56,15 +46,16 @@ term   : left=factor ((TIMES | DIV) right=term)?
 factor : left=value (EQ right=value)?
       ;     
    
-value  :  INTEGER                           #intVal
-      | ( TRUE | FALSE )                    #boolVal
-      | LPAR exp RPAR                       #baseExp
-      | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR  #ifExp
-      | ID                                  #varExp
-      | funcall                             #funExp
-      ;
-
-funcall : ID ( LPAR (exp (COMMA exp)* )? RPAR )? ;
+value  :  INTEGER                        		                                    #intVal
+      | ( TRUE | FALSE )                  		                                    #boolVal
+      | LPAR exp RPAR                      			                                #baseExp
+      | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR #ifExp
+      | ID                                                                          #varExp
+      | THIS											                            #thisExp
+      | ID ( LPAR (exp (COMMA exp)* )? RPAR )                                       #funExp
+      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                    #methodExp
+      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                            #newExp
+      ; 
 
    
 /*------------------------------------------------------------------
@@ -95,11 +86,12 @@ VAR    : 'var' ;
 FUN    : 'fun' ;
 INT    : 'int' ;
 BOOL   : 'bool' ;
+CLASS   : 'class' ;
+IMPLEMENTS   : 'implements' ;
+THIS   : 'this' ;
+NEW    : 'new' ;
+DOT    : '.' ;
 
-// OOP
-CLASS  : 'class';
-INHERITS : 'inherits';
-NEW : 'new';
 
 //Numbers
 fragment DIGIT : '0'..'9';    

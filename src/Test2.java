@@ -4,6 +4,8 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import parser.FOOLLexer;
+import parser.FOOLParser;
 import parser.FOOLParser.DecContext;
 import parser.FOOLParser.FunDeclarationContext;
 import parser.FOOLParser.LetContext;
