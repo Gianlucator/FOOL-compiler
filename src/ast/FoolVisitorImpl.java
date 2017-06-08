@@ -1,15 +1,11 @@
 package ast;
 
-import java.lang.instrument.ClassDefinition;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import parser.*;
+import parser.FOOLVisitor;
 import parser.FOOLParser.*;
-import util.SemanticError;
+import parser.FOOLLexer.*;
+import java.util.ArrayList;
 
-public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
+public class FOOLVisitorImpl implements FOOLVisitor<Node> {
 
 	@Override
 	public Node visitLetInExp(LetInExpContext ctx) {
@@ -226,50 +222,50 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		//get the invocation arguments
 		ArrayList<Node> args = new ArrayList<Node>();
 		
-		for(ExpContext exp : ctx.funcall().exp())
+		for(ExpContext exp : ctx.exp())
 			args.add(visit(exp));
 		
 		//especial check for stdlib func
 		//this is WRONG, THIS SHOULD BE DONE IN A DIFFERENT WAY
 		//JUST IMAGINE THERE ARE 800 stdlib functions...
-		if(ctx.funcall().ID().getText().equals("print"))
+		if(ctx.ID().getText().equals("print"))
 			res = new PrintNode(args.get(0));
 		
 		else
 			//instantiate the invocation
-			res = new CallNode(ctx.funcall().ID().getText(), args);
+			res = new CallNode(ctx.ID().getText(), args);
 		
 		return res;
 	}
 
 	@Override
-	public Node visitClassDefinitionExp(ClassDefinitionExpContext ctx) {
+	public Node visitClassExp(ClassExpContext ctx) {
 
 		//list of declarations in @res
 		ArrayList<Node> classes = new ArrayList<>();
 
-		for (ClassdefContext cd : ctx.classdef()) {
+		for (ClassdecContext cd : ctx.classdec()) {
 			classes.add(visit(cd));
 		}
 
-		Node prog = visit(ctx.prog());
+		Node prog = visit(ctx.let());
 
 		return new ProgClassDefinitionNode(classes, prog);
 	}
 
 
 	@Override
-	public Node visitClassdef(ClassdefContext ctx) {
+	public Node visitClassdec(ClassdecContext ctx) {
 
 		String id = ctx.ID(0).getText();
 		String inherited = ctx.ID(1).getText();
 
 		ArrayList<Node> fields = new ArrayList<>();
 		ArrayList<Node> methods = new ArrayList<>();
-		for (VarasmContext vasm : ctx.varasm()) {
+		for (VardecContext vasm : ctx.vardec()) {
 			fields.add(visit(vasm));
 		}
-		for (FunContext fc : ctx.fun()) {
+		for (FunContext fc: ctx.fun()) {
 			methods.add(visit(fc));
 		}
 

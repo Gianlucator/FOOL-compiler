@@ -1,27 +1,13 @@
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.util.ArrayList;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import parser.ExecuteVM;
-import parser.FOOLLexer;
-import parser.FOOLParser;
-import parser.SVMLexer;
-import parser.SVMParser;
 import parser.FOOLParser.DecContext;
-import parser.FOOLParser.FunContext;
 import parser.FOOLParser.FunDeclarationContext;
 import parser.FOOLParser.LetContext;
 import parser.FOOLParser.LetInExpContext;
-import parser.FOOLParser.ProgContext;
-import util.Environment;
-import util.SemanticError;
-import ast.FoolVisitorImpl;
-import ast.Node;
 
 public class Test2 {
 	static int count_var (ParseTree t){

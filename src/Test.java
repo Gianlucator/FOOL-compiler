@@ -7,13 +7,10 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import parser.ExecuteVM;
-import parser.FOOLLexer;
-import parser.FOOLParser;
 import parser.SVMLexer;
 import parser.SVMParser;
 import util.Environment;
 import util.SemanticError;
-import ast.FoolVisitorImpl;
 import ast.Node;
 
 public class Test {
