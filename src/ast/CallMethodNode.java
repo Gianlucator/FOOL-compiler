@@ -42,12 +42,12 @@ public class CallMethodNode implements Node {
 
         int j = env.nestingLevel;
         STentry tmp = null;
-        //boolean foundMethod = false;
+        boolean foundMethod = false;
 
-        /* if (objectName.equals("this")) {
+        if (objectName.equals("this")) {
 
         } else {
-            Node objType;
+            Node objType = null;
             while (j >= 0 && tmp == null){
                 objType = (env.symTable.get(j--)).get(objectName).getType();
                 for(Node decs : ((ClassNode) (env.symTable.get(0)).get(objType).getType()).getMethods()){
@@ -57,15 +57,18 @@ public class CallMethodNode implements Node {
                 }
             }
             if (!foundMethod){
-                res.add(new SemanticError("Id " + methodName + " not declared");
+                res.add(new SemanticError("Id " + methodName + " not declared"));
+            }
+            else{
+                System.out.println(objType.toPrint(""));
             }
         }
 
 
         if (tmp == null)
             res.add(new SemanticError("Id " + objectName + " not declared"));
-        */
 
+        /*
         while (j >= 0 && tmp == null)
             tmp = (env.symTable.get(j--)).get(methodName);
         if (tmp == null)
@@ -78,7 +81,7 @@ public class CallMethodNode implements Node {
             for (Node arg : args)
                 res.addAll(arg.checkSemantics(env));
         }
-
+        */
         return null;
     }
 }
