@@ -1,4 +1,4 @@
-// Generated from C:/Users/crist/Documents/GitHub/FOOL2017/src/parser\FOOL.g4 by ANTLR 4.7
+// Generated from C:/Users/Stefano/Documents/GitHub/FOOL2017/src/parser\FOOL.g4 by ANTLR 4.6
 package parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class FOOLParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -1327,7 +1327,7 @@ public class FOOLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%\u00cb\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3%\u00cb\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\6\2#\n\2\r\2\16\2"+
 		"$\3\2\3\2\5\2)\n\2\3\2\3\2\3\2\5\2.\n\2\3\3\3\3\3\3\3\3\5\3\64\n\3\3\3"+
@@ -1342,8 +1342,8 @@ public class FOOLParser extends Parser {
 		"\u00b2\n\r\f\r\16\r\u00b5\13\r\5\r\u00b7\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3"+
 		"\r\7\r\u00c0\n\r\f\r\16\r\u00c3\13\r\3\r\3\r\5\r\u00c7\n\r\5\r\u00c9\n"+
 		"\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\7\4\2\31\32!!\3\2\b\t\3"+
-		"\2\n\13\3\2\f\r\4\2\35\35!!\2\u00de\2-\3\2\2\2\4/\3\2\2\2\6N\3\2\2\2\b"+
-		"X\3\2\2\2\n[\3\2\2\2\f_\3\2\2\2\16t\3\2\2\2\20v\3\2\2\2\22y\3\2\2\2\24"+
+		"\2\n\13\3\2\f\r\4\2\35\35!!\u00de\2-\3\2\2\2\4/\3\2\2\2\6N\3\2\2\2\bX"+
+		"\3\2\2\2\n[\3\2\2\2\f_\3\2\2\2\16t\3\2\2\2\20v\3\2\2\2\22y\3\2\2\2\24"+
 		"\u0080\3\2\2\2\26\u0085\3\2\2\2\30\u00c8\3\2\2\2\32\33\5\22\n\2\33\34"+
 		"\7\3\2\2\34.\3\2\2\2\35\36\5\6\4\2\36\37\5\22\n\2\37 \7\3\2\2 .\3\2\2"+
 		"\2!#\5\4\3\2\"!\3\2\2\2#$\3\2\2\2$\"\3\2\2\2$%\3\2\2\2%&\3\2\2\2&(\7\3"+

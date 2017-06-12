@@ -141,6 +141,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 			//it is a simple expression
 			return visit( ctx.left );
 		}else{
+			//TODO AGGIUSTA
 			if(ctx.term().equals(ctx.MINUS())){
 				//return new MinusNode(visit(ctx.left), visit(ctx.right));
 			}else if(ctx.term().equals(ctx.PLUS())){
@@ -200,7 +201,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		
 		//this is actually nothing in the sense that for the ast the parenthesis are not relevant
 		//the thing is that the structure of the ast will ensure the operational order by giving
-		//a larger depth (closer to the leafs) to those expressions with higher importance
+		//a larger depth (closer to the leaves) to those expressions with higher importance
 		
 		//this is actually the default implementation for this method in the FOOLBaseVisitor class
 		//therefore it can be safely removed here
