@@ -55,7 +55,7 @@ value  :  INTEGER                        		                                    #
       | ID ( LPAR (exp (COMMA exp)* )? RPAR )                                       #funExp
       | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                    #methodExp
       | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                            #newExp
-      ;
+      ; 
 
    
 /*------------------------------------------------------------------
