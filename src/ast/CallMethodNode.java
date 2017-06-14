@@ -15,6 +15,7 @@ public class CallMethodNode implements Node {
     private STentry entry;
     private int nestinglevel;
 
+    // chiamata di un metodo di una classe
     public CallMethodNode(String objectName, String methodName, ArrayList<Node> args) {
         this.objectName = objectName;
         this.methodName = methodName;

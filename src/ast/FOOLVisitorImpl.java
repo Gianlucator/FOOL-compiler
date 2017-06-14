@@ -8,6 +8,15 @@ import parser.FOOLLexer.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// estende FOOLBaseVisitor
+
+// src/ast contiene per ogni tipo di nodo la classe java corrispondente
+
+// FOOLVisitorImpl contiene, per ogni tipo di nodo, un metodo che serve per visitare il contesto del nodo
+// ogni metodo prende in input il contesto per il nodo
+// (i context dei nodi: on FOOLParser.java)
+// e restituisce un oggetto della classe del nodo del tipo corretto
+
 public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 
 	@Override

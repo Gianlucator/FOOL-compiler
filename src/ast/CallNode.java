@@ -6,6 +6,9 @@ import util.Environment;
 import util.SemanticError;
 import lib.FOOLlib;
 
+
+// chiamata di funzione
+// vedi FunNode per dichiarazione di funzione
 public class CallNode implements Node {
 
     private String id;

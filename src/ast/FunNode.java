@@ -6,6 +6,8 @@ import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
+// dichiarazione di funzione
+// vedi CallNode per chiamata di funzione
 public class FunNode implements Node {
 
   private String id;
@@ -35,15 +37,25 @@ public class FunNode implements Node {
 	  ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 	  
 	  //env.offset = -2;
+      // mh = Symbol table = lista di hashmap
 	  HashMap<String,STentry> hm = env.symTable.get(env.nestingLevel);
-      STentry entry = new STentry(env.nestingLevel,env.offset--); //separo introducendo "entry"
 
+	  STentry entry = new STentry(env.nestingLevel,env.offset--); //separo introducendo "entry"
+
+      // se la st contiene già l'id ==> error
       if (hm.put(id, entry) != null) {
           res.add(new SemanticError("Fun id " + id + " already declared"));
       } else {
-          //creare una nuova hashmap per la symTable
+          // se la st non contiene ancora l'id ==> lo si aggiunge e
+          // si crea una nuova hashmap per la symTable
+
+          // nuovo livello innestato
           env.nestingLevel++;
+
+          // hashmap nested
           HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
+
+          // aggiunto alla symbol table
           env.symTable.add(hmn);
 
           ArrayList<Node> parTypes = new ArrayList<Node>();
@@ -54,9 +66,10 @@ public class FunNode implements Node {
               ParNode arg = (ParNode) a;
               parTypes.add(arg.getType());
               if ( hmn.put(arg.getId(),new STentry(env.nestingLevel,arg.getType(),paroffset++)) != null  ) {
+                  // warning, non errore!
+                  // la prima dichiarazione viene sovrascritta dalla seconda
                   System.out.println("Parameter id "+arg.getId()+" already declared");
               }
-
           }
 
           //set func type
@@ -101,6 +114,8 @@ public class FunNode implements Node {
   }
   
   //valore di ritorno non utilizzato
+    // controlla se il tipo del valore di ritorno coincide con il tipo del valore
+    // ritornato dalla funzione
   public Node typeCheck () {
 	if (declist!=null) 
 	  for (Node dec:declist)
@@ -111,7 +126,7 @@ public class FunNode implements Node {
     }  
     return null;
   }
-  
+
   public String codeGeneration() {
 	  
 	    String declCode="";
@@ -132,14 +147,17 @@ public class FunNode implements Node {
 				"lra\n"+ //inserimento return address
 	    		declCode+ //inserimento dichiarazioni locali
 	    		body.codeGeneration()+
-	    		"srv\n"+ //pop del return value
+	    		"srv\n"+ //pop del return value and store top into rv (var che contiene il risultato della funz)
 	    		popDecl+
-	    		"sra\n"+ // pop del return address
-	    		"pop\n"+ // pop di AL
+	    		"sra\n"+ // pop del return address e store top (= Access Link) into $ra
+	    		"pop\n"+ // pop di Access Link
+                // AL= points to the activation record associated with the nearest enclosing scope
+                // per il body della funzione AL è il blocco che contiene la dichiarazione della funzione
 	    		popParl+
-	    		"sfp\n"+  // setto $fp a valore del CL
-	    		"lrv\n"+ // risultato della funzione sullo stack
-	    		"lra\n"+"js\n" // salta a $ra
+                // Control Link (o Dynamic Link) = %fp precedente settato dal chiamante
+	    		"sfp\n"+  // setto $fp a valore del Control Link  -  store top into frame pointer
+	    		"lrv\n"+ // risultato della funzione (=rv) on top dello stack - load from rv
+	    		"lra\n"+"js\n" //load from ra e salta a $ra
 	    		);
 	    
 		return "push "+ funl +"\n";
