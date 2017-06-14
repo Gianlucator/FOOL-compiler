@@ -12,11 +12,13 @@ import java.util.HashMap;
 public class ProgClassDefinitionNode implements Node {
 
     private ArrayList<Node> classes;
-    private Node prog;
+    private Node let;
+    private Node exp;
 
-    public ProgClassDefinitionNode(ArrayList<Node> classes, Node prog) {
+    public ProgClassDefinitionNode(ArrayList<Node> classes, Node let, Node exp) {
         this.classes = classes;
-        this.prog = prog;
+        this.let = let;
+        this.exp = exp;
     }
 
     @Override
@@ -51,8 +53,9 @@ public class ProgClassDefinitionNode implements Node {
                 res.addAll(cl.checkSemantics(env));
         }
 
-        //check semantics in the exp body
-        res.addAll(prog.checkSemantics(env));
+        //check semantics in the (let)? exp
+        if (let != null) res.addAll(let.checkSemantics(env));
+        res.addAll(exp.checkSemantics(env));
 
         //clean the scope, we are leaving a let scope
         env.symTable.remove(env.nestingLevel--);

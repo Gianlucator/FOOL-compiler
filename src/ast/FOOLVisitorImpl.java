@@ -311,18 +311,18 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 
 		//list of declarations in @res
 		ArrayList<Node> classes = new ArrayList<>();
+		Node let = null;
+		Node exp = null;
 
 		for (ClassdecContext cd : ctx.classdec()) {
 			classes.add(visit(cd));
 		}
 
-		Node body;
 		if (ctx.let() != null)
-			body = visit(ctx.let());
-		else
-			body = visit(ctx.exp());
+			let = visit(ctx.let());
+		exp = visit(ctx.exp());
 
-		return new ProgClassDefinitionNode(classes, body);
+		return new ProgClassDefinitionNode(classes, let, exp);
 	}
 
 
