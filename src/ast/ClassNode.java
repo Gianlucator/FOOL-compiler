@@ -49,22 +49,34 @@ public class ClassNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        CTentry ctEntry = new CTentry(this);
         ArrayList<SemanticError> res = new ArrayList<>();
+
         //controllare ID
-        if (id.equals(superclass))
+        if (id.equals(superclass)) {
             res.add(new SemanticError(id + " cannot extend itself."));
+        }
         else {
             //env.nestingLevel++;
 
-            if ((env.classTable.put(id, ctEntry)) != null)
+            //checksemantics field e methods classe attuale
+            for (Node field : fields)
+                res.addAll(field.checkSemantics(env));
+
+            for (Node method : methods)
+                res.addAll(method.checkSemantics(env));
+
+            CTentry ctEntry = new CTentry(this);
+
+            if ((env.classTable.put(id, ctEntry)) != null) {
                 res.add(new SemanticError("Class " + id + " has been already declared"));
+            }
 
             //controllare ID superclasse
             if (!superclass.equals("")){
-                if ((env.classTable.get(superclass) == null))
+                if ((env.classTable.get(superclass) == null)) {
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
-                else {
+                } else {
+                    // imposta la superclasse della classe "id" nella ClassTable
                     env.classTable.get(id).setSuperClass(env.classTable.get(superclass).getClassNode());
                 }
             }
