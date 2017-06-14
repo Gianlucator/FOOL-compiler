@@ -56,17 +56,20 @@ public class ClassNode implements Node {
         else {
             //env.nestingLevel++;
 
-            //controllare ID superclasse
-            if (!superclass.equals("") && (env.symTable.get(0)).get(superclass) == null)
-                res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
-
             if ((env.symTable.get(0).put(id, entry)) != null)
                 res.add(new SemanticError("Class " + id + " has been already declared"));
 
+            //controllare ID superclasse
             if (!superclass.equals("")){
-                fields.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getFields());
-                methods.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getMethods());
+                if ((env.symTable.get(0)).get(superclass) == null)
+                    res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
+                else{
+                    fields.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getFields());
+                    methods.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getMethods());
+                }
             }
+
+
 
             //checksemantics field e methods classe attuale
             for (Node field : fields)
