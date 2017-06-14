@@ -66,6 +66,7 @@ public class ClassNode implements Node {
                 if ((env.classTable.get(superclass) == null))
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
                 else{
+                    // imposta la superclasse della classe "id" nella ClassTable
                     env.classTable.get(id).setSuperClass(env.classTable.get(superclass).getClassNode());
                 }
             }
