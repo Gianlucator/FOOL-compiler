@@ -1,15 +1,6 @@
 
 grammar FOOL;
 
-/*
-//unsupported option backtrack
-options {
-    backtrack = true;
-    k =1;
-}
-*/
-
-
 @lexer::members {
    //there is a much better way to do this, check the ANTLR guide
    //I will leave it like this for now just becasue it is quick
@@ -20,10 +11,7 @@ options {
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
-
-// the node in the AST is what is specified by #
-
-//  start rule
+  
 prog   : exp SEMIC                 		    #singleExp
        | let exp SEMIC                 	    #letInExp
        | (classdec)+ SEMIC (let)? exp SEMIC	#classExp
@@ -73,9 +61,6 @@ value  :  INTEGER                        		                                    #
 /*------------------------------------------------------------------
  * LEXER RULES
  *------------------------------------------------------------------*/
-
-// token
-
 SEMIC  : ';' ;
 COLON  : ':' ;
 COMMA  : ',' ;
@@ -108,8 +93,6 @@ NEW    : 'new' ;
 DOT    : '.' ;
 
 
-// no node is generated in the AST for numbers and IDs
-
 //Numbers
 fragment DIGIT : '0'..'9';    
 INTEGER       : DIGIT+;
@@ -119,8 +102,6 @@ fragment CHAR  : 'a'..'z' |'A'..'Z' ;
 ID              : CHAR (CHAR | DIGIT)* ;
 
 //ESCAPED SEQUENCES
-// no node is generated in the AST
-
 WS              : (' '|'\t'|'\n'|'\r')-> skip;
 LINECOMENTS    : '//' (~('\n'|'\r'))* -> skip;
 BLOCKCOMENTS    : '/*'( ~('/'|'*')|'/'~'*'|'*'~'/'|BLOCKCOMENTS)* '*/' -> skip;

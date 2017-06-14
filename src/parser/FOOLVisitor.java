@@ -1,4 +1,4 @@
-// Generated from C:/Users/crist/Documents/GitHub/FOOL2017/src/parser\FOOL.g4 by ANTLR 4.7
+// Generated from C:/Users/Gianluca/git/FOOL2017/src/parser\FOOL.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -11,19 +11,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by the {@code singleExp}
+	 * Visit a parse tree produced by the {@code progExp}
 	 * labeled alternative in {@link FOOLParser#prog}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSingleExp(FOOLParser.SingleExpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code letInExp}
-	 * labeled alternative in {@link FOOLParser#prog}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLetInExp(FOOLParser.LetInExpContext ctx);
+	T visitProgExp(FOOLParser.ProgExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code classExp}
 	 * labeled alternative in {@link FOOLParser#prog}.
@@ -31,6 +24,20 @@ public interface FOOLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitClassExp(FOOLParser.ClassExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code singleExp}
+	 * labeled alternative in {@link FOOLParser#simpleprog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSingleExp(FOOLParser.SingleExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code letInExp}
+	 * labeled alternative in {@link FOOLParser#simpleprog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLetInExp(FOOLParser.LetInExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FOOLParser#classdec}.
 	 * @param ctx the parse tree
