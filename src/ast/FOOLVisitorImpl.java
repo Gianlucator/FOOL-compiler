@@ -2,11 +2,9 @@ package ast;
 
 import parser.FOOLBaseVisitor;
 import parser.FOOLParser;
-import parser.FOOLVisitor;
 import parser.FOOLParser.*;
-import parser.FOOLLexer.*;
+
 import java.util.ArrayList;
-import java.util.List;
 
 // estende FOOLBaseVisitor
 
@@ -51,8 +49,12 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		return visit(ctx.exp());
 		
 	}
-	
-	
+
+	@Override
+	public Node visitProgExp(ProgExpContext ctx) {
+		return visit(ctx.simpleprog());
+	}
+
 	@Override
 	public Node visitVarasm(VarasmContext ctx) {
 		
@@ -311,18 +313,15 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 
 		//list of declarations in @res
 		ArrayList<Node> classes = new ArrayList<>();
-		Node let = null;
-		Node exp = null;
+		Node body;
 
 		for (ClassdecContext cd : ctx.classdec()) {
 			classes.add(visit(cd));
 		}
 
-		if (ctx.let() != null)
-			let = visit(ctx.let());
-		exp = visit(ctx.exp());
+		body = visit(ctx.simpleprog());
 
-		return new ProgClassDefinitionNode(classes, let, exp);
+		return new ClassExpNode(classes, body);
 	}
 
 

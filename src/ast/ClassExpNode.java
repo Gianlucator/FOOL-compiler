@@ -9,16 +9,14 @@ import java.util.HashMap;
 /**
  * Created by Stefano on 06/06/2017.
  */
-public class ProgClassDefinitionNode implements Node {
+public class ClassExpNode implements Node {
 
     private ArrayList<Node> classes;
-    private Node let;
-    private Node exp;
+    private Node body;
 
-    public ProgClassDefinitionNode(ArrayList<Node> classes, Node let, Node exp) {
+    public ClassExpNode(ArrayList<Node> classes, Node body) {
         this.classes = classes;
-        this.let = let;
-        this.exp = exp;
+        this.body = body;
     }
 
     @Override
@@ -54,8 +52,7 @@ public class ProgClassDefinitionNode implements Node {
         }
 
         //check semantics in the (let)? exp
-        if (let != null) res.addAll(let.checkSemantics(env));
-        res.addAll(exp.checkSemantics(env));
+        res.addAll(body.checkSemantics(env));
 
         //clean the scope, we are leaving a let scope
         env.symTable.remove(env.nestingLevel--);

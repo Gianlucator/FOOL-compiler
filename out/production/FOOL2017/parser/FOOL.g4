@@ -12,10 +12,13 @@ grammar FOOL;
  * PARSER RULES
  *------------------------------------------------------------------*/
   
-prog   : exp SEMIC                 		    #singleExp
-       | let exp SEMIC                 	    #letInExp
-       | (classdec)+ SEMIC (let)? exp SEMIC	#classExp
+prog   : simpleprog                                 #progExp
+       | (classdec)+ SEMIC simpleprog   	        #classExp
        ;
+
+simpleprog  : exp SEMIC                 		    #singleExp
+            | let exp SEMIC                 	    #letInExp
+            ;
 
 classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)?  (CLPAR (fun SEMIC)+ CRPAR)? ;
 
