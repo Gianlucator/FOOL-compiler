@@ -44,8 +44,15 @@ public class NewExpNode implements Node {
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        if ((env.symTable.get(0)).get(id) == null)
-            res.add(new SemanticError("Class " + id + " not declared"));
+        if (env.classTable.get(id) == null)
+            res.add(new SemanticError("Class " + id + " not declared."));
+
+        int constructorArguments = env.classTable.get(id).getClassNode().getFields().size();
+        if (constructorArguments != args.size()) {
+            String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
+            res.add(new SemanticError(String.format("Too %s arguments arguments for %s constructor. Need %d, %d given.",
+                    fewOrMany, id, constructorArguments, args.size())));
+        }
 
         for (Node arg : args)
             res.addAll(arg.checkSemantics(env));
