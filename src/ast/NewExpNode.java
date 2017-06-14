@@ -4,6 +4,7 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by crist on 14/06/2017.
@@ -34,6 +35,14 @@ public class NewExpNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        return new ArrayList<>();
+        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        env.symTable.add(hm);
+
+        //declare resulting list
+        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+
+        //hm.get(0)
+
+        return res;
     }
 }
