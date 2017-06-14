@@ -4,6 +4,7 @@ import parser.FOOLBaseVisitor;
 import parser.FOOLParser;
 import parser.FOOLParser.*;
 
+import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 
 // estende FOOLBaseVisitor
@@ -281,8 +282,6 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		return res;
 	}
 
-	// (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )
-
 	@Override
 	public Node visitMethodExp(MethodExpContext ctx) {
         String objectName;
@@ -303,9 +302,15 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		return new CallMethodNode(objectName, methodName, args);
 	}
 
+	// dovevamo implementare la new
 	@Override
 	public Node visitNewExp(NewExpContext ctx) {
-		return super.visitNewExp(ctx);
+        ArrayList<Node> args = new ArrayList<>();
+
+        for (ExpContext exp : ctx.exp())
+            args.add(visit(exp));
+
+        return new NewExpNode(ctx.ID().getText(), args);
 	}
 
 	@Override
