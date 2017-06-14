@@ -1,5 +1,6 @@
 package ast;
 
+import util.CTentry;
 import util.Environment;
 import util.SemanticError;
 
@@ -49,6 +50,7 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         STentry entry = new STentry(env.nestingLevel,env.offset--);
+        CTentry ctEntry = new CTentry(this);
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
         //controllare ID
         if (id.equals(superclass))
@@ -56,20 +58,17 @@ public class ClassNode implements Node {
         else {
             //env.nestingLevel++;
 
-            if ((env.symTable.get(0).put(id, entry)) != null)
+            if ((env.classTable.put(id, ctEntry)) != null)
                 res.add(new SemanticError("Class " + id + " has been already declared"));
 
             //controllare ID superclasse
             if (!superclass.equals("")){
-                if ((env.symTable.get(0)).get(superclass) == null)
+                if ((env.classTable.get(superclass) == null))
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
                 else{
-                    fields.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getFields());
-                    methods.addAll(((ClassNode)(env.symTable.get(0)).get(superclass).getType()).getMethods());
+                    env.classTable.get(id).setSuperClass(env.classTable.get(superclass).getClassNode());
                 }
             }
-
-
 
             //checksemantics field e methods classe attuale
             for (Node field : fields)
