@@ -33,13 +33,22 @@ public class NewExpNode implements Node {
         return null;
     }
 
+    // sistemare, manca:
+    // - mismatch parametri ==> stesso numero (tipo si controlla dopo)
+    // - ???
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
-        env.symTable.add(hm);
+        //env.symTable.add(hm);
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+
+        if ((env.symTable.get(0)).get(id) == null)
+            res.add(new SemanticError("Class " + id + " not declared"));
+
+        for (Node arg : args)
+            res.addAll(arg.checkSemantics(env));
 
         //hm.get(0)
 
