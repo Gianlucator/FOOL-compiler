@@ -53,7 +53,8 @@ public class ClassNode implements Node {
 
         STentry entry = new STentry(env.nestingLevel,env.offset--);
         System.out.println("Il nesting level in questa classe è: " + env.nestingLevel);
-        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+
+        ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID
         if (id.equals(superclass)) {
             res.add(new SemanticError(id + " cannot extend itself."));
@@ -66,6 +67,7 @@ public class ClassNode implements Node {
             for (Node method : methods)
                 res.addAll(method.checkSemantics(env));
 
+            // all class names are at nesting level 0
             if ((env.symTable.get(0).put(id, entry)) != null) {
                 res.add(new SemanticError("Class " + id + " has been already declared"));
             }

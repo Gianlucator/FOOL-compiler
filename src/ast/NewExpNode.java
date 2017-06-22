@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class NewExpNode implements Node {
     private String classId;
     private ArrayList<Node> args;
+    private ObjectNode objectLayout;
 
     public NewExpNode(String classId, ArrayList<Node> args) {
         this.classId = classId;
@@ -33,29 +34,35 @@ public class NewExpNode implements Node {
         return null;
     }
 
-    // sistemare, manca:
-    // - mismatch parametri ==> stesso numero (tipo si controlla dopo)
-    // - ???
+    // TODO: usare ObjectNode
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        HashMap<String,STentry> hm = new HashMap<> ();
         //env.symTable.add(hm);
 
         //declare resulting list
-        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+        ArrayList<SemanticError> res = new ArrayList<>();
 
-        //if (env.classTable.get(classId) == null)
-            //res.add(new SemanticError("Class " + objectId + " not declared."));
+        if (env.symTable.get(0).get(classId) == null)
+            res.add(new SemanticError("Class " + classId + " not declared."));
+        else {
+            Node classNode = env.symTable.get(0).get(classId).getType();
 
-        int constructorArguments = 0; //env.classTable.get(classId).getClassNode().getFields().size();
-        if (constructorArguments != args.size()) {
-            String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
-            res.add(new SemanticError(String.format("Too %s arguments arguments for %s constructor. Need %d, %d given.",
-                    fewOrMany, classId, constructorArguments, args.size())));
+            if (classNode instanceof ClassNode) {
+                int constructorArguments = ((ClassNode) classNode).getFields().size();
+
+                if (constructorArguments != args.size()) {
+                    String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
+                    res.add(new SemanticError(String.format("Too %s arguments arguments for %s constructor. Need %d, %d given.",
+                            fewOrMany, classId, constructorArguments, args.size())));
+                }
+            }
         }
-
         for (Node arg : args)
             res.addAll(arg.checkSemantics(env));
+
+        // add objectLayout
+        objectLayout = new ObjectNode(classId, env);
 
         //hm.get(0)
 

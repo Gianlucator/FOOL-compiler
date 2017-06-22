@@ -56,6 +56,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		return visit(ctx.simpleprog());
 	}
 
+	// TODO: sistemare la cosa che non sappiamo dove mettere il cazzo di ObjectNode
 	@Override
 	public Node visitVarasm(VarasmContext ctx) {
 		

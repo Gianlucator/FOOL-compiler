@@ -12,7 +12,7 @@ public class Environment {
 	//THESE VARIABLES SHOULDN'T BE PUBLIC
 	//THIS CAN BE DONE MUCH BETTER
 	
-	public ArrayList<HashMap<String,STentry>>  symTable = new ArrayList<>();
+	public ArrayList<HashMap<String, STentry>>  symTable = new ArrayList<>();
 	public HashMap<String, DispatchTable> dispatchTables = new HashMap<>();
 	public int nestingLevel = -1;
 	public int offset = 0;

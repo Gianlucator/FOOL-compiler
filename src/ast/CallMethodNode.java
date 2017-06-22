@@ -53,7 +53,7 @@ public class CallMethodNode implements Node {
                 objType = (env.symTable.get(j--)).get(objectName).getType();
                 STentry entry = (env.symTable.get(0)).get(objectName);
                 for(Node decs : ((ClassNode) (env.symTable.get(0)).get(objType).getType()).getMethods()){
-                    if(((FunNode) decs).getFunName().equals(methodName)) {
+                    if(((FunNode) decs).getId().equals(methodName)) {
                         foundMethod = true;
                     }
                 }

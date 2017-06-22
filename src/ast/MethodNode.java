@@ -8,33 +8,12 @@ import java.util.ArrayList;
 /**
  * Created by crist on 22/06/2017.
  */
-public class MethodNode implements Node {
+public class MethodNode extends FunNode {
 
-    private String id;
+    // TODO: sistemare sta roba del self quando ci servirà vedremo come fare sta roba del self che è da fare quando servirà
+    Node self;
 
-    public MethodNode(String id) {
-        this.id = id;
-    }
-
-    public String getId() { return id; }
-
-    @Override
-    public String toPrint(String indent) {
-        return null;
-    }
-
-    @Override
-    public Node typeCheck() {
-        return null;
-    }
-
-    @Override
-    public String codeGeneration() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<SemanticError> checkSemantics(Environment env) {
-        return null;
+    public MethodNode(String i, Node t) {
+        super(i, t);
     }
 }

@@ -11,9 +11,9 @@ import util.SemanticError;
 public class FunNode implements Node {
 
   private String id;
-  private Node type; 
-  private ArrayList<Node> parlist = new ArrayList<Node>(); 
-  private ArrayList<Node> declist; 
+  private Node type;
+  private ArrayList<Node> parlist = new ArrayList<Node>();
+  private ArrayList<Node> declist;
   private Node body;
   
   public FunNode (String i, Node t) {
@@ -26,7 +26,7 @@ public class FunNode implements Node {
     body=b;
   }
 
-  public String getFunName() {
+  public String getId() {
   	return id;
   }
   

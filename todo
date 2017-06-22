@@ -8,10 +8,10 @@ v aggiornare il ClassNode ==>
     - fare l'ObjectNode: è un campo del NewExpNode
         - contiene: classTag (id classe), objectSize, ptr alla DispachTeibol, attribooty
     - fare MethodNode: FunNode con
-        - un campo che conterrà un istanza di oggetto (self) cioè l'object node
+        - un campo che conterrà un istanza di oggetto (self) cioè l'object node ==> vedi TODO
 - fare le visite per i nuovi nodi (o chiusa) cioè
-    - MethodNode
-    - ObjectNode
+    - MethodNode ==> stefano dice che non è da fare
+    v ObjectNode
 
 v fare DispatchTable
 
