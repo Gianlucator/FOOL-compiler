@@ -42,7 +42,7 @@ public class NewExpNode implements Node {
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<>();
-        STentry tableEntry = env.symTable.get(0).get(classId)
+        STentry tableEntry = env.symTable.get(0).get(classId);
         if ( tableEntry == null || !(tableEntry.getType() instanceof ClassNode))
             res.add(new SemanticError("Class " + classId + " not declared."));
         else {
