@@ -10,11 +10,11 @@ import java.util.HashMap;
  * Created by crist on 14/06/2017.
  */
 public class NewExpNode implements Node {
-    private String id;
+    private String classId;
     private ArrayList<Node> args;
 
-    public NewExpNode(String id, ArrayList<Node> args) {
-        this.id = id;
+    public NewExpNode(String classId, ArrayList<Node> args) {
+        this.classId = classId;
         this.args = args;
     }
 
@@ -44,14 +44,14 @@ public class NewExpNode implements Node {
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        if (env.classTable.get(id) == null)
-            res.add(new SemanticError("Class " + id + " not declared."));
+        //if (env.classTable.get(classId) == null)
+            //res.add(new SemanticError("Class " + objectId + " not declared."));
 
-        int constructorArguments = env.classTable.get(id).getClassNode().getFields().size();
+        int constructorArguments = 0; //env.classTable.get(classId).getClassNode().getFields().size();
         if (constructorArguments != args.size()) {
             String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
             res.add(new SemanticError(String.format("Too %s arguments arguments for %s constructor. Need %d, %d given.",
-                    fewOrMany, id, constructorArguments, args.size())));
+                    fewOrMany, classId, constructorArguments, args.size())));
         }
 
         for (Node arg : args)

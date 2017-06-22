@@ -1,6 +1,6 @@
-- eliminare ClassTable e CTEntry
-- aggiornare il ClassNode ==>
-    - getId ==> il nome della classe
+v eliminare ClassTable e CTEntry
+v aggiornare il ClassNode ==>
+    v getId ==> il nome della classe
 
 - rifare NewExpNode
     - semantica: controllare che la classe esista
@@ -9,4 +9,11 @@
         - contiene: classTag (id classe), objectSize, ptr alla DispachTeibol, attribooty
     - fare MethodNode: FunNode con
         - un campo che conterrà un istanza di oggetto (self) cioè l'object node
+- fare le visite per i nuovi nodi (o chiusa) cioè
+    - MethodNode
+    - ObjectNode
+
+v fare DispatchTable
+
+- sostituire i vari riferimenti a ClassTable
 Altro?

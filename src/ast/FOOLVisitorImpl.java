@@ -338,13 +338,14 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		if (ctx.ID(1) != null)
 			inherited = ctx.ID(1).getText();
 
+		// TODO: sistemare sta roba dei metodi che sono MethodNode ma poi li creiamo come Node e quindi non va bene
 		ArrayList<Node> fields = new ArrayList<>();
-		ArrayList<Node> methods = new ArrayList<>();
+		ArrayList<MethodNode> methods = new ArrayList<>();
 		for (VardecContext vardec : ctx.vardec()) {
 			fields.add(visit(vardec));
 		}
 		for (FunContext fc: ctx.fun()) {
-			methods.add(visit(fc));
+			methods.add((MethodNode) visit(fc));
 		}
 
 		return new ClassNode(id, inherited, fields, methods);
