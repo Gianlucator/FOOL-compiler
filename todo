@@ -1,0 +1,12 @@
+- eliminare ClassTable e CTEntry
+- aggiornare il ClassNode ==>
+    - getId ==> il nome della classe
+
+- rifare NewExpNode
+    - semantica: controllare che la classe esista
+    - controllare che non esista una variabile/fun/blabla con lo stesso nome
+    - fare l'ObjectNode: è un campo del NewExpNode
+        - contiene: classTag (id classe), objectSize, ptr alla DispachTeibol, attribooty
+    - fare MethodNode: FunNode con
+        - un campo che conterrà un istanza di oggetto (self) cioè l'object node
+Altro?
