@@ -5,6 +5,7 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Stefano on 06/06/2017.
@@ -52,6 +53,11 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         env.nestingLevel++;
+        //TODO: dà errore quando cerca il nesting level 1 perché non inseriamo la STentry per la dich di classe.
+        STentry classEntry = new STentry(env.nestingLevel, env.offset--);
+        HashMap<String,STentry> hm = new HashMap<>();
+        env.symTable.add(hm);
+        // TODONE, da controllare
         System.out.println("Il nesting level in questa classe è: " + env.nestingLevel);
 
         ArrayList<SemanticError> res = new ArrayList<>();
@@ -61,8 +67,10 @@ public class ClassNode implements Node {
         }
         else {
             //checksemantics field e methods classe attuale
-            for (Node field : fields)
+            for (Node field : fields){
+                //env.symTable.get(env.nestingLevel).put(, clsEntry)
                 res.addAll(field.checkSemantics(env));
+            }
 
             STentry mtdEntry;
             String mtdName;
@@ -99,7 +107,7 @@ public class ClassNode implements Node {
             }
         }
 
-        env.nestingLevel--;
+        env.symTable.remove(env.nestingLevel--);
         return res;
     }
 }

@@ -45,5 +45,6 @@ public class VarDecNode implements Node {
         if (hm.put(id,entry) != null)
             res.add(new SemanticError("Var id " + id + " already declared"));
 
-        return res;    }
+        return res;
+    }
 }
