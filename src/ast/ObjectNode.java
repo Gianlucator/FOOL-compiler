@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class ObjectNode implements Node {
     private String tag;
-    private int size;
-    private DispatchTable dt;
+    private int size;       //si può derivare
+    private DispatchTable dt;      //si può derivare dalla classe
     private ArrayList<Node> fields;
 
     public ObjectNode(String tag, Environment env) {

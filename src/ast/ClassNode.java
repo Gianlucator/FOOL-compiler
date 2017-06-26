@@ -82,6 +82,7 @@ public class ClassNode implements Node {
                     // crea dispatch table usando anche la tabella della superclasse
                     DispatchTable superclassDT = env.dispatchTables.get(superclass);
                     classDT.buildDispatchTable(methods, superclassDT);
+
                 }
             } else {
                 classDT.buildDispatchTable(methods);
