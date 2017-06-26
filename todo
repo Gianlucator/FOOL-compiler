@@ -13,7 +13,7 @@ v aggiornare il ClassNode ==>
     v ObjectNode
 - risolvere CallMethodNode
 - inserire il sottotipaggio per le classi nella FOOLlib
-    - cambiare da albero a tabella
+    - cambiare da albero a tabella ==> ma anche no perché dobbiamo ripensare a come trovare i nodi e perdiamo la comodità della ricorsione che è davvero molto comoda la ricorsione
 
 v fare DispatchTable
 
