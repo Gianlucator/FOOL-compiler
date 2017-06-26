@@ -344,7 +344,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 			fields.add(visit(vardec));
 		}
 		for (FunContext fc: ctx.fun()) {
-			methods.add((MethodNode) visit(fc));
+			methods.add((MethodNode) visit(fc)); // --> sbagliatissimo maronne
 		}
 
 		return new ClassNode(id, inherited, fields, methods);
