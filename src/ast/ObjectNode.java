@@ -9,16 +9,13 @@ import java.util.ArrayList;
 /**
  * Created by crist on 22/06/2017.
  */
+// per ora non viene usato...
 public class ObjectNode implements Node {
     private String tag;
-    private int size;       //si può derivare
-    private DispatchTable dt;      //si può derivare dalla classe
     private ArrayList<Node> fields;
 
     public ObjectNode(String tag, Environment env) {
         this.tag = tag;
-        this.size = 3 + fields.size();
-        this.dt = env.dispatchTables.get(tag);
         this.fields = ((ClassNode) env.symTable.get(0).get(tag).getType()).getFields();
     }
 

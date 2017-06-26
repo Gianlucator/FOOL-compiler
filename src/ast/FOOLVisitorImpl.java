@@ -301,7 +301,6 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		return new CallMethodNode(objectName, methodName, args);
 	}
 
-	// dovevamo implementare la new
 	@Override
 	public Node visitNewExp(NewExpContext ctx) {
         ArrayList<Node> args = new ArrayList<>();
@@ -339,12 +338,12 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 
 		// TODO: sistemare sta roba dei metodi che sono MethodNode ma poi li creiamo come Node e quindi non va bene
 		ArrayList<Node> fields = new ArrayList<>();
-		ArrayList<MethodNode> methods = new ArrayList<>();
+		ArrayList<Node> methods = new ArrayList<>();
 		for (VardecContext vardec : ctx.vardec()) {
 			fields.add(visit(vardec));
 		}
 		for (FunContext fc: ctx.fun()) {
-			methods.add((MethodNode) visit(fc)); // --> sbagliatissimo maronne
+			methods.add(visit(fc));
 		}
 
 		return new ClassNode(id, inherited, fields, methods);

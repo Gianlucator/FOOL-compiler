@@ -14,9 +14,9 @@ public class ClassNode implements Node {
     private String id;
     private String superclass;
     private ArrayList<Node> fields;
-    private ArrayList<MethodNode> methods;
+    private ArrayList<Node> methods;
 
-    public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<MethodNode> methods) {
+    public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
         this.id = id;
         this.superclass = superclass;
         this.fields = fields;
@@ -29,7 +29,7 @@ public class ClassNode implements Node {
         return fields;
     }
 
-    public ArrayList<MethodNode> getMethods(){
+    public ArrayList<Node> getMethods(){
         return methods;
     }
 
@@ -51,7 +51,7 @@ public class ClassNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        STentry entry = new STentry(env.nestingLevel,env.offset--);
+        env.nestingLevel++;
         System.out.println("Il nesting level in questa classe è: " + env.nestingLevel);
 
         ArrayList<SemanticError> res = new ArrayList<>();
@@ -64,13 +64,24 @@ public class ClassNode implements Node {
             for (Node field : fields)
                 res.addAll(field.checkSemantics(env));
 
+            STentry mtdEntry;
+            String mtdName;
+
+            // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibbile
+            for (Node method : methods) {
+                mtdEntry = new STentry(env.nestingLevel, env.offset--);
+                mtdName = ((FunNode) method).getId();
+                if (env.symTable.get(env.nestingLevel).put(mtdName, mtdEntry) != null)
+                    res.add(new SemanticError("Method " + mtdName + " already declared."));
+            }
+
             for (Node method : methods)
                 res.addAll(method.checkSemantics(env));
 
-            // all class names are at nesting level 0
+            /* // all class names are at nesting level 0
             if ((env.symTable.get(0).put(id, entry)) != null) {
                 res.add(new SemanticError("Class " + id + " has been already declared"));
-            }
+            } */
 
             DispatchTable classDT = new DispatchTable();
             //controllare ID superclasse
@@ -82,13 +93,13 @@ public class ClassNode implements Node {
                     // crea dispatch table usando anche la tabella della superclasse
                     DispatchTable superclassDT = env.dispatchTables.get(superclass);
                     classDT.buildDispatchTable(methods, superclassDT);
-
                 }
             } else {
                 classDT.buildDispatchTable(methods);
             }
         }
 
+        env.nestingLevel--;
         return res;
     }
 }

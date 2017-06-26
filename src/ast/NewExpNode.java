@@ -34,22 +34,19 @@ public class NewExpNode implements Node {
         return null;
     }
 
-    // TODO: usare ObjectNode
-    // NEW ID (LPAR exp (COMMA exp)* RPAR)?
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        HashMap<String,STentry> hm = new HashMap<> ();
+        ArrayList<SemanticError> res = new ArrayList<>();
         //env.symTable.add(hm);
 
         // controllare che la classe esista
-        ArrayList<SemanticError> res = new ArrayList<>();
-        STentry tableEntry = env.symTable.get(0).get(classId);
+        STentry classEntry = env.symTable.get(env.GLOBAL_SCOPE).get(classId);
 
-        if (tableEntry == null || !(tableEntry.getType() instanceof ClassNode))
+        if (classEntry == null || !(classEntry.getType() instanceof ClassNode))
             res.add(new SemanticError("Class " + classId + " not declared."));
         else {
             // controllare che il costruttore sia chiamato col corretto numero di argomenti
-            int constructorArguments = ((ClassNode) tableEntry.getType()).getFields().size();
+            int constructorArguments = ((ClassNode) classEntry.getType()).getFields().size();
 
             if (constructorArguments != args.size()) {
                 String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
@@ -59,11 +56,6 @@ public class NewExpNode implements Node {
         }
         for (Node arg : args)
             res.addAll(arg.checkSemantics(env));
-
-        // add objectLayout
-        objectLayout = new ObjectNode(classId, env);
-
-        //hm.get(0)
 
         return res;
     }

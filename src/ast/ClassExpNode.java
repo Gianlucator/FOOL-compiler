@@ -37,11 +37,22 @@ public class ClassExpNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         env.nestingLevel++;
-        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        HashMap<String,STentry> hm = new HashMap<> ();
         env.symTable.add(hm);
 
         //declare resulting list
-        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+        ArrayList<SemanticError> res = new ArrayList<>();
+
+        STentry clsEntry;
+        String clsName;
+
+        for (Node cls: classes) {
+            clsEntry = new STentry(env.nestingLevel, env.offset);
+            clsName = ((ClassNode) cls).getId();
+
+            if (env.symTable.get(env.nestingLevel).put(clsName, clsEntry) != null)
+                res.add(new SemanticError("Class: " + clsName + " already declared."));
+        }
 
         //check semantics in the dec list
         if(classes.size() > 0){

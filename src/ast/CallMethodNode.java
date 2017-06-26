@@ -12,8 +12,6 @@ public class CallMethodNode implements Node {
     private String objectName;
     private String methodName;
     private ArrayList<Node> args;
-    private STentry entry;
-    private int nestinglevel;
 
     // chiamata di un metodo di una classe
     public CallMethodNode(String objectName, String methodName, ArrayList<Node> args) {
@@ -44,28 +42,23 @@ public class CallMethodNode implements Node {
         int j = env.nestingLevel;
         STentry tmp = null;
         boolean foundMethod = false;
+        Node classNode = null;
 
-        if (objectName.equals("this")) {
+        while (j >= 0 && classNode == null) {
+            classNode = (env.symTable.get(j--)).get(objectName).getType();
 
-        } else {
-            Node objType = null;
-            while (j >= 0 && objType == null){
-                objType = (env.symTable.get(j--)).get(objectName).getType();
-                STentry entry = (env.symTable.get(0)).get(objectName);
-                for(Node decs : ((ClassNode) (env.symTable.get(0)).get(objType).getType()).getMethods()){
-                    if(((FunNode) decs).getId().equals(methodName)) {
-                        foundMethod = true;
-                    }
+            ArrayList<Node> methods = ((ClassNode) classNode).getMethods();
+            for (Node decs : methods) {
+                if (((FunNode) decs).getId().equals(methodName)) {
+                    foundMethod = true;
                 }
             }
-            if (!foundMethod){
-                res.add(new SemanticError("Id " + methodName + " not declared"));
-            }
-            else{
-                System.out.println(objType.toPrint(""));
-            }
         }
-
+        if (!foundMethod) {
+            res.add(new SemanticError("Id " + methodName + " not declared"));
+        } else {
+            System.out.println(classNode.toPrint(""));
+        }
 
         if (tmp == null)
             res.add(new SemanticError("Id " + objectName + " not declared"));
