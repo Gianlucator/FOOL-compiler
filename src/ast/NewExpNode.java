@@ -35,18 +35,20 @@ public class NewExpNode implements Node {
     }
 
     // TODO: usare ObjectNode
+    // NEW ID (LPAR exp (COMMA exp)* RPAR)?
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         HashMap<String,STentry> hm = new HashMap<> ();
         //env.symTable.add(hm);
 
-        //declare resulting list
+        // controllare che la classe esista
         ArrayList<SemanticError> res = new ArrayList<>();
         STentry tableEntry = env.symTable.get(0).get(classId);
-        if ( tableEntry == null || !(tableEntry.getType() instanceof ClassNode))
+
+        if (tableEntry == null || !(tableEntry.getType() instanceof ClassNode))
             res.add(new SemanticError("Class " + classId + " not declared."));
         else {
-
+            // controllare che il costruttore sia chiamato col corretto numero di argomenti
             int constructorArguments = ((ClassNode) tableEntry.getType()).getFields().size();
 
             if (constructorArguments != args.size()) {

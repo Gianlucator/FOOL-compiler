@@ -3,16 +3,17 @@ v aggiornare il ClassNode ==>
     v getId ==> il nome della classe
 
 - rifare NewExpNode
-    - semantica: controllare che la classe esista
-    - controllare che non esista una variabile/fun/blabla con lo stesso nome
-    - fare l'ObjectNode: è un campo del NewExpNode
-        - contiene: classTag (id classe), objectSize, ptr alla DispachTeibol, attribooty
+    v semantica: controllare che la classe esista
+    v fare l'ObjectNode: è un campo del NewExpNode
+        v contiene: classTag (id classe), objectSize, ptr alla DispachTeibol, attribooty
     - fare MethodNode: FunNode con
         - un campo che conterrà un'istanza di oggetto (self) cioè l'object node ==> vedi TODO
 - fare le visite per i nuovi nodi (o chiusa) cioè
     - MethodNode ==> stefano dice che non è da fare
     v ObjectNode
 - risolvere CallMethodNode
+- inserire il sottotipaggio per le classi nella FOOLlib
+    - cambiare da albero a tabella
 
 v fare DispatchTable
 
