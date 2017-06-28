@@ -25,16 +25,16 @@ public class ProgLetInNode implements Node {
   
   @Override
 	public ArrayList<SemanticError> checkSemantics(Environment env) {
-	  env.nestingLevel++;
+	  env.incNestingLevel();
       HashMap<String,STentry> hm = new HashMap<String,STentry> ();
-      env.symTable.add(hm);
+      env.getSymTable().add(hm);
       
       //declare resulting list
       ArrayList<SemanticError> res = new ArrayList<SemanticError>();
       
       //check semantics in the dec list
       if(declist.size() > 0){
-    	  env.offset = -2;
+    	  env.setOffset(-2);
     	  //if there are children then check semantics for every child and save the results
     	  for(Node n : declist)
     		  res.addAll(n.checkSemantics(env));
@@ -44,7 +44,8 @@ public class ProgLetInNode implements Node {
       res.addAll(exp.checkSemantics(env));
       
       //clean the scope, we are leaving a let scope
-      env.symTable.remove(env.nestingLevel--);
+      env.decNestingLevel();
+      env.getSymTable().remove(env.getNestingLevel());
       
       //return the result
       return res;

@@ -39,13 +39,13 @@ public class CallMethodNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        int j = env.nestingLevel;
+        int j = env.getNestingLevel();
         STentry tmp = null;
         boolean foundMethod = false;
         Node classNode = null;
 
         while (j >= 0 && classNode == null) {
-            classNode = (env.symTable.get(j--)).get(objectName).getType();
+            classNode = (env.getSymTable().get(j--)).get(objectName).getType();
 
             ArrayList<Node> methods = ((ClassNode) classNode).getMethods();
             for (Node decs : methods) {

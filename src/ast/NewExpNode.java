@@ -40,7 +40,7 @@ public class NewExpNode implements Node {
         //env.symTable.add(hm);
 
         // controllare che la classe esista
-        STentry classEntry = env.symTable.get(env.GLOBAL_SCOPE).get(classId);
+        STentry classEntry = env.getSymTable().get(env.getGLOBAL_SCOPE()).get(classId);
 
         if (classEntry == null || !(classEntry.getType() instanceof ClassNode))
             res.add(new SemanticError("Class " + classId + " not declared."));

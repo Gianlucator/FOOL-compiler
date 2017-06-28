@@ -16,7 +16,7 @@ public class ObjectNode implements Node {
 
     public ObjectNode(String tag, Environment env) {
         this.tag = tag;
-        this.fields = ((ClassNode) env.symTable.get(0).get(tag).getType()).getFields();
+        this.fields = ((ClassNode) env.getSymTable().get(0).get(tag).getType()).getFields();
     }
 
     @Override

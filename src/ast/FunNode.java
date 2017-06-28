@@ -38,9 +38,10 @@ public class FunNode implements Node {
 	  
 	  //env.offset = -2;
       // mh = Symbol table = lista di hashmap
-	  HashMap<String,STentry> hm = env.symTable.get(env.nestingLevel);
+	  HashMap<String,STentry> hm = env.getSymTable().get(env.getNestingLevel());
 
-	  STentry entry = new STentry(env.nestingLevel,env.offset--); //separo introducendo "entry"
+	  env.decOffset();
+	  STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
 
       // se la st contiene già l'id ==> error
       if (hm.put(id, entry) != null) {
@@ -50,13 +51,13 @@ public class FunNode implements Node {
           // si crea una nuova hashmap per la symTable
 
           // nuovo livello innestato
-          env.nestingLevel++;
+          env.incNestingLevel();
 
           // hashmap nested
           HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
 
           // aggiunto alla symbol table
-          env.symTable.add(hmn);
+          env.getSymTable().add(hmn);
 
           ArrayList<Node> parTypes = new ArrayList<Node>();
           int paroffset=1;
@@ -65,7 +66,7 @@ public class FunNode implements Node {
           for(Node a : parlist){
               ParNode arg = (ParNode) a;
               parTypes.add(arg.getType());
-              if ( hmn.put(arg.getId(),new STentry(env.nestingLevel,arg.getType(),paroffset++)) != null  ) {
+              if ( hmn.put(arg.getId(),new STentry(env.getNestingLevel(),arg.getType(),paroffset++)) != null  ) {
                   // warning, non errore!
                   // la prima dichiarazione viene sovrascritta dalla seconda
                   System.out.println("Parameter id "+arg.getId()+" already declared");
@@ -77,7 +78,7 @@ public class FunNode implements Node {
 
           //check semantics in the dec list
           if(declist.size() > 0){
-              env.offset = -2;
+              env.setOffset(-2);
               //if there are children then check semantics for every child and save the results
               for(Node n : declist)
 	    		  res.addAll(n.checkSemantics(env));
@@ -87,7 +88,8 @@ public class FunNode implements Node {
           res.addAll(body.checkSemantics(env));
 
           //close scope
-          env.symTable.remove(env.nestingLevel--);
+          env.decNestingLevel();
+          env.getSymTable().remove(env.getNestingLevel());
 
       }
 

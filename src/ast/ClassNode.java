@@ -52,13 +52,14 @@ public class ClassNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        env.nestingLevel++;
+        env.incNestingLevel();
         //TODO: dà errore quando cerca il nesting level 1 perché non inseriamo la STentry per la dich di classe.
-        STentry classEntry = new STentry(env.nestingLevel, env.offset--);
+        env.decOffset();
+        STentry classEntry = new STentry(env.getNestingLevel(), env.getOffset());
         HashMap<String,STentry> hm = new HashMap<>();
-        env.symTable.add(hm);
+        env.getSymTable().add(hm);
         // TODONE, da controllare
-        System.out.println("Il nesting level in questa classe è: " + env.nestingLevel);
+        System.out.println("Il nesting level in questa classe è: " + env.getNestingLevel());
 
         ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID
@@ -77,9 +78,10 @@ public class ClassNode implements Node {
 
             // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibbile
             for (Node method : methods) {
-                mtdEntry = new STentry(env.nestingLevel, env.offset--);
+                env.decOffset();
+                mtdEntry = new STentry(env.getNestingLevel(), env.getOffset());
                 mtdName = ((FunNode) method).getId();
-                if (env.symTable.get(env.nestingLevel).put(mtdName, mtdEntry) != null)
+                if (env.getSymTable().get(env.getNestingLevel()).put(mtdName, mtdEntry) != null)
                     res.add(new SemanticError("Method " + mtdName + " already declared."));
             }
 
@@ -94,12 +96,12 @@ public class ClassNode implements Node {
             DispatchTable classDT = new DispatchTable();
             //controllare ID superclasse
             if (!superclass.equals("")) {
-                STentry superClassEntry = (env.symTable.get(0)).get(superclass);
+                STentry superClassEntry = (env.getSymTable().get(0)).get(superclass);
                 if (superClassEntry == null) {
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
                 } else {
                     // crea dispatch table usando anche la tabella della superclasse
-                    DispatchTable superclassDT = env.dispatchTables.get(superclass);
+                    DispatchTable superclassDT = env.getDispatchTables().get(superclass);
                     classDT.buildDispatchTable(methods, superclassDT);
                 }
             } else {
@@ -107,7 +109,8 @@ public class ClassNode implements Node {
             }
         }
 
-        env.symTable.remove(env.nestingLevel--);
+        env.decNestingLevel();
+        env.getSymTable().remove(env.getNestingLevel());
         return res;
     }
 }

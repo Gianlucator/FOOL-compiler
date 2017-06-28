@@ -36,9 +36,9 @@ public class ClassExpNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        env.nestingLevel++;
+        env.incNestingLevel();
         HashMap<String,STentry> hm = new HashMap<> ();
-        env.symTable.add(hm);
+        env.getSymTable().add(hm);
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<>();
@@ -47,16 +47,16 @@ public class ClassExpNode implements Node {
         String clsName;
 
         for (Node cls: classes) {
-            clsEntry = new STentry(env.nestingLevel, env.offset);
+            clsEntry = new STentry(env.getNestingLevel(), env.getOffset());
             clsName = ((ClassNode) cls).getId();
 
-            if (env.symTable.get(env.nestingLevel).put(clsName, clsEntry) != null)
+            if (env.getSymTable().get(env.getNestingLevel()).put(clsName, clsEntry) != null)
                 res.add(new SemanticError("Class: " + clsName + " already declared."));
         }
 
         //check semantics in the dec list
         if(classes.size() > 0){
-            env.offset = -1;
+            env.setOffset(-1);
             //if there are children then check semantics for every child and save the results
             for(Node cl : classes)
                 res.addAll(cl.checkSemantics(env));
@@ -66,7 +66,8 @@ public class ClassExpNode implements Node {
         res.addAll(body.checkSemantics(env));
 
         //clean the scope, we are leaving a let scope
-        env.symTable.remove(env.nestingLevel--);
+        env.decNestingLevel();
+        env.getSymTable().remove(env.getNestingLevel());
 
         //return the result
         return res;
