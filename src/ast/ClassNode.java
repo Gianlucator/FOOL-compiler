@@ -24,13 +24,19 @@ public class ClassNode implements Node {
         this.methods = methods;
     }
 
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
-    public ArrayList<Node> getFields(){
+    public String getSuperclass() {
+        return superclass;
+    }
+
+    public ArrayList<Node> getFields() {
         return fields;
     }
 
-    public ArrayList<Node> getMethods(){
+    public ArrayList<Node> getMethods() {
         return methods;
     }
 
@@ -53,64 +59,45 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         env.incNestingLevel();
-        //TODO: dà errore quando cerca il nesting level 1 perché non inseriamo la STentry per la dich di classe.
-        env.decOffset();
-        STentry classEntry = new STentry(env.getNestingLevel(), env.getOffset());
-        HashMap<String,STentry> hm = new HashMap<>();
-        env.getSymTable().add(hm);
-        // TODONE, da controllare
-        System.out.println("Il nesting level in questa classe è: " + env.getNestingLevel());
+
+        HashMap<String, STentry> hm = new HashMap<>();
 
         ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID
         if (id.equals(superclass)) {
             res.add(new SemanticError(id + " cannot extend itself."));
-        }
-        else {
-            //checksemantics field e methods classe attuale
-            for (Node field : fields){
-                //env.symTable.get(env.nestingLevel).put(, clsEntry)
-                res.addAll(field.checkSemantics(env));
-            }
-
-            STentry mtdEntry;
-            String mtdName;
-
-            // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibbile
-            for (Node method : methods) {
-                env.decOffset();
-                mtdEntry = new STentry(env.getNestingLevel(), env.getOffset());
-                mtdName = ((FunNode) method).getId();
-                if (env.getSymTable().get(env.getNestingLevel()).put(mtdName, mtdEntry) != null)
-                    res.add(new SemanticError("Method " + mtdName + " already declared."));
-            }
-
-            for (Node method : methods)
-                res.addAll(method.checkSemantics(env));
-
-            /* // all class names are at nesting level 0
-            if ((env.symTable.get(0).put(id, entry)) != null) {
-                res.add(new SemanticError("Class " + id + " has been already declared"));
-            } */
-
+        } else {
             DispatchTable classDT = new DispatchTable();
             //controllare ID superclasse
             if (!superclass.equals("")) {
-                STentry superClassEntry = (env.getSymTable().get(0)).get(superclass);
-                if (superClassEntry == null) {
+                ClassNode superClassLayout = env.getClassLayout(superclass);
+                if (superClassLayout == null) {
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
                 } else {
                     // crea dispatch table usando anche la tabella della superclasse
                     DispatchTable superclassDT = env.getDispatchTables().get(superclass);
                     classDT.buildDispatchTable(methods, superclassDT);
+                    //todo modificare la dt
                 }
             } else {
                 classDT.buildDispatchTable(methods);
             }
+
+            //checksemantics field e methods classe attuale
+            for (Node field : fields) {
+                res.addAll(field.checkSemantics(env));
+            }
+
+            // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibile
+            for (Node method : methods) {
+                res.addAll(method.checkSemantics(env));
+            }
+
+            env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));
         }
 
-        env.decNestingLevel();
         env.getSymTable().remove(env.getNestingLevel());
+        env.decNestingLevel();
         return res;
     }
 }

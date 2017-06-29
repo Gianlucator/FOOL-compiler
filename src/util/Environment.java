@@ -4,24 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ast.ClassNode;
 import ast.Node;
 import ast.STentry;
 
 public class Environment {
 
-	private ArrayList<HashMap<String, STentry>>  symTable = new ArrayList<>();
+	private ArrayList<HashMap<String, STentry>> symTable = new ArrayList<>();
 	private HashMap<String, DispatchTable> dispatchTables = new HashMap<>();
 	private int nestingLevel = -1;
 	private int offset = 0;
 	private String self_type = "";	//Tipo della dichiarazione di classe in cui ci troviamo
-
-	public String getSelf_type() {
-		return self_type;
-	}
-
-	public void setSelf_type(String self_type) {
-		this.self_type = self_type;
-	}
 
 	private final int GLOBAL_SCOPE = 0;
 
@@ -73,15 +66,38 @@ public class Environment {
 		this.offset--;
 	}
 
+	public String getSelf_type() {
+		return self_type;
+	}
+
+	public void setSelf_type(String self_type) {
+		this.self_type = self_type;
+	}
+
 	public int getGLOBAL_SCOPE() {
 		return GLOBAL_SCOPE;
 	}
 
+	public ClassNode getClassLayout(String className){
+		ClassNode cn = null;
+		try {
+			cn = (ClassNode) symTable.get(GLOBAL_SCOPE).get(className).getType();
+		} catch (Exception e){
+			System.err.println("Could not cast to ClassNode!");
+		}
+		return cn;
+	}
+
+	public STentry insertClassEntry(String s, STentry e) {
+        return symTable.get(GLOBAL_SCOPE).put(s, e);
+	}
+
+	public void printNestingLevel() {
+		System.out.println(nestingLevel);
+	}
+
 	//livello ambiente con dichiarazioni piu' esterno � 0 (prima posizione ArrayList) invece che 1 (slides)
 	//il "fronte" della lista di tabelle � symTable.get(nestingLevel)
-	
-	
-	
 }
 
 // classe -> lista di metodi con offset (String, (String, Int))

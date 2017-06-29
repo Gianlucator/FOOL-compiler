@@ -1,6 +1,6 @@
 package util;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by crist on 26/06/2017.
@@ -8,23 +8,27 @@ import java.util.ArrayList;
 public class TypeTreeNode {
     private String currentType;
     private TypeTreeNode parentSuperType;
-    private ArrayList<TypeTreeNode> superTypes; // contains all ancestors ==> MAXIMUM SPEED, FULL MOMENTUM, HIGH EFFICIENCY
-    private ArrayList<TypeTreeNode> subTypes;
+    private HashSet<TypeTreeNode> superTypes; // contains all ancestors ==> MAXIMUM SPEED, FULL MOMENTUM, HIGH EFFICIENCY
+    private HashSet<TypeTreeNode> subTypes;
 
     public TypeTreeNode(String currentType, TypeTreeNode parentSuperType) {
         this.currentType = currentType;
         this.parentSuperType = parentSuperType;
-        this.superTypes = new ArrayList<>();
+        this.superTypes = new HashSet<>();
 
         this.superTypes.add(parentSuperType);
         if (parentSuperType != null)
             this.superTypes.addAll(parentSuperType.superTypes);
 
-        this.subTypes = new ArrayList<>();
+        this.subTypes = new HashSet<>();
     }
 
-    public ArrayList<TypeTreeNode> getSuperTypes() {
+    public HashSet<TypeTreeNode> getSuperTypes() {
         return superTypes;
+    }
+
+    public void addSubtype(TypeTreeNode subtype) {
+        subTypes.add(subtype);
     }
 
     public TypeTreeNode findNode(String classId) {
@@ -40,4 +44,23 @@ public class TypeTreeNode {
 
         return null;
     }
+
+    public String toString() {
+        return currentType + ": " + subTypes.toString() + "\n";
+    }
+
+    /*
+    public boolean updateTypeTree() {
+        // check for cycle
+        if (superTypes.contains(this))
+            return false;
+
+        for (TypeTreeNode st: subTypes) {
+            st.superTypes.addAll(superTypes);
+            st.updateTypeTree();
+        }
+
+        return true;
+    }
+    */
 }

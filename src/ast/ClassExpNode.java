@@ -2,6 +2,8 @@ package ast;
 
 import util.Environment;
 import util.SemanticError;
+import util.TypeTreeBuilder;
+import util.TypeTreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,27 +38,27 @@ public class ClassExpNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        env.incNestingLevel();
+        env.incNestingLevel(); // 0
         HashMap<String,STentry> hm = new HashMap<> ();
         env.getSymTable().add(hm);
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        STentry clsEntry;
         String clsName;
+        TypeTreeNode typesRoot = TypeTreeBuilder.buildTypeTree(classes);
+        //System.out.println(typesRoot);
 
         for (Node cls: classes) {
-            clsEntry = new STentry(env.getNestingLevel(), env.getOffset());
             clsName = ((ClassNode) cls).getId();
-
-            if (env.getSymTable().get(env.getNestingLevel()).put(clsName, clsEntry) != null)
-                res.add(new SemanticError("Class: " + clsName + " already declared."));
+            STentry sTentry =  new STentry(env.getGLOBAL_SCOPE(), env.getOffset());
+            if (env.insertClassEntry(clsName, sTentry) != null)
+                res.add(new SemanticError("Multiple declarations of class " + clsName));
         }
 
         //check semantics in the dec list
         if(classes.size() > 0){
-            env.setOffset(-1);
+            // env.setOffset(-1);
             //if there are children then check semantics for every child and save the results
             for(Node cl : classes)
                 res.addAll(cl.checkSemantics(env));
@@ -66,8 +68,8 @@ public class ClassExpNode implements Node {
         res.addAll(body.checkSemantics(env));
 
         //clean the scope, we are leaving a let scope
+        //env.getSymTable().remove(env.getNestingLevel());
         env.decNestingLevel();
-        env.getSymTable().remove(env.getNestingLevel());
 
         //return the result
         return res;

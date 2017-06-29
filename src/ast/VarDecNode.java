@@ -10,7 +10,9 @@ import java.util.HashMap;
  * Created by crist on 08/06/2017.
  */
 public class VarDecNode implements Node {
+
     private String id;
+
     private Node type;
 
     public VarDecNode(String id, Node type) {
@@ -38,6 +40,8 @@ public class VarDecNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
+        env.printNestingLevel();
+
         //env.offset = -2;
         HashMap<String,STentry> hm = env.getSymTable().get(env.getNestingLevel());
         env.decOffset();
@@ -47,5 +51,9 @@ public class VarDecNode implements Node {
             res.add(new SemanticError("Var id " + id + " already declared"));
 
         return res;
+    }
+
+    public String getId() {
+        return id;
     }
 }

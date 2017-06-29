@@ -40,13 +40,13 @@ public class NewExpNode implements Node {
         //env.symTable.add(hm);
 
         // controllare che la classe esista
-        STentry classEntry = env.getSymTable().get(env.getGLOBAL_SCOPE()).get(classId);
+        ClassNode classEntry = env.getClassLayout(classId);
 
-        if (classEntry == null || !(classEntry.getType() instanceof ClassNode))
+        if (classEntry == null)
             res.add(new SemanticError("Class " + classId + " not declared."));
         else {
             // controllare che il costruttore sia chiamato col corretto numero di argomenti
-            int constructorArguments = ((ClassNode) classEntry.getType()).getFields().size();
+            int constructorArguments = classEntry.getFields().size();
 
             if (constructorArguments != args.size()) {
                 String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
