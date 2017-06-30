@@ -57,12 +57,13 @@ public class TypeTreeNode {
     }
 
     private ArrayList<ClassNode> buildWellOrderedClassList(ArrayList<ClassNode> classNodes) {
-        if (currentClassNode != null)
-            classNodes.add(currentClassNode);
 
         for (TypeTreeNode st: subTypes) {
-            classNodes.addAll(st.buildWellOrderedClassList(classNodes));
+            st.buildWellOrderedClassList(classNodes);
         }
+
+        if (currentClassNode != null)
+            classNodes.add(0, currentClassNode);
 
         return classNodes;
     }
