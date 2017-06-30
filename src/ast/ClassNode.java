@@ -89,7 +89,7 @@ public class ClassNode implements Node {
             //controllare ID superclasse
             if (!superclass.equals("")) {
                 ClassNode superClassLayout = env.getClassLayout(superclass);
-                if (!env.isClassDeclared(superclass)) {
+                if (!env.isClassDeclared(superclass) || superClassLayout == null) {
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
                 } else {
                     // crea dispatch table usando anche la tabella della superclasse
