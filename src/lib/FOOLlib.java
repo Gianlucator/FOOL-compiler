@@ -22,6 +22,8 @@ public class FOOLlib {
     public static boolean isSubtype(String A, String B) {
         TypeTreeNode typeOfA = root.findNode(A);
         TypeTreeNode typeOfB = root.findNode(B);
+        if(typeOfA == null && typeOfB == null)  //Se i tipi sono su due rami differenti, allora ritorno false
+            return false;
         return typeOfA.getSuperTypes().contains(typeOfB); // O(1)
     }
 
