@@ -25,7 +25,7 @@ public class NewExpNode implements Node {
 
     @Override
     public Node typeCheck() {
-        return null;
+        return new ClassIdNode(classId);
     }
 
     @Override
