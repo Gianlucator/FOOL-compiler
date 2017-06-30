@@ -89,9 +89,8 @@ public class FunNode implements Node {
             res.addAll(body.checkSemantics(env));
 
             //close scope
-            env.decNestingLevel();
             env.getSymTable().remove(env.getNestingLevel());
-
+            env.decNestingLevel();
         }
 
         return res;

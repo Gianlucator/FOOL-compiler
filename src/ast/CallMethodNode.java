@@ -69,7 +69,7 @@ public class CallMethodNode implements Node {
             }
         }
         if (!foundMethod) {
-            res.add(new SemanticError("Id " + methodName + " not declared"));
+            res.add(new SemanticError("Method " + methodName + " not declared"));
         } else {
             System.out.println(classNode.toPrint(""));
         }
