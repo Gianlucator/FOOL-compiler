@@ -61,14 +61,24 @@ public class Environment {
 		return GLOBAL_SCOPE;
 	}
 
+	// NOTE: returns null whether the class is declared or not
+    // make sure every class STentry is present before looking for it or
+    // check first with isClassDeclared!
 	public ClassNode getClassLayout(String className){
 		ClassNode cn = null;
 		try {
-			cn = (ClassNode) symTable.get(GLOBAL_SCOPE).get(className).getType();
+		    STentry classEntry = symTable.get(GLOBAL_SCOPE).get(className);
+
+		    if (classEntry != null)
+		        cn = (ClassNode) classEntry.getType();
 		} catch (Exception e){
 			System.err.println("Could not cast to ClassNode!");
 		}
 		return cn;
+	}
+
+	public boolean isClassDeclared(String className) {
+		return symTable.get(GLOBAL_SCOPE).get(className) != null;
 	}
 
 	public STentry insertClassEntry(String s, STentry e) {
