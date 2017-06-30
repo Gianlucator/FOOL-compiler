@@ -34,6 +34,29 @@ classi normali:
   in 2 * x;
 - ""
 
+classi inheritance:
+- class Sovrano(int a) {
+
+     int f(int x) 2 * 2;
+     int r(int y) 2 * y;
+ }
+ class Automa implements Sovrano (int a) {
+
+     int f(int x) 2 * 2;
+     int r(int y) 3 * y;
+ }
+ class S(int a) {
+
+     int f(int x) 2 * 2;
+     int r(int y) 2 * y;
+ }
+ class A implements S (int a) {
+
+     int f(int x) 2 * 2;
+ };
+ let int A = 5; Sovrano s = new Sovrano(4); in s;
+- ""
+
 senza classi:
 - let int x = 4; int f(int y) x + y; in f(x);
 - ""

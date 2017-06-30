@@ -1,13 +1,13 @@
 push 0
-push 5
+push 4
 push function0
 lfp
-push -2
+push -3
 lfp
 add
 lw
 lfp
-push -3
+push -4
 lfp
 add
 lw
@@ -17,10 +17,16 @@ halt
 function0:
 cfp
 lra
+push -3
+lfp
+lw
+add
+lw
 push 1
 lfp
 add
 lw
+add
 srv
 sra
 pop
