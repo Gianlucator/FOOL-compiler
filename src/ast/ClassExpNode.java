@@ -50,8 +50,14 @@ public class ClassExpNode implements Node {
 
         if (typesRoot == null) {
             res.add(new SemanticError("Cycle(s) between class definitions."));
+        } else {
+            ArrayList<ClassNode> cn = typesRoot.buildWellOrderedClassList();
+            for (ClassNode cl: cn) {
+                System.out.println(cl.getId());
+            }
         }
 
+        // add all class names to the environment to allow subclassing before declaration
         for (Node cls: classes) {
             clsName = ((ClassNode) cls).getId();
             STentry sTentry =  new STentry(env.getGLOBAL_SCOPE(), env.getOffset());
@@ -67,10 +73,8 @@ public class ClassExpNode implements Node {
                 res.addAll(cl.checkSemantics(env));
         }
 
-        //check semantics in the (let)? exp
         res.addAll(body.checkSemantics(env));
 
-        //clean the scope, we are leaving a let scope
         //env.getSymTable().remove(env.getNestingLevel());
         env.decNestingLevel();
 

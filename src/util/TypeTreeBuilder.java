@@ -16,7 +16,7 @@ public class TypeTreeBuilder {
         ArrayList<Node> classes = new ArrayList<>();
         classes.addAll(cls);
 
-        TypeTreeNode rootNode = new TypeTreeNode("", null);
+        TypeTreeNode rootNode = new TypeTreeNode("", null,null);
         nodeNames.add("");
 
         int lastSize = -1;
@@ -31,7 +31,7 @@ public class TypeTreeBuilder {
                     nodeNames.add(className);
 
                     TypeTreeNode parentNode = rootNode.findNode(superClass);
-                    parentNode.addSubtype(new TypeTreeNode(className, parentNode));
+                    parentNode.addSubtype(new TypeTreeNode(className, cl, parentNode));
 
                     it.remove();
                 }

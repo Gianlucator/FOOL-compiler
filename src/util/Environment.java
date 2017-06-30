@@ -71,6 +71,10 @@ public class Environment {
 		return cn;
 	}
 
+	public boolean isClassDeclared(String className) {
+		return symTable.get(GLOBAL_SCOPE).get(className) != null;
+	}
+
 	public STentry insertClassEntry(String s, STentry e) {
 		return symTable.get(GLOBAL_SCOPE).put(s, e);
 	}

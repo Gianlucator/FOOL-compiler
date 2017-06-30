@@ -1,5 +1,8 @@
 package util;
 
+import ast.ClassNode;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -7,12 +10,14 @@ import java.util.HashSet;
  */
 public class TypeTreeNode {
     private String currentType;
+    private ClassNode currentClassNode;
     private TypeTreeNode parentSuperType;
     private HashSet<TypeTreeNode> superTypes; // contains all ancestors ==> MAXIMUM SPEED, FULL MOMENTUM, HIGH EFFICIENCY
     private HashSet<TypeTreeNode> subTypes;
 
-    public TypeTreeNode(String currentType, TypeTreeNode parentSuperType) {
+    public TypeTreeNode(String currentType, ClassNode currentClassNode, TypeTreeNode parentSuperType) {
         this.currentType = currentType;
+        this.currentClassNode = currentClassNode;
         this.parentSuperType = parentSuperType;
         this.superTypes = new HashSet<>();
 
@@ -43,6 +48,23 @@ public class TypeTreeNode {
         }
 
         return null;
+    }
+
+
+    public ArrayList<ClassNode> buildWellOrderedClassList() {
+        ArrayList<ClassNode> classNodes = new ArrayList<>();
+        return buildWellOrderedClassList(classNodes);
+    }
+
+    private ArrayList<ClassNode> buildWellOrderedClassList(ArrayList<ClassNode> classNodes) {
+        if (currentClassNode != null)
+            classNodes.add(currentClassNode);
+
+        for (TypeTreeNode st: subTypes) {
+            classNodes.addAll(st.buildWellOrderedClassList(classNodes));
+        }
+
+        return classNodes;
     }
 
     public String toString() {
