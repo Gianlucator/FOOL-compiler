@@ -17,42 +17,48 @@ import java.util.HashMap;
 
 public class YmlTest {
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    private static int testNumber = 0;
+
+    private static final String SEMANTIC_ERRORS = "semantic errors";
+    private static final String CODEGEN_ERRORS = "code generation errors";
+
+    // Colors to print fancy stuff
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_BLUE = "\u001B[34m";
 
     public static void main(String[] args) throws Exception {
-        String fileName = "src/fool_tests.yml";
+        String fileName = "fool_tests.yml";
 
         HashMap<String, ArrayList<String>> testFile = loadYmlFromFile(fileName);
 
-        int testCount = 0, testsPassed = 0;
+        testNumber = 0;
+        int testsPassed = 0;
         String foolCode, expectedResult;
 
         for (String key : testFile.keySet()) {
-            System.out.printf("%sTest #%d: '%s'%s\n", ANSI_BLUE, testCount + 1, key, ANSI_RESET);
+            System.out.printf("%sTest #%d '%s'%s\n", ANSI_BLUE, testNumber + 1, key, ANSI_RESET);
             foolCode = testFile.get(key).get(0);
             expectedResult = testFile.get(key).get(1);
 
-            String result = foolCodeMagic(fileName, foolCode);
+            String result = codeTest(key, foolCode);
 
             if (expectedResult.equals(result)) {
                 testsPassed++;
+            } else {
+                System.out.printf("%sTest failed due to %s%s%s%n", ANSI_BLUE, ANSI_YELLOW, result, ANSI_RESET);
             }
 
-            testCount++;
+            System.out.println();
+            testNumber++;
         }
 
-        if (testCount == testsPassed) {
-            System.out.printf("%sAll %d tests passed, you must be proud.%s\n", ANSI_GREEN, testCount, ANSI_RESET);
+        if (testNumber == testsPassed) {
+            System.out.printf("%sAll %d tests passed, you must be proud.%s\n", ANSI_GREEN, testNumber, ANSI_RESET);
         } else {
-            System.out.printf("%s%d/%d tests passed, you are a failure.%s%n", ANSI_RED, testsPassed, testCount, ANSI_RESET);
+            System.out.printf("%s%d/%d tests passed, you are a failure.%s%n", ANSI_RED, testsPassed, testNumber, ANSI_RESET);
         }
     }
 
@@ -64,8 +70,8 @@ public class YmlTest {
         return (HashMap<String, ArrayList<String>>) yaml.load(input);
     }
 
-    // TODO: rename this function
-    public static String foolCodeMagic(String fileName, String foolCode) throws Exception {
+    public static String codeTest(String testName, String foolCode) throws Exception {
+
         ANTLRInputStream input = new ANTLRInputStream(foolCode);
         FOOLLexer lexer = new FOOLLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -82,27 +88,36 @@ public class YmlTest {
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 
             if (err.size() > 0) {
-                System.out.println(+ err.size() + " errors found:");
+                System.out.println(err.size() + " errors found:");
                 for (SemanticError e : err)
                     System.out.println("\t" + e);
+
+                return SEMANTIC_ERRORS;
             } else {
 
-
-                System.out.println("Visualizing AST...");
-                System.out.println(ast.toPrint(""));
+                //System.out.println("Visualizing AST...");
+                //System.out.println(ast.toPrint(""));
 
                 Node type = ast.typeCheck(); //type-checking bottom-up
-                System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
+                //System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
 
 
-                // CODE GENERATION  prova.fool.asm
+                // CODE GENERATION
+                String asmFileName = "tests_asm/test" + (testNumber + 1) + ".asm";
+
                 String code = ast.codeGeneration();
-                BufferedWriter out = new BufferedWriter(new FileWriter(fileName + ".asm"));
+
+                if (code == null) {
+                    System.out.printf("Failed to generate code for '%s'%n", testName);
+                    return CODEGEN_ERRORS;
+                }
+
+                BufferedWriter out = new BufferedWriter(new FileWriter(new File(asmFileName)));
                 out.write(code);
                 out.close();
-                System.out.println("Code generated! Assembling and running generated code.");
+                //System.out.println("Code generated! Assembling and running generated code.");
 
-                FileInputStream isASM = new FileInputStream(fileName + ".asm");
+                FileInputStream isASM = new FileInputStream(asmFileName);
                 ANTLRInputStream inputASM = new ANTLRInputStream(isASM);
                 SVMLexer lexerASM = new SVMLexer(inputASM);
                 CommonTokenStream tokensASM = new CommonTokenStream(lexerASM);
@@ -110,10 +125,10 @@ public class YmlTest {
 
                 parserASM.assembly();
 
-                System.out.println("You had: " + lexerASM.lexicalErrors + " lexical errors and " + parserASM.getNumberOfSyntaxErrors() + " syntax errors.");
-                if (lexerASM.lexicalErrors > 0 || parserASM.getNumberOfSyntaxErrors() > 0) System.exit(1);
+                //System.out.println("You had: " + lexerASM.lexicalErrors + " lexical errors and " + parserASM.getNumberOfSyntaxErrors() + " syntax errors.");
+                //if (lexerASM.lexicalErrors > 0 || parserASM.getNumberOfSyntaxErrors() > 0) System.exit(1);
 
-                System.out.println("Starting Virtual Machine...");
+                //System.out.println("Starting Virtual Machine...");
                 ExecuteVM vm = new ExecuteVM(parserASM.code);
                 vm.cpu();
             }

@@ -47,7 +47,10 @@ public class ClassExpNode implements Node {
 
         String clsName;
         TypeTreeNode typesRoot = TypeTreeBuilder.buildTypeTree(classes);
-        //System.out.println(typesRoot);
+
+        if (typesRoot == null) {
+            res.add(new SemanticError("Cycle(s) between class definitions."));
+        }
 
         for (Node cls: classes) {
             clsName = ((ClassNode) cls).getId();
