@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * Created by crist on 22/06/2017.
  */
-public class MethodNode implements Node {
+public class MethodNode extends FunNode {
 
     private String id;
     private Node type;
@@ -19,9 +19,16 @@ public class MethodNode implements Node {
     private Node body;
     private Node self;
 
-    public MethodNode(String i, Node t) {
-        id = i;
-        type = t;
+    public MethodNode(String i, Node t, Node self) {
+        super(i, t);
+        this.self = self;
+        parlist.add(0, self);
+        System.out.println(parlist);
+    }
+
+    public static void main(String [ ] args) {
+        ClassNode c = new ClassNode();
+        MethodNode m = new MethodNode("f", new IntTypeNode(), c);
     }
 
     public void addDecBody(ArrayList<Node> d, Node b) {
