@@ -1,6 +1,7 @@
 package util;
 
 import ast.ClassNode;
+import ast.Node;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.HashSet;
  */
 public class TypeTreeNode {
     private String currentType;
-    private ClassNode currentClassNode;
+    private Node currentClassNode;
     private TypeTreeNode parentSuperType;
     private HashSet<TypeTreeNode> superTypes; // contains all ancestors ==> MAXIMUM SPEED, FULL MOMENTUM, HIGH EFFICIENCY
     private HashSet<TypeTreeNode> subTypes;
@@ -51,12 +52,12 @@ public class TypeTreeNode {
     }
 
 
-    public ArrayList<ClassNode> buildWellOrderedClassList() {
-        ArrayList<ClassNode> classNodes = new ArrayList<>();
+    public ArrayList<Node> buildWellOrderedClassList() {
+        ArrayList<Node> classNodes = new ArrayList<>();
         return buildWellOrderedClassList(classNodes);
     }
 
-    private ArrayList<ClassNode> buildWellOrderedClassList(ArrayList<ClassNode> classNodes) {
+    private ArrayList<Node> buildWellOrderedClassList(ArrayList<Node> classNodes) {
 
         for (TypeTreeNode st: subTypes) {
             st.buildWellOrderedClassList(classNodes);
