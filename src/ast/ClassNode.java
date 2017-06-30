@@ -25,6 +25,7 @@ public class ClassNode implements Node {
         this.fields = fields;
         this.methods = methods;
         methodDT = new DispatchTable();
+        fieldDT = new DispatchTable();
     }
 
     public String getId() {
@@ -45,6 +46,10 @@ public class ClassNode implements Node {
 
     public DispatchTable getMethodDT() {
         return methodDT;
+    }
+
+    public DispatchTable getFieldDT() {
+        return fieldDT;
     }
 
     @Override
@@ -95,9 +100,11 @@ public class ClassNode implements Node {
                     // crea dispatch table usando anche la tabella della superclasse
                     DispatchTable superclassDT = superClassLayout.getMethodDT();
                     methodDT.buildDispatchTable(methods, superclassDT);
+                    fieldDT.buildDispatchTable(fields, superclassDT);
                 }
             } else {
                 methodDT.buildDispatchTable(methods);
+                fieldDT.buildDispatchTable(fields);
             }
 
             env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));

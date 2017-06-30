@@ -77,22 +77,6 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 	    return new VarDecNode(ctx.ID().getText(), typeNode);
     }
 
-	@Override
-	public Node visitLet(LetContext ctx) {
-
-		LetNode res;
-
-		//list of declarations in @res
-		ArrayList<Node> declarations = new ArrayList<Node>();
-
-		//visit all nodes corresponding to declarations inside the let context and store them in @declarations
-		for(DecContext dc : ctx.dec()){
-			declarations.add( visit(dc) );
-		}
-
-		return res = new LetNode(declarations);
-	}
-
 	@Override	//auto-generated
 	public Node visitFunDeclaration(FunDeclarationContext ctx) {
 		return super.visitFunDeclaration(ctx);
