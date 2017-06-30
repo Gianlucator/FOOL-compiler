@@ -11,10 +11,9 @@ import ast.STentry;
 public class Environment {
 
 	private ArrayList<HashMap<String, STentry>> symTable = new ArrayList<>();
-	private HashMap<String, DispatchTable> dispatchTables = new HashMap<>();
 	private int nestingLevel = -1;
 	private int offset = 0;
-	private String self_type = "";	//Tipo della dichiarazione di classe in cui ci troviamo
+	//private String self_type = "";	//Tipo della dichiarazione di classe in cui ci troviamo
 
 	private final int GLOBAL_SCOPE = 0;
 
@@ -24,14 +23,6 @@ public class Environment {
 
 	public void setSymTable(ArrayList<HashMap<String, STentry>> symTable) {
 		this.symTable = symTable;
-	}
-
-	public HashMap<String, DispatchTable> getDispatchTables() {
-		return dispatchTables;
-	}
-
-	public void setDispatchTables(HashMap<String, DispatchTable> dispatchTables) {
-		this.dispatchTables = dispatchTables;
 	}
 
 	public int getNestingLevel() {
@@ -66,14 +57,6 @@ public class Environment {
 		this.offset--;
 	}
 
-	public String getSelf_type() {
-		return self_type;
-	}
-
-	public void setSelf_type(String self_type) {
-		this.self_type = self_type;
-	}
-
 	public int getGLOBAL_SCOPE() {
 		return GLOBAL_SCOPE;
 	}
@@ -89,7 +72,7 @@ public class Environment {
 	}
 
 	public STentry insertClassEntry(String s, STentry e) {
-        return symTable.get(GLOBAL_SCOPE).put(s, e);
+		return symTable.get(GLOBAL_SCOPE).put(s, e);
 	}
 
 	public void printNestingLevel() {

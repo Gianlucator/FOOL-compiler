@@ -49,8 +49,8 @@ public class LetNode implements Node {
         }
 
         //clean the scope, we are leaving a let scope
-        env.decNestingLevel();
         env.getSymTable().remove(env.getNestingLevel());
+        env.decNestingLevel();
 
         return res;
     }

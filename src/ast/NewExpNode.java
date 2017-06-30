@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class NewExpNode implements Node {
     private String classId;
     private ArrayList<Node> args;
-    private ObjectNode objectLayout;
 
     public NewExpNode(String classId, ArrayList<Node> args) {
         this.classId = classId;

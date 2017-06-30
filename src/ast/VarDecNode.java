@@ -40,8 +40,6 @@ public class VarDecNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        env.printNestingLevel();
-
         //env.offset = -2;
         HashMap<String,STentry> hm = env.getSymTable().get(env.getNestingLevel());
         env.decOffset();

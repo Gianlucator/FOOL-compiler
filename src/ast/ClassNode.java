@@ -16,12 +16,14 @@ public class ClassNode implements Node {
     private String superclass;
     private ArrayList<Node> fields;
     private ArrayList<Node> methods;
+    private DispatchTable methodDT;
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
         this.id = id;
         this.superclass = superclass;
         this.fields = fields;
         this.methods = methods;
+        methodDT = new DispatchTable();
     }
 
     public String getId() {
@@ -38,6 +40,10 @@ public class ClassNode implements Node {
 
     public ArrayList<Node> getMethods() {
         return methods;
+    }
+
+    public DispatchTable getMethodDT() {
+        return methodDT;
     }
 
     @Override
@@ -60,28 +66,14 @@ public class ClassNode implements Node {
 
         env.incNestingLevel();
 
-        HashMap<String, STentry> hm = new HashMap<>();
+        HashMap<String,STentry> hm = new HashMap<> ();
+        env.getSymTable().add(hm);
 
         ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID
         if (id.equals(superclass)) {
             res.add(new SemanticError(id + " cannot extend itself."));
         } else {
-            DispatchTable classDT = new DispatchTable();
-            //controllare ID superclasse
-            if (!superclass.equals("")) {
-                ClassNode superClassLayout = env.getClassLayout(superclass);
-                if (superClassLayout == null) {
-                    res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
-                } else {
-                    // crea dispatch table usando anche la tabella della superclasse
-                    DispatchTable superclassDT = env.getDispatchTables().get(superclass);
-                    classDT.buildDispatchTable(methods, superclassDT);
-                    //todo modificare la dt
-                }
-            } else {
-                classDT.buildDispatchTable(methods);
-            }
 
             //checksemantics field e methods classe attuale
             for (Node field : fields) {
@@ -91,6 +83,20 @@ public class ClassNode implements Node {
             // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibile
             for (Node method : methods) {
                 res.addAll(method.checkSemantics(env));
+            }
+
+            //controllare ID superclasse
+            if (!superclass.equals("")) {
+                ClassNode superClassLayout = env.getClassLayout(superclass);
+                if (superClassLayout == null) {
+                    res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
+                } else {
+                    // crea dispatch table usando anche la tabella della superclasse
+                    DispatchTable superclassDT = superClassLayout.getMethodDT();
+                    methodDT.buildDispatchTable(methods, superclassDT);
+                }
+            } else {
+                methodDT.buildDispatchTable(methods);
             }
 
             env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));

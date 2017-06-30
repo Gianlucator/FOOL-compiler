@@ -44,9 +44,9 @@ public class ProgLetInNode implements Node {
       res.addAll(exp.checkSemantics(env));
       
       //clean the scope, we are leaving a let scope
-      env.decNestingLevel();
       env.getSymTable().remove(env.getNestingLevel());
-      
+      env.decNestingLevel();
+
       //return the result
       return res;
 	}
