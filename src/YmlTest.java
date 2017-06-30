@@ -15,7 +15,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class YmlTests {
+public class YmlTest {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -32,18 +32,27 @@ public class YmlTests {
 
         HashMap<String, ArrayList<String>> testFile = loadYmlFromFile(fileName);
 
-        int testCount = 1;
+        int testCount = 0, testsPassed = 0;
         String foolCode, expectedResult;
 
         for (String key : testFile.keySet()) {
-            System.out.printf(ANSI_BLUE + "Test #%d: '%s'\n" + ANSI_RESET, testCount, key);
+            System.out.printf("%sTest #%d: '%s'%s\n", ANSI_BLUE, testCount + 1, key, ANSI_RESET);
             foolCode = testFile.get(key).get(0);
             expectedResult = testFile.get(key).get(1);
 
             String result = foolCodeMagic(fileName, foolCode);
 
-            if (expectedResult.equals(result))
-                System.out.println(ANSI_GREEN + " all tests passed!" + ANSI_RESET);
+            if (expectedResult.equals(result)) {
+                testsPassed++;
+            }
+
+            testCount++;
+        }
+
+        if (testCount == testsPassed) {
+            System.out.printf("%sAll %d tests passed, you must be proud.%s\n", ANSI_GREEN, testCount, ANSI_RESET);
+        } else {
+            System.out.printf("%s%d/%d tests passed, you are a failure.%s%n", ANSI_RED, testsPassed, testCount, ANSI_RESET);
         }
     }
 
