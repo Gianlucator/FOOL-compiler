@@ -42,15 +42,29 @@ public class CallMethodNode implements Node {
         int j = env.getNestingLevel();
         STentry tmp = null;
         boolean foundMethod = false;
-        Node classNode = null;
+        boolean foundObject = true;
+        ClassIdNode classId = new ClassIdNode("");
+        ClassNode classNode = null;
 
-        while (j >= 0 && classNode == null) {
-            classNode = (env.getSymTable().get(j--)).get(objectName).getType();
+        // dichiarazione di oggetto
+        while (j >= 0 && classId.getClassId().equals("") && foundObject) {
+            try{
+                classId = (ClassIdNode) (env.getSymTable().get(j--)).get(objectName).getType();
+            }catch (Exception e){
+                System.out.println("Could not cast object type to ClassIdNode.\n");
+                foundObject = false;
+            }
+            if (classId.getClassId().equals("")){
+                res.add(new SemanticError("Object " + objectName + " not declared"));
+            }
+            else {
+                classNode = env.getClassLayout(classId.getClassId());
 
-            ArrayList<Node> methods = ((ClassNode) classNode).getMethods();
-            for (Node decs : methods) {
-                if (((FunNode) decs).getId().equals(methodName)) {
-                    foundMethod = true;
+                ArrayList<Node> methods = classNode.getMethods();
+                for (Node decs : methods) {
+                    if (((FunNode) decs).getId().equals(methodName)) {
+                        foundMethod = true;
+                    }
                 }
             }
         }
@@ -60,8 +74,6 @@ public class CallMethodNode implements Node {
             System.out.println(classNode.toPrint(""));
         }
 
-        if (tmp == null)
-            res.add(new SemanticError("Id " + objectName + " not declared"));
 
         /*
         while (j >= 0 && tmp == null)
@@ -75,8 +87,11 @@ public class CallMethodNode implements Node {
 
             for (Node arg : args)
                 res.addAll(arg.checkSemantics(env));
+
+        if (tmp == null)
+            res.add(new SemanticError("Id " + objectName + " not declared"));
         }
         */
-        return null;
+        return res;
     }
 }

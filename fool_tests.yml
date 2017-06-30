@@ -54,7 +54,7 @@ classi inheritance:
 
      int f(int x) 2 * 2;
  };
- let int A = 5; Sovrano s = new Sovrano(4); in s;
+ let Sovrano s = new Sovrano(4); in t.f();
 - ""
 
 senza classi:

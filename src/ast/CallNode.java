@@ -49,7 +49,6 @@ public class CallNode implements Node {
             tmp = (env.getSymTable().get(j--)).get(id);
         if (tmp == null)
             res.add(new SemanticError("Id " + id + " not declared"));
-
         else {
             this.entry = tmp;
             this.nestinglevel = env.getNestingLevel();

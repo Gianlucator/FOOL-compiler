@@ -16,6 +16,11 @@ public class ClassIdNode implements Node{
         this.classId = classId;
     }
 
+
+    public String getClassId() {
+        return classId;
+    }
+
     @Override
     public String toPrint(String s) {
         return s+"ClassIdType: " + classId +"\n";

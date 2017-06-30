@@ -1,4 +1,5 @@
 package ast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,158 +11,159 @@ import util.SemanticError;
 // vedi CallNode per chiamata di funzione
 public class FunNode implements Node {
 
-  private String id;
-  private Node type;
-  private ArrayList<Node> parlist = new ArrayList<Node>();
-  private ArrayList<Node> declist;
-  private Node body;
-  
-  public FunNode (String i, Node t) {
-    id=i;
-    type=t;
-  }
-  
-  public void addDecBody (ArrayList<Node> d, Node b) {
-    declist=d;
-    body=b;
-  }
+    private String id;
+    private Node type;
+    private ArrayList<Node> parlist = new ArrayList<Node>();
+    private ArrayList<Node> declist;
+    private Node body;
 
-  public String getId() {
-  	return id;
-  }
-  
-  @Override
-	public ArrayList<SemanticError> checkSemantics(Environment env) {
-	  
-	  //create result list
-	  ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-	  
-	  //env.offset = -2;
-      // mh = Symbol table = lista di hashmap
-	  HashMap<String,STentry> hm = env.getSymTable().get(env.getNestingLevel());
+    public FunNode(String i, Node t) {
+        id = i;
+        type = t;
+    }
 
-	  env.decOffset();
-	  STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
+    public void addDecBody(ArrayList<Node> d, Node b) {
+        declist = d;
+        body = b;
+    }
 
-      // se la st contiene già l'id ==> error
-      if (hm.put(id, entry) != null) {
-          res.add(new SemanticError("Fun id " + id + " already declared"));
-      } else {
-          // se la st non contiene ancora l'id ==> lo si aggiunge e
-          // si crea una nuova hashmap per la symTable
+    public String getId() {
+        return id;
+    }
 
-          // nuovo livello innestato
-          env.incNestingLevel();
+    @Override
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-          // hashmap nested
-          HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
+        //create result list
+        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-          // aggiunto alla symbol table
-          env.getSymTable().add(hmn);
+        //env.offset = -2;
+        // mh = Symbol table = lista di hashmap
+        HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
 
-          ArrayList<Node> parTypes = new ArrayList<Node>();
-          int paroffset=1;
+        env.decOffset();
+        STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
 
-          //check args
-          for(Node a : parlist){
-              ParNode arg = (ParNode) a;
-              parTypes.add(arg.getType());
-              if ( hmn.put(arg.getId(),new STentry(env.getNestingLevel(),arg.getType(),paroffset++)) != null  ) {
-                  // warning, non errore!
-                  // la prima dichiarazione viene sovrascritta dalla seconda
-                  System.out.println("Parameter id "+arg.getId()+" already declared");
-              }
-          }
+        // se la st contiene già l'id ==> error
+        if (hm.put(id, entry) != null) {
+            res.add(new SemanticError("Fun id " + id + " already declared"));
+        } else {
+            // se la st non contiene ancora l'id ==> lo si aggiunge e
+            // si crea una nuova hashmap per la symTable
 
-          //set func type
-          entry.addType( new ArrowTypeNode(parTypes, type) );
+            // nuovo livello innestato
+            env.incNestingLevel();
 
-          //check semantics in the dec list
-          if(declist.size() > 0){
-              env.setOffset(-2);
-              //if there are children then check semantics for every child and save the results
-              for(Node n : declist)
-	    		  res.addAll(n.checkSemantics(env));
-          }
+            // hashmap nested
+            HashMap<String, STentry> hmn = new HashMap<String, STentry>();
 
-          //check body
-          res.addAll(body.checkSemantics(env));
+            // aggiunto alla symbol table
+            env.getSymTable().add(hmn);
 
-          //close scope
-          env.getSymTable().remove(env.getNestingLevel());
-          env.decNestingLevel();
-      }
+            ArrayList<Node> parTypes = new ArrayList<Node>();
+            int paroffset = 1;
 
-      return res;
-  }
-  
-  public void addPar (Node p) {
-    parlist.add(p);
-  }  
-  
-  public String toPrint(String s) {
-	String parlstr="";
-	for (Node par:parlist)
-	  parlstr+=par.toPrint(s+"  ");
-	String declstr="";
-	if (declist!=null) 
-	  for (Node dec:declist)
-	    declstr+=dec.toPrint(s+"  ");
-    return s+"Fun:" + id +"\n"
-		   +type.toPrint(s+"  ")
-		   +parlstr
-	   	   +declstr
-           +body.toPrint(s+"  ") ; 
-  }
-  
-  //valore di ritorno non utilizzato
+            //check args
+            for (Node a : parlist) {
+                ParNode arg = (ParNode) a;
+                parTypes.add(arg.getType());
+                if (hmn.put(arg.getId(), new STentry(env.getNestingLevel(), arg.getType(), paroffset++)) != null) {
+                    // warning, non errore!
+                    // la prima dichiarazione viene sovrascritta dalla seconda
+                    System.out.println("Parameter id " + arg.getId() + " already declared");
+                }
+            }
+
+            //set func type
+            entry.addType(new ArrowTypeNode(parTypes, type));
+
+            //check semantics in the dec list
+            if (declist.size() > 0) {
+                env.setOffset(-2);
+                //if there are children then check semantics for every child and save the results
+                for (Node n : declist)
+                    res.addAll(n.checkSemantics(env));
+            }
+
+            //check body
+            res.addAll(body.checkSemantics(env));
+
+            //close scope
+            env.decNestingLevel();
+            env.getSymTable().remove(env.getNestingLevel());
+
+        }
+
+        return res;
+    }
+
+    public void addPar(Node p) {
+        parlist.add(p);
+    }
+
+    public String toPrint(String s) {
+        String parlstr = "";
+        for (Node par : parlist)
+            parlstr += par.toPrint(s + "  ");
+        String declstr = "";
+        if (declist != null)
+            for (Node dec : declist)
+                declstr += dec.toPrint(s + "  ");
+        return s + "Fun:" + id + "\n"
+                + type.toPrint(s + "  ")
+                + parlstr
+                + declstr
+                + body.toPrint(s + "  ");
+    }
+
+    //valore di ritorno non utilizzato
     // controlla se il tipo del valore di ritorno coincide con il tipo del valore
     // ritornato dalla funzione
-  public Node typeCheck () {
-	if (declist!=null) 
-	  for (Node dec:declist)
-		dec.typeCheck();
-    if ( !(FOOLlib.isSubtype(body.typeCheck(),type)) ){
-      System.out.println("Wrong return type for function "+id);
-      System.exit(0);
-    }  
-    return null;
-  }
+    public Node typeCheck() {
+        if (declist != null)
+            for (Node dec : declist)
+                dec.typeCheck();
+        if (!(FOOLlib.isSubtype(body.typeCheck(), type))) {
+            System.out.println("Wrong return type for function " + id);
+            System.exit(0);
+        }
+        return null;
+    }
 
-  public String codeGeneration() {
-	  
-	    String declCode="";
-	    if (declist!=null) for (Node dec:declist)
-		    declCode+=dec.codeGeneration();
-	    
-	    String popDecl="";
-	    if (declist!=null) for (Node dec:declist)
-	    	popDecl+="pop\n";
-	    
-	    String popParl="";
-	    for (Node dec:parlist)
-	    	popParl+="pop\n";
-	    
-	    String funl=FOOLlib.freshFunLabel(); 
-	    FOOLlib.putCode(funl+":\n"+
-	            "cfp\n"+ //setta $fp a $sp				
-				"lra\n"+ //inserimento return address
-	    		declCode+ //inserimento dichiarazioni locali
-	    		body.codeGeneration()+
-	    		"srv\n"+ //pop del return value and store top into rv (var che contiene il risultato della funz)
-	    		popDecl+
-	    		"sra\n"+ // pop del return address e store top (= Access Link) into $ra
-	    		"pop\n"+ // pop di Access Link
+    public String codeGeneration() {
+
+        String declCode = "";
+        if (declist != null) for (Node dec : declist)
+            declCode += dec.codeGeneration();
+
+        String popDecl = "";
+        if (declist != null) for (Node dec : declist)
+            popDecl += "pop\n";
+
+        String popParl = "";
+        for (Node dec : parlist)
+            popParl += "pop\n";
+
+        String funl = FOOLlib.freshFunLabel();
+        FOOLlib.putCode(funl + ":\n" +
+                "cfp\n" + //setta $fp a $sp
+                "lra\n" + //inserimento return address
+                declCode + //inserimento dichiarazioni locali
+                body.codeGeneration() +
+                "srv\n" + //pop del return value and store top into rv (var che contiene il risultato della funz)
+                popDecl +
+                "sra\n" + // pop del return address e store top (= Access Link) into $ra
+                "pop\n" + // pop di Access Link
                 // AL= points to the activation record associated with the nearest enclosing scope
                 // per il body della funzione AL è il blocco che contiene la dichiarazione della funzione
-	    		popParl+
+                popParl +
                 // Control Link (o Dynamic Link) = %fp precedente settato dal chiamante
-	    		"sfp\n"+  // setto $fp a valore del Control Link  -  store top into frame pointer
-	    		"lrv\n"+ // risultato della funzione (=rv) on top dello stack - load from rv
-	    		"lra\n"+"js\n" //load from ra e salta a $ra
-	    		);
-	    
-		return "push "+ funl +"\n";
-  }
-  
+                "sfp\n" +  // setto $fp a valore del Control Link  -  store top into frame pointer
+                "lrv\n" + // risultato della funzione (=rv) on top dello stack - load from rv
+                "lra\n" + "js\n" //load from ra e salta a $ra
+        );
+
+        return "push " + funl + "\n";
+    }
+
 }  

@@ -122,7 +122,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		else if(ctx.getText().equals("bool"))
 			return new BoolTypeNode();
 		else
-			return new IdNode(ctx.ID().getText());	//riconosco come tipo il nome di una classe
+			return new ClassIdNode(ctx.ID().getText());	//riconosco come tipo il nome di una classe
 	}
 	
 	@Override
