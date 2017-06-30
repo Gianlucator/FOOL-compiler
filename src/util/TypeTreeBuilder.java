@@ -10,18 +10,13 @@ import java.util.Iterator;
  * Created by Stef@no on 29/06/2017.
  */
 public class TypeTreeBuilder {
-    private static ArrayList<String> nodeNames;
-
-    public TypeTreeBuilder() {
-        nodeNames = new ArrayList<>();
-        nodeNames.add("");
-    }
+    private static ArrayList<String> nodeNames = new ArrayList<>();
 
     public static TypeTreeNode buildTypeTree(ArrayList<Node> cls) {
         ArrayList<Node> classes = new ArrayList<>();
         classes.addAll(cls);
+
         TypeTreeNode rootNode = new TypeTreeNode("", null);
-        nodeNames = new ArrayList<>();
         nodeNames.add("");
 
         int lastSize = -1;
@@ -42,8 +37,13 @@ public class TypeTreeBuilder {
                 }
             }
 
-            if (lastSize == classes.size())
+            if (lastSize == classes.size()) {
+                System.out.println("Cycle detected between these classes: ");
+                for (Node cl: classes)
+                    System.out.printf("  Class %s implements %s%n", ((ClassNode) cl).getId(), ((ClassNode) cl).getSuperclass());
+
                 return null;
+            }
             else
                 lastSize = classes.size();
         }
