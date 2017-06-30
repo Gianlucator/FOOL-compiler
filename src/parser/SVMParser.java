@@ -1,4 +1,4 @@
-// Generated from SVM.g4 by ANTLR 4.6
+// Generated from C:/Users/Cristiano Piemontese/Documents/GitHub/FOOL2017/src/parser\SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class SVMParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -209,11 +209,6 @@ public class SVMParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assembly; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SVMVisitor ) return ((SVMVisitor<? extends T>)visitor).visitAssembly(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AssemblyContext assembly() throws RecognitionException {
@@ -447,17 +442,17 @@ public class SVMParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\36D\4\2\t\2\3\2\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\36D\4\2\t\2\3\2\3"+
 		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
 		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3"+
 		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
-		"\3\2\3\2\7\2=\n\2\f\2\16\2@\13\2\3\2\3\2\3\2\2\2\3\2\2\2[\2>\3\2\2\2\4"+
-		"\5\7\3\2\2\5\6\7\34\2\2\6=\b\2\1\2\7\b\7\3\2\2\b\t\7\33\2\2\t=\b\2\1\2"+
-		"\n\13\7\4\2\2\13=\b\2\1\2\f\r\7\5\2\2\r=\b\2\1\2\16\17\7\6\2\2\17=\b\2"+
-		"\1\2\20\21\7\7\2\2\21=\b\2\1\2\22\23\7\b\2\2\23=\b\2\1\2\24\25\7\t\2\2"+
-		"\25=\b\2\1\2\26\27\7\n\2\2\27=\b\2\1\2\30\31\7\33\2\2\31\32\7\32\2\2\32"+
-		"=\b\2\1\2\33\34\7\13\2\2\34\35\7\33\2\2\35=\b\2\1\2\36\37\7\f\2\2\37 "+
-		"\7\33\2\2 =\b\2\1\2!\"\7\r\2\2\"#\7\33\2\2#=\b\2\1\2$%\7\16\2\2%=\b\2"+
+		"\3\2\3\2\7\2=\n\2\f\2\16\2@\13\2\3\2\3\2\3\2\2\2\3\2\2\2\2[\2>\3\2\2\2"+
+		"\4\5\7\3\2\2\5\6\7\34\2\2\6=\b\2\1\2\7\b\7\3\2\2\b\t\7\33\2\2\t=\b\2\1"+
+		"\2\n\13\7\4\2\2\13=\b\2\1\2\f\r\7\5\2\2\r=\b\2\1\2\16\17\7\6\2\2\17=\b"+
+		"\2\1\2\20\21\7\7\2\2\21=\b\2\1\2\22\23\7\b\2\2\23=\b\2\1\2\24\25\7\t\2"+
+		"\2\25=\b\2\1\2\26\27\7\n\2\2\27=\b\2\1\2\30\31\7\33\2\2\31\32\7\32\2\2"+
+		"\32=\b\2\1\2\33\34\7\13\2\2\34\35\7\33\2\2\35=\b\2\1\2\36\37\7\f\2\2\37"+
+		" \7\33\2\2 =\b\2\1\2!\"\7\r\2\2\"#\7\33\2\2#=\b\2\1\2$%\7\16\2\2%=\b\2"+
 		"\1\2&\'\7\17\2\2\'=\b\2\1\2()\7\20\2\2)=\b\2\1\2*+\7\21\2\2+=\b\2\1\2"+
 		",-\7\22\2\2-=\b\2\1\2./\7\23\2\2/=\b\2\1\2\60\61\7\24\2\2\61=\b\2\1\2"+
 		"\62\63\7\25\2\2\63=\b\2\1\2\64\65\7\26\2\2\65=\b\2\1\2\66\67\7\27\2\2"+
