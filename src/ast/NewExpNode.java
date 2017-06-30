@@ -36,7 +36,7 @@ public class NewExpNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
-        //env.symTable.add(hm);
+        HashMap<String, STentry> hm =  env.getSymTable().get(env.getNestingLevel());
 
         // controllare che la classe esista
         ClassNode classEntry = env.getClassLayout(classId);

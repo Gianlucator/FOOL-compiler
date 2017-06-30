@@ -17,6 +17,4 @@ class A implements S (int a) {
 
     int f(int x) 2 * 2;
 };
-
-
-let Sovrano s = new Sovrano(4); in s;
+let int A = 5; Sovrano s = new Sovrano(4); in s;

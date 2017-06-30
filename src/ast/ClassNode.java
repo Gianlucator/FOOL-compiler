@@ -16,6 +16,7 @@ public class ClassNode implements Node {
     private String superclass;
     private ArrayList<Node> fields;
     private ArrayList<Node> methods;
+    private DispatchTable fieldDT;
     private DispatchTable methodDT;
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
