@@ -70,15 +70,6 @@ public class FunNode implements Node {
             ArrayList<Node> parTypes = new ArrayList<Node>();
             int paroffset = 1;
 
-            //<CAUTION>
-            //Parte aggiunta da Stefn, in caso di ripristino per malfunzionamenti, eliminare.
-            //Cerco di sfruttare il FunNode anche per i metodi impostando il self che altrimenti rimane vuoto.
-            //Il self bisogna settarlo fuori, nel Classnode.
-            //Al limite dopo si pensa meglio come rifarlo, ma se funziò, funziò.
-            if(self != null)
-                parlist.add(0, new ParNode("self", self));
-            //</CAUTION>
-
             //check args
             for (Node a : parlist) {
                 ParNode arg = (ParNode) a;
@@ -100,6 +91,15 @@ public class FunNode implements Node {
                 for (Node n : declist)
                     res.addAll(n.checkSemantics(env));
             }
+
+            //<CAUTION>
+            //Parte aggiunta da Stefn, in caso di ripristino per malfunzionamenti, eliminare.
+            //Cerco di sfruttare il FunNode anche per i metodi impostando il self che altrimenti rimane vuoto.
+            //Il self bisogna settarlo fuori, nel Classnode.
+            //Al limite dopo si pensa meglio come rifarlo, ma se funziò, funziò.
+            if(self != null)
+                parlist.add(0, new ParNode("self", self));
+            //</CAUTION>
 
             //check body
             res.addAll(body.checkSemantics(env));
