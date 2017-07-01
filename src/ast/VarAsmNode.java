@@ -24,17 +24,6 @@ public class VarAsmNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        /*  Instant kill omfg this sucks
-        //Controllo per vedere se ho istanziato bene l'oggetto, così da memorizzarlo con il tipo di istanziazione
-        if (exp.typeCheck() instanceof ClassIdNode && type instanceof ClassIdNode) {
-            if (FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
-                type = (ClassIdNode) exp.typeCheck();
-            } else {
-                res.add(new SemanticError("Incompatible class type for object: " + id + "\n"));
-            }
-        }
-        */
-
         //env.setOffset(-2);
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
         env.decOffset();
@@ -56,6 +45,18 @@ public class VarAsmNode implements Node {
 
     //valore di ritorno non utilizzato
     public Node typeCheck() {
+
+        /*  da adattare
+        //Controllo per vedere se ho istanziato bene l'oggetto, così da memorizzarlo con il tipo di istanziazione
+        if (exp.typeCheck() instanceof ClassIdNode && type instanceof ClassIdNode) {
+            if (FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
+                type = (ClassIdNode) exp.typeCheck();
+            } else {
+                res.add(new SemanticError("Incompatible class type for object: " + id + "\n"));
+            }
+        }
+        */
+
         if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
             System.out.println("incompatible value for variable " + id);
             System.exit(0);
