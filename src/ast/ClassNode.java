@@ -71,9 +71,7 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         env.incNestingLevel();
-
-        HashMap<String,STentry> hm = new HashMap<> ();
-        env.getSymTable().add(hm);
+        env.getSymTable().add(new HashMap<> ());
 
         ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID
