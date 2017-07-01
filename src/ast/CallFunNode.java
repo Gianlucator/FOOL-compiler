@@ -16,7 +16,6 @@ public class CallFunNode implements Node {
     private ArrayList<Node> parlist;
     private int nestinglevel;
 
-
     public CallFunNode(String i, STentry e, ArrayList<Node> p, int nl) {
         id = i;
         entry = e;
