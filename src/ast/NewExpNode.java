@@ -18,6 +18,10 @@ public class NewExpNode implements Node {
         this.args = args;
     }
 
+    public String getClassId() {
+        return classId;
+    }
+
     @Override
     public String toPrint(String indent) {
         return null;

@@ -24,6 +24,19 @@ public class VarAsmNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
+        // Memorizzo nel method environment il tipo con cui istanzio l'oggetto.
+        if (exp instanceof NewExpNode){
+            String classInstance = ((NewExpNode) exp).getClassId();
+            HashMap<String, String> hm;
+            try {
+                hm = env.getMethodEnvironment().get(env.getNestingLevel());
+            } catch (Exception e) {
+                hm = new HashMap<>();
+                env.getMethodEnvironment().add(hm);
+            }
+            hm.put(id, classInstance);
+        }
+
         //env.setOffset(-2);
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
         env.decOffset();
@@ -33,7 +46,6 @@ public class VarAsmNode implements Node {
             res.add(new SemanticError("Var id " + id + " already declared"));
 
         res.addAll(exp.checkSemantics(env));
-
         return res;
     }
 
@@ -47,10 +59,10 @@ public class VarAsmNode implements Node {
     public Node typeCheck() {
 
         /*  da adattare
-        //Controllo per vedere se ho istanziato bene l'oggetto, così da memorizzarlo con il tipo di istanziazione
+        //Controllo per vedere se ho istanziato bene l'oggetto, così da risalire l'albero con il tipo di istanziazione
         if (exp.typeCheck() instanceof ClassIdNode && type instanceof ClassIdNode) {
             if (FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
-                type = (ClassIdNode) exp.typeCheck();
+
             } else {
                 res.add(new SemanticError("Incompatible class type for object: " + id + "\n"));
             }

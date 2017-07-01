@@ -57,10 +57,6 @@ classi inheritance:
  let Sovrano s = new Automa(4); in s.f(4);
 - ""
 
-senza classi:
-- let int x = 4; int f(int y) x + y; in f(4);
-- ""
-
 esempio sbagliato di CallMethod:
 - class Sovrano(int a) {
 
@@ -82,4 +78,8 @@ esempio sbagliato di CallMethod:
        int f(int x) 2 * 2;
    };
    let Sovrano s = new S(4); in s.f(4);
+- ""
+
+senza classi:
+- let int x = 4; int f(int y) x + y; in f(4);
 - ""

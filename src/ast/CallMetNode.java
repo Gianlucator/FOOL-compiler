@@ -3,6 +3,7 @@ package ast;
 import util.Environment;
 import util.SemanticError;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 
 /**
@@ -42,26 +43,28 @@ public class CallMetNode implements Node {
         int j = env.getNestingLevel();
         STentry tmp = null;
         boolean foundMethod = false;
-        ClassIdNode classId = new ClassIdNode("");
+        String classId = "";
         ClassNode classNode = null;
 
         // dichiarazione di oggetto
-        while (j >= 0 && classId.getClassId().equals("")) {
-            try{    //Provo a castare le entry nella symtable con lo stesso nome a classId
-                classId = (ClassIdNode) (env.getSymTable().get(j--)).get(objectName).getType();
+        while (j >= 0 && classId.equals("")) {
+            try{    // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
+                classId = env.getMethodEnvironment().get(j--).get(objectName);
             }catch (Exception e){
-                System.out.println("Could not cast object type to ClassIdNode.\n");
+                //Questa stampa sarà eliminata in futuro
+                System.out.print("Class instantiation for object '" + objectName + "' not found at nesting level " + (j+1) + "\n");
             }
-            if (classId.getClassId().equals(""))
-                res.add(new SemanticError("Object " + objectName + " not declared"));
+        }
+        if (classId.equals("")) {
+            res.add(new SemanticError("Object " + objectName + " not declared"));
+        }
             else {
-                classNode = env.getClassLayout(classId.getClassId());
+            classNode = env.getClassLayout(classId);
 
-                ArrayList<Node> methods = classNode.getMethods();
-                for (Node decs : methods) {
-                    if (((FunNode) decs).getId().equals(methodName)) {
-                        foundMethod = true;
-                    }
+            ArrayList<Node> methods = classNode.getMethods();
+            for (Node decs : methods) {
+                if (((FunNode) decs).getId().equals(methodName)) {
+                    foundMethod = true;
                 }
             }
         }
