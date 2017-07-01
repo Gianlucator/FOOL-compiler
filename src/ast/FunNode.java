@@ -11,11 +11,18 @@ import util.SemanticError;
 // vedi CallFunNode per chiamata di funzione
 public class FunNode implements Node {
 
-    protected String id;
-    protected Node type;
-    protected ArrayList<Node> parlist = new ArrayList<Node>();
-    protected ArrayList<Node> declist;
-    protected Node body;
+    private String id;
+    private Node type;
+    private ArrayList<Node> parlist = new ArrayList<Node>();
+    private ArrayList<Node> declist;
+    private Node body;
+
+    //Se rimane null è una funzione, altrimenti indica la classe di appartenenza del metodo
+    private Node self = null;
+
+    public void setSelf(Node self) {
+        this.self = self;
+    }
 
     public FunNode(String i, Node t) {
         id = i;
@@ -62,6 +69,15 @@ public class FunNode implements Node {
 
             ArrayList<Node> parTypes = new ArrayList<Node>();
             int paroffset = 1;
+
+            //<CAUTION>
+            //Parte aggiunta da Stefn, in caso di ripristino per malfunzionamenti, eliminare.
+            //Cerco di sfruttare il FunNode anche per i metodi impostando il self che altrimenti rimane vuoto.
+            //Il self bisogna settarlo fuori, nel Classnode.
+            //Al limite dopo si pensa meglio come rifarlo, ma se funziò, funziò.
+            if(self != null)
+                parlist.add(0, new ParNode("self", self));
+            //</CAUTION>
 
             //check args
             for (Node a : parlist) {

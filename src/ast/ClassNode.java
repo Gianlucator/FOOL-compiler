@@ -88,6 +88,8 @@ public class ClassNode implements Node {
 
             // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibile
             for (Node method : methods) {
+                //Imposto il self all'inizio dei parametri nel FunNode.
+                ((FunNode) method).setSelf(new ClassIdNode(id));
                 res.addAll(method.checkSemantics(env));
             }
 

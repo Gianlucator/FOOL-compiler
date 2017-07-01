@@ -58,15 +58,15 @@ public class CallMetNode implements Node {
         if (classId.equals("")) {
             res.add(new SemanticError("Object " + objectName + " not declared"));
         }
-            else {
-            classNode = env.getClassLayout(classId);
+        else {
+        classNode = env.getClassLayout(classId);
 
-            ArrayList<Node> methods = classNode.getMethods();
-            for (Node decs : methods) {
-                if (((FunNode) decs).getId().equals(methodName)) {
+        ArrayList<Node> methods = classNode.getMethods();
+        for (Node method : methods) {
+            if(method instanceof FunNode)
+                if (((FunNode) method).getId().equals(methodName))
                     foundMethod = true;
-                }
-            }
+        }
         }
         if (!foundMethod) {
             res.add(new SemanticError("Method " + methodName + " not declared"));
