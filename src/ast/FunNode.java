@@ -8,7 +8,7 @@ import util.Environment;
 import util.SemanticError;
 
 // dichiarazione di funzione
-// vedi CallNode per chiamata di funzione
+// vedi CallFunNode per chiamata di funzione
 public class FunNode implements Node {
 
     protected String id;

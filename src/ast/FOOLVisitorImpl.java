@@ -1,10 +1,8 @@
 package ast;
 
 import parser.FOOLBaseVisitor;
-import parser.FOOLParser;
 import parser.FOOLParser.*;
 
-import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 
 // estende FOOLBaseVisitor
@@ -67,7 +65,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		Node expNode = visit(ctx.exp());
 		
 		//build the varNode
-		return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
+		return new VarAsmNode(ctx.vardec().ID().getText(), typeNode, expNode);
 	}
 
 	@Override
@@ -260,7 +258,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		
 		else
 			//instantiate the invocation
-			res = new CallNode(ctx.ID().getText(), args);
+			res = new CallFunNode(ctx.ID().getText(), args);
 		
 		return res;
 	}
@@ -282,7 +280,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
         for (ExpContext exp : ctx.exp())
 	        args.add(visit(exp));
 
-		return new CallMethodNode(objectName, methodName, args);
+		return new CallMetNode(objectName, methodName, args);
 	}
 
 	@Override
@@ -320,7 +318,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		if (ctx.ID(1) != null)
 			inherited = ctx.ID(1).getText();
 
-		// TODO: sistemare sta roba dei metodi che sono MethodNode ma poi li creiamo come Node e quindi non va bene
+		// TODO: sistemare sta roba dei metodi che sono MetNode ma poi li creiamo come Node e quindi non va bene
 		ArrayList<Node> fields = new ArrayList<>();
 		ArrayList<Node> methods = new ArrayList<>();
 		for (VardecContext vardec : ctx.vardec()) {

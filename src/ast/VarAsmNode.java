@@ -7,13 +7,13 @@ import util.Environment;
 import util.SemanticError;
 import lib.FOOLlib;
 
-public class VarNode implements Node {
+public class VarAsmNode implements Node {
 
     private String id;
     private Node type;
     private Node exp;
 
-    public VarNode(String i, Node t, Node v) {
+    public VarAsmNode(String i, Node t, Node v) {
         id = i;
         type = t;
         exp = v;
@@ -24,7 +24,7 @@ public class VarNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        /*
+        /*  Instant kill omfg this sucks
         //Controllo per vedere se ho istanziato bene l'oggetto, così da memorizzarlo con il tipo di istanziazione
         if (exp.typeCheck() instanceof ClassIdNode && type instanceof ClassIdNode) {
             if (FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
@@ -32,7 +32,8 @@ public class VarNode implements Node {
             } else {
                 res.add(new SemanticError("Incompatible class type for object: " + id + "\n"));
             }
-        } */
+        }
+        */
 
         //env.setOffset(-2);
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());

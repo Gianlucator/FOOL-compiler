@@ -9,7 +9,7 @@ import lib.FOOLlib;
 
 // chiamata di funzione
 // vedi FunNode per dichiarazione di funzione
-public class CallNode implements Node {
+public class CallFunNode implements Node {
 
     private String id;
     private STentry entry;
@@ -17,14 +17,14 @@ public class CallNode implements Node {
     private int nestinglevel;
 
 
-    public CallNode(String i, STentry e, ArrayList<Node> p, int nl) {
+    public CallFunNode(String i, STentry e, ArrayList<Node> p, int nl) {
         id = i;
         entry = e;
         parlist = p;
         nestinglevel = nl;
     }
 
-    public CallNode(String text, ArrayList<Node> args) {
+    public CallFunNode(String text, ArrayList<Node> args) {
         id = text;
         parlist = args;
     }

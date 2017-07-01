@@ -8,13 +8,13 @@ import java.util.ArrayList;
 /**
  * Created by crist on 08/06/2017.
  */
-public class CallMethodNode implements Node {
+public class CallMetNode implements Node {
     private String objectName;
     private String methodName;
     private ArrayList<Node> args;
 
     // chiamata di un metodo di una classe
-    public CallMethodNode(String objectName, String methodName, ArrayList<Node> args) {
+    public CallMetNode(String objectName, String methodName, ArrayList<Node> args) {
         this.objectName = objectName;
         this.methodName = methodName;
         this.args = args;
@@ -42,21 +42,18 @@ public class CallMethodNode implements Node {
         int j = env.getNestingLevel();
         STentry tmp = null;
         boolean foundMethod = false;
-        boolean foundObject = true;
         ClassIdNode classId = new ClassIdNode("");
         ClassNode classNode = null;
 
         // dichiarazione di oggetto
-        while (j >= 0 && classId.getClassId().equals("") && foundObject) {
-            try{
+        while (j >= 0 && classId.getClassId().equals("")) {
+            try{    //Provo a castare le entry nella symtable con lo stesso nome a classId
                 classId = (ClassIdNode) (env.getSymTable().get(j--)).get(objectName).getType();
             }catch (Exception e){
                 System.out.println("Could not cast object type to ClassIdNode.\n");
-                foundObject = false;
             }
-            if (classId.getClassId().equals("")){
+            if (classId.getClassId().equals(""))
                 res.add(new SemanticError("Object " + objectName + " not declared"));
-            }
             else {
                 classNode = env.getClassLayout(classId.getClassId());
 
