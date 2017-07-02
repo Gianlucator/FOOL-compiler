@@ -10,6 +10,7 @@ import org.yaml.snakeyaml.Yaml;
 import parser.*;
 import util.Environment;
 import util.SemanticError;
+import util.VMResult;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class YmlTest {
 
     private static final String SEMANTIC_ERRORS = "semantic errors";
     private static final String CODEGEN_ERRORS = "code generation errors";
+    private static final String LEXICAL_ERRORS = "lexical errors";
 
     // Colors to print fancy stuff
     private static final String ANSI_RESET = "\u001B[0m";
@@ -79,6 +81,8 @@ public class YmlTest {
         if (lexer.lexicalErrors > 0) {
             System.err.println("Lexical errors found. Exiting now.");
         } else {
+            System.out.println(ANSI_GREEN + "Lexical analysis passed." + ANSI_RESET);
+
             FOOLParser parser = new FOOLParser(tokens);
             FOOLVisitorImpl visitor = new FOOLVisitorImpl();
 
@@ -99,11 +103,10 @@ public class YmlTest {
                 return SEMANTIC_ERRORS;
             } else {
 
-                //System.out.println("Visualizing AST...");
-                //System.out.println(ast.toPrint(""));
+                System.out.println(ANSI_GREEN + "Semantic analysis passed." + ANSI_RESET);
 
                 Node type = ast.typeCheck(); //type-checking bottom-up
-                //System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
+                System.out.print(ANSI_GREEN + "Type checking passed: " + type.toPrint("") + ANSI_RESET);
 
 
                 // CODE GENERATION
@@ -115,6 +118,9 @@ public class YmlTest {
                     System.out.printf("Failed to generate code for '%s'%n", testName);
                     return CODEGEN_ERRORS;
                 }
+
+                System.out.println(ANSI_GREEN + "Code generated\n" + ANSI_RESET);
+                System.out.println("Code prints: ");
 
                 BufferedWriter out = new BufferedWriter(new FileWriter(new File(asmFileName)));
                 out.write(code);
@@ -135,8 +141,13 @@ public class YmlTest {
                 //System.out.println("Starting Virtual Machine...");
                 ExecuteVM vm = new ExecuteVM(parserASM.code);
                 vm.cpu();
+                VMResult res = vm.getResult();
+                if (!res.executionFailed())
+                    return Integer.toString(res.getResult());
+                else
+                    return res.getMessage();
             }
         }
-        return "";
+        return LEXICAL_ERRORS;
     }
 }

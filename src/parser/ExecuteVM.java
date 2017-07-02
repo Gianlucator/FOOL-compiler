@@ -1,5 +1,7 @@
 package parser;
 
+import util.VMResult;
+
 public class ExecuteVM {
 
     public static final int CODESIZE = 10000;
@@ -9,10 +11,10 @@ public class ExecuteVM {
     private int[] memory = new int[MEMSIZE];
 
     private int ip = 0;
-    private int sp = MEMSIZE - 1;
+    private int sp = MEMSIZE;
 
     private int hp = 0;
-    private int fp = MEMSIZE - 1;
+    private int fp = MEMSIZE;
     private int ra;
     private int rv;
 
@@ -127,5 +129,9 @@ public class ExecuteVM {
     private void printState() {
         System.out.printf("ip: %d\nsp: %d\nhp: %d\nfp: %d\nra: %d\nrv: %d\ncode at ip is: %d\nmemory at sp: %d\n\n",
                 ip, sp, hp, fp, ra, rv, code[ip], memory[sp]);
+    }
+
+    public VMResult getResult() {
+        return (sp < MEMSIZE) ? new VMResult(memory[sp], VMResult.OK) : new VMResult(0,VMResult.EMPTY_STACK);
     }
 }
