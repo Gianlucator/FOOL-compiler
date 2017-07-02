@@ -22,13 +22,16 @@ public class ClassExpNode implements Node {
     }
 
     @Override
-    public String toPrint(String indent) {
-        return null;
+    public String toPrint(String s) {
+        String declstr="";
+        for (Node c : classes)
+            declstr += c.toPrint(s+"  ");
+        return s+"ClassExp\n" + declstr + body.toPrint(s+"  ") ;
     }
 
     @Override
     public Node typeCheck() {
-        return null;
+        return body.typeCheck();
     }
 
     @Override

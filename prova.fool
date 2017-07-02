@@ -17,4 +17,4 @@ class Sovrano(int a) {
 
      int f(int x) 2 * 2;
  };
- let Sovrano s = new Automa(4); in s.f(4);
+ let Sovrano s = new Automa(4); in s;

@@ -53,8 +53,8 @@ public class ClassNode implements Node {
     }
 
     @Override
-    public String toPrint(String indent) {
-        return null;
+    public String toPrint(String s) {
+        return s + "class: " + id + "\n";
     }
 
     @Override
