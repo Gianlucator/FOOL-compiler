@@ -1,100 +1,12 @@
-classi circolari:
-- class A implements C (int a) {
-
-      int f(int x) 2 * 2;
-      int r(int y) 2 * y;
-  }
-  class B implements A (int a) {
-
-      int f(int x) 2 * 2;
-      int r(int y) 2 * y;
-  }
-  class C implements B (int a) {
-
-      int f(int x) 2 * 2;
-      int r(int y) 2 * y;
-  };
-
-  let int x = 2;
-  in 2 * x;
-- ""
-
-classi normali:
-- class B implements A (int a) {
-
-      int f(int x) 2 * 2;
-      int r(int y) 2 * y;
-  }
-  class A(int a) {
-
-      int f(int x) 2 * 2;
-      int r(int y) 2 * y;
-  };
-  let int x = 2;
-  in 2 * x;
-- ""
-
-chiamate di metodi cicliche:
-- class B implements A (int a) {
-
-      int f(int x) 2 * 2;
-      int r(int y) 2 * y;
-  }
-  class A(int a) {
-
-      int f(int x) 2 * r(x);
-      int r(int y) 2 * f(y);
-  };
-  let int x = 2;
-  in 2 * x;
-- ""
-
-classi inheritance:
-- class Sovrano(int a) {
-
-     int f(int x) 2 * 2;
-     int r(int y) 2 * y;
- }
- class Automa implements Sovrano (int a) {
-
-     int f(int x) 2 * x;
-     int r(int y) 3 * y;
- }
- class S(int a) {
-
-     int f(int x) 2 * 2;
-     int r(int y) 2 * y;
- }
- class A implements S (int a) {
-
-     int f(int x) 2 * 2;
- };
- let Sovrano s = new Automa(4); in s.f(4);
-- ""
-
-esempio sbagliato di CallMethod:
-- class Sovrano(int a) {
-
-       int f(int x) 2 * 2;
-       int r(int y) 2 * y;
-   }
-   class Automa implements Sovrano (int a) {
-
-       int f(int x) 2 * x;
-       int r(int y) 3 * y;
-   }
-   class S(int a) {
-
-       int f(int x) 2 * 2;
-       int r(int y) 2 * y;
-   }
-   class A implements S (int a) {
-
-       int f(bool x) 2 * 2;
-   };
-   let S s = new A(4); in s.f(4);
-- ""
-
 senza classi:
-- let int x = 4; int f(int y) x + y; in f(4);
-- ""
+- let int x = 4; int f(int y) x + y; in print(f(4));
+- "8"
+
+classe singola dec:
+- class Rectangle(int l1, int l2) {
+    int area() l1 * l2;
+  };
+
+  let Rectangle r = new Rectangle(2, 4);
+  in print(r.area());
+- "8"
