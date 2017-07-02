@@ -38,6 +38,10 @@ public class FunNode implements Node {
         return id;
     }
 
+    public ArrayList<Node> getDeclist() {
+        return declist;
+    }
+
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 

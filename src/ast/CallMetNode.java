@@ -2,6 +2,7 @@ package ast;
 
 import util.Environment;
 import util.SemanticError;
+
 import java.util.ArrayList;
 
 /**
@@ -10,12 +11,14 @@ import java.util.ArrayList;
 public class CallMetNode implements Node {
     private String objectName;
     private String methodName;
+    private FunNode methodSignature;
     private ArrayList<Node> parlist;
 
     // chiamata del metodo di una classe
     public CallMetNode(String objectName, String methodName, ArrayList<Node> parlist) {
         this.objectName = objectName;
         this.methodName = methodName;
+        methodSignature = null;
         this.parlist = parlist;
     }
 
@@ -26,6 +29,11 @@ public class CallMetNode implements Node {
 
     @Override
     public Node typeCheck() {
+        ArrayList<Node> decs = methodSignature.getDeclist();
+
+        for (Node dec: decs) {
+            dec.toPrint("");
+        }
         return null;
     }
 
@@ -39,31 +47,34 @@ public class CallMetNode implements Node {
         ArrayList<SemanticError> res = new ArrayList<>();
 
         int j = env.getNestingLevel();
-        boolean foundMethod = false;
         String classId = "";
-        ClassNode classNode = null;
+        boolean foundMethod = false;
 
         // dichiarazione di oggetto
         while (j >= 0 && classId.equals("")) {
-            try{ // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
+            try { // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
                 classId = env.getObjectEnvironment().get(j--).get(objectName);
-            }catch (Exception e){
+            } catch (Exception e) {
                 //Questa stampa sarà eliminata in futuro
-                System.out.print("Class instantiation for object '" + objectName + "' not found at nesting level " + (j+1) + "\n");
+                System.out.print("Class instantiation for object '" + objectName + "' not found at nesting level " + (j + 1) + "\n");
             }
         }
+
         if (classId.equals("")) {
             res.add(new SemanticError("Object " + objectName + " not declared"));
         } else {
-            classNode = env.getClassLayout(classId);
+            ClassNode objectClass = env.getClassLayout(classId);
 
-            ArrayList<Node> methods = classNode.getMethods();
+            ArrayList<Node> methods = objectClass.getMethods();
             for (Node method : methods) {
-                if(method instanceof FunNode)
-                    if (((FunNode) method).getId().equals(methodName))
+                if (method instanceof FunNode)
+                    if (((FunNode) method).getId().equals(methodName)) {
+                        methodSignature = (FunNode) method;
                         foundMethod = true;
+                    }
             }
         }
+
         if (!foundMethod) {
             res.add(new SemanticError("Method " + methodName + " not declared"));
         } else {

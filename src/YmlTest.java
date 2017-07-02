@@ -95,11 +95,11 @@ public class YmlTest {
                 return SEMANTIC_ERRORS;
             } else {
 
-                //System.out.println("Visualizing AST...");
-                //System.out.println(ast.toPrint(""));
+                System.out.println("Visualizing AST...");
+                System.out.println(ast.toPrint(""));
 
                 Node type = ast.typeCheck(); //type-checking bottom-up
-                //System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
+                System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
 
 
                 // CODE GENERATION
