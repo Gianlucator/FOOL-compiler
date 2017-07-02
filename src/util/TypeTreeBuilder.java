@@ -17,6 +17,7 @@ public class TypeTreeBuilder {
         classes.addAll(cls);
 
         TypeTreeNode rootNode = new TypeTreeNode("", null,null);
+        nodeNames = new ArrayList<>();
         nodeNames.add("");
 
         int lastSize = -1;
@@ -25,8 +26,7 @@ public class TypeTreeBuilder {
                 ClassNode cl = ((ClassNode) it.next());
                 String superClass = cl.getSuperclass();
                 String className = cl.getId();
-
-
+                
                 if (nodeNames.contains(superClass)) {
                     nodeNames.add(className);
 

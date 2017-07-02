@@ -114,4 +114,8 @@ public class ClassNode implements Node {
         env.decNestingLevel();
         return res;
     }
+
+    public String toString() {
+        return "Class " + id;
+    }
 }
