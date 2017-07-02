@@ -20,6 +20,14 @@ public class VarDecNode implements Node {
         this.type = type;
     }
 
+    public Node getType() {
+        return type;
+    }
+
+    public void setType(Node type) {
+        this.type = type;
+    }
+
     @Override
     public String toPrint(String indent) {
         return null;

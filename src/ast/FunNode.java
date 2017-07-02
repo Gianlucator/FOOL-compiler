@@ -95,7 +95,6 @@ public class FunNode implements Node {
             //<CAUTION>
             //Parte aggiunta da Stefn, in caso di ripristino per malfunzionamenti, eliminare.
             //Cerco di sfruttare il FunNode anche per i metodi impostando il self che altrimenti rimane vuoto.
-            //Il self bisogna settarlo fuori, nel Classnode.
             //Al limite dopo si pensa meglio come rifarlo, ma se funziò, funziò.
             if(self != null)
                 parlist.add(0, new ParNode("self", self));

@@ -1,5 +1,7 @@
 package ast;
 
+import jdk.nashorn.internal.ir.VarNode;
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -12,6 +14,7 @@ import java.util.HashMap;
 public class NewExpNode implements Node {
     private String classId;
     private ArrayList<Node> args;
+    ClassNode classEntry;
 
     public NewExpNode(String classId, ArrayList<Node> args) {
         this.classId = classId;
@@ -29,6 +32,24 @@ public class NewExpNode implements Node {
 
     @Override
     public Node typeCheck() {
+        for (int i = 0; i < classEntry.getFields().size(); i++){
+            Node varNodeType = ((VarDecNode) classEntry.getFields().get(i)).getType();
+            Node arg = args.get(i).typeCheck();
+            if ( arg instanceof ClassIdNode && varNodeType instanceof ClassIdNode) {
+                if (!FOOLlib.isSubtype(((ClassIdNode) arg.typeCheck()).getClassId(), ((ClassIdNode) varNodeType).getClassId())) {
+                    System.out.println("incompatible class for parameter at position " + i);
+                    System.exit(0);
+                }
+                if(arg != varNodeType)
+                    ((VarDecNode) classEntry.getFields().get(i)).setType(arg.typeCheck());
+            }
+            else {
+                if (!(FOOLlib.isSubtype(arg, varNodeType))) {
+                    System.out.println("incompatible value for parameter at position " + i);
+                    System.exit(0);
+                }
+            }
+        }
         return new ClassIdNode(classId);
     }
 
@@ -43,7 +64,7 @@ public class NewExpNode implements Node {
         HashMap<String, STentry> hm =  env.getSymTable().get(env.getNestingLevel());
 
         // controllare che la classe esista
-        ClassNode classEntry = env.getClassLayout(classId);
+        classEntry = env.getClassLayout(classId);
 
         if (classEntry == null)
             res.add(new SemanticError("Class " + classId + " not declared."));
