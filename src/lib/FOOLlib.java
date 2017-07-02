@@ -19,7 +19,7 @@ public class FOOLlib {
                 ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode)); //
     }
 
-    public static boolean isSubtype(String A, String B) {
+    public static boolean isSubtype(String B, String A) {
         TypeTreeNode typeOfA = root.findNode(A);
         TypeTreeNode typeOfB = root.findNode(B);
 
