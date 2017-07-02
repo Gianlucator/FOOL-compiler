@@ -37,7 +37,7 @@ public class NewExpNode implements Node {
             Node arg = args.get(i).typeCheck();
             if ( arg instanceof ClassIdNode && varNodeType instanceof ClassIdNode) {
                 if (!FOOLlib.isSubtype(((ClassIdNode) arg.typeCheck()).getClassId(), ((ClassIdNode) varNodeType).getClassId())) {
-                    System.out.println("incompatible class for parameter at position " + i);
+                    System.out.println("Incompatible class for parameter at position " + i);
                     System.exit(0);
                 }
                 if(arg != varNodeType)
@@ -45,7 +45,7 @@ public class NewExpNode implements Node {
             }
             else {
                 if (!(FOOLlib.isSubtype(arg, varNodeType))) {
-                    System.out.println("incompatible value for parameter at position " + i);
+                    System.out.println("Incompatible value for parameter at position " + i);
                     System.exit(0);
                 }
             }

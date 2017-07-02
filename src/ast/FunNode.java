@@ -42,6 +42,14 @@ public class FunNode implements Node {
         return declist;
     }
 
+    public ArrayList<Node> getParlist() {
+        return parlist;
+    }
+
+    public void setParlist(ArrayList<Node> parlist) {
+        this.parlist = parlist;
+    }
+
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
@@ -100,7 +108,7 @@ public class FunNode implements Node {
             //Parte aggiunta da Stefn, in caso di ripristino per malfunzionamenti, eliminare.
             //Cerco di sfruttare il FunNode anche per i metodi impostando il self che altrimenti rimane vuoto.
             //Al limite dopo si pensa meglio come rifarlo, ma se funziò, funziò.
-            if(self != null)
+            if (self != null)
                 parlist.add(0, new ParNode("self", self));
             //</CAUTION>
 
@@ -108,10 +116,11 @@ public class FunNode implements Node {
             res.addAll(body.checkSemantics(env));
 
             //close scope
-            env.getSymTable().remove(env.getNestingLevel());
+
+            if (self == null)
+                env.getSymTable().remove(env.getNestingLevel());
             env.decNestingLevel();
         }
-
         return res;
     }
 

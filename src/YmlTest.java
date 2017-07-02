@@ -88,18 +88,22 @@ public class YmlTest {
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 
             if (err.size() > 0) {
-                System.out.println(err.size() + " errors found:");
+                String errorStr = "error";
+                if (err.size() > 1)
+                    errorStr += "s";
+
+                System.out.printf("%d %s found:%n", err.size(), errorStr);
                 for (SemanticError e : err)
                     System.out.println("\t" + e);
 
                 return SEMANTIC_ERRORS;
             } else {
 
-                System.out.println("Visualizing AST...");
-                System.out.println(ast.toPrint(""));
+                //System.out.println("Visualizing AST...");
+                //System.out.println(ast.toPrint(""));
 
                 Node type = ast.typeCheck(); //type-checking bottom-up
-                System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
+                //System.out.println(type.toPrint("Type checking passed! Type of the program is: "));
 
 
                 // CODE GENERATION

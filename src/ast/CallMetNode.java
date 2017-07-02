@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -11,14 +12,14 @@ import java.util.ArrayList;
 public class CallMetNode implements Node {
     private String objectName;
     private String methodName;
-    private FunNode methodSignature;
+    private STentry methodEntry;
     private ArrayList<Node> parlist;
 
     // chiamata del metodo di una classe
     public CallMetNode(String objectName, String methodName, ArrayList<Node> parlist) {
         this.objectName = objectName;
         this.methodName = methodName;
-        methodSignature = null;
+        methodEntry = null;
         this.parlist = parlist;
     }
 
@@ -29,12 +30,27 @@ public class CallMetNode implements Node {
 
     @Override
     public Node typeCheck() {
-        ArrayList<Node> decs = methodSignature.getDeclist();
-
-        for (Node dec: decs) {
-            dec.toPrint("");
+        ArrowTypeNode t = null;
+        System.out.println(methodEntry);
+        if (methodEntry.getType() instanceof ArrowTypeNode) {
+            t = (ArrowTypeNode) methodEntry.getType();
+            t.toPrint("");
         }
-        return null;
+        else {
+            System.out.println("Invocation of a non-method " + methodName);
+            System.exit(0);
+        }
+        ArrayList<Node> p = t.getParList();
+        if (!(p.size() == parlist.size())) {
+            System.out.println("Wrong number of parameters in the invocation of " + methodName);
+            System.exit(0);
+        }
+        for (int i = 0; i < parlist.size(); i++)
+            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i)))) {
+                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + methodName);
+                System.exit(0);
+            }
+        return t.getRet();
     }
 
     @Override
@@ -69,9 +85,12 @@ public class CallMetNode implements Node {
             for (Node method : methods) {
                 if (method instanceof FunNode)
                     if (((FunNode) method).getId().equals(methodName)) {
-                        methodSignature = (FunNode) method;
                         foundMethod = true;
                     }
+            }
+
+            while (j >= 0 && methodEntry == null) {
+                methodEntry = (env.getSymTable().get(j--)).get(methodName);
             }
         }
 
