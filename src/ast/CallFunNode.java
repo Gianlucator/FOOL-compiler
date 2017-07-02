@@ -45,7 +45,6 @@ public class CallFunNode implements Node {
         int j = env.getNestingLevel();
         STentry tmp = null;
         while (j >= 0 && tmp == null) {
-            System.out.println(env.getSymTable().get(j) + " " + env.getNestingLevel());
             tmp = (env.getSymTable().get(j--)).get(id);
         }
         if (tmp == null)
