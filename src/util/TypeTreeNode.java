@@ -3,6 +3,7 @@ package util;
 import ast.ClassNode;
 import ast.Node;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -29,6 +30,11 @@ public class TypeTreeNode {
         this.subTypes = new HashSet<>();
     }
 
+    // this is sub of sup if this = sup or if sup is its supertype
+    public boolean isSubtype(TypeTreeNode sup) {
+        return this.equals(sup) || this.superTypes.contains(sup);
+    }
+
     public HashSet<TypeTreeNode> getSuperTypes() {
         return superTypes;
     }
@@ -38,6 +44,7 @@ public class TypeTreeNode {
     }
 
     public TypeTreeNode findNode(String classId) {
+
         if (currentType.equals(classId))
             return this;
         else {
@@ -50,7 +57,6 @@ public class TypeTreeNode {
 
         return null;
     }
-
 
     public ArrayList<Node> buildWellOrderedClassList() {
         ArrayList<Node> classNodes = new ArrayList<>();

@@ -16,9 +16,9 @@ inheritance semplice:
     int u() 1;
   }
   class B implements A {
-    int s(x) x + 1;
+    int s(int x) x + 1;
   };
 
-  let A x = new B();
+  let A x = new B;
   in print(x.u());
 - "1"
