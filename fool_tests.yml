@@ -90,9 +90,9 @@ esempio sbagliato di CallMethod:
    }
    class A implements S (int a) {
 
-       int f(int x) 2 * 2;
+       int f(bool x) 2 * 2;
    };
-   let Sovrano s = new S(4); in s.f(4);
+   let S s = new A(4); in s.f(4);
 - ""
 
 senza classi:
