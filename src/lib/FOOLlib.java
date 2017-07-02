@@ -5,7 +5,7 @@ import util.TypeTreeNode;
 
 public class FOOLlib {
 
-    private static TypeTreeNode root = new TypeTreeNode("object",null,null);
+    private static TypeTreeNode root = new TypeTreeNode("",null,null);
 
     private static int labCount = 0;
 

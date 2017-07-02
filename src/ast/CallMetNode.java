@@ -46,7 +46,7 @@ public class CallMetNode implements Node {
         // dichiarazione di oggetto
         while (j >= 0 && classId.equals("")) {
             try{ // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
-                classId = env.getMethodEnvironment().get(j--).get(objectName);
+                classId = env.getObjectEnvironment().get(j--).get(objectName);
             }catch (Exception e){
                 //Questa stampa sarà eliminata in futuro
                 System.out.print("Class instantiation for object '" + objectName + "' not found at nesting level " + (j+1) + "\n");

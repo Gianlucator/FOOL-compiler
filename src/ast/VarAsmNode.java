@@ -29,10 +29,10 @@ public class VarAsmNode implements Node {
             String classInstance = ((NewExpNode) exp).getClassId();
             HashMap<String, String> hm;
             try {
-                hm = env.getMethodEnvironment().get(env.getNestingLevel());
+                hm = env.getObjectEnvironment().get(env.getNestingLevel());
             } catch (Exception e) {
                 hm = new HashMap<>();
-                env.getMethodEnvironment().add(hm);
+                env.getObjectEnvironment().add(hm);
             }
             hm.put(id, classInstance);
         }
@@ -57,21 +57,17 @@ public class VarAsmNode implements Node {
 
     //valore di ritorno non utilizzato
     public Node typeCheck() {
-
-        /*  da adattare
-        //Controllo per vedere se ho istanziato bene l'oggetto, così da risalire l'albero con il tipo di istanziazione
         if (exp.typeCheck() instanceof ClassIdNode && type instanceof ClassIdNode) {
-            if (FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
-
-            } else {
-                res.add(new SemanticError("Incompatible class type for object: " + id + "\n"));
+            if (!FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
+                System.out.println("incompatible class for object " + id);
+                System.exit(0);
             }
         }
-        */
-
-        if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
-            System.out.println("incompatible value for variable " + id);
-            System.exit(0);
+        else {
+            if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
+                System.out.println("incompatible value for variable " + id);
+                System.exit(0);
+            }
         }
         return null;
     }

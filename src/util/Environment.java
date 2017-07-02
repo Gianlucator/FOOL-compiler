@@ -2,25 +2,22 @@ package util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import ast.ClassIdNode;
 import ast.ClassNode;
-import ast.Node;
 import ast.STentry;
 
 public class Environment {
 
 	private ArrayList<HashMap<String, STentry>> symTable = new ArrayList<>();
-	private ArrayList<HashMap<String, String>> methodEnvironment = new ArrayList<>();
+	private ArrayList<HashMap<String, String>> objectEnvironment = new ArrayList<>();
 	private int nestingLevel = -1;
 	private int offset = 0;
 	//private String self_type = "";	//Tipo della dichiarazione di classe in cui ci troviamo
 
 	private final int GLOBAL_SCOPE = 0;
 
-	public ArrayList<HashMap<String, String>> getMethodEnvironment() {
-		return methodEnvironment;
+	public ArrayList<HashMap<String, String>> getObjectEnvironment() {
+		return objectEnvironment;
 	}
 
 	public ArrayList<HashMap<String, STentry>> getSymTable() {

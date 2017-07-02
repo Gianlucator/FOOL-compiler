@@ -115,7 +115,4 @@ public class ClassNode implements Node {
         return res;
     }
 
-    public String toString() {
-        return "Class " + id;
-    }
 }
