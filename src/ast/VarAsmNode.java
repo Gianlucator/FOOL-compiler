@@ -64,8 +64,9 @@ public class VarAsmNode implements Node {
                 System.exit(0);
             }
             //Imposto il tipo dell'oggetto con il tipo con cui è stato istanziato
-            //se è sottotipo del tipo con cui è stato dichiarato. 
-            entry.setType(exp.typeCheck());
+            //se è sottotipo del tipo con cui è stato dichiarato.
+            if(exp.typeCheck() != entry.getType())
+                entry.setType(exp.typeCheck());
         }
         else {
             if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
