@@ -38,6 +38,10 @@ public class FunNode implements Node {
         return id;
     }
 
+    public ArrayList<Node> getDeclist() {
+        return declist;
+    }
+
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
@@ -52,7 +56,7 @@ public class FunNode implements Node {
         STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
 
         // se la st contiene già l'id ==> error
-        if (hm.put(id, entry) != null) {
+        if (hm.put(id, entry) != null && self == null) {
             res.add(new SemanticError("Fun id " + id + " already declared"));
         } else {
             // se la st non contiene ancora l'id ==> lo si aggiunge e

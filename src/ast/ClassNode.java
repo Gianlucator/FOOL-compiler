@@ -85,9 +85,24 @@ public class ClassNode implements Node {
             }
 
             // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibile
-            for (Node method : methods) {
+            String methodName;
+            for (Node method: methods) {
                 //Imposto il self all'inizio dei parametri nel FunNode.
                 ((FunNode) method).setSelf(new ClassIdNode(id));
+                methodName = ((FunNode) method).getId();
+
+                HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
+                env.decOffset();
+                STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
+                env.incOffset();
+
+                // se la st contiene già l'id ==> error
+                if (hm.put(methodName, entry) != null)
+                    res.add(new SemanticError("Method id " + methodName + " already declared"));
+            }
+
+            // processing effettivo ==> essendo gia' presenti tutti i nomi possiamo fare mutua ricorsione e boiate varie
+            for (Node method : methods) {
                 res.addAll(method.checkSemantics(env));
             }
 
