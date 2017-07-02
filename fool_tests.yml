@@ -1,6 +1,6 @@
-senza classi:
-- let int x = 4; int f(int y) x + y; in print(f(4));
-- "8"
+#senza classi:
+#- let int x = 4; int f(int y) x + y; in print(f(4));
+#- "8"
 
 classe singola dec:
 - class Rectangle(int l1, int l2) {
@@ -10,3 +10,15 @@ classe singola dec:
   let Rectangle r = new Rectangle(2, 4);
   in print(r.area());
 - "8"
+
+inheritance semplice:
+- class A {
+    int u() 1;
+  }
+  class B implements A {
+    int s(x) x + 1;
+  };
+
+  let A x = new B();
+  in print(x.u());
+- "1"
