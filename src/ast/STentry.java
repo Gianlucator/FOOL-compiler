@@ -2,6 +2,7 @@ package ast;
 public class STentry {
  
   private int nl;
+
   private Node type;
   private int offset;
   
@@ -19,6 +20,10 @@ public class STentry {
   
   public Node getType ()
   {return type;}
+
+  public void setType(Node type) {
+    this.type = type;
+  }
 
   public int getOffset ()
   {return offset;}

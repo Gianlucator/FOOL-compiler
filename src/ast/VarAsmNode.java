@@ -12,6 +12,7 @@ public class VarAsmNode implements Node {
     private String id;
     private Node type;
     private Node exp;
+    private STentry entry;
 
     public VarAsmNode(String i, Node t, Node v) {
         id = i;
@@ -40,7 +41,7 @@ public class VarAsmNode implements Node {
         //env.setOffset(-2);
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
         env.decOffset();
-        STentry entry = new STentry(env.getNestingLevel(), type, env.getOffset()); //separo introducendo "entry"
+        entry = new STentry(env.getNestingLevel(), type, env.getOffset()); //separo introducendo "entry"
 
         if (hm.put(id, entry) != null)
             res.add(new SemanticError("Var id " + id + " already declared"));
@@ -62,6 +63,9 @@ public class VarAsmNode implements Node {
                 System.out.println("incompatible class for object " + id);
                 System.exit(0);
             }
+            //Imposto il tipo dell'oggetto con il tipo con cui è stato istanziato
+            //se è sottotipo del tipo con cui è stato dichiarato. 
+            entry.setType(exp.typeCheck());
         }
         else {
             if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
