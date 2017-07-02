@@ -31,7 +31,7 @@ public class DispatchTable {
         buildDispatchTable(currentMethods);
     }
 
-    private HashMap<String, Node> getEntries() {
+    public HashMap<String, Node> getEntries() {
         return entries;
     }
 

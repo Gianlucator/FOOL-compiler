@@ -1,6 +1,7 @@
 package ast;
 
 import lib.FOOLlib;
+import util.DispatchTable;
 import util.Environment;
 import util.SemanticError;
 
@@ -58,15 +59,13 @@ public class CallMetNode implements Node {
 
         int j = env.getNestingLevel();
         String classId = "";
-        boolean foundMethod = false;
+        boolean foundMethod = true;
 
         // dichiarazione di oggetto
         while (j >= 0 && classId.equals("")) {
             try { // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
                 classId = env.getObjectEnvironment().get(j--).get(objectName);
             } catch (Exception e) {
-                //Questa stampa sarà eliminata in futuro
-                System.out.print("Class instantiation for object '" + objectName + "' not found at nesting level " + (j + 1) + "\n");
             }
         }
 
@@ -74,16 +73,11 @@ public class CallMetNode implements Node {
             res.add(new SemanticError("Object " + objectName + " not declared"));
         } else {
             ClassNode objectClass = env.getClassLayout(classId);
-
-            ArrayList<Node> methods = objectClass.getMethods();
-            for (Node method : methods) {
-                if (method instanceof FunNode) {
-                    if (((FunNode) method).getId().equals(methodName)) {
-                        methodNode = (FunNode) method;
-                        foundMethod = true;
-                    }
-                }
-            }
+            DispatchTable methods = objectClass.getMethodDT();
+            if (methods.getEntries().get(methodName) != null)
+                methodNode = (FunNode) methods.getEntries().get(methodName);
+            else
+                foundMethod = false;
         }
 
         if (!foundMethod) {
