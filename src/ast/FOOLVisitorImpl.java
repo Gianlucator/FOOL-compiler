@@ -226,7 +226,6 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 	
 	@Override
 	public Node visitVarExp(VarExpContext ctx) {
-		
 		//this corresponds to a variable access
 		return new IdNode(ctx.ID().getText());
 

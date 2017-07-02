@@ -16,6 +16,7 @@ public class FunNode implements Node {
     private ArrayList<Node> parlist = new ArrayList<Node>();
     private ArrayList<Node> declist;
     private Node body;
+    private Node arrowType;
 
     //Se rimane null è una funzione, altrimenti indica la classe di appartenenza del metodo
     private Node self = null;
@@ -38,12 +39,8 @@ public class FunNode implements Node {
         return id;
     }
 
-    public ArrayList<Node> getDeclist() {
-        return declist;
-    }
-
-    public ArrayList<Node> getParlist() {
-        return parlist;
+    public Node getArrowType() {
+        return arrowType;
     }
 
     public void setParlist(ArrayList<Node> parlist) {
@@ -94,7 +91,10 @@ public class FunNode implements Node {
             }
 
             //set func type
-            entry.addType(new ArrowTypeNode(parTypes, type));
+            if (self == null)
+                entry.addType(new ArrowTypeNode(parTypes, type));
+            else
+                arrowType = new ArrowTypeNode(parTypes, type);
 
             //check semantics in the dec list
             if (declist.size() > 0) {
@@ -117,8 +117,7 @@ public class FunNode implements Node {
 
             //close scope
 
-            if (self == null)
-                env.getSymTable().remove(env.getNestingLevel());
+            env.getSymTable().remove(env.getNestingLevel());
             env.decNestingLevel();
         }
         return res;

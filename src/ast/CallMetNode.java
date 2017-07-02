@@ -12,14 +12,14 @@ import java.util.ArrayList;
 public class CallMetNode implements Node {
     private String objectName;
     private String methodName;
-    private STentry methodEntry;
     private ArrayList<Node> parlist;
+    private FunNode methodNode;
 
     // chiamata del metodo di una classe
     public CallMetNode(String objectName, String methodName, ArrayList<Node> parlist) {
         this.objectName = objectName;
         this.methodName = methodName;
-        methodEntry = null;
+        methodNode = null;
         this.parlist = parlist;
     }
 
@@ -30,26 +30,20 @@ public class CallMetNode implements Node {
 
     @Override
     public Node typeCheck() {
-        ArrowTypeNode t = null;
-        System.out.println(methodEntry);
-        if (methodEntry.getType() instanceof ArrowTypeNode) {
-            t = (ArrowTypeNode) methodEntry.getType();
-            t.toPrint("");
-        }
-        else {
-            System.out.println("Invocation of a non-method " + methodName);
-            System.exit(0);
-        }
+        ArrowTypeNode t = (ArrowTypeNode) methodNode.getArrowType();
         ArrayList<Node> p = t.getParList();
-        if (!(p.size() == parlist.size())) {
+
+        if (!(p.size() == (parlist.size() - 1))) {
             System.out.println("Wrong number of parameters in the invocation of " + methodName);
             System.exit(0);
         }
-        for (int i = 0; i < parlist.size(); i++)
-            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i)))) {
+
+        for (int i = 1; i < parlist.size(); i++) {
+            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i - 1)))) {
                 System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + methodName);
                 System.exit(0);
             }
+        }
         return t.getRet();
     }
 
@@ -83,14 +77,12 @@ public class CallMetNode implements Node {
 
             ArrayList<Node> methods = objectClass.getMethods();
             for (Node method : methods) {
-                if (method instanceof FunNode)
+                if (method instanceof FunNode) {
                     if (((FunNode) method).getId().equals(methodName)) {
+                        methodNode = (FunNode) method;
                         foundMethod = true;
                     }
-            }
-
-            while (j >= 0 && methodEntry == null) {
-                methodEntry = (env.getSymTable().get(j--)).get(methodName);
+                }
             }
         }
 
@@ -98,8 +90,9 @@ public class CallMetNode implements Node {
             res.add(new SemanticError("Method " + methodName + " not declared"));
         } else {
             // controllo semantico sui parametri passati al metodo
-            for (Node arg : parlist)
+            for (Node arg : parlist) {
                 res.addAll(arg.checkSemantics(env));
+            }
             // si aggiunge ai parametri il self
             parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
         }

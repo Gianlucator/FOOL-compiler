@@ -22,7 +22,7 @@ public class MultNode implements Node {
 	  ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 	  
 	  //check semantics in the left and in the right exp
-	  
+
 	  res.addAll(left.checkSemantics(env));
 	  res.addAll(right.checkSemantics(env));
 	  
