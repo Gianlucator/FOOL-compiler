@@ -22,9 +22,11 @@ public class FOOLlib {
     public static boolean isSubtype(String A, String B) {
         TypeTreeNode typeOfA = root.findNode(A);
         TypeTreeNode typeOfB = root.findNode(B);
-        if(typeOfA == null && typeOfB == null)  //Se i tipi sono su due rami differenti, allora ritorno false
+        try { //tamarro ma funziona
+            return typeOfA.getSuperTypes().contains(typeOfB);
+        } catch (Exception e){
             return false;
-        return typeOfA.getSuperTypes().contains(typeOfB); // O(1)
+        }
     }
 
     public static String freshLabel() {
@@ -41,5 +43,13 @@ public class FOOLlib {
 
     public static String getCode() {
         return funCode;
+    }
+
+    public static TypeTreeNode getRoot() {
+        return root;
+    }
+
+    public static void setRoot(TypeTreeNode root) {
+        FOOLlib.root = root;
     }
 }

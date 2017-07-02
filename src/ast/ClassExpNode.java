@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 import util.TypeTreeBuilder;
@@ -49,12 +50,12 @@ public class ClassExpNode implements Node {
         ArrayList<SemanticError> res = new ArrayList<>();
 
         String clsName;
-        TypeTreeNode typesRoot = TypeTreeBuilder.buildTypeTree(classes);
+        FOOLlib.setRoot(TypeTreeBuilder.buildTypeTree(classes));
 
-        if (typesRoot == null) {
+        if (FOOLlib.getRoot() == null) {
             res.add(new SemanticError("Cycle(s) between class definitions."));
         } else {
-            classes = typesRoot.buildWellOrderedClassList();
+            classes = FOOLlib.getRoot().buildWellOrderedClassList();
         }
 
         // add all class names to the environment to allow subclassing before declaration
