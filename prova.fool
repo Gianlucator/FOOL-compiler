@@ -3,7 +3,7 @@ class Sovrano(int a) {
      int f(int x) 2 * 2;
      int r(int y) 2 * y;
  }
- class Automa implements Sovrano (S a) {
+ class Automa implements Sovrano (bool a) {
 
      int f(int x) 2 * x;
      int r(int y) 3 * y;
@@ -16,9 +16,5 @@ class Sovrano(int a) {
  class A implements S (int a) {
 
         int f(int x) 2 * 2;
- }
- class C (int a) {
-
-        int f(int x) 2 * 2;
  };
- let Sovrano s = new Automa(true); in s;
+ let Sovrano s = new Automa(3); in s;
