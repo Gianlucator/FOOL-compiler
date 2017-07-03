@@ -81,36 +81,35 @@ controvarianza err:
 covarianza errato 1:
 - class Parent(int a) {
     Child f(int x) x;
-}
-class Child implements Parent (int a) {
+  }
+  class Child implements Parent (int a) {
     int f(int x) 2 * x;
-};
-
-let int x = 4; Parent o = new Child(x); in o.f(x);
+  };
+  let int x = 4; Parent o = new Child(x); in o.f(x);
 - ""
 
 tipo di ritorno errato e override errato:
 - class Parent(int a) {
     Child r(Child c) c.f(2) + a;
-}
-class Child implements Parent (int a) {
+  }
+  class Child implements Parent (int a) {
     int r(Child c) 2 * x;
-};
+  };
 
-let int x = 4;
-Child c = new Child(x);
-Parent o = new Child(x); in o.r(c);
+  let int x = 4;
+  Child c = new Child(x);
+  Parent o = new Child(x); in o.r(c);
 - ""
 
 covarianza errato 2:
 - class Parent(int a) {
     Child p(Child c) c.f(2);
-}
-class Child implements Parent (int a) {
+  }
+  class Child implements Parent (int a) {
     Child p(Child c) 2 * x;
-};
+  };
 
-let int x = 4; Parent o = new Child(x); in o.f(x);
+  let int x = 4; Parent o = new Child(x); in o.f(x);
 - ""
 
 covarianza errato 5:
@@ -128,21 +127,21 @@ covarianza errato 5:
 covarianza corr:
 - class GranParent(int a) {
     Parent p(Parent o) o;
-}
+  }
 
-class Parent implements GrandParent(int a){
+  class Parent implements GrandParent(int a){
     Child p(Child c) c;
-}
+  }
 
-class Child implements GrandParent(int x){
+  class Child implements GrandParent(int x){
     int f(int x) 2 * x;
-};
+  };
 
-let
-int x = 4;
-Child c = new Child(x);
-Parent o = new Parent(x);
-in o.p(c);
+  let
+  int x = 4;
+  Child c = new Child(x);
+  Parent o = new Parent(x);
+  in o.p(c);
 - ""
 
 

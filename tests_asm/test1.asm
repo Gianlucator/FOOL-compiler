@@ -1,7 +1,15 @@
 push 8
 push function0
 push 0
-nullnullprint
+nulllfp
+lfp
+lw
+lfp
+lw
+add
+lw
+js
+print
 halt
 
 function0:
