@@ -58,7 +58,7 @@ public class ExecuteVM {
                     address = pop();
                     memory[address] = pop();
                     break;
-                case SVMParser.LOADW: //
+                case SVMParser.LOADW: //Devo aver già pushato sullo stack l'address da cui caricare la variabile
                     push(memory[pop()]);
                     break;
                 case SVMParser.BRANCH:
