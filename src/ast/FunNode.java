@@ -16,7 +16,7 @@ public class FunNode implements Node {
     private ArrayList<Node> parlist = new ArrayList<Node>();
     private ArrayList<Node> declist;
     private Node body;
-    private Node arrowType;
+    private ArrowTypeNode arrowType;
 
     //Se rimane null è una funzione, altrimenti indica la classe di appartenenza del metodo
     private Node self = null;
@@ -39,7 +39,7 @@ public class FunNode implements Node {
         return id;
     }
 
-    public Node getArrowType() {
+    public ArrowTypeNode getArrowType() {
         return arrowType;
     }
 
