@@ -84,19 +84,22 @@ public class CallFunNode implements Node {
         String parCode = "";
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
+            // fa anche push
 
         String getAR = "";
         for (int i = 0; i < nestinglevel - entry.getNestinglevel(); i++)
-            getAR += "lw\n";
+            getAR += "lw\n"; // load a value from the memory cell pointed by top
 
-        return "lfp\n" + //CL
-                parCode +
+        return "lfp\n" + // = push $fp, load frame pointer in the stack
+                parCode +  // codice generato per i param
                 "lfp\n" + getAR + //setto AL risalendo la catena statica
-                // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
+                // ora recupero l'indirizzo a cui saltare e lo metto sullo stack (?)
                 "push " + entry.getOffset() + "\n" + //metto offset sullo stack
                 "lfp\n" + getAR + //risalgo la catena statica
-                "add\n" +
-                "lw\n" + //carico sullo stack il valore all'indirizzo ottenuto
+                // offset della funzione + ar(=activation record relativo al funzione)
+                "add\n" +  // add two values from the stack e ne fa push
+                "lw\n" + // load a value from the memory cell pointed by top of the stack
+                //js: jump to instruction pointed by top of stack and store next instruction in ra
                 "js\n";
     }
 }  

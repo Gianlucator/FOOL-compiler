@@ -42,7 +42,9 @@ public class ClassExpNode implements Node {
         for (Node cls: classes)
             code += cls.codeGeneration();
 
-        return code += body.codeGeneration();
+        code += body.codeGeneration();
+
+        return code;
     }
 
     @Override
