@@ -1,15 +1,7 @@
 push 8
 push function0
 push 0
-nulllfp
-lfp
-lw
-lfp
-lw
-add
-lw
-js
-print
+nullnullprint
 halt
 
 function0:

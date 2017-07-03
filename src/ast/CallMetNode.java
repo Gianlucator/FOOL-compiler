@@ -92,12 +92,12 @@ public class CallMetNode implements Node {
     @Override
     public String codeGeneration() {
 
-        // 1. generate code for evaluating each parameter fi
+        /*// 1. generate code for evaluating each parameter fi
         String parCode = "";
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
-        /* 2. generate code for pushing value of fi on stack. Note: you should generate code for evaluating and pushing the
-              parameters on stack in such a way that fn is pushed first, and f1 last. */
+        *//* 2. generate code for pushing value of fi on stack. Note: you should generate code for evaluating and pushing the
+              parameters on stack in such a way that fn is pushed first, and f1 last. *//*
 
         // 3. generate code for pushing value of x on stack.
 
@@ -115,6 +115,7 @@ public class CallMetNode implements Node {
                 "lfp\n" + getAR + //risalgo la catena statica
                 "add\n" +
                 "lw\n" + //carico sullo stack il valore all'indirizzo ottenuto
-                "js\n";
+                "js\n";*/
+        return null;
     }
 }
