@@ -1,8 +1,3 @@
-#senza classi:
-#- let int x = 4; int f(int y) x + y; int g(int z) x + z;
-#  in print(g(f(4)));
-#- "8"
-
 classe singola dec:
 - class Rectangle(int l1, int l2) {
     int area() l1 * l2;
@@ -37,5 +32,30 @@ overriding:
   in print(x.u());
 - "true"
 
+covarianza corr:
+- class Parent(int a) {
+    int f(int x) 2 * 2;
+    int r(int y) 2 * y;
+  }
+  class Child implements Parent (int a) {
+     int f(int x) 2 * x;
+     int r(int y) 3 * y;
+  };
 
+  let int x = 4; Parent o = new Child(x);
+  in o.f(x);
+- ""
 
+err:
+- class Parent(int a) {
+    int f(int x) 2 * 2;
+    int r(int y) 2 * y;
+  }
+  class Child implements Parent (int a) {
+     bool f(int x) 2 * x;
+     int r(int y) 3 * y;
+  };
+
+  let int x = 4; Parent o = new Child(x);
+  in o.f(x);
+- ""
