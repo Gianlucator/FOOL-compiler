@@ -37,7 +37,12 @@ public class ClassExpNode implements Node {
 
     @Override
     public String codeGeneration() {
-        return null;
+        String code = "";
+
+        for (Node cls: classes)
+            code += cls.codeGeneration();
+
+        return code += body.codeGeneration();
     }
 
     @Override

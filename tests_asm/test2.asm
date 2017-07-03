@@ -1,9 +1,9 @@
 push 0
-push function5
-push function6
+push function1
+push function2
 push 8
-push function7
-push function8
+push function3
+push function4
 push 0
 nullnullprint
 halt
@@ -83,70 +83,6 @@ lra
 js
 
 function4:
-cfp
-lra
-push 1
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function5:
-cfp
-lra
-push 1
-lfp
-add
-lw
-push 1
-add
-srv
-sra
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function6:
-cfp
-lra
-push 1
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function7:
-cfp
-lra
-push 1
-lfp
-add
-lw
-push 1
-add
-srv
-sra
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function8:
 cfp
 lra
 push 1

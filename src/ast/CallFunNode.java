@@ -99,6 +99,4 @@ public class CallFunNode implements Node {
                 "lw\n" + //carico sullo stack il valore all'indirizzo ottenuto
                 "js\n";
     }
-
-
 }  

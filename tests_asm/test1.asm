@@ -1,30 +1,23 @@
-push 0
-push 4
+push 8
 push function0
-lfp
-push 4
-lfp
-push -4
-lfp
-add
-lw
-js
-print
+push 0
+nullnullprint
 halt
 
 function0:
 cfp
 lra
-push -3
+push -1
 lfp
 lw
 add
 lw
-push 1
+push -2
 lfp
-add
 lw
 add
+lw
+mult
 srv
 sra
 pop
