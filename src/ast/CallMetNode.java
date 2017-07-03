@@ -49,11 +49,6 @@ public class CallMetNode implements Node {
     }
 
     @Override
-    public String codeGeneration() {
-        return null;
-    }
-
-    @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
 
@@ -92,5 +87,34 @@ public class CallMetNode implements Node {
             parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
         }
         return res;
+    }
+
+    @Override
+    public String codeGeneration() {
+
+        // 1. generate code for evaluating each parameter fi
+        String parCode = "";
+        for (int i = parlist.size() - 1; i >= 0; i--)
+            parCode += parlist.get(i).codeGeneration();
+        /* 2. generate code for pushing value of fi on stack. Note: you should generate code for evaluating and pushing the
+              parameters on stack in such a way that fn is pushed first, and f1 last. */
+
+        // 3. generate code for pushing value of x on stack.
+
+        // 4. generate code for jumping to the assembly routine generated for p
+
+        String getAR = "";
+        //for (int i = 0; i < smth ; i++) //devo risalire allo scope della classe in cui è stato dichiarato il metodo.
+            getAR += "lw\n";
+
+        return "lfp\n" + //CL
+                parCode +
+                "lfp\n" + getAR + //setto AL risalendo la catena statica
+                // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
+                //"push " + entry.getOffset() + "\n" + //metto offset sullo stack
+                "lfp\n" + getAR + //risalgo la catena statica
+                "add\n" +
+                "lw\n" + //carico sullo stack il valore all'indirizzo ottenuto
+                "js\n";
     }
 }
