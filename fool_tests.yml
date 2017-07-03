@@ -22,3 +22,19 @@ inheritance semplice:
   let A x = new B;
   in print(x.u());
 - "1"
+
+overriding:
+- class A {
+    int u() 1;
+  }
+  class B implements A {
+    bool u() true;
+    int s(int x) x + 1;
+  };
+
+  let B x = new B;
+  in print(x.u());
+- "true"
+
+
+
