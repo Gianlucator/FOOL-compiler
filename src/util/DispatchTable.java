@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Created by crist on 22/06/2017.
  */
 public class DispatchTable {
-    private HashMap<String, Node> entries;
+    private HashMap<String, DTEntry> entries;
 
     public DispatchTable() {
         entries = new HashMap<>();
@@ -20,9 +20,9 @@ public class DispatchTable {
     public void buildDispatchTable(ArrayList<Node> current) {
         for (Node c: current)
             if(c instanceof FunNode)
-                entries.put(((FunNode) c).getId(), c);
+                entries.put(((FunNode) c).getId(), new DTEntry(c));
             else if(c instanceof VarDecNode)
-                entries.put(((VarDecNode) c).getId(), c);
+                entries.put(((VarDecNode) c).getId(), new DTEntry(c));
     }
 
     public void buildDispatchTable(ArrayList<Node> currentMethods, DispatchTable superclassDT) {
@@ -31,7 +31,7 @@ public class DispatchTable {
         buildDispatchTable(currentMethods);
     }
 
-    public HashMap<String, Node> getEntries() {
+    public HashMap<String, DTEntry> getEntries() {
         return entries;
     }
 

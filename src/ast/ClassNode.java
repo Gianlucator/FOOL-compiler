@@ -64,6 +64,20 @@ public class ClassNode implements Node {
 
     @Override
     public String codeGeneration() {
+        int offset = 0;
+        for ( String field : fieldDT.getEntries().keySet() ) {
+            fieldDT.getEntries().get(field).setOffset(offset);
+            offset += 4;
+        }
+        // il valore finale di offset è la size
+
+        //Adesso la codegen dei metodi
+        for (String method : methodDT.getEntries().keySet()){
+            methodDT.getEntries().get(method).getNode().codeGeneration();
+
+        }
+
+
         return null;
     }
 

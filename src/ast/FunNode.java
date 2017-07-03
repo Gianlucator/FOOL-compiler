@@ -157,7 +157,7 @@ public class FunNode implements Node {
     }
 
     public String codeGeneration() {
-
+//che altro dovrebbe mancare?
         String declCode = "";
         if (declist != null) for (Node dec : declist)
             declCode += dec.codeGeneration();

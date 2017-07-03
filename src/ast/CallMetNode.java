@@ -74,8 +74,9 @@ public class CallMetNode implements Node {
         } else {
             ClassNode objectClass = env.getClassLayout(classId);
             DispatchTable methods = objectClass.getMethodDT();
-            if (methods.getEntries().get(methodName) != null)
-                methodNode = (FunNode) methods.getEntries().get(methodName);
+            if (methods.getEntries().get(methodName) != null &&
+                methods.getEntries().get(methodName).getNode() instanceof FunNode)
+                methodNode = (FunNode) methods.getEntries().get(methodName).getNode();
             else
                 foundMethod = false;
         }
