@@ -23,7 +23,7 @@ public class DispatchTable {
         DTEntry dtEntry;
         for (Node c : current)
             // metodi
-            if (c instanceof FunNode) {
+            if (c instanceof FunNode) { //Da modificare
                 // se dtEntry è diverso da null c'è override
                 dtEntry = entries.put(((FunNode) c).getId(), new DTEntry(c));
                 if (dtEntry != null) {
@@ -65,9 +65,6 @@ public class DispatchTable {
                     }
                 }
             }
-            //entries.put(((FunNode) c).getId(), new DTEntry(c));
-            else if (c instanceof VarDecNode)
-                entries.put(((VarDecNode) c).getId(), new DTEntry(c));
     }
 
     public void buildDispatchTable(ArrayList<Node> currentMethods, DispatchTable superclassDT) {

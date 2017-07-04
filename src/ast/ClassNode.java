@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.DispatchTable;
 import util.Environment;
 import util.SemanticError;
@@ -18,6 +19,7 @@ public class ClassNode implements Node {
     private ArrayList<Node> methods;
     private DispatchTable fieldDT;
     private DispatchTable methodDT;
+    ClassNode superClassLayout;
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
         this.id = id;
@@ -59,7 +61,86 @@ public class ClassNode implements Node {
 
     @Override
     public Node typeCheck() {
-        // TODO: controllare overriding corretto di campi e metodi
+        // TODO: controllare overriding corretto di metodi
+        //Override Fields
+        for (Node newField : fields) {
+            for (Node oldField : superClassLayout.getFields()) {
+                if(((VarDecNode) newField).getId() == ((VarDecNode) oldField).getId()) {
+                    Node newType = ((VarDecNode) newField).getType();
+                    Node oldType = ((VarDecNode) oldField).getType();
+                    if(newType instanceof ClassIdNode && oldType instanceof ClassIdNode) {
+                        if(!FOOLlib.isSubtype(((ClassIdNode) newType).getClassId(),((ClassIdNode) oldType).getClassId())) {
+                            System.out.println("Field " + ((VarDecNode) newField).getId() + "of type" + ((VarDecNode) newField).getType()
+                                                + " cannot override the old field of type " + ((VarDecNode) oldField).getType() + ".\n");
+                            System.exit(0);
+                        }
+                    } else {
+                        if(!FOOLlib.isSubtype(newType, oldType)) {
+                            System.out.println("Field " + ((VarDecNode) newField).getId() + "of type" + ((VarDecNode) newField).getType()
+                                    + " cannot override the old field of type " + ((VarDecNode) oldField).getType() + ".\n");
+                            System.exit(0);
+                        }
+                    }
+                }
+            }
+        }
+        //Override Metodi
+        for (Node newMethod : methods) {
+            for (Node oldMethod : superClassLayout.getMethods()){
+                if(((FunNode) newMethod).getId().equals(((FunNode) oldMethod).getId()) &&
+                    methods.size() == superClassLayout.getMethods().size()) {
+
+                    ArrayList<Node> oldPar = ((FunNode) oldMethod).getArrowType().getParList();
+                    ArrayList<Node> newPar = ((FunNode) newMethod).getArrowType().getParList();
+                    for (int i = 0; i < oldPar.size(); i++) {
+                        // se il parametro è un oggetto
+                        if (((ParNode) oldPar.get(i)).getType() instanceof ClassIdNode &&
+                                ((ParNode) newPar.get(i)).getType() instanceof ClassIdNode) {
+                            if (!FOOLlib.isSubtype(((ClassIdNode) oldPar.get(i)).getClassId(),
+                                    ((ClassIdNode) newPar.get(i)).getClassId())) {
+                                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) newMethod).getId());
+                                System.exit(0);
+                            }
+                        } else {  // se il parametro è int o bool
+                            try{
+                                //Nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
+                                //Catturo dicendo che non è sottotipo.
+                                if (!FOOLlib.isSubtype(oldPar.get(i), newPar.get(i))) {
+                                    System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) newMethod).getId());
+                                    System.exit(0);
+                                }
+                            } catch (Exception e){
+                                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) newMethod).getId());
+                                System.exit(0);
+                            }
+                        }
+                    }
+
+                    Node oldRet = ((FunNode) oldMethod).getArrowType().getRet();
+                    Node newRet = ((FunNode) newMethod).getArrowType().getRet();
+                    // deve valere la covarianza per il tipo di ritorno
+                    if (newRet instanceof ClassIdNode && oldRet instanceof ClassIdNode) {
+                        if (!FOOLlib.isSubtype(((ClassIdNode) newRet).getClassId(), ((ClassIdNode) oldRet).getClassId())) {
+                            System.out.println("Wrong return type");
+                            System.exit(0);
+                        }
+                    } else {
+                        try{
+                            //nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
+                            //Catturo dicendo che non è sottotipo.
+                            if (!FOOLlib.isSubtype(newRet, oldRet)) {
+                                System.out.println("Wrong return type");
+                                System.exit(0);
+                            }
+                        } catch (Exception e){
+                            System.out.println("Wrong return type");
+                            System.exit(0);
+                        }
+                    }
+
+                }
+            }
+        }
         return null;
     }
 
@@ -67,9 +148,10 @@ public class ClassNode implements Node {
     public String codeGeneration() {
         StringBuilder classCode = new StringBuilder();
 
-        int offset = 0;
+        /*int offset = 0;
         for (String field : fieldDT.getEntries().keySet())
             fieldDT.getEntries().get(field).setOffset(offset++);
+        */
 
         //classCode += "push " + offset + "\n";
         // il valore finale di offset è la size
@@ -123,7 +205,7 @@ public class ClassNode implements Node {
 
             //controllare ID superclasse
             if (!superclass.equals("")) {
-                ClassNode superClassLayout = env.getClassLayout(superclass);
+                superClassLayout = env.getClassLayout(superclass);
                 ArrayList<Node> supFields = superClassLayout.getFields();
                 ArrayList<Node> supMethods = superClassLayout.getMethods();
 

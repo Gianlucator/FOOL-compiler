@@ -37,12 +37,12 @@ public class NewExpNode implements Node {
             Node varNodeType = ((VarDecNode) classEntry.getFields().get(i)).getType();
             Node arg = args.get(i).typeCheck();
             if ( arg instanceof ClassIdNode && varNodeType instanceof ClassIdNode) {
-                if (!FOOLlib.isSubtype(((ClassIdNode) arg.typeCheck()).getClassId(), ((ClassIdNode) varNodeType).getClassId())) {
+                if (!FOOLlib.isSubtype(((ClassIdNode) arg).getClassId(), ((ClassIdNode) varNodeType).getClassId())) {
                     System.out.println("Incompatible class for parameter at position " + i);
                     System.exit(0);
                 }
                 if(arg != varNodeType)
-                    ((VarDecNode) classEntry.getFields().get(i)).setType(arg.typeCheck());
+                    ((VarDecNode) classEntry.getFields().get(i)).setType(arg);
             }
             else {
                 if (!(FOOLlib.isSubtype(arg, varNodeType))) {
