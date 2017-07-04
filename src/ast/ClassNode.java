@@ -67,17 +67,15 @@ public class ClassNode implements Node {
         String classCode = "";
 
         int offset = 0;
-        for (String field : fieldDT.getEntries().keySet()) {
-            fieldDT.getEntries().get(field).setOffset(offset);
-            offset += 4;
-        }
-        classCode += "push " + offset + "\n";
+        for (String field : fieldDT.getEntries().keySet())
+            fieldDT.getEntries().get(field).setOffset(offset++);
+
+        //classCode += "push " + offset + "\n";
         // il valore finale di offset è la size
 
         //Adesso la codegen dei metodi
-        for (String method : methodDT.getEntries().keySet()){
+        for (String method : methodDT.getEntries().keySet())
             classCode += methodDT.getEntries().get(method).getNode().codeGeneration();
-        }
 
         return classCode;
     }

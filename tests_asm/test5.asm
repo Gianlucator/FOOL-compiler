@@ -1,9 +1,9 @@
 push 4
-nullpush function10
-push function11
-push 12
 nullpush function12
 push function13
+push 12
+nullpush function14
+push function15
 push 0
 push 4
 nullnullhalt
@@ -11,36 +11,65 @@ nullnullhalt
 function0:
 cfp
 lra
-push 2
-lfp
-add
-lw
-push 1
-beq label0
-push -2
-lfp
-lw
-add
-lw
-b label1
-label0:
-push -2
-lfp
-lw
-add
-lw
 push 1
 lfp
 add
 lw
-push 3
-lfp
-add
-lw
-add
-add
-label1:
 srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function1:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push 1
+add
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function2:
+cfp
+lra
+push 5
+lfp
+lfp
+push -2
+lfp
+add
+lw
+lfp
+lw
+push -4
+lfp
+lw
+add
+lw
+js
+lfp
+lw
+push -3
+lfp
+lw
+add
+lw
+js
+srv
+pop
 sra
 pop
 pop
@@ -51,7 +80,7 @@ lrv
 lra
 js
 
-function1:
+function3:
 cfp
 lra
 push -1
@@ -65,38 +94,6 @@ lw
 add
 lw
 mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function2:
-cfp
-lra
-push 1
-lfp
-add
-lw
-push 1
-add
-srv
-sra
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function3:
-cfp
-lra
-push 1
 srv
 sra
 pop
@@ -205,12 +202,12 @@ js
 function10:
 cfp
 lra
-push 3
 push 1
 lfp
 add
 lw
-mult
+push 1
+add
 srv
 sra
 pop
@@ -224,15 +221,9 @@ js
 function11:
 cfp
 lra
-push 2
 push 1
-lfp
-add
-lw
-mult
 srv
 sra
-pop
 pop
 pop
 sfp
@@ -260,6 +251,44 @@ lra
 js
 
 function13:
+cfp
+lra
+push 2
+push 1
+lfp
+add
+lw
+mult
+srv
+sra
+pop
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function14:
+cfp
+lra
+push 3
+push 1
+lfp
+add
+lw
+mult
+srv
+sra
+pop
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function15:
 cfp
 lra
 push 2
