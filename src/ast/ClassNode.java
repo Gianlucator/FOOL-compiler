@@ -122,7 +122,26 @@ public class ClassNode implements Node {
             //controllare ID superclasse
             if (!superclass.equals("")) {
                 ClassNode superClassLayout = env.getClassLayout(superclass);
-                if (!env.isClassDeclared(superclass) || superClassLayout == null) {
+                ArrayList<Node> supFields = superClassLayout.getFields();
+
+                boolean override = false;
+                for (Node field : fields) {
+                    for (int j = 0; j < supFields.size(); j++) {
+                        if (supFields.get(j).equals(field)) {
+                            supFields.set(j, field);
+                            override = true;
+                        }
+                    }
+
+                    if (!override) {
+                        supFields.add(field);
+                        override = false;
+                    }
+                }
+                fields = supFields;
+
+
+                if (!env.isClassDeclared(superclass)) {
                     res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
                 } else {
                     // crea dispatch table usando anche la tabella della superclasse

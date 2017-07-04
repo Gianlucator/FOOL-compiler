@@ -57,6 +57,5 @@ public class IdNode implements Node {
                 "lfp\n" + getAR + //risalgo la catena statica
                 "add\n" +
                 "lw\n"; //carico sullo stack il valore all'indirizzo ottenuto
-
     }
-}  
+}

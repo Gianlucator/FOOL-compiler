@@ -21,12 +21,12 @@ public class DispatchTable {
 
     public void buildDispatchTable(ArrayList<Node> current) {
         DTEntry dtEntry;
-        for (Node c: current)
+        for (Node c : current)
             // metodi
-            if(c instanceof FunNode) {
+            if (c instanceof FunNode) {
                 // se dtEntry è diverso da null c'è override
                 dtEntry = entries.put(((FunNode) c).getId(), new DTEntry(c));
-                if(dtEntry != null){
+                if (dtEntry != null) {
 
                     // deve valere la controvarianza per i tipi dei parametri formali
                     ArrayList<Node> listaPar = ((FunNode) c).getArrowType().getParList();
@@ -34,14 +34,14 @@ public class DispatchTable {
                         // se il parametro è un oggetto
                         if ((listaPar.get(i)).typeCheck() instanceof ClassIdNode &&
                                 ((FunNode) dtEntry.getNode()).getArrowType().getParList().get(i) instanceof ClassIdNode) {
-                            if (!(FOOLlib.isSubtype( ((ClassIdNode)(listaPar.get(i))).getClassId(),
-                                ((ClassIdNode)((FunNode) dtEntry.getNode()).getArrowType().getParList().get(i)).getClassId()))) {
+                            if (!(FOOLlib.isSubtype(((ClassIdNode) (listaPar.get(i))).getClassId(),
+                                    ((ClassIdNode) ((FunNode) dtEntry.getNode()).getArrowType().getParList().get(i)).getClassId()))) {
                                 System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) c).getId());
                                 System.exit(0);
                             }
                         } else {  // se il parametro è int o bool
                             if (!(FOOLlib.isSubtype((listaPar.get(i)),
-                                ((FunNode) dtEntry.getNode()).getArrowType().getParList().get(i)))) {
+                                    ((FunNode) dtEntry.getNode()).getArrowType().getParList().get(i)))) {
                                 System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) c).getId());
                                 System.exit(0);
                             }
@@ -50,23 +50,23 @@ public class DispatchTable {
 
 
                     // deve valere la covarianza per il tipo di ritorno
-                    if ( ((FunNode) c).getArrowType().getRet().typeCheck() instanceof ClassIdNode) {
-                        if (!(FOOLlib.isSubtype( ((ClassIdNode)((FunNode) c).getArrowType().getRet()).getClassId(),
-                            ((ClassIdNode)((FunNode) dtEntry.getNode()).getArrowType().getRet()).getClassId()))) {
+                    if (((FunNode) c).getArrowType().getRet().typeCheck() instanceof ClassIdNode) {
+                        if (!(FOOLlib.isSubtype(((ClassIdNode) ((FunNode) c).getArrowType().getRet()).getClassId(),
+                                ((ClassIdNode) ((FunNode) dtEntry.getNode()).getArrowType().getRet()).getClassId()))) {
                             System.out.println("Wrong return type");
                             System.exit(0);
                         }
                     } else {
-                        if (!(FOOLlib.isSubtype( ((FunNode) c).getArrowType().getRet(),
-                            ((FunNode) dtEntry.getNode()).getArrowType().getRet()))) {
+                        if (!(FOOLlib.isSubtype(((FunNode) c).getArrowType().getRet(),
+                                ((FunNode) dtEntry.getNode()).getArrowType().getRet()))) {
                             System.out.println("Wrong return type");
                             System.exit(0);
                         }
                     }
                 }
             }
-                //entries.put(((FunNode) c).getId(), new DTEntry(c));
-            else if(c instanceof VarDecNode)
+            //entries.put(((FunNode) c).getId(), new DTEntry(c));
+            else if (c instanceof VarDecNode)
                 entries.put(((VarDecNode) c).getId(), new DTEntry(c));
     }
 
