@@ -93,6 +93,7 @@ public class ClassNode implements Node {
         } else {
 
             //checksemantics field e methods classe attuale
+            env.setOffset(-2);
             for (Node field : fields) {
                 res.addAll(field.checkSemantics(env));
             }
@@ -127,7 +128,7 @@ public class ClassNode implements Node {
                 boolean override = false;
                 for (Node field : fields) {
                     for (int j = 0; j < supFields.size(); j++) {
-                        if (supFields.get(j).equals(field)) {
+                        if (((VarDecNode) supFields.get(j)).getId().equals(((VarDecNode) field).getId())) {
                             supFields.set(j, field);
                             override = true;
                         }

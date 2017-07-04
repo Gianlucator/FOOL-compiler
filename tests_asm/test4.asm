@@ -96,12 +96,12 @@ js
 function3:
 cfp
 lra
-push -1
+push -3
 lfp
 lw
 add
 lw
-push -2
+push -4
 lfp
 lw
 add
