@@ -2,9 +2,14 @@ push 0
 push 4
 push function0
 lfp
-push 4
+push 2
+push 1
+push -2
 lfp
-push -4
+add
+lw
+lfp
+push -3
 lfp
 add
 lw
@@ -15,7 +20,20 @@ halt
 function0:
 cfp
 lra
-push -3
+push 2
+lfp
+add
+lw
+push 1
+beq label0
+push -2
+lfp
+lw
+add
+lw
+b label1
+label0:
+push -2
 lfp
 lw
 add
@@ -24,9 +42,17 @@ push 1
 lfp
 add
 lw
+push 3
+lfp
 add
+lw
+add
+add
+label1:
 srv
 sra
+pop
+pop
 pop
 pop
 sfp

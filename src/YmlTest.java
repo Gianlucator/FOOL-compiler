@@ -49,6 +49,7 @@ public class YmlTest {
 
             if (expectedResult.equals(result)) {
                 testsPassed++;
+                System.out.println(ANSI_GREEN + "Test passed." + ANSI_RESET);
             } else {
                 System.out.printf("%sTest failed due to %s%s%s%n", ANSI_BLUE, ANSI_YELLOW, result, ANSI_RESET);
             }

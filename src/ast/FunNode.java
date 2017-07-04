@@ -57,8 +57,8 @@ public class FunNode implements Node {
         // mh = Symbol table = lista di hashmap
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
 
-        env.decOffset();
         STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
+        env.decOffset();
 
         // se la st contiene già l'id ==> error
         if (hm.put(id, entry) != null && self == null) {

@@ -1,8 +1,15 @@
 senza classi:
-- let int x = 4; int f(int y) x + y; in print(f(4));
+- let
+    int x = 4;
+    int f(int y, bool b, int z)
+      if b then {
+        x + y + z
+      } else { x };
+  in
+    print(f(x, true, 2));
 #- let int x = 4; int f(int y) x + y; int g(int z) x + z;
 #  in print(g(f(4)));
-- "8"
+- "10"
 
 classe singola dec:
 - class Rectangle(int l1, int l2) {

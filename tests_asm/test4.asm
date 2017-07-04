@@ -1,14 +1,57 @@
-push 4
-nullpush function9
-push function10
-push 12
-nullpush function11
-push function12
 push 0
-push 4
-nullnullhalt
+push function6
+push function7
+push 8
+push function8
+push function9
+push 0
+nullnullprint
+halt
 
 function0:
+cfp
+lra
+push 2
+lfp
+add
+lw
+push 1
+beq label0
+push -2
+lfp
+lw
+add
+lw
+b label1
+label0:
+push -2
+lfp
+lw
+add
+lw
+push 1
+lfp
+add
+lw
+push 3
+lfp
+add
+lw
+add
+add
+label1:
+srv
+sra
+pop
+pop
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function1:
 cfp
 lra
 push -1
@@ -31,7 +74,7 @@ lrv
 lra
 js
 
-function1:
+function2:
 cfp
 lra
 push 1
@@ -43,19 +86,6 @@ add
 srv
 sra
 pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function2:
-cfp
-lra
-push 1
-srv
-sra
 pop
 pop
 sfp
@@ -67,14 +97,8 @@ function3:
 cfp
 lra
 push 1
-lfp
-add
-lw
-push 1
-add
 srv
 sra
-pop
 pop
 pop
 sfp
@@ -86,8 +110,14 @@ function4:
 cfp
 lra
 push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 pop
 sfp
@@ -99,14 +129,8 @@ function5:
 cfp
 lra
 push 1
-lfp
-add
-lw
-push 1
-add
 srv
 sra
-pop
 pop
 pop
 sfp
@@ -118,8 +142,14 @@ function6:
 cfp
 lra
 push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 pop
 sfp
@@ -131,14 +161,8 @@ function7:
 cfp
 lra
 push 1
-lfp
-add
-lw
-push 1
-add
 srv
 sra
-pop
 pop
 pop
 sfp
@@ -150,8 +174,14 @@ function8:
 cfp
 lra
 push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 pop
 sfp
@@ -162,72 +192,9 @@ js
 function9:
 cfp
 lra
-push 3
 push 1
-lfp
-add
-lw
-mult
 srv
 sra
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function10:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function11:
-cfp
-lra
-push 3
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function12:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
 pop
 pop
 sfp
