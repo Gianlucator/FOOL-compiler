@@ -2,6 +2,7 @@ package ast;
 
 import jdk.nashorn.internal.ir.VarNode;
 import lib.FOOLlib;
+import util.DTEntry;
 import util.Environment;
 import util.SemanticError;
 
@@ -55,7 +56,22 @@ public class NewExpNode implements Node {
 
     @Override
     public String codeGeneration() {
-        return null;
+        String code = "lhp\n";
+        //gestire il tag della classe
+        int size = args.size() + 2;
+        code += "push " + size + "\n" +
+                "lhp\n" +
+                "sw\n";
+        for (Node arg : args){
+            code += arg.codeGeneration() +
+                    "lhp\n" +
+                    "sw\n" +
+                    "push 1\n" +
+                    "lhp\n" +
+                    "add\n" +
+                    "shp\n"; //shp fa già la pop
+        }
+        return code;
     }
 
     @Override
