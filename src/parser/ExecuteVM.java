@@ -7,6 +7,9 @@ public class ExecuteVM {
     public static final int CODESIZE = 10000;
     public static final int MEMSIZE = 10000;
 
+    public static final int PRINT_STACK = -1;
+    public static final int PRINT_HEAP = -2;
+
     private int[] code;
     private int[] memory = new int[MEMSIZE];
 
@@ -113,6 +116,8 @@ public class ExecuteVM {
                     System.out.println((sp < MEMSIZE) ? memory[sp] : "Empty stack!");
                     break;
                 case SVMParser.HALT:
+                    printMemory(PRINT_HEAP);
+                    printMemory(PRINT_STACK);
                     return;
             }
         }
@@ -126,9 +131,29 @@ public class ExecuteVM {
         memory[--sp] = v;
     }
 
-    private void printState() {
-        System.out.printf("ip: %d\nsp: %d\nhp: %d\nfp: %d\nra: %d\nrv: %d\ncode at ip is: %d\nmemory at sp: %d\n\n",
-                ip, sp, hp, fp, ra, rv, code[ip], memory[sp]);
+    public void printState() {
+        System.out.printf("ip: %d\nsp: %d\nhp: %d\nfp: %d\nra: %d\nrv: %d\ncode at ip is: %d\nmemory at sp: %d\nmemory at hp: %d\n",
+                ip, sp, hp, fp, ra, rv, code[ip], memory[sp], memory[hp]);
+    }
+
+    public void printMemory(int mode) {
+        int start = -1, end = -1;
+
+        switch (mode) {
+            case PRINT_STACK:
+                System.out.println("STACK");
+                start = sp;
+                end = MEMSIZE;
+                break;
+            case PRINT_HEAP:
+                System.out.println("HEAP");
+                start = 0;
+                end = hp;
+                break;
+        }
+
+        for (int i = start; i < end; i++)
+            System.out.println(i + " -> " + memory[i]);
     }
 
     public VMResult getResult() {

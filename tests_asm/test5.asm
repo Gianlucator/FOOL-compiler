@@ -1,12 +1,35 @@
-push 4
 nullpush function12
 push function13
-push 12
 nullpush function14
 push function15
 push 0
 push 4
-nullnullhalt
+lhp
+push 65078524
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+push -2
+lfp
+add
+lw
+lhp
+sw
+push 1
+lhp
+add
+shp
+nullhalt
 
 function0:
 cfp

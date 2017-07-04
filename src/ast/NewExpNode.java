@@ -56,20 +56,20 @@ public class NewExpNode implements Node {
 
     @Override
     public String codeGeneration() {
+        String saveToHPThenIncHP = "lhp\nsw\npush 1\nlhp\nadd\nshp\n";
+
+        // salviamo indirizzo iniziale della classe = top heap sullo skack
         String code = "lhp\n";
-        //gestire il tag della classe
+
+        // salviamo il tag a addr_class + 1
+        code += "push " + classId.hashCode() + "\n" + saveToHPThenIncHP;
+
+        // salviamo la dimensione a addr_class + 2
         int size = args.size() + 2;
-        code += "push " + size + "\n" +
-                "lhp\n" +
-                "sw\n";
+        code += "push " + size + "\n" + saveToHPThenIncHP;
+
         for (Node arg : args){
-            code += arg.codeGeneration() +
-                    "lhp\n" +
-                    "sw\n" +
-                    "push 1\n" +
-                    "lhp\n" +
-                    "add\n" +
-                    "shp\n"; //shp fa già la pop
+            code += arg.codeGeneration() + saveToHPThenIncHP; //shp fa già la pop
         }
         return code;
     }

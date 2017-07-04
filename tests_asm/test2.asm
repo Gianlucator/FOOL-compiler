@@ -1,7 +1,35 @@
-push 8
 push function3
 push 0
-nullnullprint
+lhp
+push -1169699505
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+nullprint
 halt
 
 function0:

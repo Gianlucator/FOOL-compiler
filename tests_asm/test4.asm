@@ -1,11 +1,24 @@
-push 0
 push function8
 push function9
-push 8
 push function10
 push function11
 push 0
-nullnullprint
+lhp
+push 66
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+nullprint
 halt
 
 function0:
