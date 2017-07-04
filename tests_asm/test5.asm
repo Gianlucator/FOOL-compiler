@@ -1,7 +1,7 @@
-push function9
 push function10
 push function11
 push function12
+push function13
 push 0
 push 4
 lhp
@@ -175,19 +175,6 @@ function7:
 cfp
 lra
 push 1
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function8:
-cfp
-lra
-push 1
 lfp
 add
 lw
@@ -203,15 +190,25 @@ lrv
 lra
 js
 
-function9:
+function8:
 cfp
 lra
-push 2
-push 2
-mult
+push 1
 srv
 sra
 pop
+pop
+sfp
+lrv
+lra
+js
+
+function9:
+cfp
+lra
+push 1
+srv
+sra
 pop
 pop
 sfp
@@ -241,7 +238,7 @@ js
 function11:
 cfp
 lra
-push 2
+push 3
 push 1
 lfp
 add
@@ -258,6 +255,25 @@ lra
 js
 
 function12:
+cfp
+lra
+push 2
+push 1
+lfp
+add
+lw
+mult
+srv
+sra
+pop
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function13:
 cfp
 lra
 push 3

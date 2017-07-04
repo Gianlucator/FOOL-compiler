@@ -1,6 +1,5 @@
-push function6
-push function7
 push function8
+push function9
 push 0
 lhp
 push 66
@@ -164,8 +163,14 @@ function7:
 cfp
 lra
 push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 pop
 sfp
@@ -177,14 +182,21 @@ function8:
 cfp
 lra
 push 1
-lfp
-add
-lw
-push 1
-add
 srv
 sra
 pop
+pop
+sfp
+lrv
+lra
+js
+
+function9:
+cfp
+lra
+push 1
+srv
+sra
 pop
 pop
 sfp

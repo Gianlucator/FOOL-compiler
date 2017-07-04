@@ -1,5 +1,7 @@
 push function4
 push function5
+push function6
+push function7
 push 0
 lhp
 push 66
@@ -128,6 +130,38 @@ lra
 js
 
 function5:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push 1
+add
+srv
+sra
+pop
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function6:
+cfp
+lra
+push 1
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function7:
 cfp
 lra
 push 1

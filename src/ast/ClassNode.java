@@ -59,6 +59,7 @@ public class ClassNode implements Node {
 
     @Override
     public Node typeCheck() {
+        // TODO: controllare overriding corretto di campi e metodi
         return null;
     }
 
@@ -84,7 +85,7 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         env.incNestingLevel();
-        env.getSymTable().add(new HashMap<> ());
+        env.getSymTable().add(new HashMap<>());
 
         ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID
@@ -100,7 +101,7 @@ public class ClassNode implements Node {
 
             // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibile
             String methodName;
-            for (Node method: methods) {
+            for (Node method : methods) {
                 //Imposto il self all'inizio dei parametri nel FunNode.
                 ((FunNode) method).setSelf(new ClassIdNode(id));
                 methodName = ((FunNode) method).getId();
@@ -124,6 +125,7 @@ public class ClassNode implements Node {
             if (!superclass.equals("")) {
                 ClassNode superClassLayout = env.getClassLayout(superclass);
                 ArrayList<Node> supFields = superClassLayout.getFields();
+                ArrayList<Node> supMethods = superClassLayout.getMethods();
 
                 boolean override = false;
                 for (Node field : fields) {
@@ -141,15 +143,26 @@ public class ClassNode implements Node {
                 }
                 fields = supFields;
 
+                override = false;
+                for (Node method : methods) {
+                    for (int j = 0; j < supMethods.size(); j++) {
+                        if (((FunNode) supMethods.get(j)).getId().equals(((FunNode) method).getId())) {
+                            supMethods.set(j, method);
+                            override = true;
+                        }
+                    }
 
-                if (!env.isClassDeclared(superclass)) {
-                    res.add(new SemanticError("Extended class " + superclass + " has not been declared"));
-                } else {
-                    // crea dispatch table usando anche la tabella della superclasse
-                    DispatchTable superclassDT = superClassLayout.getMethodDT();
-                    methodDT.buildDispatchTable(methods, superclassDT);
-                    fieldDT.buildDispatchTable(fields, superclassDT);
+                    if (!override) {
+                        supMethods.add(method);
+                        override = false;
+                    }
                 }
+                methods = supMethods;
+
+                // crea dispatch table usando anche la tabella della superclasse
+                DispatchTable superclassDT = superClassLayout.getMethodDT();
+                methodDT.buildDispatchTable(methods, superclassDT);
+                fieldDT.buildDispatchTable(fields, superclassDT);
             } else {
                 methodDT.buildDispatchTable(methods);
                 fieldDT.buildDispatchTable(fields);
@@ -162,5 +175,4 @@ public class ClassNode implements Node {
         env.decNestingLevel();
         return res;
     }
-
 }
