@@ -4,6 +4,7 @@
 
 import ast.FOOLVisitorImpl;
 import ast.Node;
+import lib.FOOLlib;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.yaml.snakeyaml.Yaml;
@@ -113,6 +114,7 @@ public class YmlTest {
                 // CODE GENERATION
                 String asmFileName = "tests_asm/test" + (testNumber + 1) + ".asm";
 
+                FOOLlib.resetCode();
                 String code = ast.codeGeneration();
 
                 if (code == null) {

@@ -157,8 +157,13 @@ public class ClassNode implements Node {
         // il valore finale di offset è la size
 
         //Adesso la codegen dei metodi
-        for (Node method : methods)
-            classCode.append(method.codeGeneration());
+        for (Node method : methods)  {
+            String selfName = ((ClassIdNode) ((FunNode) method).getSelf()).getClassId();
+            if (id.equals(selfName))
+                classCode.append(method.codeGeneration());
+            else
+                classCode.append("");
+        }
 
         return classCode.toString();
     }
@@ -206,8 +211,8 @@ public class ClassNode implements Node {
             //controllare ID superclasse
             if (!superclass.equals("")) {
                 superClassLayout = env.getClassLayout(superclass);
-                ArrayList<Node> supFields = superClassLayout.getFields();
-                ArrayList<Node> supMethods = superClassLayout.getMethods();
+                ArrayList<Node> supFields = new ArrayList<>(superClassLayout.getFields());
+                ArrayList<Node> supMethods = new ArrayList<>(superClassLayout.getMethods());
 
                 boolean override = false;
                 for (Node field : fields) {

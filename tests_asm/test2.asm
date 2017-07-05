@@ -1,4 +1,4 @@
-push function3
+push areaRectangle
 push 0
 lhp
 push -1169699505
@@ -32,79 +32,7 @@ shp
 nullprint
 halt
 
-function0:
-cfp
-lra
-push 1
-lfp
-add
-lw
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function1:
-cfp
-lra
-push 1
-lfp
-add
-lw
-push 1
-add
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function2:
-cfp
-lra
-push 5
-lfp
-lfp
-push -2
-lfp
-add
-lw
-lfp
-lw
-push -4
-lfp
-lw
-add
-lw
-js
-lfp
-lw
-push -3
-lfp
-lw
-add
-lw
-js
-srv
-pop
-sra
-pop
-pop
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function3:
+areaRectangle:
 cfp
 lra
 push -3

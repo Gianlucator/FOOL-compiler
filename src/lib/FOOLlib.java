@@ -39,6 +39,8 @@ public class FOOLlib {
         return "function" + (funLabCount++);
     }
 
+    public static void resetCode() { funCode = ""; }
+
     public static void putCode(String c) {
         funCode += "\n" + c; //aggiunge una linea vuota di separazione prima di funzione
     }
