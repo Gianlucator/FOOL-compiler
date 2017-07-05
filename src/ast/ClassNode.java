@@ -39,7 +39,7 @@ public class ClassNode implements Node {
         //Override Fields
         for (Node newField : fields) {
             for (Node oldField : superClassLayout.getFields()) {
-                if(((VarDecNode) newField).getId() == ((VarDecNode) oldField).getId()) {
+                if(((VarDecNode) newField).getId().equals(((VarDecNode) oldField).getId())) {
                     Node newType = ((VarDecNode) newField).getType();
                     Node oldType = ((VarDecNode) oldField).getType();
                     if(newType instanceof ClassIdNode && oldType instanceof ClassIdNode) {
@@ -121,6 +121,7 @@ public class ClassNode implements Node {
     @Override
     public String codeGeneration() {
 
+        // Genera codice per ogni metodo
         for (Node method : methods)  {
             String selfName = ((ClassIdNode) ((FunNode) method).getSelf()).getClassId();
             dispatchTable.add(((FunNode) method).getId() + selfName);
@@ -173,43 +174,48 @@ public class ClassNode implements Node {
             //controllare ID superclasse
             if (!superclass.equals("")) {
                 superClassLayout = env.getClassLayout(superclass);
-                ArrayList<Node> supFields = new ArrayList<>(superClassLayout.getFields());
-                ArrayList<Node> supMethods = new ArrayList<>(superClassLayout.getMethods());
+                if (superClassLayout != null) {
+                    ArrayList<Node> supFields = new ArrayList<>(superClassLayout.getFields());
+                    ArrayList<Node> supMethods = new ArrayList<>(superClassLayout.getMethods());
 
-                boolean override = false;
-                for (Node field : fields) {
-                    for (int j = 0; j < supFields.size(); j++) {
-                        if (((VarDecNode) supFields.get(j)).getId().equals(((VarDecNode) field).getId())) {
-                            supFields.set(j, field);
-                            override = true;
+                    boolean override = false;
+                    for (Node field : fields) {
+                        for (int j = 0; j < supFields.size(); j++) {
+                            if (((VarDecNode) supFields.get(j)).getId().equals(((VarDecNode) field).getId())) {
+                                supFields.set(j, field);
+                                override = true;
+                            }
+                        }
+
+                        if (!override) {
+                            supFields.add(field);
+                            override = false;
                         }
                     }
-
-                    if (!override) {
-                        supFields.add(field);
-                        override = false;
-                    }
-                }
-                fields = supFields;
-
-                override = false;
-                for (Node method : methods) {
-                    for (int j = 0; j < supMethods.size(); j++) {
-                        if (((FunNode) supMethods.get(j)).getId().equals(((FunNode) method).getId())) {
-                            supMethods.set(j, method);
-                            override = true;
-                        }
-                    }
-
-                    if (!override)
-                        supMethods.add(method);
+                    fields = supFields;
 
                     override = false;
-                }
-                methods = supMethods;
-            }
+                    for (Node method : methods) {
+                        for (int j = 0; j < supMethods.size(); j++) {
+                            if (((FunNode) supMethods.get(j)).getId().equals(((FunNode) method).getId())) {
+                                supMethods.set(j, method);
+                                override = true;
+                            }
+                        }
 
-            env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));
+                        if (!override)
+                            supMethods.add(method);
+
+                        override = false;
+                    }
+                    methods = supMethods;
+                }
+
+                env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));
+            } else {
+                // TODO: la superclass structure è null in alcuni casi, ho aggiunto un nuovo errore
+                res.add(new SemanticError("Superclass error"));
+            }
         }
 
         env.getSymTable().remove(env.getNestingLevel());

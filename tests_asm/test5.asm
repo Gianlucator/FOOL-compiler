@@ -17,6 +17,13 @@ push 1
 lhp
 add
 shp
+push 65078524
+lhp
+sw
+push 1
+lhp
+add
+shp
 lhp
 push -2
 lfp

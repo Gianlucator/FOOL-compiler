@@ -58,10 +58,14 @@ public class CallMetNode implements Node {
         boolean foundMethod = true;
 
         // dichiarazione di oggetto
-        while (j >= 0 && classId.equals("")) {
-            try { // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
-                classId = env.getObjectEnvironment().get(j--).get(objectName);
-            } catch (Exception e) { // do nothing
+        if (env.getObjectEnvironment().size() > j) {
+            while (j >= 0 && classId.equals("")) {
+                // TODO: Il try/catch credo si possa eliminare ora.
+                try {
+                    // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
+                    classId = env.getObjectEnvironment().get(j--).get(objectName);
+                } catch (Exception e) {
+                }
             }
         }
 
