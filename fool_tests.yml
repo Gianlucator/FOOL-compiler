@@ -69,7 +69,7 @@ covarianza err:
      int r(int y) 3 * y;
   };
 
-  let int x = 4; Parent o = new Child(x);
+  let bool x = 4; Parent o = new Child(x);
   in o.f(x);
 - ""
 
