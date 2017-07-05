@@ -42,7 +42,7 @@ overriding:
   };
 
   let B x = new B;
-  in print(x.u());
+  in print(x.s(2));
 - "true"
 
 covarianza corr:

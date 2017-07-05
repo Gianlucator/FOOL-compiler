@@ -13,13 +13,17 @@ public class FunNode implements Node {
 
     private String id;
     private Node type;
-    private ArrayList<Node> parlist = new ArrayList<Node>();
+    private ArrayList<Node> parlist = new ArrayList<>();
     private ArrayList<Node> declist;
     private Node body;
     private ArrowTypeNode arrowType;
 
     //Se rimane null è una funzione, altrimenti indica la classe di appartenenza del metodo
     private Node self = null;
+
+    public Node getSelf() {
+        return self;
+    }
 
     public void setSelf(Node self) {
         this.self = self;

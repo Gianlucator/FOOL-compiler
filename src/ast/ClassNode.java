@@ -234,10 +234,10 @@ public class ClassNode implements Node {
                         }
                     }
 
-                    if (!override) {
+                    if (!override)
                         supMethods.add(method);
-                        override = false;
-                    }
+
+                    override = false;
                 }
                 methods = supMethods;
             }
