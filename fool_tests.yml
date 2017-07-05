@@ -32,16 +32,16 @@ inheritance semplice:
 
 overriding:
 - class A {
-    int u() 1;
+    int u() 2;
   }
   class B implements A{
-    bool u() true;
-    int s() 2;
+    bool u() false;
+    int s() 3;
   };
 
   let A x = new B ;
-  in print(x.s());
-- "2"
+  in print(x.u());
+- "0"
 
 covarianza corr:
 - class Parent(int a) {
@@ -57,32 +57,35 @@ covarianza corr:
   in o.f(x);
 - ""
 
-covarianza err:
-- class Parent(int a) {
-    int f(int x) 2 * 2;
-    int r(int y) 2 * y;
-  }
-  class Child implements Parent (int a) {
-     bool f(int x) 2 * x;
-     int r(int y) 3 * y;
-  };
+#Funziona: dà errore di tipo di parametro incompatibile
+#covarianza err:
+#- class Parent(int a) {
+#    int f(int x) 2 * 2;
+#    int r(int y) 2 * y;
+#  }
+#  class Child implements Parent (int a) {
+#     bool f(int x) 2 * x;
+#     int r(int y) 3 * y;
+#  };
+#
+#  let bool x = 4; Parent o = new Child(x);
+#  in o.f(x);
+#- ""
 
-  let bool x = 4; Parent o = new Child(x);
-  in o.f(x);
-- ""
+#Funziona: dà errore di tipo di ritorno incompatibile
+#controvarianza err:
+#- class Parent(int a) {
+#    int f(int x) 2 * 2;
+#    int r(int y) 2 * y;
+#  }
+#  class Child implements Parent (int a) {
+#     int f(int x) 2 * x;
+#     int r(bool y) 3 * y;
+#  };
+#  let bool x = 4; Parent o = new Child(x); in o.r(x);
+#- ""
 
-controvarianza err:
-- class Parent(int a) {
-    int f(int x) 2 * 2;
-    int r(int y) 2 * y;
-  }
-  class Child implements Parent (int a) {
-     int f(int x) 2 * x;
-     int r(bool y) 3 * y;
-  };
-  let bool x = 4; Parent o = new Child(x); in o.r(x);
-- ""
-
+#errore perché non riesce a trovare il parametro x definito in f di Child
 covarianza errato 1:
 - class Parent(int a) {
     Child f(int x) x;

@@ -19,7 +19,7 @@ lfp
 add
 lw
 shp
-push sB
+push uB
 lw
 js
 print
@@ -28,7 +28,7 @@ halt
 uA:
 cfp
 lra
-push 1
+push 2
 srv
 sra
 pop
@@ -41,7 +41,7 @@ js
 uB:
 cfp
 lra
-push 1
+push 0
 srv
 sra
 pop
@@ -54,7 +54,7 @@ js
 sB:
 cfp
 lra
-push 2
+push 3
 srv
 sra
 pop
