@@ -1,4 +1,3 @@
-push areaRectangle
 push 0
 lhp
 push -1169699505
@@ -29,7 +28,10 @@ push 1
 lhp
 add
 shp
-nullprint
+push areaRectangle
+lw
+js
+print
 halt
 
 areaRectangle:

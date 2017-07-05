@@ -88,7 +88,12 @@ public class CallMetNode implements Node {
 
     @Override
     public String codeGeneration() {
+        String selfName = ((ClassIdNode) ((FunNode) methodNode).getSelf()).getClassId();
+        String mLabel = methodName + selfName;
 
+        return "push " + mLabel + "\n" +
+                "lw\n" +
+                "js\n";
 
         /*// 1. generate code for evaluating each parameter fi
         String parCode = "";
@@ -114,6 +119,5 @@ public class CallMetNode implements Node {
                 "add\n" +
                 "lw\n" + //carico sullo stack il valore all'indirizzo ottenuto
                 "js\n";*/
-        return null;
     }
 }

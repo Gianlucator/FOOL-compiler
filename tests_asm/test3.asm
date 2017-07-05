@@ -1,5 +1,3 @@
-push uA
-push sB
 push 0
 lhp
 push 66
