@@ -17,41 +17,15 @@ public class ClassNode implements Node {
     private String superclass;
     private ArrayList<Node> fields;
     private ArrayList<Node> methods;
-    ClassNode superClassLayout;
+    private ClassNode superClassLayout;
+    private ArrayList<String> dispatchTable;
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
         this.id = id;
         this.superclass = superclass;
         this.fields = fields;
         this.methods = methods;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getSuperclass() {
-        return superclass;
-    }
-
-    public ArrayList<Node> getFields() {
-        return fields;
-    }
-
-    public ArrayList<Node> getMethods() {
-        return methods;
-    }
-
-    public Node getMethod(String methodName) {
-        String ownMethodName;
-
-        for (Node method: methods) {
-            ownMethodName = ((FunNode) method).getId();
-            if (ownMethodName.equals(methodName))
-                return method;
-        }
-
-        return null;
+        dispatchTable = new ArrayList<>();
     }
 
     @Override
@@ -146,26 +120,14 @@ public class ClassNode implements Node {
 
     @Override
     public String codeGeneration() {
-        StringBuilder classCode = new StringBuilder();
 
-        /*int offset = 0;
-        for (String field : fieldDT.getEntries().keySet())
-            fieldDT.getEntries().get(field).setOffset(offset++);
-        */
-
-        //classCode += "push " + offset + "\n";
-        // il valore finale di offset è la size
-
-        //Adesso la codegen dei metodi
         for (Node method : methods)  {
             String selfName = ((ClassIdNode) ((FunNode) method).getSelf()).getClassId();
+            dispatchTable.add(((FunNode) method).getId() + selfName);
             if (id.equals(selfName))
-                classCode.append(method.codeGeneration());
-            else
-                classCode.append("");
+                method.codeGeneration();
         }
-
-        return classCode.toString();
+        return "";
     }
 
     @Override
@@ -253,5 +215,38 @@ public class ClassNode implements Node {
         env.getSymTable().remove(env.getNestingLevel());
         env.decNestingLevel();
         return res;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public String getSuperclass() {
+        return superclass;
+    }
+
+    public ArrayList<Node> getFields() {
+        return fields;
+    }
+
+    public ArrayList<Node> getMethods() {
+        return methods;
+    }
+
+    public Node getMethod(String methodName) {
+        String ownMethodName;
+
+        for (Node method: methods) {
+            ownMethodName = ((FunNode) method).getId();
+            if (ownMethodName.equals(methodName))
+                return method;
+        }
+
+        return null;
+    }
+
+    public ArrayList<String> getDispatchTable() {
+        return dispatchTable;
     }
 }
