@@ -17,8 +17,6 @@ public class ClassNode implements Node {
     private String superclass;
     private ArrayList<Node> fields;
     private ArrayList<Node> methods;
-    private DispatchTable fieldDT;
-    private DispatchTable methodDT;
     ClassNode superClassLayout;
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
@@ -26,8 +24,6 @@ public class ClassNode implements Node {
         this.superclass = superclass;
         this.fields = fields;
         this.methods = methods;
-        methodDT = new DispatchTable();
-        fieldDT = new DispatchTable();
     }
 
     public String getId() {
@@ -46,12 +42,16 @@ public class ClassNode implements Node {
         return methods;
     }
 
-    public DispatchTable getMethodDT() {
-        return methodDT;
-    }
+    public Node getMethod(String methodName) {
+        String ownMethodName;
 
-    public DispatchTable getFieldDT() {
-        return fieldDT;
+        for (Node method: methods) {
+            ownMethodName = ((FunNode) method).getId();
+            if (ownMethodName.equals(methodName))
+                return method;
+        }
+
+        return null;
     }
 
     @Override
@@ -240,14 +240,6 @@ public class ClassNode implements Node {
                     }
                 }
                 methods = supMethods;
-
-                // crea dispatch table usando anche la tabella della superclasse
-                DispatchTable superclassDT = superClassLayout.getMethodDT();
-                methodDT.buildDispatchTable(methods, superclassDT);
-                fieldDT.buildDispatchTable(fields, superclassDT);
-            } else {
-                methodDT.buildDispatchTable(methods);
-                fieldDT.buildDispatchTable(fields);
             }
 
             env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));

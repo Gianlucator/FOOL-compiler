@@ -31,7 +31,7 @@ public class CallMetNode implements Node {
 
     @Override
     public Node typeCheck() {
-        ArrowTypeNode t = (ArrowTypeNode) methodNode.getArrowType();
+        ArrowTypeNode t = methodNode.getArrowType();
         ArrayList<Node> p = t.getParList();
 
         if (!(p.size() == (parlist.size() - 1))) {
@@ -60,29 +60,26 @@ public class CallMetNode implements Node {
         while (j >= 0 && classId.equals("")) {
             try { // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
                 classId = env.getObjectEnvironment().get(j--).get(objectName);
-            } catch (Exception e) {
+            } catch (Exception e) { // do nothing
             }
         }
 
         if (classId.equals("")) {
             res.add(new SemanticError("Object " + objectName + " not declared"));
         } else {
+            // dobbiamo essere sicuri che il metodo esista
             ClassNode objectClass = env.getClassLayout(classId);
-            DispatchTable methods = objectClass.getMethodDT();
-            if (methods.getEntries().get(methodName) != null &&
-                methods.getEntries().get(methodName).getNode() instanceof FunNode)
-                methodNode = (FunNode) methods.getEntries().get(methodName).getNode();
-            else
-                foundMethod = false;
+            methodNode = (FunNode) objectClass.getMethod(methodName);
+            foundMethod = (methodNode != null);
         }
 
         if (!foundMethod) {
             res.add(new SemanticError("Method " + methodName + " not declared"));
         } else {
             // controllo semantico sui parametri passati al metodo
-            for (Node arg : parlist) {
+            for (Node arg : parlist)
                 res.addAll(arg.checkSemantics(env));
-            }
+
             // si aggiunge ai parametri il self
             parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
         }
