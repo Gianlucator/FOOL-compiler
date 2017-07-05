@@ -56,7 +56,30 @@ public class NewExpNode implements Node {
 
     @Override
     public String codeGeneration() {
+        String code = "";
         String saveToHPThenIncHP =  "lhp\n" +
+                "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
+                "push 1\n" +
+                "lhp\n" +
+                "add\n" +       //vado all'indirizzo successivo
+                "shp\n";        //modifico l'hp //fa già la pop
+
+        for (int i = args.size() - 1; i >= 0; i--)
+            code += args.get(i).codeGeneration() + saveToHPThenIncHP;
+
+        // salviamo la dimensione a addr_class + 2
+        int size = args.size() + 2;
+        code += "push " + size + "\n" + saveToHPThenIncHP;
+
+        // salviamo il tag a addr_class + 1
+        code += "push " + classId.hashCode() + "\n" + saveToHPThenIncHP;
+
+        // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
+        code += "lhp\n";
+
+        return code;
+
+        /* String saveToHPThenIncHP =  "lhp\n" +
                                     "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
                                     "push 1\n" +
                                     "lhp\n" +
@@ -76,7 +99,7 @@ public class NewExpNode implements Node {
         for (Node arg : args) {
             code += arg.codeGeneration() + saveToHPThenIncHP; //shp fa già la pop
         }
-        return code;
+        return code; */
     }
 
     @Override

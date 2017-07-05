@@ -98,6 +98,7 @@ public class CallMetNode implements Node {
         String mLabel = methodName + selfName;
 
         return  objectEntry.codeGeneration() +
+                "shp\n" +
                 "push " + mLabel + "\n" +
                 "lw\n" +
                 "js\n";

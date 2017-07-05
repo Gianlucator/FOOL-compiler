@@ -1,12 +1,4 @@
 push 0
-lhp
-push 66
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 2
 lhp
 sw
@@ -14,7 +6,23 @@ push 1
 lhp
 add
 shp
-nullprint
+push 66
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push -2
+lfp
+add
+lw
+shp
+push sB
+lw
+js
+print
 halt
 
 uA:

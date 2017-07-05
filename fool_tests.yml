@@ -7,9 +7,7 @@ senza classi:
          let int k = 5; in g(z(k));
     in
       print(f(x, true, x));
-#- let int x = 4; int f(int y) x + y; int g(int z) x + z;
-#  in print(g(f(4)));
-- "10"
+- "6"
 
 classe singola dec:
 - class Rectangle(int l1, int l2) {
@@ -41,9 +39,9 @@ overriding:
     int s(int x) x + 1;
   };
 
-  let B x = new B;
+  let A x = new B;
   in print(x.s(2));
-- "true"
+- "3"
 
 covarianza corr:
 - class Parent(int a) {

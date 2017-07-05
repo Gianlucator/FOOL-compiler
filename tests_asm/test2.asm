@@ -1,12 +1,4 @@
 push 0
-lhp
-push -1169699505
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 4
 lhp
 sw
@@ -27,6 +19,19 @@ sw
 push 1
 lhp
 add
+shp
+push -1169699505
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push -2
+lfp
+add
+lw
 shp
 push areaRectangle
 lw
