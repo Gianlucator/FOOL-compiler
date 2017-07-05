@@ -25,6 +25,10 @@ lhp
 add
 shp
 lhp
+push -2
+lfp
+add
+lw
 push -3
 lfp
 add

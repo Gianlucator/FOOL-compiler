@@ -97,7 +97,12 @@ public class CallMetNode implements Node {
         String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId();
         String mLabel = methodName + selfName;
 
-        return  objectEntry.codeGeneration() +
+        String parCode = "";
+        for (int i = parlist.size() - 1; i >= 0; i--)
+            parCode += parlist.get(i).codeGeneration();
+
+        return  parCode +
+                objectEntry.codeGeneration() +
                 "shp\n" +
                 "push " + mLabel + "\n" +
                 "lw\n" +
