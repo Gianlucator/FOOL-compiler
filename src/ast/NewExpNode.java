@@ -57,24 +57,23 @@ public class NewExpNode implements Node {
     @Override
     public String codeGeneration() {
         String saveToHPThenIncHP =  "lhp\n" +
-                                    "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente
+                                    "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
                                     "push 1\n" +
                                     "lhp\n" +
                                     "add\n" +       //vado all'indirizzo successivo
-                                    "shp\n";        //modifico l'hp
+                                    "shp\n";        //modifico l'hp //fa già la pop
 
-        // salviamo indirizzo iniziale della classe = top heap sullo skack
+        // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
         String code = "lhp\n";
 
         // salviamo il tag a addr_class + 1
-        code += "push " + classId.hashCode() + "\n" +
-                saveToHPThenIncHP;
+        code += "push " + classId.hashCode() + "\n" + saveToHPThenIncHP;
 
         // salviamo la dimensione a addr_class + 2
         int size = args.size() + 2;
         code += "push " + size + "\n" + saveToHPThenIncHP;
 
-        for (Node arg : args){
+        for (Node arg : args) {
             code += arg.codeGeneration() + saveToHPThenIncHP; //shp fa già la pop
         }
         return code;
@@ -83,7 +82,6 @@ public class NewExpNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
-        HashMap<String, STentry> hm =  env.getSymTable().get(env.getNestingLevel());
 
         // controllare che la classe esista
         classEntry = env.getClassLayout(classId);
