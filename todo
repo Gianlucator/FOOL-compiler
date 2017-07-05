@@ -1,5 +1,5 @@
-- commentare coso della FieldsDT in codegen di ClassNode
-- aggiustare codice dispatch table
-- inserire nella NewExpNode il controllo dei tipi del costruttore
-- ...
 
+- Sistemare i metodi cosicché siano capaci di prendere i campi dallo heap
+- Sistemare i parametri dei metodi
+- (minor) capire perché il file YmlTest ignora alcuni test senza eseguirli
+- Fare un sacco di test e correggere gli errori che si presentano

@@ -54,15 +54,9 @@ js
 sB:
 cfp
 lra
-push 1
-lfp
-add
-lw
-push 1
-add
+push 2
 srv
 sra
-pop
 pop
 pop
 sfp

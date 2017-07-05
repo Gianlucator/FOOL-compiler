@@ -34,14 +34,14 @@ overriding:
 - class A {
     int u() 1;
   }
-  class B implements A {
+  class B implements A{
     bool u() true;
-    int s(int x) x + 1;
+    int s() 2;
   };
 
-  let A x = new B;
-  in print(x.s(2));
-- "3"
+  let A x = new B ;
+  in print(x.s());
+- "2"
 
 covarianza corr:
 - class Parent(int a) {
