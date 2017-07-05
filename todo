@@ -1,5 +1,10 @@
 
 - Sistemare i metodi cosicché siano capaci di prendere i campi dallo heap
-- Sistemare i parametri dei metodi
+- Sistemare i parametri dei metodi ==> non riescono a prenderli ne a farci nulla
 - (minor) capire perché il file YmlTest ignora alcuni test senza eseguirli
 - Fare un sacco di test e correggere gli errori che si presentano
+
+Pensieri:
+- ogni tanto l'hashCode della classe si trova in giro es. viene dato come output... Y?
+- bisogna guardare bene all'ordine di codegen nella CallMetNode:
+    - prima i parametri dell'id o prima l'id?
