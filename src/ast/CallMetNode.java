@@ -15,6 +15,7 @@ public class CallMetNode implements Node {
     private String methodName;
     private ArrayList<Node> parlist;
     private FunNode methodNode;
+    private IdNode objectEntry;
 
     // chiamata del metodo di una classe
     public CallMetNode(String objectName, String methodName, ArrayList<Node> parlist) {
@@ -74,7 +75,7 @@ public class CallMetNode implements Node {
         }
 
         if (!foundMethod) {
-            res.add(new SemanticError("Method " + methodName + " not declared"));
+            res.add(new SemanticError("Method " + methodName + " not declared in class " + classId));
         } else {
             // controllo semantico sui parametri passati al metodo
             for (Node arg : parlist)
@@ -83,15 +84,21 @@ public class CallMetNode implements Node {
             // si aggiunge ai parametri il self
             parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
         }
+
+        //create object ID node
+        objectEntry = new IdNode(objectName);
+        res.addAll(objectEntry.checkSemantics(env));
+
         return res;
     }
 
     @Override
     public String codeGeneration() {
-        String selfName = ((ClassIdNode) ((FunNode) methodNode).getSelf()).getClassId();
+        String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId();
         String mLabel = methodName + selfName;
 
-        return "push " + mLabel + "\n" +
+        return  objectEntry.codeGeneration() +
+                "push " + mLabel + "\n" +
                 "lw\n" +
                 "js\n";
 
