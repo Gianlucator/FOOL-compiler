@@ -20,19 +20,44 @@ push 1
 lhp
 add
 shp
-push -1169699505
+push 0
 lhp
 sw
 push 1
 lhp
 add
 shp
-lhp
+push 0
 push -2
 lfp
 add
 lw
+label1:
+push 0
+lhp
+push -1
+add
+bleq label2
+lhp
+push -1
+add
+lw
+push -2
+lfp
+add
+lw
+beq label0
+lhp
+lhp
+push -2
+add
+lw
+sub
 shp
+b label1
+label0:
+lhp
+label2:
 push areaRectangle
 lw
 js

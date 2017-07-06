@@ -40,6 +40,7 @@ public class VarAsmNode implements Node {
 
         //env.setOffset(-2);
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
+
         entry = new STentry(env.getNestingLevel(), type, env.getOffset()); //separo introducendo "entry"
         env.decOffset();
 

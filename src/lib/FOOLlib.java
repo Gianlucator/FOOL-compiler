@@ -8,7 +8,7 @@ public class FOOLlib {
     private static TypeTreeNode root = new TypeTreeNode("",null,null);
 
     private static int labCount = 0;
-
+    private static int objCount = 0;
     private static int funLabCount = 0;
 
     private static String funCode = "";
@@ -38,6 +38,8 @@ public class FOOLlib {
     public static String freshFunLabel() {
         return "function" + (funLabCount++);
     }
+
+    public static int freshObjLabel() { return objCount++; }
 
     public static void resetCode() { funCode = ""; }
 

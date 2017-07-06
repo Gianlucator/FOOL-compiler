@@ -63,6 +63,7 @@ public class NewExpNode implements Node {
                 "lhp\n" +
                 "add\n" +       //vado all'indirizzo successivo
                 "shp\n";        //modifico l'hp //fa già la pop
+        int objLabel = FOOLlib.freshObjLabel();
 
         for (int i = args.size() - 1; i >= 0; i--)
             code += args.get(i).codeGeneration() + saveToHPThenIncHP;
@@ -72,10 +73,10 @@ public class NewExpNode implements Node {
         code += "push " + size + "\n" + saveToHPThenIncHP;
 
         // salviamo il tag a addr_class + 1
-        code += "push " + classId.hashCode() + "\n" + saveToHPThenIncHP;
+        code += "push " + objLabel  + "\n" + saveToHPThenIncHP;
 
         // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
-        code += "lhp\n";
+        code += "push " + objLabel + "\n";
 
         return code;
 

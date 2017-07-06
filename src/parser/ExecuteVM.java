@@ -119,13 +119,13 @@ public class ExecuteVM {
                         System.out.println((sp < MEMSIZE) ? memory[sp] : "Empty stack!");
                         break;
                     case SVMParser.HALT:
-                        printMemory(PRINT_HEAP);
+                        //printMemory(PRINT_HEAP);
                         //printMemory(PRINT_STACK);
                         return;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("A.o.o.b. at line " + e.getStackTrace()[0].getLineNumber());
+            System.out.println("AOOB at line " + e.getStackTrace()[0].getLineNumber());
         }
     }
 
