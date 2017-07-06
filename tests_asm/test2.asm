@@ -20,14 +20,6 @@ push 1
 lhp
 add
 shp
-push -1169699505
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add

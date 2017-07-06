@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ast.ClassNode;
-import ast.Node;
 import ast.STentry;
 
 public class Environment {
@@ -66,16 +65,13 @@ public class Environment {
 	}
 
 	public ClassNode getClassLayout(String className){
-		// TODO: ulteriore modifica, ditemi se va bene.
-		STentry classEntry = symTable.get(GLOBAL_SCOPE).get(className);
-		if (classEntry != null) {
-			Node typeClass = classEntry.getType();
-			if (typeClass instanceof ClassNode) {
-				return (ClassNode) typeClass;
-			}
+		ClassNode cn = null;
+		try {
+			cn = (ClassNode) symTable.get(GLOBAL_SCOPE).get(className).getType();
+		} catch (Exception e){
+			System.err.println("Could not cast to ClassNode!");
 		}
-		return null;
-
+		return cn;
 	}
 
 	public boolean isClassDeclared(String className) {
