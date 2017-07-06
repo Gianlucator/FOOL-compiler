@@ -28,39 +28,19 @@ lhp
 add
 shp
 push 0
+push 2
 push -2
 lfp
 add
 lw
-label1:
-push 0
-lhp
-push -1
-add
-bleq label2
-lhp
-push -1
-add
-lw
-push -2
-lfp
-add
-lw
-beq label0
-lhp
-lhp
-push -2
-add
-lw
-sub
-shp
-b label1
-label0:
-lhp
-label2:
 push areaRectangle
 lw
 js
+push -3
+lfp
+add
+lw
+add
 print
 halt
 

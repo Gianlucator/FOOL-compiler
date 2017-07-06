@@ -18,32 +18,6 @@ push -2
 lfp
 add
 lw
-label4:
-push 0
-lhp
-push -1
-add
-bleq label5
-lhp
-push -1
-add
-lw
-push -2
-lfp
-add
-lw
-beq label3
-lhp
-lhp
-push -2
-add
-lw
-sub
-shp
-b label4
-label3:
-lhp
-label5:
 push uA
 lw
 js

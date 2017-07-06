@@ -12,6 +12,8 @@ public class Environment {
 	private ArrayList<HashMap<String, String>> objectEnvironment = new ArrayList<>();
 	private int nestingLevel = -1;
 	private int offset = 0;
+
+	public String classEnvironment = "";
 	//private String self_type = "";	//Tipo della dichiarazione di classe in cui ci troviamo
 
 	private final int GLOBAL_SCOPE = 0;
@@ -67,8 +69,8 @@ public class Environment {
 	public ClassNode getClassLayout(String className){
 		ClassNode cn = null;
 		try {
-			cn = (ClassNode) symTable.get(GLOBAL_SCOPE).get(className).getType();
-		} catch (Exception e){
+            cn = (ClassNode) symTable.get(GLOBAL_SCOPE).get(className).getType();
+        } catch (Exception e){
 			System.err.println("Could not cast to ClassNode!");
 		}
 		return cn;

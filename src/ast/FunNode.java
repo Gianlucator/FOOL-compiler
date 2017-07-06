@@ -104,8 +104,9 @@ public class FunNode implements Node {
             if (declist.size() > 0) {
                 env.setOffset(-2);
                 //if there are children then check semantics for every child and save the results
-                for (Node n : declist)
+                for (Node n : declist) {
                     res.addAll(n.checkSemantics(env));
+                }
             }
 
             //<CAUTION>

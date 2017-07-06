@@ -10,9 +10,13 @@ public class IdNode implements Node {
     private String id;
     private STentry entry;
     private int nestinglevel;
+    private int fieldOffset;
+    private boolean isField;
 
     public IdNode(String i) {
         id = i;
+        isField = false;
+        fieldOffset = 0;
     }
 
     public String toPrint(String s) {
@@ -36,6 +40,20 @@ public class IdNode implements Node {
         else {
             entry = tmp;
             nestinglevel = env.getNestingLevel();
+
+            // controllo se e' un accesso a un campo, se si mi salvo l'offset per al codegen
+            if (entry.getNestinglevel() == 1 && !env.classEnvironment.equals("")) {
+                ClassNode ownerCl = env.getClassLayout(env.classEnvironment);
+                ArrayList<Node> fields = ownerCl.getFields();
+
+                for (int i = 0; i < fields.size(); i++) {
+                    Node fl = fields.get(i);
+                    if (((VarDecNode) fl).getId().equals(id))
+                        fieldOffset = -i - 3;
+                }
+
+                isField = true;
+            }
         }
 
         return res;
