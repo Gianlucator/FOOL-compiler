@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 3
+push 4
 lhp
 sw
 push 1
@@ -21,15 +21,63 @@ lw
 sop
 lfp
 lfp
-push caSU
+push kB
 js
 print
 halt
 
-caSU:
+uA:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+kA:
+cfp
+lra
+push 5
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+uB:
 cfp
 lra
 push 1
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+kB:
+cfp
+lra
+push 6
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+sB:
+cfp
+lra
+push 3
 srv
 sra
 pop

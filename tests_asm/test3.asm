@@ -1,4 +1,11 @@
 push 0
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
 push 2
 lhp
 sw
@@ -6,7 +13,14 @@ push 1
 lhp
 add
 shp
+push 4
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -20,17 +34,26 @@ add
 lw
 sop
 lfp
-push 1
+push 5
+push 3
 lfp
-push sB
+push calcAreaRectangle
 js
 print
 halt
 
-uA:
+areaRectangle:
 cfp
 lra
-push 1
+push -3
+lop
+add
+lw
+push -4
+lop
+add
+lw
+mult
 srv
 sra
 pop
@@ -39,17 +62,77 @@ lrv
 lra
 js
 
-sB:
+getL1Rectangle:
+cfp
+lra
+push -3
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getL2Rectangle:
+cfp
+lra
+push -4
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+scaleAreaRectangle:
 cfp
 lra
 push 1
 lfp
 add
 lw
-push 1
+push -3
+lop
 add
+lw
+push -4
+lop
+add
+lw
+mult
+mult
 srv
 sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+calcAreaRectangle:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push 2
+lfp
+add
+lw
+mult
+srv
+sra
+pop
 pop
 pop
 sfp

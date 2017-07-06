@@ -9,6 +9,18 @@ senza classi:
       print(f(x, true, x));
 - "6"
 
+sooca:
+- class Area{
+    int s() 1;
+  }
+  class Rectangle{
+    int t() 2;
+  };
+  let Area p = new Area;
+      Rectangle q = new Rectangle;
+  in print(p.s() + q.t());
+- "3"
+
 classe singola dec:
 - class Rectangle(int l1, int l2) {
     int area() l1 * l2;
@@ -48,18 +60,6 @@ overriding:
   let A x = new B ;
   in print(x.k());
 - "6"
-
-sooca:
-- class SU {
-    int ca() 1;
-  }
-  class U {
-    int caS() 2;
-  };
-  let SU p = new SU;
-      U q = new U;
-  in print(p.ca());
-- "3"
 
 covarianza corr:
 - class Parent(int a) {
@@ -112,7 +112,7 @@ covarianza errato 1:
     int f(int x) 2 * x;
   };
   let int x = 4; Parent o = new Child(x); in print(o.f(x));
-- "6"
+- "8"
 
 tipo di ritorno errato e override errato:
 - class Parent(int a) {

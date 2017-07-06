@@ -54,18 +54,19 @@ public class CallMetNode implements Node {
         ArrayList<SemanticError> res = new ArrayList<>();
 
         int j = env.getNestingLevel();
-        String classId = "";
+        String classId = null;
         boolean foundMethod = true;
 
         // dichiarazione di oggetto
-        while (j >= 0 && classId.equals("")) {
+        while (j >= 0 && classId == null) {
             try { // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
                 classId = env.getObjectEnvironment().get(j--).get(objectName);
             } catch (Exception e) { // do nothing
+
             }
         }
 
-        if (classId.equals("")) {
+        if (classId == null) {
             res.add(new SemanticError("Object " + objectName + " not declared"));
         } else {
             // dobbiamo essere sicuri che il metodo esista
