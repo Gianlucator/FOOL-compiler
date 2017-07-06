@@ -1,8 +1,6 @@
 
-- Sistemare i metodi cosicché siano capaci di prendere i campi dallo heap
-- Sistemare i parametri dei metodi ==> non riescono a prenderli ne a farci nulla
-- (minor) capire perché il file YmlTest ignora alcuni test senza eseguirli
-- Fare un sacco di test e correggere gli errori che si presentano
+- Controllare che il tipo di ritorno sia coerente con il valore ritornato
+    - Problema: Bool e Int non interagiscono con i tipi delle classi. (se ritorni Int e dovresti ritornare una classe --> errore)
 
 Pensieri:
 - ogni tanto l'hashCode della classe si trova in giro es. viene dato come output... Y?
