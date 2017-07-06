@@ -67,12 +67,12 @@ halt
 areaRectangle:
 cfp
 lra
-push -3
+push -1
 lfp
 lw
 add
 lw
-push -4
+push -2
 lfp
 lw
 add

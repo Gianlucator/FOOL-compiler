@@ -94,6 +94,7 @@ public class CallMetNode implements Node {
 
     @Override
     public String codeGeneration() {
+
         String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId();
         String mLabel = methodName + selfName;
 
@@ -105,42 +106,8 @@ public class CallMetNode implements Node {
         String repeat = FOOLlib.freshLabel();
         String end = FOOLlib.freshLabel();
 
-        String heapSearch =
-                repeat + ":\n" +
-
-                "push 0\n" +
-                "lhp\n" +
-                "push -1\n" +
-                "add\n" +
-                "bleq " + end + "\n" +
-
-                "lhp\n" +
-                "push -1\n" +
-                "add\n" +
-                "lw\n" +
-                objectEntry.codeGeneration() +
-                "beq " + objectFound + "\n" +
-
-                "lhp\n" +  //indirizzo hp
-
-                "lhp\n" +
-                "push -2\n" +
-                "add\n" +
-                "lw\n" +
-
-                "sub\n" +
-                //nuovo indirizzo su stack
-                "shp\n" +
-                "b " + repeat + "\n" +
-
-                objectFound + ":\n" +
-                "lhp\n" +
-
-                end + ":\n";
-
         return  parCode +
                 objectEntry.codeGeneration() +
-                heapSearch +
                 "push " + mLabel + "\n" +
                 "lw\n" +
                 "js\n";

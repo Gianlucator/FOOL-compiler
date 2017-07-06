@@ -143,7 +143,7 @@ public class ClassNode implements Node {
         } else {
 
             //checksemantics field e methods classe attuale
-            env.setOffset(-2);
+            env.setOffset(0);
             for (Node field : fields) {
                 res.addAll(field.checkSemantics(env));
             }
@@ -157,7 +157,7 @@ public class ClassNode implements Node {
 
                 HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
                 env.decOffset();
-                STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
+                STentry entry = new STentry(env.getNestingLevel(), env.getOffset());
                 env.incOffset();
 
                 // se la st contiene già l'id ==> error
@@ -169,6 +169,7 @@ public class ClassNode implements Node {
             for (Node method : methods) {
                 res.addAll(method.checkSemantics(env));
             }
+
 
             //controllare ID superclasse
             if (!superclass.equals("")) {
