@@ -138,6 +138,79 @@ covarianza errato 2:
   let int x = 4; Parent o = new Child(x); in o.f(x);
 - ""
 
+#########TEST GIANLUCA
+class in input method:
+- class A {
+    int b() 2;
+  }
+  class B {
+    int aparam(A param) param.b(); 
+  };
+  let B obj = new B; A a = new A; 
+  in print(obj.aparam(a));
+- "2"  
+
+class in input method2:
+- class A {
+    int afun() 2;
+  }
+  class B(int p) {
+    int aparam(A param) p * param.afun(); 
+  };
+  let B obj = new B(5); A a = new A; 
+  in print(obj.aparam(a));
+- "10"  
+
+class in input method2:
+- class A {
+    int afun() 2;
+  }
+  class B(int p) {
+    int aparam(A param) p * param.afun(); 
+  };
+  let B obj = new B(5); A a = new A; 
+  in print(obj.aparam(a));
+- "10"  
+
+Costruttore ereditato test 1:
+- class A(int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int c){
+    int getC() c; 
+  };
+  let B b = new B(1, 2, 3); 
+  in print(b.getC());
+- "3"  
+
+
+Costruttore ereditato test 2:
+- class A(int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int a, int b, int c){
+    int getC() c; 
+  };
+  let B b = new B(1, 2, 3); 
+  in print(b.getC());
+- "3"  
+
+Superclass getter:
+- class A(int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int c){
+    int getter() getA(); 
+  };
+  let B b = new B(1, 2); 
+  in print(b.getter());
+- "1"  
+
+##########FINE TEST GIANLUCA
+
 covarianza errato 5:
 - class GranParent(int a) {
       Parent p(Parent o) o;
@@ -169,8 +242,6 @@ covarianza corr:
   Parent o = new Parent(x);
   in o.p(c);
 - ""
-
-
 
 
 

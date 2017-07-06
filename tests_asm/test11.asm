@@ -1,19 +1,11 @@
 push 0
-push 2
+push 3
 lhp
 sw
 push 1
 lhp
 add
 shp
-push 0
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push 2
 lhp
 sw
@@ -22,6 +14,20 @@ lhp
 add
 shp
 push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 5
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 6
 lhp
 sw
 push 1
@@ -36,25 +42,18 @@ lw
 sop
 lfp
 lfp
-push sArea
+push getCB
 js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push tRectangle
-js
-add
 print
 halt
 
-tRectangle:
+getAA:
 cfp
 lra
-push 2
+push -3
+lop
+add
+lw
 srv
 sra
 pop
@@ -63,10 +62,28 @@ lrv
 lra
 js
 
-sArea:
+getBA:
 cfp
 lra
-push 1
+push -4
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getCB:
+cfp
+lra
+push -3
+lop
+add
+lw
 srv
 sra
 pop
