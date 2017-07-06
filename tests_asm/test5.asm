@@ -24,7 +24,7 @@ push 1
 lhp
 add
 shp
-push 3
+lhp
 push -2
 lfp
 add
@@ -33,32 +33,7 @@ push -3
 lfp
 add
 lw
-label10:
-push 0
-lhp
-push -1
-add
-bleq label11
-lhp
-push -1
-add
-lw
-push -3
-lfp
-add
-lw
-beq label9
-lhp
-lhp
-push -2
-add
-lw
-sub
-shp
-b label10
-label9:
-lhp
-label11:
+sop
 push fChild
 lw
 js
@@ -73,7 +48,6 @@ add
 lw
 srv
 sra
-pop
 pop
 pop
 sfp
@@ -92,7 +66,6 @@ lw
 mult
 srv
 sra
-pop
 pop
 pop
 sfp

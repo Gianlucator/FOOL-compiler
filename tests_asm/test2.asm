@@ -27,40 +27,32 @@ push 1
 lhp
 add
 shp
-push 0
-push 2
+lhp
 push -2
 lfp
 add
 lw
+sop
 push areaRectangle
 lw
 js
-push -3
-lfp
-add
-lw
-add
 print
 halt
 
 areaRectangle:
 cfp
 lra
-push -1
-lfp
-lw
+push -3
+lop
 add
 lw
-push -2
-lfp
-lw
+push -4
+lop
 add
 lw
 mult
 srv
 sra
-pop
 pop
 sfp
 lrv

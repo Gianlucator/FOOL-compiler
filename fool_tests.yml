@@ -14,8 +14,8 @@ classe singola dec:
     int area() l1 * l2;
   };
 
-  let Rectangle r = new Rectangle(2, 4); int l1 = 2;
-  in print(r.area() + l1);
+  let Rectangle r = new Rectangle(2, 4);
+  in print(r.area());
 - "8"
 
 inheritance semplice:

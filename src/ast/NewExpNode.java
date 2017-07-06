@@ -56,13 +56,13 @@ public class NewExpNode implements Node {
 
     @Override
     public String codeGeneration() {
-        String code = "";
+        String code = "";                           //NON CI INTERESSA SALVARE L'HP, NON CI PENSARE.
         String saveToHPThenIncHP =  "lhp\n" +
-                "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
-                "push 1\n" +
-                "lhp\n" +
-                "add\n" +       //vado all'indirizzo successivo
-                "shp\n";        //modifico l'hp //fa già la pop
+                                    "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
+                                    "push 1\n" +
+                                    "lhp\n" +
+                                    "add\n" +       //vado all'indirizzo successivo
+                                    "shp\n";        //modifico l'hp //fa già la pop
         int objLabel = FOOLlib.freshObjLabel();
 
         for (int i = args.size() - 1; i >= 0; i--)
@@ -76,11 +76,11 @@ public class NewExpNode implements Node {
         code += "push " + objLabel  + "\n" + saveToHPThenIncHP;
 
         // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
-        code += "push " + objLabel + "\n";
+        code += "lhp\n";
 
         return code;
 
-        /* String saveToHPThenIncHP =  "lhp\n" +
+        /* String saveToHPThenIncHP = "lhp\n" +
                                     "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
                                     "push 1\n" +
                                     "lhp\n" +

@@ -13,11 +13,12 @@ push 1
 lhp
 add
 shp
-push 1
+lhp
 push -2
 lfp
 add
 lw
+sop
 push uA
 lw
 js
@@ -30,7 +31,6 @@ lra
 push 1
 srv
 sra
-pop
 pop
 sfp
 lrv
@@ -48,7 +48,6 @@ push 1
 add
 srv
 sra
-pop
 pop
 pop
 sfp

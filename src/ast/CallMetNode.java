@@ -102,12 +102,9 @@ public class CallMetNode implements Node {
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
 
-        String objectFound = FOOLlib.freshLabel();
-        String repeat = FOOLlib.freshLabel();
-        String end = FOOLlib.freshLabel();
-
         return  parCode +
                 objectEntry.codeGeneration() +
+                "sop\n" +
                 "push " + mLabel + "\n" +
                 "lw\n" +
                 "js\n";

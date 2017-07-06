@@ -163,17 +163,20 @@ public class FunNode implements Node {
 
     public String codeGeneration() {
 //che altro dovrebbe mancare?
-        String declCode = "";
-        if (declist != null) for (Node dec : declist)
-            declCode += dec.codeGeneration();
-
-        String popDecl = "";
-        if (declist != null) for (Node dec : declist)
-            popDecl += "pop\n";
+        String declCode = "", popDecl = "";
+        if (declist != null) {
+            for (Node dec : declist) {
+                declCode += dec.codeGeneration();
+                popDecl += "pop\n";
+            }
+        }
 
         String popParl = "";
-        for (Node dec : parlist)
+        int parSize = (self == null) ? parlist.size() : parlist.size() - 1;
+        for (int i = 0; i < parSize; i++) {
+            Node dec = parlist.get(i);
             popParl += "pop\n";
+        }
 
         String funl;
         if (self == null)

@@ -19,6 +19,7 @@ public class ExecuteVM {
     private int sp = MEMSIZE;
 
     private int hp = 0;
+    private int op = 0;
     private int fp = MEMSIZE;
     private int ra;
     private int rv;
@@ -115,17 +116,22 @@ public class ExecuteVM {
                     case SVMParser.LOADHP: //
                         push(hp);
                         break;
+                    case SVMParser.LOADOP:
+                        push(op);
+                        break;
+                    case SVMParser.STOREOP:
+                        op = pop();
+                        break;
                     case SVMParser.PRINT:
                         System.out.println((sp < MEMSIZE) ? memory[sp] : "Empty stack!");
                         break;
                     case SVMParser.HALT:
-                        //(PRINT_HEAP);
-                        //printMemory(PRINT_STACK);
                         return;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("AOOB at line " + e.getStackTrace()[0].getLineNumber());
+            System.out.println("ip: " + ip + " sp: " + sp + " hp: " + hp + " fp: " + fp);
         }
     }
 
@@ -163,6 +169,6 @@ public class ExecuteVM {
     }
 
     public VMResult getResult() {
-        return (sp < MEMSIZE) ? new VMResult(memory[sp], VMResult.OK) : new VMResult(0, VMResult.EMPTY_STACK);
+        return (sp < MEMSIZE && sp > -1) ? new VMResult(memory[sp], VMResult.OK) : new VMResult(0, VMResult.EMPTY_STACK);
     }
 }
