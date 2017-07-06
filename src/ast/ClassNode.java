@@ -39,7 +39,7 @@ public class ClassNode implements Node {
         //Override Fields
         for (Node newField : fields) {
             for (Node oldField : superClassLayout.getFields()) {
-                if(((VarDecNode) newField).getId() == ((VarDecNode) oldField).getId()) {
+                if(((VarDecNode) newField).getId().equals(((VarDecNode) oldField).getId())) {
                     Node newType = ((VarDecNode) newField).getType();
                     Node oldType = ((VarDecNode) oldField).getType();
                     if(newType instanceof ClassIdNode && oldType instanceof ClassIdNode) {
