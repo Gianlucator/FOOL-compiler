@@ -19,7 +19,9 @@ lfp
 add
 lw
 sop
-push uB
+lfp
+lfp
+push kB
 js
 print
 halt
@@ -36,10 +38,34 @@ lrv
 lra
 js
 
+kA:
+cfp
+lra
+push 5
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
 uB:
 cfp
 lra
 push 1
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+kB:
+cfp
+lra
+push 6
 srv
 sra
 pop

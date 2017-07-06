@@ -15,11 +15,12 @@ classe singola dec:
     int getL1() l1;
     int getL2() l2;
     int scaleArea(int scaling) scaling * l1 * l2;
+    int calcArea(int l1, int l2) l1 * l2;
   };
 
   let Rectangle r = new Rectangle(2, 4);
-  in print(r.scaleArea(2));
-- "16"
+  in print(r.calcArea(3, 5));
+- "15"
 
 inheritance semplice:
 - class A {
@@ -30,21 +31,35 @@ inheritance semplice:
   };
 
   let A x = new B;
-  in print(x.u());
-- "1"
+  in print(x.s(1));
+- "2"
 
 overriding:
 - class A {
     int u() 2;
+    int k() 5;
   }
   class B implements A{
     bool u() true;
     int s() 3;
+    int k() 6;
   };
 
   let A x = new B ;
-  in print(x.u());
-- "1"
+  in print(x.k());
+- "6"
+
+sooca:
+- class SU {
+    int ca() 1;
+  }
+  class U {
+    int caS() 2;
+  };
+  let SU p = new SU;
+      U q = new U;
+  in print(p.ca());
+- "3"
 
 covarianza corr:
 - class Parent(int a) {

@@ -28,13 +28,16 @@ lhp
 add
 shp
 lhp
-push 1
 push -2
 lfp
 add
 lw
 sop
-push scaleAreaRectangle
+lfp
+push 5
+push 3
+lfp
+push calcAreaRectangle
 js
 print
 halt
@@ -108,6 +111,28 @@ mult
 mult
 srv
 sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+calcAreaRectangle:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push 2
+lfp
+add
+lw
+mult
+srv
+sra
+pop
 pop
 pop
 sfp

@@ -19,7 +19,10 @@ lfp
 add
 lw
 sop
-push uA
+lfp
+push 1
+lfp
+push sB
 js
 print
 halt
