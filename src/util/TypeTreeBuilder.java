@@ -13,8 +13,7 @@ public class TypeTreeBuilder {
     private static ArrayList<String> nodeNames = new ArrayList<>();
 
     public static TypeTreeNode buildTypeTree(ArrayList<Node> cls) {
-        ArrayList<Node> classes = new ArrayList<>();
-        classes.addAll(cls);
+        ArrayList<Node> classes = new ArrayList<>(cls);
 
         TypeTreeNode rootNode = new TypeTreeNode("", null,null);
         nodeNames = new ArrayList<>();
@@ -26,7 +25,7 @@ public class TypeTreeBuilder {
                 ClassNode cl = ((ClassNode) it.next());
                 String superClass = cl.getSuperclass();
                 String className = cl.getId();
-                
+
                 if (nodeNames.contains(superClass)) {
                     nodeNames.add(className);
 
@@ -38,13 +37,12 @@ public class TypeTreeBuilder {
             }
 
             if (lastSize == classes.size()) {
-                System.out.println("Cycle detected between these classes: ");
+                System.out.println("Could not insert the following classes in the type tree: ");
                 for (Node cl: classes)
-                    System.out.printf("  Class %s implements %s%n", ((ClassNode) cl).getId(), ((ClassNode) cl).getSuperclass());
+                    System.out.printf("\tClass %s that implements %s%n", ((ClassNode) cl).getId(), ((ClassNode) cl).getSuperclass());
 
                 return null;
-            }
-            else
+            } else
                 lastSize = classes.size();
         }
         return rootNode;

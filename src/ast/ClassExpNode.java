@@ -56,7 +56,6 @@ public class ClassExpNode implements Node {
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        String clsName;
         FOOLlib.setRoot(TypeTreeBuilder.buildTypeTree(classes));
 
         if (FOOLlib.getRoot() == null) {
@@ -67,7 +66,13 @@ public class ClassExpNode implements Node {
 
         // add all class names to the environment to allow subclassing before declaration
         for (Node cls : classes) {
-            clsName = ((ClassNode) cls).getId();
+            String clsName = ((ClassNode) cls).getId();
+            String supClsName = ((ClassNode) cls).getSuperclass();
+
+            if (!env.isClassDeclared(supClsName) && !supClsName.equals("")) {
+                res.add(new SemanticError("Superclass " + supClsName + " of " + clsName + " not declared."));
+            }
+
             STentry sTentry = new STentry(env.getGLOBAL_SCOPE(), env.getOffset());
             if (env.insertClassEntry(clsName, sTentry) != null)
                 res.add(new SemanticError("Multiple declarations of class " + clsName));
