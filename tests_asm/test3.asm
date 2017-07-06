@@ -20,7 +20,6 @@ add
 lw
 sop
 push uA
-lw
 js
 print
 halt

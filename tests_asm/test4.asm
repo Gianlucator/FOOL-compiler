@@ -20,7 +20,6 @@ add
 lw
 sop
 push uB
-lw
 js
 print
 halt
@@ -40,7 +39,7 @@ js
 uB:
 cfp
 lra
-push 0
+push 1
 srv
 sra
 pop

@@ -12,11 +12,14 @@ senza classi:
 classe singola dec:
 - class Rectangle(int l1, int l2) {
     int area() l1 * l2;
+    int getL1() l1;
+    int getL2() l2;
+    int scaleArea(int scaling) scaling * l1 * l2;
   };
 
   let Rectangle r = new Rectangle(2, 4);
-  in print(r.area());
-- "8"
+  in print(r.scaleArea(2));
+- "16"
 
 inheritance semplice:
 - class A {
@@ -35,13 +38,13 @@ overriding:
     int u() 2;
   }
   class B implements A{
-    bool u() false;
+    bool u() true;
     int s() 3;
   };
 
   let A x = new B ;
   in print(x.u());
-- "0"
+- "1"
 
 covarianza corr:
 - class Parent(int a) {
@@ -93,8 +96,8 @@ covarianza errato 1:
   class Child implements Parent (int a) {
     int f(int x) 2 * x;
   };
-  let int x = 4; Parent o = new Child(x); in o.f(x);
-- "8"
+  let int x = 4; Parent o = new Child(x); in print(o.f(x));
+- "6"
 
 tipo di ritorno errato e override errato:
 - class Parent(int a) {

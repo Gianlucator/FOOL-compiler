@@ -28,13 +28,13 @@ lhp
 add
 shp
 lhp
+push 1
 push -2
 lfp
 add
 lw
 sop
-push areaRectangle
-lw
+push scaleAreaRectangle
 js
 print
 halt
@@ -53,6 +53,62 @@ lw
 mult
 srv
 sra
+pop
+sfp
+lrv
+lra
+js
+
+getL1Rectangle:
+cfp
+lra
+push -3
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getL2Rectangle:
+cfp
+lra
+push -4
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+scaleAreaRectangle:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push -3
+lop
+add
+lw
+push -4
+lop
+add
+lw
+mult
+mult
+srv
+sra
+pop
 pop
 sfp
 lrv

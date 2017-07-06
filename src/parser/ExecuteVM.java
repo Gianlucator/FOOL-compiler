@@ -88,6 +88,7 @@ public class ExecuteVM {
                         address = pop();
                         ra = ip;
                         ip = address;
+                        //System.out.println("jumping to: " + address + "(= ip) and ra is " + ra);
                         break;
                     case SVMParser.STORERA: //
                         ra = pop();

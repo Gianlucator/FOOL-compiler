@@ -106,7 +106,6 @@ public class CallMetNode implements Node {
                 objectEntry.codeGeneration() +
                 "sop\n" +
                 "push " + mLabel + "\n" +
-                "lw\n" +
                 "js\n";
 
         /*// 1. generate code for evaluating each parameter fi

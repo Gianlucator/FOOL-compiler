@@ -35,8 +35,8 @@ add
 lw
 sop
 push fChild
-lw
 js
+print
 halt
 
 fParent:
