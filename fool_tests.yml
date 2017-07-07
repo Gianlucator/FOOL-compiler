@@ -9,6 +9,18 @@ senza classi:
       print(f(x, true, x));
 - "6"
 
+Costruttore ereditato test 2:
+- class A(int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int a, int b, int c){
+    int getC() c;
+  };
+  let B b = new B(1, 2, 7);
+  in print(b.getC());
+- "7"
+
 class in input method:
 - class A {
     int b() 2;
@@ -181,19 +193,6 @@ Costruttore ereditato test 1:
     int getB() b;
   }
   class B implements A (int c){
-    int getC() c;
-  };
-  let B b = new B(1, 2, 3);
-  in print(b.getC());
-- "3"
-
-
-Costruttore ereditato test 2:
-- class A(int a, int b) {
-    int getA() a;
-    int getB() b;
-  }
-  class B implements A (int a, int b, int c){
     int getC() c;
   };
   let B b = new B(1, 2, 3);

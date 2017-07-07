@@ -38,16 +38,32 @@ lw
 lfp
 push fChild
 js
-print
 halt
 
 fParent:
 cfp
 lra
+push 2
+push 2
+mult
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+rParent:
+cfp
+lra
+push 2
 push 1
 lfp
 add
 lw
+mult
 srv
 sra
 pop
@@ -61,6 +77,24 @@ fChild:
 cfp
 lra
 push 2
+push 1
+lfp
+add
+lw
+mult
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+rChild:
+cfp
+lra
+push 3
 push 1
 lfp
 add

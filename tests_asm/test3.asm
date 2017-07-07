@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 2
+push 1
 lhp
 sw
 push 1
@@ -21,7 +21,7 @@ push 1
 lhp
 add
 shp
-push 3
+push 2
 lhp
 sw
 push 1
@@ -35,38 +35,41 @@ add
 lw
 sop
 lfp
-lfp
-push sArea
-js
 push -3
+lfp
+add
+lw
+lfp
+push aparamB
+js
+print
+halt
+
+aparamB:
+cfp
+lra
+push 1
 lfp
 add
 lw
 sop
 lfp
 lfp
-push tRectangle
+push bA
 js
-add
-print
-halt
-
-tRectangle:
-cfp
-lra
-push 2
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-sArea:
+bA:
 cfp
 lra
-push 1
+push 2
 srv
 sra
 pop
