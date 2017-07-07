@@ -25,19 +25,6 @@ public class VarAsmNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        // Memorizzo nel method environment il tipo con cui istanzio l'oggetto.
-        if (exp instanceof NewExpNode){
-            String classInstance = ((NewExpNode) exp).getClassId();
-            HashMap<String, String> hm;
-            try {
-                hm = env.getObjectEnvironment().get(env.getNestingLevel());
-            } catch (Exception e) {
-                hm = new HashMap<>();
-                env.getObjectEnvironment().add(hm);
-            }
-            hm.put(id, classInstance);
-        }
-
         //env.setOffset(-2);
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
 
@@ -48,6 +35,33 @@ public class VarAsmNode implements Node {
             res.add(new SemanticError("Var id " + id + " already declared"));
 
         res.addAll(exp.checkSemantics(env));
+
+        String classInstance = "";
+        // Memorizzo nel method environment il tipo con cui istanzio l'oggetto.
+        if (exp instanceof NewExpNode) {
+            classInstance = ((NewExpNode) exp).getClassId();
+        } else {
+            ArrowTypeNode arrowType = null;
+            if (exp instanceof CallMetNode) {
+                arrowType = ((CallMetNode) exp).getArrowType();
+            } else if (exp instanceof CallFunNode) {
+                arrowType = ((CallFunNode) exp).getArrowType();
+            }
+
+            assert arrowType != null;
+            type = arrowType.getRet();
+            classInstance = ((ClassIdNode) type).getClassId();
+        }
+
+        HashMap<String, String> ohm;
+        try {
+            ohm = env.getObjectEnvironment().get(env.getNestingLevel());
+        } catch (Exception e) {
+            ohm = new HashMap<>();
+            env.getObjectEnvironment().add(ohm);
+        }
+        ohm.put(id, classInstance);
+
         return res;
     }
 
@@ -68,8 +82,7 @@ public class VarAsmNode implements Node {
             //Imposto il tipo dell'oggetto con il tipo con cui è stato istanziato
             //se è sottotipo del tipo con cui è stato dichiarato.
             entry.setType(exp.typeCheck());
-        }
-        else {
+        } else {
             if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
                 System.out.println("Incompatible value for variable " + id);
                 System.err.println("Fatal error during type checking");

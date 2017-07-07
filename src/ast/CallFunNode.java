@@ -28,6 +28,10 @@ public class CallFunNode implements Node {
         parlist = args;
     }
 
+    public ArrowTypeNode getArrowType() {
+        return ((ArrowTypeNode) entry.getType());
+    }
+
     public String toPrint(String s) {  //
         String parlstr = "";
         for (Node par : parlist)

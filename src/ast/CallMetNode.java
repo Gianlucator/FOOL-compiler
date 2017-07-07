@@ -24,6 +24,10 @@ public class CallMetNode implements Node {
         this.parlist = parlist;
     }
 
+    public ArrowTypeNode getArrowType() {
+        return methodNode.getArrowType();
+    }
+
     @Override
     public String toPrint(String indent) {
         return null;
