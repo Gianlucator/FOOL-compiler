@@ -45,6 +45,18 @@ js
 print
 halt
 
+bA:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
 aparamB:
 cfp
 lra
@@ -60,18 +72,6 @@ js
 srv
 sra
 pop
-pop
-sfp
-lrv
-lra
-js
-
-bA:
-cfp
-lra
-push 2
-srv
-sra
 pop
 sfp
 lrv

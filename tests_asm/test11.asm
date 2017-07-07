@@ -52,18 +52,6 @@ js
 print
 halt
 
-afunA:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
 aparamB:
 cfp
 lra
@@ -84,6 +72,18 @@ mult
 srv
 sra
 pop
+pop
+sfp
+lrv
+lra
+js
+
+afunA:
+cfp
+lra
+push 2
+srv
+sra
 pop
 sfp
 lrv
