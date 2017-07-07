@@ -15,8 +15,9 @@ public class FOOLlib {
 
     //valuta se il tipo "a" è <= del tipo "b", dove "a" e "b" sono tipi di base: int o bool
     public static boolean isSubtype(Node a, Node b) {
-        if (a instanceof ClassIdNode && b instanceof ClassIdNode)
+        if (a instanceof ClassIdNode && b instanceof ClassIdNode){
             return !FOOLlib.isSubtype(((ClassIdNode) a).getClassId(), ((ClassIdNode) b).getClassId());
+        }
         else if (a instanceof ClassIdNode || b instanceof ClassIdNode)
             return false;
         else
@@ -30,7 +31,7 @@ public class FOOLlib {
         TypeTreeNode typeOfB = root.findNode(B);
 
         try { //tamarro ma funziona
-            return typeOfB.isSubtype(typeOfA);
+            return typeOfB.isSubtype(typeOfA) ;
         } catch (Exception e){
             return false;
         }

@@ -79,18 +79,16 @@ public class TypeTreeNode {
         return currentType + ": " + subTypes.toString() + "\n";
     }
 
-    /*
-    public boolean updateTypeTree() {
-        // check for cycle
-        if (superTypes.contains(this))
-            return false;
-
-        for (TypeTreeNode st: subTypes) {
-            st.superTypes.addAll(superTypes);
-            st.updateTypeTree();
-        }
-
-        return true;
+    public String getCurrentType() {
+        return currentType;
     }
-    */
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof TypeTreeNode)
+            if (currentType.equals(((TypeTreeNode) o).getCurrentType()))
+                return true;
+        return false;
+    }
+
 }
