@@ -9,6 +9,17 @@ senza classi:
       print(f(x, true, x));
 - "6"
 
+class in input method:
+- class A {
+    int b() 2;
+  }
+  class B {
+    int aparam(A param) param.b();
+  };
+  let B obj = new B; A a = new A;
+  in print(obj.aparam(a));
+- "2"
+
 sooca:
 - class Area{
     int s() 1;
@@ -139,16 +150,7 @@ covarianza errato 2:
 - ""
 
 #########TEST GIANLUCA
-class in input method:
-- class A {
-    int b() 2;
-  }
-  class B {
-    int aparam(A param) param.b(); 
-  };
-  let B obj = new B; A a = new A; 
-  in print(obj.aparam(a));
-- "2"  
+
 
 class in input method2:
 - class A {

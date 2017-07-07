@@ -73,7 +73,7 @@ public class ClassExpNode implements Node {
                 res.add(new SemanticError("Superclass " + supClsName + " of " + clsName + " not declared."));
             }
 
-            STentry sTentry = new STentry(env.getGLOBAL_SCOPE(), env.getOffset());
+            STentry sTentry = new STentry(env.getGLOBAL_SCOPE(), cls, env.getOffset());
             if (env.insertClassEntry(clsName, sTentry) != null)
                 res.add(new SemanticError("Multiple declarations of class " + clsName));
         }
