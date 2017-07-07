@@ -26,8 +26,8 @@ public class ProgLetInNode implements Node {
   @Override
 	public ArrayList<SemanticError> checkSemantics(Environment env) {
 	  env.incNestingLevel();
-      HashMap<String,STentry> hm = new HashMap<String,STentry> ();
-      env.getSymTable().add(hm);
+      HashMap<String,STentry> hm = env.addSymTableHMtoNL();
+      env.addObjectEnvHMtoNL();
       
       //declare resulting list
       ArrayList<SemanticError> res = new ArrayList<SemanticError>();

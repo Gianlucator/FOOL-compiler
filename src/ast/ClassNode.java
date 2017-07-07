@@ -131,7 +131,8 @@ public class ClassNode implements Node {
 
         env.setClassEnvironment(id);
         env.incNestingLevel();
-        env.getSymTable().add(new HashMap<>());
+        env.addSymTableHMtoNL();
+        env.addObjectEnvHMtoNL();
 
         ArrayList<SemanticError> res = new ArrayList<>();
         //controllare ID

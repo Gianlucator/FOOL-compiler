@@ -50,8 +50,8 @@ public class ClassExpNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         env.incNestingLevel(); // 0
-        HashMap<String, STentry> hm = new HashMap<>();
-        env.getSymTable().add(hm);
+        HashMap<String, STentry> hm = env.addSymTableHMtoNL();
+        env.addObjectEnvHMtoNL();
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<>();

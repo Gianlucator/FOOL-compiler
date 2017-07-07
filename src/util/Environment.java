@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import ast.ClassNode;
 import ast.STentry;
+import org.stringtemplate.v4.ST;
 
 public class Environment {
 
@@ -25,6 +26,18 @@ public class Environment {
 			System.err.println("Could not cast to ClassNode!");
 		}
 		return cn;
+	}
+
+	public HashMap<String, String> addObjectEnvHMtoNL(){
+		HashMap<String, String> hm = new HashMap<>();
+		objectEnvironment.add(nestingLevel, hm);
+		return hm;
+	}
+
+	public HashMap<String, STentry> addSymTableHMtoNL(){
+		HashMap<String, STentry> hm = new HashMap<>();
+		symTable.add(nestingLevel, hm);
+		return hm;
 	}
 
 	public String getClassEnvironment() {

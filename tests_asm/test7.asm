@@ -1,4 +1,15 @@
 push 0
+push 4
+push -2
+lfp
+add
+lw
+lhp
+sw
+push 1
+lhp
+add
+shp
 push 3
 lhp
 sw
@@ -6,28 +17,7 @@ push 1
 lhp
 add
 shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 10
+push 7
 lhp
 sw
 push 1
@@ -35,57 +25,50 @@ lhp
 add
 shp
 lhp
-push -2
+push -3
 lfp
 add
 lw
 sop
 lfp
+push -2
 lfp
-push getCB
+add
+lw
+lfp
+push fChild
 js
 print
 halt
 
-getAA:
+fParent:
 cfp
 lra
-push -3
-lop
+push 1
+lfp
 add
 lw
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-getBA:
+fChild:
 cfp
 lra
-push -4
-lop
+push 2
+push 1
+lfp
 add
 lw
+mult
 srv
 sra
 pop
-sfp
-lrv
-lra
-js
-
-getCB:
-cfp
-lra
-push -3
-lop
-add
-lw
-srv
-sra
 pop
 sfp
 lrv

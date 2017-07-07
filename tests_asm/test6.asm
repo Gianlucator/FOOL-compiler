@@ -1,74 +1,85 @@
 push 0
-push 4
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 6
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 push -2
-lfp
-add
-lw
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push -3
 lfp
 add
 lw
 sop
 lfp
-push -2
 lfp
-add
-lw
-lfp
-push fChild
+push kB
 js
 print
 halt
 
-fParent:
+uA:
 cfp
 lra
-push 1
-lfp
-add
-lw
+push 2
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-fChild:
+kA:
 cfp
 lra
-push 2
-push 1
-lfp
-add
-lw
-mult
+push 5
 srv
 sra
 pop
+sfp
+lrv
+lra
+js
+
+uB:
+cfp
+lra
+push 1
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+kB:
+cfp
+lra
+push 6
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+sB:
+cfp
+lra
+push 3
+srv
+sra
 pop
 sfp
 lrv

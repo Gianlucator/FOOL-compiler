@@ -35,26 +35,20 @@ add
 lw
 sop
 lfp
-lfp
-push sArea
-js
 push -3
 lfp
 add
 lw
-sop
 lfp
-lfp
-push tRectangle
+push aparamB
 js
-add
 print
 halt
 
-sArea:
+bA:
 cfp
 lra
-push 1
+push 2
 srv
 sra
 pop
@@ -63,12 +57,21 @@ lrv
 lra
 js
 
-tRectangle:
+aparamB:
 cfp
 lra
-push 2
+push 1
+lfp
+add
+lw
+sop
+lfp
+lfp
+push bA
+js
 srv
 sra
+pop
 pop
 sfp
 lrv

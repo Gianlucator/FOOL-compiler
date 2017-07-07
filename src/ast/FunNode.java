@@ -56,6 +56,7 @@ public class FunNode implements Node {
         //env.offset = -2;
         // mh = Symbol table = lista di hashmap
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
+        HashMap<String, String> ohm = env.addObjectEnvHMtoNL();
 
         STentry entry = new STentry(env.getNestingLevel(), env.getOffset()); //separo introducendo "entry"
         env.decOffset();
@@ -71,7 +72,7 @@ public class FunNode implements Node {
             env.incNestingLevel();
 
             // hashmap nested
-            HashMap<String, STentry> hmn = new HashMap<String, STentry>();
+            HashMap<String, STentry> hmn = env.addSymTableHMtoNL();
 
             // aggiunto alla symbol table
             env.getSymTable().add(hmn);
@@ -83,6 +84,9 @@ public class FunNode implements Node {
             for (Node a : parlist) {
                 ParNode arg = (ParNode) a;
                 parTypes.add(arg.getType());
+                if ( arg.getType() instanceof ClassIdNode) {
+                    ohm.put(arg.getId(), ((ClassIdNode) arg.getType()).getClassId());
+                }
                 if (hmn.put(arg.getId(), new STentry(env.getNestingLevel(), arg.getType(), paroffset++)) != null) {
                     // warning, non errore!
                     // la prima dichiarazione viene sovrascritta dalla seconda
