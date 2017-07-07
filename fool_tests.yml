@@ -54,8 +54,8 @@ inheritance semplice:
   };
 
   let A x = new B;
-  in print(x.s(1));
-- "2"
+  in print(x.u());
+- "1"
 
 overriding:
 - class A {
@@ -84,7 +84,7 @@ covarianza corr:
 
   let int x = 4; Parent o = new Child(x);
   in o.f(x);
-- ""
+- "8"
 
 #Funziona: dà errore di tipo di parametro incompatibile
 #covarianza err:
@@ -122,7 +122,8 @@ covarianza errato 1:
   class Child implements Parent (int a) {
     int f(int x) 2 * x;
   };
-  let int x = 4; Parent o = new Child(x); in print(o.f(x));
+  let int x = 4; Parent o = new Child(x);
+  in print(o.f(x));
 - "8"
 
 tipo di ritorno errato e override errato:
@@ -136,7 +137,7 @@ tipo di ritorno errato e override errato:
   let int x = 4;
   Child c = new Child(x);
   Parent o = new Child(x); in o.r(c);
-- ""
+- "semantic errors"
 
 covarianza errato 2:
 - class Parent(int a) {
@@ -147,7 +148,7 @@ covarianza errato 2:
   };
 
   let int x = 4; Parent o = new Child(x); in o.f(x);
-- ""
+- "semantic errors"
 
 #########TEST GIANLUCA
 
@@ -182,9 +183,9 @@ Costruttore ereditato test 1:
   class B implements A (int c){
     int getC() c; 
   };
-  let B b = new B(1, 2, 3); 
+  let B b = new B(1, 2, 3);
   in print(b.getC());
-- "3"  
+- "3"
 
 
 Costruttore ereditato test 2:
@@ -210,6 +211,18 @@ Superclass getter:
   let B b = new B(5, 2, 3);
   in print(b.getter());
 - "2"
+
+Self extending:
+- class A implements A (int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int c){
+    int getter() this.getB();
+  };
+  let B b = new B(5, 2, 3);
+  in print(b.getter());
+- "semantic errors"
 
 ##########FINE TEST GIANLUCA
 

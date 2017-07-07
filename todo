@@ -1,2 +1,3 @@
 - overriding dei campi
 - chiamate a metodo interne alle classi
+- controllare covarianza e controvarianza per interazioni fra int, bool e Classi

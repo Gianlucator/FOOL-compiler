@@ -135,10 +135,35 @@ public class ClassNode implements Node {
         env.addObjectEnvHMtoNL();
 
         ArrayList<SemanticError> res = new ArrayList<>();
+
         //controllare ID
         if (id.equals(superclass)) {
             res.add(new SemanticError(id + " cannot extend itself."));
         } else {
+
+            boolean extendsSomething = !superclass.equals("");
+
+            // inheritance e overriding dei campi
+            if (extendsSomething) {
+                superClassLayout = env.getClassLayout(superclass);
+                ArrayList<Node> supFields = new ArrayList<>(superClassLayout.getFields());
+
+                boolean override = false;
+                for (Node field : fields) {
+                    for (int j = 0; j < supFields.size(); j++) {
+                        if (((VarDecNode) supFields.get(j)).getId().equals(((VarDecNode) field).getId())) {
+                            supFields.set(j, field);
+                            override = true;
+                        }
+                    }
+
+                    if (!override) {
+                        supFields.add(field);
+                        override = false;
+                    }
+                }
+                fields = supFields;
+            }
 
             //env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));
             //checksemantics field e methods classe attuale
@@ -169,29 +194,12 @@ public class ClassNode implements Node {
                 res.addAll(method.checkSemantics(env));
             }
 
-            //controllare ID superclasse
-            if (!superclass.equals("")) {
+            // inheritance e overriding dei metodi
+            if (extendsSomething) {
                 superClassLayout = env.getClassLayout(superclass);
-                ArrayList<Node> supFields = new ArrayList<>(superClassLayout.getFields());
                 ArrayList<Node> supMethods = new ArrayList<>(superClassLayout.getMethods());
 
                 boolean override = false;
-                for (Node field : fields) {
-                    for (int j = 0; j < supFields.size(); j++) {
-                        if (((VarDecNode) supFields.get(j)).getId().equals(((VarDecNode) field).getId())) {
-                            supFields.set(j, field);
-                            override = true;
-                        }
-                    }
-
-                    if (!override) {
-                        supFields.add(field);
-                        override = false;
-                    }
-                }
-                fields = supFields;
-
-                override = false;
                 for (Node method : methods) {
                     for (int j = 0; j < supMethods.size(); j++) {
                         if (((FunNode) supMethods.get(j)).getId().equals(((FunNode) method).getId())) {

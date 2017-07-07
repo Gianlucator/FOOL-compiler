@@ -6,7 +6,14 @@ push 1
 lhp
 add
 shp
-push 5
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 13
 lhp
 sw
 push 1
@@ -20,33 +27,25 @@ add
 lw
 sop
 lfp
+push 3
 lfp
-push uA
+push aA
 js
 print
 halt
 
-uA:
-cfp
-lra
-push 1
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-sB:
+aA:
 cfp
 lra
 push 1
 lfp
 add
 lw
-push 1
+push -3
+lop
 add
+lw
+mult
 srv
 sra
 pop
