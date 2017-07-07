@@ -157,10 +157,10 @@ public class ClassNode implements Node {
                         }
                     }
 
-                    if (!override) {
+                    if (!override) 
                         supFields.add(field);
-                        override = false;
-                    }
+
+                    override = false;
                 }
                 fields = supFields;
             }
