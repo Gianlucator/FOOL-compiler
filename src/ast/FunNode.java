@@ -47,10 +47,6 @@ public class FunNode implements Node {
         return arrowType;
     }
 
-    public void setParlist(ArrayList<Node> parlist) {
-        this.parlist = parlist;
-    }
-
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 

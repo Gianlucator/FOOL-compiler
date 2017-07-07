@@ -81,7 +81,7 @@ public class ClassExpNode implements Node {
         for (Node cl : classes)
             res.addAll(cl.checkSemantics(env));
 
-        env.classEnvironment = "";
+        env.setClassEnvironment("");
 
         res.addAll(body.checkSemantics(env));
 

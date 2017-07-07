@@ -42,8 +42,8 @@ public class IdNode implements Node {
             nestinglevel = env.getNestingLevel();
 
             // controllo se e' un accesso a un campo, se si mi salvo l'offset per al codegen
-            if (entry.getNestinglevel() == 1 && !env.classEnvironment.equals("")) {
-                ClassNode ownerCl = env.getClassLayout(env.classEnvironment);
+            if (entry.getNestinglevel() == 1 && !env.getClassEnvironment().equals("")) {
+                ClassNode ownerCl = env.getClassLayout(env.getClassEnvironment());
                 ArrayList<Node> fields = ownerCl.getFields();
 
                 for (int i = 0; i < fields.size(); i++) {

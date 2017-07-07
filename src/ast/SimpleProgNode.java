@@ -10,14 +10,13 @@ import java.util.ArrayList;
  */
 public class SimpleProgNode implements Node{
 
-    Node simpleprog;
+    private Node simpleprog;
 
     public SimpleProgNode(Node simpleprog) {
         this.simpleprog = simpleprog;
     }
 
     @Override
-
     public String toPrint(String indent) {
         return null;
     }

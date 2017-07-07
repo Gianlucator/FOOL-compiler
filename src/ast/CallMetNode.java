@@ -1,7 +1,6 @@
 package ast;
 
 import lib.FOOLlib;
-import util.DispatchTable;
 import util.Environment;
 import util.SemanticError;
 

@@ -1,7 +1,6 @@
 package ast;
 
 import lib.FOOLlib;
-import util.DispatchTable;
 import util.Environment;
 import util.SemanticError;
 
@@ -130,7 +129,7 @@ public class ClassNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
-        env.classEnvironment = id;
+        env.setClassEnvironment(id);
         env.incNestingLevel();
         env.getSymTable().add(new HashMap<>());
 

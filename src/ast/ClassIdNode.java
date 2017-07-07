@@ -23,7 +23,7 @@ public class ClassIdNode implements Node{
 
     @Override
     public String toPrint(String s) {
-        return s+"ClassIdType: " + classId +"\n";
+        return s+"Class Type: " + classId +"\n";
     }
 
     @Override

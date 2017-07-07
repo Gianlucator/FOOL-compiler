@@ -1,13 +1,10 @@
 package ast;
 
-import jdk.nashorn.internal.ir.VarNode;
 import lib.FOOLlib;
-import util.DTEntry;
 import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by crist on 14/06/2017.
@@ -15,7 +12,7 @@ import java.util.HashMap;
 public class NewExpNode implements Node {
     private String classId;
     private ArrayList<Node> args;
-    ClassNode classEntry;
+    private ClassNode classEntry;
 
     public NewExpNode(String classId, ArrayList<Node> args) {
         this.classId = classId;
@@ -79,28 +76,6 @@ public class NewExpNode implements Node {
         code += "lhp\n";
 
         return code;
-
-        /* String saveToHPThenIncHP = "lhp\n" +
-                                    "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
-                                    "push 1\n" +
-                                    "lhp\n" +
-                                    "add\n" +       //vado all'indirizzo successivo
-                                    "shp\n";        //modifico l'hp //fa già la pop
-
-        // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
-        String code = "lhp\n";
-
-        // salviamo il tag a addr_class + 1
-        code += "push " + classId.hashCode() + "\n" + saveToHPThenIncHP;
-
-        // salviamo la dimensione a addr_class + 2
-        int size = args.size() + 2;
-        code += "push " + size + "\n" + saveToHPThenIncHP;
-
-        for (Node arg : args) {
-            code += arg.codeGeneration() + saveToHPThenIncHP; //shp fa già la pop
-        }
-        return code; */
     }
 
     @Override
