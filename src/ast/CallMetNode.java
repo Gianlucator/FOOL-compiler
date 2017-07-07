@@ -101,15 +101,15 @@ public class CallMetNode implements Node {
     @Override
     public String codeGeneration() {
 
-        String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId();
-        String mLabel = methodName + selfName;
+        String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId(),
+               mLabel = methodName + selfName,
+               loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");
 
         String parCode = "";
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
 
-        return  objectEntry.codeGeneration() +
-                "sop\n" +
+        return  loadObject +
                 "lfp\n" +
                 parCode +
                 "lfp\n" +

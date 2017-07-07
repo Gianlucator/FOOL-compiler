@@ -80,8 +80,6 @@ js
 getterB:
 cfp
 lra
-lop
-sop
 lfp
 lfp
 push getBA

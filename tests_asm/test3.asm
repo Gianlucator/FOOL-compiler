@@ -51,10 +51,10 @@ add
 print
 halt
 
-tRectangle:
+sArea:
 cfp
 lra
-push 2
+push 1
 srv
 sra
 pop
@@ -63,10 +63,10 @@ lrv
 lra
 js
 
-sArea:
+tRectangle:
 cfp
 lra
-push 1
+push 2
 srv
 sra
 pop
