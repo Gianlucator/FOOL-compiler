@@ -139,7 +139,7 @@ public class ClassNode implements Node {
             res.add(new SemanticError(id + " cannot extend itself."));
         } else {
 
-            env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));
+            //env.insertClassEntry(id, new STentry(env.getGLOBAL_SCOPE(), this, env.getOffset()));
             //checksemantics field e methods classe attuale
             env.setOffset(0);
             for (Node field : fields) {
