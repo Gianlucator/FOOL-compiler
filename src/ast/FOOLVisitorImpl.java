@@ -54,7 +54,7 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		return visit(ctx.simpleprog());
 	}
 
-	// TODO: sistemare la cosa che non sappiamo dove mettere il cazzo di ObjectNode
+
 	@Override
 	public Node visitVarasm(VarasmContext ctx) {
 		
@@ -317,7 +317,6 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 		if (ctx.ID(1) != null)
 			inherited = ctx.ID(1).getText();
 
-		// TODO: sistemare sta roba dei metodi che sono MetNode ma poi li creiamo come Node e quindi non va bene
 		ArrayList<Node> fields = new ArrayList<>();
 		ArrayList<Node> methods = new ArrayList<>();
 		for (VardecContext vardec : ctx.vardec()) {

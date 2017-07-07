@@ -29,7 +29,6 @@ public class IdNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        // TODO: assegnare cmq entry
         if (!id.equals("this")) {
             int j = env.getNestingLevel();
 

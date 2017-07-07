@@ -1,74 +1,60 @@
 push 0
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 4
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
 lw
-sop
-lfp
-lfp
-push sArea
-js
-push -3
-lfp
+lhp
+sw
+push 1
+lhp
 add
-lw
-sop
-lfp
-lfp
-push tRectangle
-js
+shp
+push 3
+lhp
+sw
+push 1
+lhp
 add
+shp
+push 11
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push 8
 print
 halt
 
-tRectangle:
+fParent:
 cfp
 lra
-push 2
+push 1
+lfp
+add
+lw
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-sArea:
+fChild:
 cfp
 lra
 push 1
+lfp
+add
+lw
 srv
 sra
+pop
 pop
 sfp
 lrv

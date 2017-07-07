@@ -1,9 +1,5 @@
 push 0
-push 4
-push -2
-lfp
-add
-lw
+push 20
 lhp
 sw
 push 1
@@ -17,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 9
+push 31
 lhp
 sw
 push 1
@@ -25,28 +21,47 @@ lhp
 add
 shp
 lhp
-push -3
+push -2
 lfp
 add
 lw
 sop
 lfp
-push -2
+push 0
 lfp
-add
-lw
-lfp
-push fChild
+push getFabonicci
 js
 print
 halt
 
-fParent:
+getFabonicci:
 cfp
 lra
-push 2
-push 2
-mult
+push 1
+lfp
+add
+lw
+push 20
+beq label14
+push 0
+b label15
+label14:
+push 1
+label15:
+push 1
+beq label12
+lfp
+push 1
+lfp
+add
+lw
+lfp
+push fooFabonicci
+js
+b label13
+label12:
+push 42
+label13:
 srv
 sra
 pop
@@ -56,51 +71,19 @@ lrv
 lra
 js
 
-rParent:
+fooFabonicci:
 cfp
 lra
-push 2
+lfp
 push 1
 lfp
 add
 lw
-mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
+push 1
+add
+lfp
+push getFabonicci
 js
-
-fChild:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-rChild:
-cfp
-lra
-push 3
-push 1
-lfp
-add
-lw
-mult
 srv
 sra
 pop

@@ -32,8 +32,6 @@ public class ClassNode implements Node {
 
     @Override
     public Node typeCheck() {
-        // TODO: controllare overriding corretto di metodi
-
         if (superClassLayout != null) {
             ArrayList<Node> superFields = superClassLayout.getFields();
             //Override Fields

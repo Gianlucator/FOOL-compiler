@@ -1,18 +1,4 @@
 push 0
-push 7
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 1
 lhp
 sw
@@ -20,14 +6,14 @@ push 1
 lhp
 add
 shp
-push 5
+push 3
 lhp
 sw
 push 1
 lhp
 add
 shp
-push 1
+push 30
 lhp
 sw
 push 1
@@ -42,12 +28,64 @@ lw
 sop
 lfp
 lfp
-push getCB
+push createBA
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getYB
 js
 print
 halt
 
-getAA:
+createBA:
+cfp
+lra
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push -3
+lop
+add
+lw
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 29
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getXB:
 cfp
 lra
 push -3
@@ -62,25 +100,10 @@ lrv
 lra
 js
 
-getBA:
+getYB:
 cfp
 lra
 push -4
-lop
-add
-lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getCB:
-cfp
-lra
-push -5
 lop
 add
 lw

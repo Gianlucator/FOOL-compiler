@@ -1,5 +1,5 @@
 push 0
-push 7
+push 3
 lhp
 sw
 push 1
@@ -13,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 1
+push 5
 lhp
 sw
 push 1
@@ -27,7 +27,7 @@ push 1
 lhp
 add
 shp
-push 1
+push 14
 lhp
 sw
 push 1
@@ -42,7 +42,7 @@ lw
 sop
 lfp
 lfp
-push getCB
+push getterB
 js
 print
 halt
@@ -77,13 +77,13 @@ lrv
 lra
 js
 
-getCB:
+getterB:
 cfp
 lra
-push -5
-lop
-add
-lw
+lfp
+lfp
+push getBA
+js
 srv
 sra
 pop

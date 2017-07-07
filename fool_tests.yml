@@ -1,3 +1,32 @@
+#TODO: scazzo completo, non vede x, risolvere.
+#test55 - Subtyping hell in returntype:
+#-   class A
+#    class B implements A (A a, A b)
+#    class X {
+#       B get() new B(new A, new B(new A, new A));
+#    };
+#    let
+#        X x = new X;
+#        B kek() x.get();
+#        B b2 = new B(x.get(), kek());
+#    in
+#        print(777);
+#-   "777"
+
+ti sfotto e ti fotto:
+-   class Numero (int x) {
+        int getNum() x;
+    }
+    class Numero2 implements Numero (int x) {
+      int getNum() x + 1;
+    };
+    let
+        Numero uno() new Numero2(1);
+        Numero num = uno();
+    in
+        print(num.getNum());
+-   "2"
+
 Costruttore ereditato test 2:
 - class A(int a, int b) {
     int getA() a;
@@ -86,34 +115,6 @@ covarianza corr:
   let int x = 4; Parent o = new Child(x);
   in print(o.f(x));
 - "8"
-
-#Funziona: dà errore di tipo di parametro incompatibile
-#covarianza err:
-#- class Parent(int a) {
-#    int f(int x) 2 * 2;
-#    int r(int y) 2 * y;
-#  }
-#  class Child implements Parent (int a) {
-#     bool f(int x) 2 * x;
-#     int r(int y) 3 * y;
-#  };
-#
-#  let bool x = 4; Parent o = new Child(x);
-#  in o.f(x);
-#- ""
-
-#Funziona: dà errore di tipo di ritorno incompatibile
-#controvarianza err:
-#- class Parent(int a) {
-#    int f(int x) 2 * 2;
-#    int r(int y) 2 * y;
-#  }
-#  class Child implements Parent (int a) {
-#     int f(int x) 2 * x;
-#     int r(bool y) 3 * y;
-#  };
-#  let bool x = 4; Parent o = new Child(x); in o.r(x);
-#- ""
 
 covarianza errato 1:
 - class Parent(int a) {
@@ -248,19 +249,6 @@ Self extending:
 ## DA RISOLVERE ##
 # Sintassi
 
-ti sfotto e ti fotto:
--   class Numero (int x) {
-        int getNum() x;
-    }
-    class Numero2 implements Numero (int x) {
-      int getNum() x + 1;
-    };
-    let
-        Numero uno() new Numero2(1);
-        Numero num = uno();
-    in
-        print(num.getNum());
--   "2"
 
 # ritorna oggetti e non va bbene
 test21 - Call method on object returned by method:
@@ -410,37 +398,46 @@ test45 - Implicit cast to supertype and method invocation:
 -   "2"
 
 # gli oggetti vengo messi nell'object environment solo con una new
-#test49 - New inside new:
-#-   class A (int x) {
-#        int value() x;
-#    }
-#    class B implements A (int x, A a) {
-#        A getA() a;
-#    }
-#    ;
-#    let
-#        B b = new B(0, new B(1, new A(2)));
-#        A a = b.getA();
-#    in
-#        print(b.value() == (a.value() - 1));
-#-   "1"
+test49 - New inside new:
+-   class A (int x) {
+        int value() x;
+    }
+    class B implements A (int x, A a) {
+        A getA() a;
+    }
+    ;
+    let
+        B b = new B(0, new B(10, new A(2)));
+        A a = b.getA();
+    in
+        print(b.value() + a.value());
+-   "10"
 
 # stesso problema del 49
-#test51 - Subclass inside superclass:
-#-   class A (int x) {
-#        B createB() new B(x, 2);
-#    }
-#    class B implements A (int x, int y) {
-#        int getX() x;
-#        int getY() y;
-#    }
-#    ;
-#    let
-#        A a = new A(1);
-#        B b = a.createB();
-#    in
-#        print(b.getY());
-#-   "2"
+test51 - Subclass inside superclass:
+-   class A (int x) {
+        B createB() new B(x, 2);
+    }
+    class B implements A (int x, int y) {
+        int getX() x;
+        int getY() y;
+    }
+    ;
+    let
+        A a = new A(1);
+        B b = a.createB();
+    in
+        print(b.getY());
+-   "2"
+
+metodi ricorsivi nella stessa classe:
+-   class Fabonicci (int x) {
+        int get(int x) if (x == 20) then {42} else {this.foo(x)};
+        int foo(int x) this.get(x + 1);
+    };
+    let Fabonicci f = new Fabonicci(20);
+    in print(f.get(0));
+-   "42"
 
 # print ha problemi
 #test52 - Subclass inside superclass' constructor:
@@ -449,34 +446,31 @@ test45 - Implicit cast to supertype and method invocation:
 #    print(1);
 #-   "1"
 
-# scazzo completo, non vede x
-#test55 - Subtyping hell in returntype:
-#-   class A
-#    class B implements A (A a, A b)
-#    class X {
-#        B get() new B(new A, new B(new A, new A));
-#    };
-#    let
-#        X x = new X;
-#        B kek() x.get();
-#        B b2 = new B(x.get(), kek());
-#    in
-#        print(777);
-#-   "777"
+#Funziona: dà errore di tipo di parametro incompatibile
+#covarianza err:
+#- class Parent(int a) {
+#    int f(int x) 2 * 2;
+#    int r(int y) 2 * y;
+#  }
+#  class Child implements Parent (int a) {
+#     bool f(int x) 2 * x;
+#     int r(int y) 3 * y;
+#  };
+#
+#  let bool x = 4; Parent o = new Child(x);
+#  in o.f(x);
+#- ""
 
-# id non unici
-#test56 - Calling method inside a function:
-#-   class A (int x) {
-#        int x() x;
-#        int z()
-#            let
-#                int f() this.x();
-#            in
-#                f()
-#        ;
-#    };
-#    let
-#        A a = new A(1);
-#    in
-#        print(a.z());
-#-   "1"
+#Funziona: dà errore di tipo di ritorno incompatibile
+#controvarianza err:
+#- class Parent(int a) {
+#    int f(int x) 2 * 2;
+#    int r(int y) 2 * y;
+#  }
+#  class Child implements Parent (int a) {
+#     int f(int x) 2 * x;
+#     int r(bool y) 3 * y;
+#  };
+#  let bool x = 4; Parent o = new Child(x); in o.r(x);
+#- ""
+

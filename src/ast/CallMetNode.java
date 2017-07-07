@@ -105,6 +105,7 @@ public class CallMetNode implements Node {
     @Override
     public String codeGeneration() {
 
+        //TODO: trovare label univoca per metodo di una classe
         String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId(),
                mLabel = methodName + selfName,
                loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");

@@ -21,36 +21,12 @@ lw
 sop
 lfp
 lfp
-push kB
+push uA
 js
 print
 halt
 
 uA:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-kA:
-cfp
-lra
-push 5
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-uB:
 cfp
 lra
 push 1
@@ -62,24 +38,18 @@ lrv
 lra
 js
 
-kB:
-cfp
-lra
-push 6
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
 sB:
 cfp
 lra
-push 3
+push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 sfp
 lrv

@@ -94,11 +94,8 @@ public class FunNode implements Node {
                 }
             }
 
-            //set func type
-            if (self == null)
-                entry.addType(new ArrowTypeNode(parTypes, type));
-            else
-                arrowType = new ArrowTypeNode(parTypes, type);
+
+
 
             //check semantics in the dec list
             if (declist.size() > 0) {
@@ -120,6 +117,16 @@ public class FunNode implements Node {
             //check body
             res.addAll(body.checkSemantics(env));
 
+            // change returned type into type returned by body.
+            try {
+                if ((FOOLlib.isSubtype(body.typeCheck(), type))) type = body.typeCheck();
+            } catch (Exception e) { }
+
+            //set func type
+            if (self == null)
+                entry.addType(new ArrowTypeNode(parTypes, type));
+            else
+                arrowType = new ArrowTypeNode(parTypes, type);
             //close scope
 
             env.getSymTable().remove(env.getNestingLevel());
@@ -158,7 +165,6 @@ public class FunNode implements Node {
             System.out.println("Wrong return type for function " + id);
             System.err.println("Fatal error during type checking");
         }
-        type = body.typeCheck();
         return null;
     }
 
