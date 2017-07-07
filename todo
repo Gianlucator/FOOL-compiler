@@ -1,8 +1,2 @@
-
-- Controllare che il tipo di ritorno sia coerente con il valore ritornato
-    - Problema: Bool e Int non interagiscono con i tipi delle classi. (se ritorni Int e dovresti ritornare una classe --> errore)
-
-Pensieri:
-- ogni tanto l'hashCode della classe si trova in giro es. viene dato come output... Y?
-- bisogna guardare bene all'ordine di codegen nella CallMetNode:
-    - prima i parametri dell'id o prima l'id?
+- overriding dei campi
+- chiamate a metodo interne alle classi

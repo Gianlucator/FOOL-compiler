@@ -54,24 +54,30 @@ public class CallMetNode implements Node {
 
         int j = env.getNestingLevel();
         String classId = null;
-        boolean foundMethod = true;
+        boolean foundMethod = false;
 
-        // dichiarazione di oggetto
-        while (j >= 0 && classId == null) {
-            try { // Ottengo la classe più vicina al nl attuale, con cui è stato istanziato l'oggetto.
+        if (objectName.equals("this"))
+            classId = env.getClassEnvironment();
+        else {
+            // dichiarazione di oggetto
+            while (j >= 0 && classId == null) {
                 classId = env.getObjectEnvironment().get(j--).get(objectName);
-            } catch (Exception e) { // do nothing
-
             }
         }
 
         if (classId == null) {
             res.add(new SemanticError("Object " + objectName + " not declared"));
         } else {
-            // dobbiamo essere sicuri che il metodo esista
-            ClassNode objectClass = env.getClassLayout(classId);
-            methodNode = (FunNode) objectClass.getMethod(methodName);
-            foundMethod = (methodNode != null);
+            // dobbiamo essere sicuri che il metodo esista ==> o nella classe o in una super
+            String classToSearch = classId;
+
+            while (!classToSearch.equals("") && !foundMethod) {
+                ClassNode objectClass = env.getClassLayout(classToSearch);
+                methodNode = (FunNode) objectClass.getMethod(methodName);
+                foundMethod = (methodNode != null);
+
+                classToSearch = objectClass.getSuperclass();
+            }
         }
 
         if (!foundMethod) {

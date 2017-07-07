@@ -29,30 +29,33 @@ public class IdNode implements Node {
         //create result list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        int j = env.getNestingLevel();
+        // TODO: assegnare cmq entry
+        if (!id.equals("this")) {
+            int j = env.getNestingLevel();
 
-        STentry tmp = null;
-        while (j >= 0 && tmp == null) {
-            tmp = (env.getSymTable().get(j--)).get(id);
-        }
-        if (tmp == null)
-            res.add(new SemanticError("Id " + id + " not declared"));
-        else {
-            entry = tmp;
-            nestinglevel = env.getNestingLevel();
+            STentry tmp = null;
+            while (j >= 0 && tmp == null) {
+                tmp = (env.getSymTable().get(j--)).get(id);
+            }
+            if (tmp == null)
+                res.add(new SemanticError("Id " + id + " not declared"));
+            else {
+                entry = tmp;
+                nestinglevel = env.getNestingLevel();
 
-            // controllo se e' un accesso a un campo, se si mi salvo l'offset per al codegen
-            if (entry.getNestinglevel() == 1 && !env.getClassEnvironment().equals("")) {
-                ClassNode ownerCl = env.getClassLayout(env.getClassEnvironment());
-                ArrayList<Node> fields = ownerCl.getFields();
+                // controllo se e' un accesso a un campo, se si mi salvo l'offset per al codegen
+                if (entry.getNestinglevel() == 1 && !env.getClassEnvironment().equals("")) {
+                    ClassNode ownerCl = env.getClassLayout(env.getClassEnvironment());
+                    ArrayList<Node> fields = ownerCl.getFields();
 
-                for (int i = 0; i < fields.size(); i++) {
-                    Node fl = fields.get(i);
-                    if (((VarDecNode) fl).getId().equals(id))
-                        fieldOffset = -i - 3;
+                    for (int i = 0; i < fields.size(); i++) {
+                        Node fl = fields.get(i);
+                        if (((VarDecNode) fl).getId().equals(id))
+                            fieldOffset = -i - 3;
+                    }
+
+                    isField = true;
                 }
-
-                isField = true;
             }
         }
 

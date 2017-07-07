@@ -169,7 +169,6 @@ public class ClassNode implements Node {
                 res.addAll(method.checkSemantics(env));
             }
 
-
             //controllare ID superclasse
             if (!superclass.equals("")) {
                 superClassLayout = env.getClassLayout(superclass);

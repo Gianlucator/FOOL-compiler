@@ -48,7 +48,7 @@ public class CallFunNode implements Node {
             tmp = (env.getSymTable().get(j--)).get(id);
         }
         if (tmp == null)
-            res.add(new SemanticError("Id " + id + " not declared"));
+            res.add(new SemanticError("Function " + id + " not declared"));
         else {
             this.entry = tmp;
             this.nestinglevel = env.getNestingLevel();
