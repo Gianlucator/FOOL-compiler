@@ -33,85 +33,92 @@ public class ClassNode implements Node {
     @Override
     public Node typeCheck() {
         // TODO: controllare overriding corretto di metodi
-        //Override Fields
-        for (Node newField : fields) {
-            for (Node oldField : superClassLayout.getFields()) {
-                if(((VarDecNode) newField).getId().equals(((VarDecNode) oldField).getId())) {
-                    Node newType = ((VarDecNode) newField).getType();
-                    Node oldType = ((VarDecNode) oldField).getType();
-                    if(newType instanceof ClassIdNode && oldType instanceof ClassIdNode) {
-                        if(!FOOLlib.isSubtype(((ClassIdNode) newType).getClassId(),((ClassIdNode) oldType).getClassId())) {
-                            System.out.println("Field " + ((VarDecNode) newField).getId() + "of type" + ((VarDecNode) newField).getType()
-                                                + " cannot override the old field of type " + ((VarDecNode) oldField).getType() + ".\n");
-                            System.exit(0);
-                        }
-                    } else {
-                        if(!FOOLlib.isSubtype(newType, oldType)) {
-                            System.out.println("Field " + ((VarDecNode) newField).getId() + "of type" + ((VarDecNode) newField).getType()
-                                    + " cannot override the old field of type " + ((VarDecNode) oldField).getType() + ".\n");
-                            System.exit(0);
-                        }
-                    }
+
+        if (superClassLayout != null) {
+            ArrayList<Node> superFields = superClassLayout.getFields();
+            //Override Fields
+            Node newField, oldField,
+                    newType, oldType;
+            boolean typeError;
+
+            System.out.println(superFields.size());
+
+            for (int i = 0; i < superFields.size(); i++) {
+                newField = fields.get(i);
+                oldField = superFields.get(i);
+
+                newType = ((VarDecNode) newField).getType();
+                oldType = ((VarDecNode) oldField).getType();
+
+                if (!FOOLlib.isSubtype(newType, oldType)) {
+                    System.out.printf("Field %s of type %s cannot override the old field of type %s.",
+                            ((VarDecNode) newField).getId(), ((VarDecNode) newField).getType().getClass(), ((VarDecNode) oldField).getType().getClass());
+                    System.exit(0);
                 }
             }
-        }
-        //Override Metodi
-        for (Node newMethod : methods) {
-            for (Node oldMethod : superClassLayout.getMethods()){
-                if(((FunNode) newMethod).getId().equals(((FunNode) oldMethod).getId()) &&
-                    methods.size() == superClassLayout.getMethods().size()) {
 
-                    ArrayList<Node> oldPar = ((FunNode) oldMethod).getArrowType().getParList();
-                    ArrayList<Node> newPar = ((FunNode) newMethod).getArrowType().getParList();
-                    for (int i = 0; i < oldPar.size(); i++) {
-                        // se il parametro è un oggetto
-                        if (((ParNode) oldPar.get(i)).getType() instanceof ClassIdNode &&
-                                ((ParNode) newPar.get(i)).getType() instanceof ClassIdNode) {
-                            if (!FOOLlib.isSubtype(((ClassIdNode) oldPar.get(i)).getClassId(),
-                                    ((ClassIdNode) newPar.get(i)).getClassId())) {
-                                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                System.exit(0);
-                            }
-                        } else {  // se il parametro è int o bool
-                            try{
-                                //Nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
-                                //Catturo dicendo che non è sottotipo.
-                                if (!FOOLlib.isSubtype(oldPar.get(i), newPar.get(i))) {
-                                    System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) newMethod).getId());
+            //Override Metodi
+            for (Node newMethod : methods) {
+                for (Node oldMethod : superClassLayout.getMethods()) {
+                    if (((FunNode) newMethod).getId().equals(((FunNode) oldMethod).getId()) &&
+                            methods.size() == superClassLayout.getMethods().size()) {
+
+                        ArrayList<Node> oldPar = ((FunNode) oldMethod).getArrowType().getParList();
+                        ArrayList<Node> newPar = ((FunNode) newMethod).getArrowType().getParList();
+                        for (int i = 0; i < oldPar.size(); i++) {
+                            // se il parametro è un oggetto
+                            if (((ParNode) oldPar.get(i)).getType() instanceof ClassIdNode &&
+                                    ((ParNode) newPar.get(i)).getType() instanceof ClassIdNode) {
+                                if (!FOOLlib.isSubtype(((ClassIdNode) oldPar.get(i)).getClassId(),
+                                        ((ClassIdNode) newPar.get(i)).getClassId())) {
+                                    System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
                                     System.exit(0);
                                 }
-                            } catch (Exception e){
-                                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                System.exit(0);
+                            } else {  // se il parametro è int o bool
+                                try {
+                                    //Nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
+                                    //Catturo dicendo che non è sottotipo.
+                                    if (!FOOLlib.isSubtype(oldPar.get(i), newPar.get(i))) {
+                                        System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
+                                        System.exit(0);
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
+                                    System.exit(0);
+                                }
                             }
                         }
-                    }
 
-                    Node oldRet = ((FunNode) oldMethod).getArrowType().getRet();
-                    Node newRet = ((FunNode) newMethod).getArrowType().getRet();
-                    // deve valere la covarianza per il tipo di ritorno
-                    if (newRet instanceof ClassIdNode && oldRet instanceof ClassIdNode) {
-                        if (!FOOLlib.isSubtype(((ClassIdNode) newRet).getClassId(), ((ClassIdNode) oldRet).getClassId())) {
-                            System.out.println("Wrong return type");
-                            System.exit(0);
-                        }
-                    } else {
-                        try{
-                            //nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
-                            //Catturo dicendo che non è sottotipo.
-                            if (!FOOLlib.isSubtype(newRet, oldRet)) {
+                        Node oldRet = ((FunNode) oldMethod).getArrowType().getRet();
+                        Node newRet = ((FunNode) newMethod).getArrowType().getRet();
+                        // deve valere la covarianza per il tipo di ritorno
+                        if (newRet instanceof ClassIdNode && oldRet instanceof ClassIdNode) {
+                            if (!FOOLlib.isSubtype(((ClassIdNode) newRet).getClassId(), ((ClassIdNode) oldRet).getClassId())) {
                                 System.out.println("Wrong return type");
                                 System.exit(0);
                             }
-                        } catch (Exception e){
-                            System.out.println("Wrong return type");
-                            System.exit(0);
+                        } else {
+                            try {
+                                //nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
+                                //Catturo dicendo che non è sottotipo.
+                                if (!FOOLlib.isSubtype(newRet, oldRet)) {
+                                    System.out.println("Wrong return type");
+                                    System.exit(0);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Wrong return type");
+                                System.exit(0);
+                            }
                         }
-                    }
 
+                    }
                 }
             }
         }
+
+        for (Node m: methods)
+            m.typeCheck();
+
         return null;
     }
 

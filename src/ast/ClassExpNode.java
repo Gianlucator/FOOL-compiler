@@ -32,6 +32,9 @@ public class ClassExpNode implements Node {
 
     @Override
     public Node typeCheck() {
+        for (Node cls: classes)
+            cls.typeCheck();
+
         return body.typeCheck();
     }
 

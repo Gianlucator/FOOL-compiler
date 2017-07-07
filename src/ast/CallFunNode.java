@@ -74,7 +74,7 @@ public class CallFunNode implements Node {
         }
         for (int i = 0; i < parlist.size(); i++)
             if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i)))) {
-                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + id);
+                System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + id);
                 System.exit(0);
             }
         return t.getRet();

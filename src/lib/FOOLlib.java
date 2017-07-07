@@ -15,7 +15,12 @@ public class FOOLlib {
 
     //valuta se il tipo "a" è <= del tipo "b", dove "a" e "b" sono tipi di base: int o bool
     public static boolean isSubtype(Node a, Node b) {
-        return a.getClass().equals(b.getClass()) ||
+        if (a instanceof ClassIdNode && b instanceof ClassIdNode)
+            return !FOOLlib.isSubtype(((ClassIdNode) a).getClassId(), ((ClassIdNode) b).getClassId());
+        else if (a instanceof ClassIdNode || b instanceof ClassIdNode)
+            return false;
+        else
+            return a.getClass().equals(b.getClass()) ||
                 ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode)); //
     }
 

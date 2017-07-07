@@ -41,7 +41,7 @@ public class CallMetNode implements Node {
 
         for (int i = 1; i < parlist.size(); i++) {
             if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i - 1)))) {
-                System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + methodName);
+                System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + methodName);
                 System.exit(0);
             }
         }
