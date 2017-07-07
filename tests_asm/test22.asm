@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 23
+push 25
 lhp
 sw
 push 1
@@ -20,39 +20,18 @@ add
 lw
 sop
 lfp
-push 0
 lfp
-push fC
+push getB
 js
 print
 halt
 
-fA:
+getB:
 cfp
 lra
-push 1
-lfp
-add
-lw
+push 2
 srv
 sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-fC:
-cfp
-lra
-push 1
-lfp
-add
-lw
-srv
-sra
-pop
 pop
 sfp
 lrv

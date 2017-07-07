@@ -40,15 +40,15 @@ public class VarAsmNode implements Node {
         // Memorizzo nel method environment il tipo con cui istanzio l'oggetto.
         if (exp instanceof NewExpNode) {
             classInstance = ((NewExpNode) exp).getClassId();
-        } else {
+        } else if (exp instanceof CallMetNode || exp instanceof CallFunNode) {
             ArrowTypeNode arrowType = null;
+
             if (exp instanceof CallMetNode) {
                 arrowType = ((CallMetNode) exp).getArrowType();
             } else if (exp instanceof CallFunNode) {
                 arrowType = ((CallFunNode) exp).getArrowType();
             }
 
-            assert arrowType != null;
             type = arrowType.getRet();
             classInstance = ((ClassIdNode) type).getClassId();
         }
