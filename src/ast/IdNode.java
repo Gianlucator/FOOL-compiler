@@ -71,19 +71,23 @@ public class IdNode implements Node {
     }
 
     public String codeGeneration() {
-        if (isField) {
-            return  "push " + fieldOffset + "\n" +  // push offset sullo stack
-                    "lop\n" +                       // carichi hp che punta all'oggetto sullo heap
-                    "add\n" +                       // calcoli il ptr al campo
-                    "lw\n";                         // carichi il valore del campo
+        if (!id.equals("this")){
+            if (isField) {
+                return "push " + fieldOffset + "\n" +  // push offset sullo stack
+                        "lop\n" +                       // carichi hp che punta all'oggetto sullo heap
+                        "add\n" +                       // calcoli il ptr al campo
+                        "lw\n";                         // carichi il valore del campo
+            } else {
+                String getAR = "";
+                for (int i = 0; i < nestinglevel - entry.getNestinglevel(); i++)
+                    getAR += "lw\n";
+                return "push " + entry.getOffset() + "\n" + //metto offset sullo stack
+                        "lfp\n" + getAR + //risalgo la catena statica
+                        "add\n" +
+                        "lw\n"; //carico sullo stack il valore all'indirizzo ottenuto
+            }
         } else {
-            String getAR = "";
-            for (int i = 0; i < nestinglevel - entry.getNestinglevel(); i++)
-                getAR += "lw\n";
-            return "push " + entry.getOffset() + "\n" + //metto offset sullo stack
-                    "lfp\n" + getAR + //risalgo la catena statica
-                    "add\n" +
-                    "lw\n"; //carico sullo stack il valore all'indirizzo ottenuto
+            return "lop\n";
         }
     }
 }
