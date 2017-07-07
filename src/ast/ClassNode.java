@@ -18,14 +18,12 @@ public class ClassNode implements Node {
     private ArrayList<Node> fields;
     private ArrayList<Node> methods;
     private ClassNode superClassLayout;
-    private ArrayList<String> dispatchTable;
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
         this.id = id;
         this.superclass = superclass;
         this.fields = fields;
         this.methods = methods;
-        dispatchTable = new ArrayList<>();
     }
 
     @Override
@@ -123,7 +121,6 @@ public class ClassNode implements Node {
 
         for (Node method : methods)  {
             String selfName = ((ClassIdNode) ((FunNode) method).getSelf()).getClassId();
-            dispatchTable.add(((FunNode) method).getId() + selfName);
             if (id.equals(selfName))
                 method.codeGeneration();
         }
@@ -240,14 +237,13 @@ public class ClassNode implements Node {
 
         for (Node method: methods) {
             ownMethodName = ((FunNode) method).getId();
-            if (ownMethodName.equals(methodName))
+            if (ownMethodName.equals(methodName)){
+                //System.out.println(((FunNode) method).getId());
                 return method;
+            }
         }
 
         return null;
     }
 
-    public ArrayList<String> getDispatchTable() {
-        return dispatchTable;
-    }
 }

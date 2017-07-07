@@ -106,7 +106,6 @@ public class NewExpNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
-        System.out.println(classId);
 
         // controllare che la classe esista
         classEntry = env.getClassLayout(classId);
