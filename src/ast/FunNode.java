@@ -158,6 +158,7 @@ public class FunNode implements Node {
             System.out.println("Wrong return type for function " + id);
             System.err.println("Fatal error during type checking");
         }
+        type = body.typeCheck();
         return null;
     }
 
