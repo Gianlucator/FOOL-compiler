@@ -42,7 +42,7 @@ public class YmlTest {
         String foolCode, expectedResult;
 
         for (String key : testFile.keySet()) {
-            System.out.printf("%sTest #%d '%s'%s\n", ANSI_BLUE, testNumber + 1, key, ANSI_RESET);
+            System.out.printf("%sTest '%s'%s\n", ANSI_BLUE, key, ANSI_RESET);
             foolCode = testFile.get(key).get(0);
             expectedResult = testFile.get(key).get(1);
 

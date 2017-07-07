@@ -255,3 +255,210 @@ Self extending:
 #  Parent o = new Parent(x);
 #  in o.p(c);
 #- ""
+
+## DA RISOLVERE ##
+# Sintassi
+
+# ritorna oggetti e non va bbene
+#test21 - Call method on object returned by method:
+#-   class Numero (int x) {
+#        Numero uno() new Numero(4);
+#        int due() x;
+#    };
+#    let
+#        Numero num = new Numero(2);
+#        Numero num2 = num.uno();
+#    in
+#        print(num2.due());
+#-   "4"
+
+# TODO: da risolvere
+#test23 - Function returning an object:
+#-   class Numero (int x) {
+#        int getNum() x;
+#    };
+#    let
+#        Numero uno() new Numero(1);
+#        Numero num = uno();
+#    in
+#        print(num.getNum());
+#-   "1"
+
+# TODO non deve dare null pointer
+#test25 - Using this as expression:
+#-   class Numero (int x) {
+#        Numero getThis() this;
+#        int getX() x;
+#    };
+#    let
+#        Numero num = new Numero(8);
+#        Numero num2 = num.getThis();
+#    in
+#        print(num2.getX());
+#-   "8"
+
+# da un errore di typecheck non so perche'
+test27 - Non-overwritted method call:
+-   class Animale(int Age, bool Alive){
+        int getAge() Age;
+        bool isAlive() Alive;
+    }
+
+    class Cane implements Animale(int Age, bool Alive){
+        int quantoViveAncora()
+            if(Alive) then {
+                if(Age == 15) then {
+                    (15 - Age)
+                } else {
+                    1
+                }
+            } else {
+                0
+            };
+    }
+
+    class BullDog implements Cane(int Age, bool Alive){
+        int quantoViveAncora()
+            if(Alive) then {
+                if(Age == 8) then {
+                    (8 - Age)
+                } else {
+                    1
+                }
+            } else {
+                0
+            };
+    };
+
+    let
+        Cane tom = new Cane( 7 , false );
+        Cane roger = new BullDog( 6 , true);
+    in
+        print(roger.getAge() + roger.quantoViveAncora());
+-   "7"
+
+# dovrebbe uscire
+28 - Overring methods with incompatible types:
+-   class A {
+        int f(int x) x;
+    }
+    class B implements A
+    class C implements B {
+        bool f(bool x) x;
+    };
+    let
+        C c = new C;
+    in
+        print(c.f(false));
+-   "0"
+
+# uso di this, bisogna dare errore e uscire
+#test43 - this with subtyping:
+#-   class A
+#    class B implements A {
+#        int get()
+#            let
+#                int nestedGet(A a) 5;
+#            in
+#                nestedGet(this)
+#        ;
+#    };
+#    let
+#        B b = new B;
+#    in
+#        print(b.get());
+#-    "5"
+
+# non si blocca col type check
+test44 - Incompatible object types assignment:
+-   class A
+    class N;
+    let
+        A a = new N;
+    in
+        print(4);
+-   "4"
+
+# non si blocca col type check e se ne fotte
+test45 - Implicit cast to supertype and method invocation:
+-   class A
+    class B {
+        int get() 2;
+    };
+    let
+        A a = new B;
+    in
+        print(a.get());
+-   "2"
+
+# gli oggetti vengo messi nell'object environment solo con una new
+#test49 - New inside new:
+#-   class A (int x) {
+#        int value() x;
+#    }
+#    class B implements A (int x, A a) {
+#        A getA() a;
+#    }
+#    ;
+#    let
+#        B b = new B(0, new B(1, new A(2)));
+#        A a = b.getA();
+#    in
+#        print(b.value() == (a.value() - 1));
+#-   "1"
+
+# stesso problema del 49
+#test51 - Subclass inside superclass:
+#-   class A (int x) {
+#        B createB() new B(x, 2);
+#    }
+#    class B implements A (int x, int y) {
+#        int getX() x;
+#        int getY() y;
+#    }
+#    ;
+#    let
+#        A a = new A(1);
+#        B b = a.createB();
+#    in
+#        print(b.getY());
+#-   "2"
+
+# print ha problemi
+#test52 - Subclass inside superclass' constructor:
+#-   class A (B b)
+#    class B implements A (B b);
+#    print(1);
+#-   "1"
+
+# scazzo completo, non vede x
+#test55 - Subtyping hell in returntype:
+#-   class A
+#    class B implements A (A a, A b)
+#    class X {
+#        B get() new B(new A, new B(new A, new A));
+#    };
+#    let
+#        X x = new X;
+#        B kek() x.get();
+#        B b2 = new B(x.get(), kek());
+#    in
+#        print(777);
+#-   "777"
+
+# id non unici
+#test56 - Calling method inside a function:
+#-   class A (int x) {
+#        int x() x;
+#        int z()
+#            let
+#                int f() this.x();
+#            in
+#                f()
+#        ;
+#    };
+#    let
+#        A a = new A(1);
+#    in
+#        print(a.z());
+#-   "1"
