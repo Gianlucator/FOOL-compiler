@@ -65,7 +65,7 @@ public class IdNode implements Node {
     public Node typeCheck() {
         if (entry.getType() instanceof ArrowTypeNode) { //
             System.out.println("Wrong usage of function identifier");
-            System.exit(0);
+            System.err.println("Fatal error during type checking");
         }
         return entry.getType();
     }

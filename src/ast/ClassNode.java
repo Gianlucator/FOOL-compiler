@@ -50,7 +50,7 @@ public class ClassNode implements Node {
                 if (!FOOLlib.isSubtype(newType, oldType)) {
                     System.out.printf("Field %s of type %s cannot override the old field of type %s.",
                             ((VarDecNode) newField).getId(), ((VarDecNode) newField).getType().getClass(), ((VarDecNode) oldField).getType().getClass());
-                    System.exit(0);
+                    System.err.println("Fatal error during type checking");
                 }
             }
 
@@ -67,7 +67,7 @@ public class ClassNode implements Node {
                     if (!FOOLlib.isSubtype(oldType, newType)) {
                         System.out.println("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId());
                         System.out.println("Subclass parameter is " + newType.toPrint("") + ", superclass was " + oldType.toPrint(""));
-                        System.exit(0);
+                        System.err.println("Fatal error during type checking");
                     }
                 }
 
@@ -76,7 +76,7 @@ public class ClassNode implements Node {
 
                 if (!FOOLlib.isSubtype(newRet, oldRet)) {
                     System.out.println("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet.getClass());
-                    System.exit(0);
+                    System.err.println("Fatal error during type checking");
                 }
 
             }
@@ -96,7 +96,7 @@ public class ClassNode implements Node {
                                     if (!FOOLlib.isSubtype(((ClassIdNode) oldPar.get(i)).getClassId(),
                                             ((ClassIdNode) newPar.get(i)).getClassId())) {
                                         System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                        System.exit(0);
+                                        System.err.println("Fatal error during type checking");
                                     }
                                 } else {  // se il parametro è int o bool
                                     try {
@@ -104,11 +104,11 @@ public class ClassNode implements Node {
                                         //Catturo dicendo che non è sottotipo.
                                         if (!FOOLlib.isSubtype(oldPar.get(i), newPar.get(i))) {
                                             System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                            System.exit(0);
+                                            System.err.println("Fatal error during type checking");
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                        System.exit(0);
+                                        System.err.println("Fatal error during type checking");
                                     }
                                 }
                             }
@@ -119,7 +119,7 @@ public class ClassNode implements Node {
                             if (newRet instanceof ClassIdNode && oldRet instanceof ClassIdNode) {
                                 if (!FOOLlib.isSubtype(((ClassIdNode) newRet).getClassId(), ((ClassIdNode) oldRet).getClassId())) {
                                     System.out.println("Wrong return type");
-                                    System.exit(0);
+                                    System.err.println("Fatal error during type checking");
                                 }
                             } else {
                                 try {
@@ -127,11 +127,11 @@ public class ClassNode implements Node {
                                     //Catturo dicendo che non è sottotipo.
                                     if (!FOOLlib.isSubtype(newRet, oldRet)) {
                                         System.out.println("Wrong return type");
-                                        System.exit(0);
+                                        System.err.println("Fatal error during type checking");
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Wrong return type");
-                                    System.exit(0);
+                                    System.err.println("Fatal error during type checking");
                                 }
                             }
 

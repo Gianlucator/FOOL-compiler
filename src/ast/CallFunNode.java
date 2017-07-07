@@ -65,17 +65,17 @@ public class CallFunNode implements Node {
             t = (ArrowTypeNode) entry.getType();
         else {
             System.out.println("Invocation of a non-function " + id);
-            System.exit(0);
+            System.err.println("Fatal error during type checking");
         }
         ArrayList<Node> p = t.getParList();
         if (!(p.size() == parlist.size())) {
             System.out.println("Wrong number of parameters in the invocation of " + id);
-            System.exit(0);
+            System.err.println("Fatal error during type checking");
         }
         for (int i = 0; i < parlist.size(); i++)
             if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i)))) {
                 System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + id);
-                System.exit(0);
+                System.err.println("Fatal error during type checking");
             }
         return t.getRet();
     }

@@ -36,13 +36,13 @@ public class CallMetNode implements Node {
 
         if (!(p.size() == (parlist.size() - 1))) {
             System.out.println("Wrong number of parameters in the invocation of " + methodName);
-            System.exit(0);
+            System.err.println("Fatal error during type checking");
         }
 
         for (int i = 1; i < parlist.size(); i++) {
             if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i - 1)))) {
                 System.out.println("Wrong type for " + i + " parameter in the invocation of " + methodName);
-                System.exit(0);
+                System.err.println("Fatal error during type checking");
             }
         }
         return t.getRet();

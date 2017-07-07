@@ -44,7 +44,7 @@ public class IfNode implements Node {
   public Node typeCheck() {
     if (!(FOOLlib.isSubtype(cond.typeCheck(),new BoolTypeNode()))) {
           System.out.println("non boolean condition in if");
-          System.exit(0);
+          System.err.println("Fatal error during type checking");
       }
       Node t = th.typeCheck();
       Node e = el.typeCheck();
@@ -53,7 +53,7 @@ public class IfNode implements Node {
       if (FOOLlib.isSubtype(e,t))
           return t;
       System.out.println("Incompatible types in then else branches");
-      System.exit(0);
+      System.err.println("Fatal error during type checking");
       return null;
   }
   
