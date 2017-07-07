@@ -38,6 +38,7 @@ lw
 lfp
 push fChild
 js
+print
 halt
 
 fParent:

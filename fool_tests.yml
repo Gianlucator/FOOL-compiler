@@ -95,7 +95,7 @@ covarianza corr:
   };
 
   let int x = 4; Parent o = new Child(x);
-  in o.f(x);
+  in print(o.f(x));
 - "8"
 
 #Funziona: dà errore di tipo di parametro incompatibile
@@ -126,16 +126,15 @@ covarianza corr:
 #  let bool x = 4; Parent o = new Child(x); in o.r(x);
 #- ""
 
-#errore perché non riesce a trovare il parametro x definito in f di Child
 covarianza errato 1:
 - class Parent(int a) {
-    Child f(int x) x;
+    int f(int x) x;
   }
   class Child implements Parent (int a) {
-    int f(int x) 2 * x;
+    int f(int x) x;
   };
   let int x = 4; Parent o = new Child(x);
-  in print(o.f(x));
+  in print(8);
 - "8"
 
 tipo di ritorno errato e override errato:

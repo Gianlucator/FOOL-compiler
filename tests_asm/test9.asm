@@ -25,19 +25,7 @@ lhp
 add
 shp
 lhp
-push -3
-lfp
-add
-lw
-sop
-lfp
-push -2
-lfp
-add
-lw
-lfp
-push fChild
-js
+push 8
 print
 halt
 
@@ -60,12 +48,10 @@ js
 fChild:
 cfp
 lra
-push 2
 push 1
 lfp
 add
 lw
-mult
 srv
 sra
 pop

@@ -60,12 +60,13 @@ public class ClassNode implements Node {
                 ArrayList<Node> oldPar = ((FunNode) superMethods.get(i)).getArrowType().getParList();
                 ArrayList<Node> newPar = ((FunNode) methods.get(i)).getArrowType().getParList();
 
-                for (int j = 1; j < oldPar.size(); j++) {
-                    newType = ((ParNode) newPar.get(i)).getType();
-                    oldType = ((ParNode) oldPar.get(i)).getType();
+                for (int j = 0; j < oldPar.size(); j++) {
+                    newType = newPar.get(j);
+                    oldType = oldPar.get(j);
 
                     if (!FOOLlib.isSubtype(oldType, newType)) {
-                        System.out.println("Wrong type for " + j + " parameter in the invocation of " + ((FunNode) methods.get(i)).getId());
+                        System.out.println("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId());
+                        System.out.println("Subclass parameter is " + newType.toPrint("") + ", superclass was " + oldType.toPrint(""));
                         System.exit(0);
                     }
                 }
@@ -74,7 +75,7 @@ public class ClassNode implements Node {
                 Node newRet = ((FunNode) methods.get(i)).getArrowType().getRet();
 
                 if (!FOOLlib.isSubtype(newRet, oldRet)) {
-                    System.out.println("Return type: " + oldRet.getClass() + "is not covariant in respect to its superclass definition.");
+                    System.out.println("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet.getClass());
                     System.exit(0);
                 }
 
