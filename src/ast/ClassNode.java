@@ -48,7 +48,7 @@ public class ClassNode implements Node {
 
                 if (!FOOLlib.isSubtype(newType, oldType)) {
                     FOOLlib.addTypeError(String.format("Field %s of type %s cannot override the old field of type %s.",
-                            ((VarDecNode) newField).getId(), ((VarDecNode) newField).getType().getClass(), ((VarDecNode) oldField).getType().getClass()));
+                            ((VarDecNode) newField).getId(), newType, oldType));
                 }
             }
 
@@ -63,8 +63,8 @@ public class ClassNode implements Node {
                     oldType = oldPar.get(j);
 
                     if (!FOOLlib.isSubtype(oldType, newType)) {
-                        FOOLlib.addTypeError("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId());
-                        FOOLlib.addTypeError("\tSubclass parameter is " + newType + ", superclass was " + oldType);
+                        FOOLlib.addTypeError("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId() + ".");
+                        FOOLlib.addTypeError("\tSubclass parameter is of type '" + newType + "', superclass is of type '" + oldType + "'.");
                     }
                 }
 
@@ -72,7 +72,7 @@ public class ClassNode implements Node {
                 Node newRet = ((FunNode) methods.get(i)).getArrowType().getRet();
 
                 if (!FOOLlib.isSubtype(newRet, oldRet))
-                    FOOLlib.addTypeError("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet);
+                    FOOLlib.addTypeError("Return type '" + oldRet + "' is not covariant wrt its superclass definition type '" + newRet + "'.");
             }
         }
 
