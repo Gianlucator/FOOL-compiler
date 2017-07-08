@@ -20,20 +20,16 @@ add
 lw
 sop
 lfp
-push 0
 lfp
-push f1C1
+push get3B1
 js
 print
 halt
 
-f1A1:
+function0:
 cfp
 lra
-push 1
-lfp
-add
-lw
+push 5
 srv
 sra
 pop
@@ -43,16 +39,21 @@ lrv
 lra
 js
 
-f1C1:
+get3B1:
 cfp
 lra
-push 1
+push function0
+lfp
+lop
+lfp
+push -2
 lfp
 add
 lw
+js
 srv
-sra
 pop
+sra
 pop
 sfp
 lrv

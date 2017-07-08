@@ -1,5 +1,9 @@
 push 0
-push 5
+push 4
+push -2
+lfp
+add
+lw
 lhp
 sw
 push 1
@@ -13,7 +17,7 @@ push 1
 lhp
 add
 shp
-push 10
+push 0
 lhp
 sw
 push 1
@@ -21,54 +25,17 @@ lhp
 add
 shp
 lhp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 11
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push -2
-lfp
-add
-lw
-sop
-lfp
-push -3
-lfp
-add
-lw
-lfp
-push aparamB
-js
+push 8
 print
 halt
 
-aparamB:
+f1Parent6:
 cfp
 lra
-push -3
-lop
-add
-lw
 push 1
 lfp
 add
 lw
-sop
-lfp
-lfp
-push afunA
-js
-mult
 srv
 sra
 pop
@@ -78,12 +45,16 @@ lrv
 lra
 js
 
-afunA:
+f1Child5:
 cfp
 lra
-push 2
+push 1
+lfp
+add
+lw
 srv
 sra
+pop
 pop
 sfp
 lrv

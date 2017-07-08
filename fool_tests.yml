@@ -290,7 +290,6 @@ test23 - Function returning an object:
         print(num.getNum());
 -   "1"
 
-# TODO non deve dare null pointer
 test25 - Using this as expression:
 -   class Numero (int x) {
         Numero getThis() this;
@@ -303,8 +302,38 @@ test25 - Using this as expression:
         print(num2.getX());
 -   "8"
 
-# da un errore di typecheck non so perche'
-test27 - Non-overwritted method call:
+Using this with subtyping:
+-   class Numero (int x) {
+        Numero getThis() this;
+        int getX() x;
+    }
+    class Numero2 implements Numero (int x) {
+        Numero2 getThis() this;
+    };
+    let
+        Numero2 num = new Numero2(12);
+        Numero num2 = num.getThis();
+    in
+        print(num2.getX());
+-   "12"
+
+test43 - this with subtyping:
+-   class A
+    class B implements A {
+        int get()
+            let
+                int nestedGet(A a) 5;
+            in
+                nestedGet(this)
+        ;
+    };
+    let
+        B b = new B;
+    in
+        print(b.get());
+-    "5"
+
+test27 - Non-overriden method call:
 -   class Animale(int Age, bool Alive){
         int getAge() Age;
         bool isAlive() Alive;
@@ -344,7 +373,7 @@ test27 - Non-overwritted method call:
 -   "7"
 
 # dovrebbe uscire
-28 - Overring methods with incompatible types:
+28 - Overriding methods with incompatible types:
 -   class A {
         int f(int x) x;
     }
@@ -357,23 +386,6 @@ test27 - Non-overwritted method call:
     in
         print(c.f(false));
 -   "0"
-
-# uso di this, bisogna dare errore e uscire
-#test43 - this with subtyping:
-#-   class A
-#    class B implements A {
-#        int get()
-#            let
-#                int nestedGet(A a) 5;
-#            in
-#                nestedGet(this)
-#        ;
-#    };
-#    let
-#        B b = new B;
-#    in
-#        print(b.get());
-#-    "5"
 
 # non si blocca col type check
 test44 - Incompatible object types assignment:
@@ -397,7 +409,6 @@ test45 - Implicit cast to supertype and method invocation:
         print(a.get());
 -   "2"
 
-# gli oggetti vengo messi nell'object environment solo con una new
 test49 - New inside new:
 -   class A (int x) {
         int value() x;
@@ -413,7 +424,6 @@ test49 - New inside new:
         print(b.value() + a.value());
 -   "10"
 
-# stesso problema del 49
 test51 - Subclass inside superclass:
 -   class A (int x) {
         B createB() new B(x, 2);
@@ -439,38 +449,23 @@ metodi ricorsivi nella stessa classe:
     in print(f.get(0));
 -   "42"
 
-# print ha problemi
-#test52 - Subclass inside superclass' constructor:
-#-   class A (B b)
-#    class B implements A (B b);
-#    print(1);
-#-   "1"
-
-#Funziona: dà errore di tipo di parametro incompatibile
-#covarianza err:
-#- class Parent(int a) {
-#    int f(int x) 2 * 2;
-#    int r(int y) 2 * y;
-#  }
-#  class Child implements Parent (int a) {
-#     bool f(int x) 2 * x;
-#     int r(int y) 3 * y;
-#  };
-#
-#  let bool x = 4; Parent o = new Child(x);
-#  in o.f(x);
-#- ""
-
 #Funziona: dà errore di tipo di ritorno incompatibile
-#controvarianza err:
-#- class Parent(int a) {
-#    int f(int x) 2 * 2;
-#    int r(int y) 2 * y;
-#  }
-#  class Child implements Parent (int a) {
-#     int f(int x) 2 * x;
-#     int r(bool y) 3 * y;
-#  };
-#  let bool x = 4; Parent o = new Child(x); in o.r(x);
-#- ""
+controvarianza err:
+- class Parent(int a) {
+    int f(int x) 2 * 2;
+    int r(int y) 2 * y;
+  }
+  class Child implements Parent (int a) {
+     int f(int x) 2 * x;
+     int r(bool y) 3 * y;
+  };
+  let bool x = 4; Parent o = new Child(x); in o.r(x);
+- "12"
+
+# print ha problemi
+test52 - Subclass inside superclass' constructor:
+-   class A (B b)
+    class B implements A (B b);
+    print(1);
+-   "1"
 
