@@ -1,5 +1,4 @@
-#TODO: scazzo completo, non vede x, risolvere.
-test55 - Subtyping hell in returntype:
+Subtyping hell in returntype:
 -   class A
     class B implements A (A a, A b)
     class X {
@@ -13,7 +12,7 @@ test55 - Subtyping hell in returntype:
         print(777);
 -   "777"
 
-ti sfotto e ti fotto:
+Return type of function with subtyping hell:
 -   class Numero (int x) {
         int getNum() x;
     }
@@ -27,7 +26,7 @@ ti sfotto e ti fotto:
         print(num.getNum());
 -   "2"
 
-Costruttore ereditato test 2:
+Costruttore ereditato:
 - class A(int a, int b) {
     int getA() a;
     int getB() b;
@@ -50,7 +49,7 @@ class in input method:
   in print(obj.aparam(a));
 - "2"
 
-sooca:
+Simple method call from different classes:
 - class Area{
     int s() 1;
   }
@@ -70,7 +69,6 @@ classe singola dec:
     int scaleArea(int scaling) scaling * l1 * l2;
     int calcArea(int l1, int l2) l1 * l2;
   };
-
   let Rectangle r = new Rectangle(2, 4);
   in print(r.calcArea(3, 5));
 - "15"
@@ -97,9 +95,8 @@ overriding:
     int s() 3;
     int k() 6;
   };
-
-  let A x = new B ;
-  in print(x.k());
+  let A x = new B;
+  in print(x.k() + x.u());
 - "6"
 
 covarianza corr:
@@ -462,7 +459,6 @@ controvarianza err:
   let bool x = 4; Parent o = new Child(x); in o.r(x);
 - "12"
 
-# print ha problemi
 test52 - Subclass inside superclass' constructor:
 -   class A (B b)
     class B implements A (B b);
