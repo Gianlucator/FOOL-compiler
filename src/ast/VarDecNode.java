@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class VarDecNode implements Node {
 
     private String id;
-
     private Node type;
 
     public VarDecNode(String id, Node type) {
@@ -55,6 +54,8 @@ public class VarDecNode implements Node {
 
         if (hm.put(id,entry) != null)
             res.add(new SemanticError("Var id " + id + " already declared"));
+
+        res.addAll(type.checkSemantics(env));
 
         return res;
     }

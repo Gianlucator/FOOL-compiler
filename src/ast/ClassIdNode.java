@@ -38,7 +38,12 @@ public class ClassIdNode implements Node{
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        return new ArrayList<SemanticError>();
+        ArrayList<SemanticError> res = new ArrayList<>();
+
+        if (env.getClassLayout(classId) == null)
+            res.add(new SemanticError("Class " + classId + " not declared"));
+
+        return res;
     }
 
     @Override

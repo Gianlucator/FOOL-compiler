@@ -454,3 +454,16 @@ test52 - Subclass inside superclass' constructor:
     print(1);
 -   "1"
 
+# possibili errori semantici
+variabile con classe non esistente:
+- let A nonExistent = new A;
+  in print(0);
+- "semantic errors"
+
+# NON DA ERRORE OPS
+field di classe non esistente:
+- class A (B b);
+  let int x = 42;
+  in print(x);
+- "semantic errors"
+

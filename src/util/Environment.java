@@ -21,11 +21,11 @@ public class Environment {
 
 	public ClassNode getClassLayout(String className){
 		ClassNode cn = null;
-		try {
-			cn = (ClassNode) symTable.get(GLOBAL_SCOPE).get(className).getType();
-		} catch (Exception e){
-			System.err.println("Could not cast to ClassNode!");
-		}
+		STentry classEntry = symTable.get(GLOBAL_SCOPE).get(className);
+
+		if (classEntry != null)
+			cn = (ClassNode) classEntry.getType();
+
 		return cn;
 	}
 
