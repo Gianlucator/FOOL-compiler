@@ -36,12 +36,12 @@ lfp
 add
 lw
 lfp
-push fChild15
+push f1Child5
 js
 print
 halt
 
-fParent16:
+f1Parent6:
 cfp
 lra
 push 2
@@ -56,25 +56,7 @@ lrv
 lra
 js
 
-rParent16:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-fChild15:
+r1Parent6:
 cfp
 lra
 push 2
@@ -92,7 +74,25 @@ lrv
 lra
 js
 
-rChild15:
+f1Child5:
+cfp
+lra
+push 2
+push 1
+lfp
+add
+lw
+mult
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+r1Child5:
 cfp
 lra
 push 3

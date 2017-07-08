@@ -64,7 +64,7 @@ lw
 sop
 lfp
 lfp
-push getAgeAnimale67
+push getAge6Animale7
 js
 push -3
 lfp
@@ -73,13 +73,13 @@ lw
 sop
 lfp
 lfp
-push quantoViveAncoraBullDog167
+push quantoViveAncora16BullDog7
 js
 add
 print
 halt
 
-getAgeAnimale67:
+getAge6Animale7:
 cfp
 lra
 push -3
@@ -94,7 +94,7 @@ lrv
 lra
 js
 
-isAliveAnimale77:
+isAlive7Animale7:
 cfp
 lra
 push -4
@@ -109,7 +109,7 @@ lrv
 lra
 js
 
-quantoViveAncoraCane164:
+quantoViveAncora16Cane4:
 cfp
 lra
 push -4
@@ -153,7 +153,7 @@ lrv
 lra
 js
 
-quantoViveAncoraBullDog167:
+quantoViveAncora16BullDog7:
 cfp
 lra
 push -4

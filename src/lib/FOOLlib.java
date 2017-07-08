@@ -52,7 +52,7 @@ public class FOOLlib {
     public static int freshObjLabel() { return objCount++; }
 
     public static String getMethodLabel(String className, String methodName) {
-        return methodName + className + methodName.length() + className.length();
+        return methodName + methodName.length() + className + className.length();
     }
 
     public static void resetCode() {

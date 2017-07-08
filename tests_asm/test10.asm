@@ -29,7 +29,7 @@ push 8
 print
 halt
 
-fParent16:
+f1Parent6:
 cfp
 lra
 push 1
@@ -45,7 +45,7 @@ lrv
 lra
 js
 
-fChild15:
+f1Child5:
 cfp
 lra
 push 1

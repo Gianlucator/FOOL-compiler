@@ -42,12 +42,12 @@ lw
 sop
 lfp
 lfp
-push getCB41
+push getC4B1
 js
 print
 halt
 
-getAA41:
+getA4A1:
 cfp
 lra
 push -3
@@ -62,7 +62,7 @@ lrv
 lra
 js
 
-getBA41:
+getB4A1:
 cfp
 lra
 push -4
@@ -77,7 +77,7 @@ lrv
 lra
 js
 
-getCB41:
+getC4B1:
 cfp
 lra
 push -5

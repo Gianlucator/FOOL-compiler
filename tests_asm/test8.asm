@@ -21,12 +21,12 @@ lw
 sop
 lfp
 lfp
-push kB11
+push k1B1
 js
 print
 halt
 
-uA11:
+u1A1:
 cfp
 lra
 push 2
@@ -38,7 +38,7 @@ lrv
 lra
 js
 
-kA11:
+k1A1:
 cfp
 lra
 push 5
@@ -50,7 +50,7 @@ lrv
 lra
 js
 
-uB11:
+u1B1:
 cfp
 lra
 push 1
@@ -62,7 +62,7 @@ lrv
 lra
 js
 
-kB11:
+k1B1:
 cfp
 lra
 push 6
@@ -74,7 +74,7 @@ lrv
 lra
 js
 
-sB11:
+s1B1:
 cfp
 lra
 push 3

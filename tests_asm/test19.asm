@@ -14,12 +14,12 @@ lw
 sop
 lfp
 lfp
-push getNumNumero66
+push getNum6Numero6
 js
 print
 halt
 
-getNumNumero66:
+getNum6Numero6:
 cfp
 lra
 push -3

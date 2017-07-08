@@ -28,7 +28,7 @@ lw
 sop
 lfp
 lfp
-push createBA71
+push createB7A1
 js
 push -3
 lfp
@@ -37,12 +37,12 @@ lw
 sop
 lfp
 lfp
-push getYB41
+push getY4B1
 js
 print
 halt
 
-createBA71:
+createB7A1:
 cfp
 lra
 push 2
@@ -85,7 +85,7 @@ lrv
 lra
 js
 
-getXB41:
+getX4B1:
 cfp
 lra
 push -3
@@ -100,7 +100,7 @@ lrv
 lra
 js
 
-getYB41:
+getY4B1:
 cfp
 lra
 push -4

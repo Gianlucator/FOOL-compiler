@@ -28,7 +28,7 @@ lw
 sop
 lfp
 lfp
-push unoNumero36
+push uno3Numero6
 js
 push -3
 lfp
@@ -37,12 +37,12 @@ lw
 sop
 lfp
 lfp
-push dueNumero36
+push due3Numero6
 js
 print
 halt
 
-unoNumero36:
+uno3Numero6:
 cfp
 lra
 push 4
@@ -75,7 +75,7 @@ lrv
 lra
 js
 
-dueNumero36:
+due3Numero6:
 cfp
 lra
 push -3

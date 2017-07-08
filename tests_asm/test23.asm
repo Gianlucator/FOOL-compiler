@@ -21,12 +21,12 @@ lw
 sop
 lfp
 lfp
-push getB31
+push get3B1
 js
 print
 halt
 
-getB31:
+get3B1:
 cfp
 lra
 push 2

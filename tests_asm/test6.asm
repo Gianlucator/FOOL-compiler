@@ -37,12 +37,12 @@ lfp
 push 5
 push 3
 lfp
-push calcAreaRectangle89
+push calcArea8Rectangle9
 js
 print
 halt
 
-areaRectangle49:
+area4Rectangle9:
 cfp
 lra
 push -3
@@ -62,7 +62,7 @@ lrv
 lra
 js
 
-getL1Rectangle59:
+getL15Rectangle9:
 cfp
 lra
 push -3
@@ -77,7 +77,7 @@ lrv
 lra
 js
 
-getL2Rectangle59:
+getL25Rectangle9:
 cfp
 lra
 push -4
@@ -92,7 +92,7 @@ lrv
 lra
 js
 
-scaleAreaRectangle99:
+scaleArea9Rectangle9:
 cfp
 lra
 push 1
@@ -118,7 +118,7 @@ lrv
 lra
 js
 
-calcAreaRectangle89:
+calcArea8Rectangle9:
 cfp
 lra
 push 1

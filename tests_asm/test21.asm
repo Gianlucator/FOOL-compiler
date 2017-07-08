@@ -22,12 +22,12 @@ sop
 lfp
 push 0
 lfp
-push fC11
+push f1C1
 js
 print
 halt
 
-fA11:
+f1A1:
 cfp
 lra
 push 1
@@ -43,7 +43,7 @@ lrv
 lra
 js
 
-fC11:
+f1C1:
 cfp
 lra
 push 1

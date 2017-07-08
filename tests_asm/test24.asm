@@ -84,7 +84,7 @@ lw
 sop
 lfp
 lfp
-push getAB41
+push getA4B1
 js
 push -2
 lfp
@@ -93,7 +93,7 @@ lw
 sop
 lfp
 lfp
-push valueA51
+push value5A1
 js
 push -3
 lfp
@@ -102,13 +102,13 @@ lw
 sop
 lfp
 lfp
-push valueA51
+push value5A1
 js
 add
 print
 halt
 
-valueA51:
+value5A1:
 cfp
 lra
 push -3
@@ -123,7 +123,7 @@ lrv
 lra
 js
 
-getAB41:
+getA4B1:
 cfp
 lra
 push -4

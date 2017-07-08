@@ -40,12 +40,12 @@ lfp
 add
 lw
 lfp
-push aparamB61
+push aparam6B1
 js
 print
 halt
 
-aparamB61:
+aparam6B1:
 cfp
 lra
 push 1
@@ -55,7 +55,7 @@ lw
 sop
 lfp
 lfp
-push bA11
+push b1A1
 js
 srv
 sra
@@ -66,7 +66,7 @@ lrv
 lra
 js
 
-bA11:
+b1A1:
 cfp
 lra
 push 2
