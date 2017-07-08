@@ -1,5 +1,9 @@
 push 0
-push 12
+push 4
+push -2
+lfp
+add
+lw
 lhp
 sw
 push 1
@@ -21,60 +25,85 @@ lhp
 add
 shp
 lhp
+push -3
+lfp
+add
+lw
+sop
+lfp
 push -2
 lfp
 add
 lw
-sop
 lfp
-lfp
-push getThis7Numero27
-js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getX4Numero6
+push f1Child5
 js
 print
 halt
 
-getThis7Numero6:
+f1Parent6:
 cfp
 lra
-lop
+push 2
+push 2
+mult
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-getX4Numero6:
+r1Parent6:
 cfp
 lra
-push -3
-lop
+push 2
+push 1
+lfp
 add
 lw
+mult
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-getThis7Numero27:
+f1Child5:
 cfp
 lra
-lop
+push 2
+push 1
+lfp
+add
+lw
+mult
 srv
 sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+r1Child5:
+cfp
+lra
+push 3
+push 1
+lfp
+add
+lw
+mult
+srv
+sra
+pop
 pop
 sfp
 lrv

@@ -1,99 +1,11 @@
 push 0
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 10
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 4
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 4
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+push function0
+lfp
+lfp
 push -2
 lfp
 add
 lw
-sop
-lfp
-lfp
-push getA4B1
-js
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push value5A1
 js
 push -3
 lfp
@@ -102,13 +14,12 @@ lw
 sop
 lfp
 lfp
-push value5A1
+push getNum6Numero6
 js
-add
 print
 halt
 
-value5A1:
+getNum6Numero6:
 cfp
 lra
 push -3
@@ -123,13 +34,31 @@ lrv
 lra
 js
 
-getA4B1:
+function0:
 cfp
 lra
-push -4
-lop
+push 1
+lhp
+sw
+push 1
+lhp
 add
-lw
+shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 0
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 srv
 sra
 pop

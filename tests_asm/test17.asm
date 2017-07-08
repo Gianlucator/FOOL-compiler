@@ -1,34 +1,11 @@
 push 0
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+push function0
+lfp
+lfp
 push -2
 lfp
 add
 lw
-sop
-lfp
-lfp
-push uno3Numero6
 js
 push -3
 lfp
@@ -37,15 +14,47 @@ lw
 sop
 lfp
 lfp
-push due3Numero6
+push getNum6Numero27
 js
 print
 halt
 
-uno3Numero6:
+getNum6Numero6:
 cfp
 lra
-push 4
+push -3
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getNum6Numero27:
+cfp
+lra
+push -3
+lop
+add
+lw
+push 1
+add
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+function0:
+cfp
+lra
+push 1
 lhp
 sw
 push 1
@@ -67,21 +76,6 @@ lhp
 add
 shp
 lhp
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-due3Numero6:
-cfp
-lra
-push -3
-lop
-add
-lw
 srv
 sra
 pop

@@ -1,3 +1,17 @@
+##########################################################
+#					     MAIN TESTS                      #
+##########################################################
+
+Mutually recursive methods in the same class:
+-   class Fabonicci (int x) {
+        int get(int x) if (x == 20) then {42} else {this.foo(x)};
+        int foo(int x) this.get(x + 1);
+    };
+    let Fabonicci f = new Fabonicci(20);
+    in print(f.get(0));
+-   "42"
+
+
 Subtyping hell in returntype:
 -   class A
     class B implements A (A a, A b)
@@ -12,6 +26,188 @@ Subtyping hell in returntype:
         print(777);
 -   "777"
 
+##########################################################
+
+##########################################################
+#					  SEMANTIC ERRORS                    #
+##########################################################
+
+variabile con classe non esistente:
+- let A nonExistent = new A;
+  in print(0);
+- "semantic errors"
+
+field di classe non esistente:
+- class A (B b);
+  let int x = 42;
+  in print(x);
+- "semantic errors"
+
+Self extending:
+- class A implements A (int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int c){
+    int getter() this.getB();
+  };
+ let B b = new B(5, 2, 3);
+ in print(b.getter());
+- "semantic errors"
+
+Wrong return type and wrong override:
+- class Parent(int a) {
+    Child r(Child c) c.f(2) + a;
+  }
+  class Child implements Parent (int a) {
+    int r(Child c) 2 * x;
+  };
+
+  let int x = 4;
+  Child c = new Child(x);
+  Parent o = new Child(x); in o.r(c);
+- "semantic errors"
+
+Method not declared:
+- class Parent(int a) {
+    Child p(Child c) c.f(2);
+  }
+  class Child implements Parent (int a) {
+    Child p(Child c) 2 * x;
+  };
+
+  let int x = 4; Parent o = new Child(x); in o.f(x);
+- "semantic errors"
+
+##########################################################
+
+##########################################################
+#					TYPE CHECKING ERRORS                 #
+##########################################################
+
+#Funziona: dà errore di tipo di ritorno incompatibile
+Wrong contravariance with standard types:
+- class Parent(int a) {
+    int f(int x) 2 * 2;
+    int r(int y) 2 * y;
+  }
+  class Child implements Parent (int a) {
+     int f(int x) 2 * x;
+     int r(bool y) 3 * y;
+  };
+  let bool x = 4; Parent o = new Child(x); in o.r(x);
+- "type errors"
+
+Implicit cast to supertype and method invocation:
+-   class A
+    class B {
+        int get() 2;
+    };
+    let
+        A a = new B;
+    in
+        print(a.get());
+-   "type errors"
+
+Incompatible object types assignment:
+-   class A
+    class N;
+    let
+        A a = new N;
+    in
+        print(4);
+-   "type errors"
+
+Overriding methods with incompatible types:
+-   class A {
+        int f(int x) x;
+    }
+    class B implements A
+    class C implements B {
+        bool f(bool x) x;
+    };
+    let
+        C c = new C;
+    in
+        print(c.f(false));
+-   "type errors"
+
+Wrong Covariance with objects:
+- class GrandParent(int a) {
+      Parent p(Parent o) o;
+  }
+  class Parent implements GrandParent(int a){
+      GrandParent p(GrandParent c) c;
+  };
+
+  let int x = 4; Parent o = new Parent(x); in o.p(x);
+- "type errors"
+
+Wrong contravariance with objects:
+- class GrandParent(int a) {
+    Parent p(Parent o) o;
+  }
+  class Parent implements GrandParent(int a){
+    Child p(Child c) c;
+  }
+  class Child implements GrandParent(int x){
+    int f(int x) 2 * x;
+  };
+  let
+    int x = 4;
+    Child c = new Child(2, x);
+    Parent o = new Parent(x);
+  in o.p(c);
+- "type errors"
+
+##########################################################
+
+##########################################################
+#						INHERITANCE                      #
+##########################################################
+
+Simple method inheritance:
+- class A {
+    int u() 1;
+  }
+  class B implements A {
+    int s(int x) x + 1;
+  };
+
+  let A x = new B;
+  in print(x.u());
+- "1"
+
+Inheritance:
+- class A(int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int a, int b, int c){
+    int getC() c;
+  };
+  let A b = new B(1, 2, 7);
+  in print(b.getC());
+- "7"
+
+Inheritance2:
+- class A(int a, int b) {
+    int getA() a;
+    int getB() b;
+  }
+  class B implements A (int c){
+    int getC() c;
+  };
+  let B b = new B(1, 2, 3);
+  in print(b.getC());
+- "3"
+
+##########################################################
+
+##########################################################
+#			  CORRECT EXAMPLES WITH RESULT               #
+##########################################################
+
 Return type of function with subtyping hell:
 -   class Numero (int x) {
         int getNum() x;
@@ -25,18 +221,6 @@ Return type of function with subtyping hell:
     in
         print(num.getNum());
 -   "2"
-
-Costruttore ereditato:
-- class A(int a, int b) {
-    int getA() a;
-    int getB() b;
-  }
-  class B implements A (int a, int b, int c){
-    int getC() c;
-  };
-  let A b = new B(1, 2, 7);
-  in print(b.getC());
-- "7"
 
 class in input method:
 - class A {
@@ -61,7 +245,7 @@ Simple method call from different classes:
   in print(p.s() + q.t());
 - "3"
 
-classe singola dec:
+Single class with multiple method:
 - class Rectangle(int l1, int l2) {
     int area() l1 * l2;
     int getL1() l1;
@@ -72,18 +256,6 @@ classe singola dec:
   let Rectangle r = new Rectangle(2, 4);
   in print(r.calcArea(3, 5));
 - "15"
-
-inheritance semplice:
-- class A {
-    int u() 1;
-  }
-  class B implements A {
-    int s(int x) x + 1;
-  };
-
-  let A x = new B;
-  in print(x.u());
-- "1"
 
 overriding:
 - class A {
@@ -124,33 +296,6 @@ covarianza errato 1:
   in print(8);
 - "8"
 
-tipo di ritorno errato e override errato:
-- class Parent(int a) {
-    Child r(Child c) c.f(2) + a;
-  }
-  class Child implements Parent (int a) {
-    int r(Child c) 2 * x;
-  };
-
-  let int x = 4;
-  Child c = new Child(x);
-  Parent o = new Child(x); in o.r(c);
-- "semantic errors"
-
-covarianza errato 2:
-- class Parent(int a) {
-    Child p(Child c) c.f(2);
-  }
-  class Child implements Parent (int a) {
-    Child p(Child c) 2 * x;
-  };
-
-  let int x = 4; Parent o = new Child(x); in o.f(x);
-- "semantic errors"
-
-#########TEST GIANLUCA
-
-
 class in input method2:
 - class A {
     int afun() 2;
@@ -161,29 +306,6 @@ class in input method2:
   let B obj = new B(5); A a = new A;
   in print(obj.aparam(a));
 - "10"
-
-class in input method2:
-- class A {
-    int afun() 2;
-  }
-  class B(int p) {
-    int aparam(A param) p * param.afun();
-  };
-  let B obj = new B(5); A a = new A;
-  in print(obj.aparam(a));
-- "10"
-
-Costruttore ereditato test 1:
-- class A(int a, int b) {
-    int getA() a;
-    int getB() b;
-  }
-  class B implements A (int c){
-    int getC() c;
-  };
-  let B b = new B(1, 2, 3);
-  in print(b.getC());
-- "3"
 
 Superclass getter:
 - class A(int a, int b) {
@@ -197,49 +319,7 @@ Superclass getter:
   in print(b.getter());
 - "2"
 
-Self extending:
-- class A implements A (int a, int b) {
-    int getA() a;
-    int getB() b;
-  }
-  class B implements A (int c){
-    int getter() this.getB();
-  };
- let B b = new B(5, 2, 3);
- in print(b.getter());
-- "semantic errors"
-
-##########FINE TEST GIANLUCA
-
-covarianza errato 5:
-- class GrandParent(int a) {
-      Parent p(Parent o) o;
-  }
-  class Parent implements GrandParent(int a){
-      GrandParent p(GrandParent c) c;
-  };
-
-  let int x = 4; Parent o = new Parent(x); in o.p(x);
-- "type errors"
-
-#covarianza corr:
-- class GranParent(int a) {
-    Parent p(Parent o) o;
-  }
-  class Parent implements GrandParent(int a){
-    Child p(Child c) c;
-  }
-  class Child implements GrandParent(int x){
-    int f(int x) 2 * x;
-  };
-  let
-    int x = 4;
-    Child c = new Child(x);
-    Parent o = new Parent(x);
-  in o.p(c);
-- ""
-
-test21 - Call method on object returned by method:
+Call method on object returned by method:
 -   class Numero (int x) {
         Numero uno() new Numero(4);
         int due() x;
@@ -251,7 +331,7 @@ test21 - Call method on object returned by method:
         print(num2.due());
 -   "4"
 
-test22 - Call method on object returned by method + stuff:
+Call method on object returned by method + stuff:
 -   class Numero (int x) {
         Numero uno() new Numero(2 * x);
         int due() x;
@@ -265,7 +345,7 @@ test22 - Call method on object returned by method + stuff:
         print(num2.due() + num3.due());
 -   "10"
 
-test23 - Function returning an object:
+Function returning an object:
 -   class Numero (int x) {
         int getNum() x;
     };
@@ -276,7 +356,7 @@ test23 - Function returning an object:
         print(num.getNum());
 -   "1"
 
-test25 - Using this as expression:
+Using this as expression:
 -   class Numero (int x) {
         Numero getThis() this;
         int getX() x;
@@ -303,7 +383,7 @@ Using this with subtyping:
         print(num2.getX());
 -   "12"
 
-test43 - this with subtyping:
+This with subtyping:
 -   class A
     class B implements A {
         int get()
@@ -319,7 +399,7 @@ test43 - this with subtyping:
         print(b.get());
 -    "5"
 
-test27 - Non-overriden method call:
+Non-overriden method call:
 -   class Animale(int Age, bool Alive){
         int getAge() Age;
         bool isAlive() Alive;
@@ -358,44 +438,7 @@ test27 - Non-overriden method call:
         print(roger.getAge() + roger.quantoViveAncora());
 -   "7"
 
-# dovrebbe uscire
-28 - Overriding methods with incompatible types:
--   class A {
-        int f(int x) x;
-    }
-    class B implements A
-    class C implements B {
-        bool f(bool x) x;
-    };
-    let
-        C c = new C;
-    in
-        print(c.f(false));
--   "type errors"
-
-# non si blocca col type check
-test44 - Incompatible object types assignment:
--   class A
-    class N;
-    let
-        A a = new N;
-    in
-        print(4);
--   "type errors"
-
-# non si blocca col type check e se ne fotte
-test45 - Implicit cast to supertype and method invocation:
--   class A
-    class B {
-        int get() 2;
-    };
-    let
-        A a = new B;
-    in
-        print(a.get());
--   "type errors"
-
-test49 - New inside new:
+New inside new:
 -   class A (int x) {
         int value() x;
     }
@@ -410,7 +453,7 @@ test49 - New inside new:
         print(b.value() + a.value());
 -   "10"
 
-test51 - Subclass inside superclass:
+Subclass inside superclass:
 -   class A (int x) {
         B createB() new B(x, 2);
     }
@@ -426,44 +469,12 @@ test51 - Subclass inside superclass:
         print(b.getY());
 -   "2"
 
-metodi ricorsivi nella stessa classe:
--   class Fabonicci (int x) {
-        int get(int x) if (x == 20) then {42} else {this.foo(x)};
-        int foo(int x) this.get(x + 1);
-    };
-    let Fabonicci f = new Fabonicci(20);
-    in print(f.get(0));
--   "42"
 
-#Funziona: dà errore di tipo di ritorno incompatibile
-controvarianza err:
-- class Parent(int a) {
-    int f(int x) 2 * 2;
-    int r(int y) 2 * y;
-  }
-  class Child implements Parent (int a) {
-     int f(int x) 2 * x;
-     int r(bool y) 3 * y;
-  };
-  let bool x = 4; Parent o = new Child(x); in o.r(x);
-- "type errors"
 
-test52 - Subclass inside superclass' constructor:
+Subclass inside superclass' constructor:
 -   class A (B b)
     class B implements A (B b);
     print(1);
 -   "1"
 
-# possibili errori semantici
-variabile con classe non esistente:
-- let A nonExistent = new A;
-  in print(0);
-- "semantic errors"
-
-# NON DA ERRORE OPS
-field di classe non esistente:
-- class A (B b);
-  let int x = 42;
-  in print(x);
-- "semantic errors"
-
+##########################################################

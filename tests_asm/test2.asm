@@ -1,60 +1,92 @@
 push 0
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 5
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 push function0
 lfp
 lfp
-push -2
+push -3
 lfp
 add
 lw
 js
-push -3
+lhp
+sw
+push 1
+lhp
+add
+shp
+push -2
 lfp
 add
 lw
 sop
 lfp
 lfp
-push getNum6Numero27
+push get3X1
 js
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 6
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push 777
 print
 halt
 
-getNum6Numero6:
+get3X1:
 cfp
 lra
-push -3
-lop
-add
-lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getNum6Numero27:
-cfp
-lra
-push -3
-lop
-add
-lw
+push 2
+lhp
+sw
 push 1
+lhp
 add
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-function0:
-cfp
-lra
+shp
+push 2
+lhp
+sw
 push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -62,6 +94,62 @@ lhp
 add
 shp
 push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -76,6 +164,27 @@ lhp
 add
 shp
 lhp
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+function0:
+cfp
+lra
+push -2
+lfp
+lw
+add
+lw
+sop
+lfp
+lfp
+push get3X1
+js
 srv
 sra
 pop

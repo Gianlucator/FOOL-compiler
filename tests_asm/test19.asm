@@ -6,14 +6,7 @@ push 1
 lhp
 add
 shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
+push 0
 lhp
 sw
 push 1
@@ -21,21 +14,14 @@ lhp
 add
 shp
 lhp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
 lhp
 sw
 push 1
@@ -50,7 +36,7 @@ lw
 sop
 lfp
 lfp
-push uno3Numero6
+push s1Area4
 js
 push -3
 lfp
@@ -59,60 +45,16 @@ lw
 sop
 lfp
 lfp
-push uno3Numero6
-js
-push -4
-lfp
-add
-lw
-sop
-lfp
-lfp
-push due3Numero6
-js
-push -5
-lfp
-add
-lw
-sop
-lfp
-lfp
-push due3Numero6
+push t1Rectangle9
 js
 add
 print
 halt
 
-uno3Numero6:
+s1Area4:
 cfp
 lra
-push 2
-push -3
-lop
-add
-lw
-mult
-lhp
-sw
 push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 srv
 sra
 pop
@@ -121,13 +63,10 @@ lrv
 lra
 js
 
-due3Numero6:
+t1Rectangle9:
 cfp
 lra
-push -3
-lop
-add
-lw
+push 2
 srv
 sra
 pop

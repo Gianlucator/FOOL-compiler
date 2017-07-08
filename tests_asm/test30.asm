@@ -1,5 +1,5 @@
 push 0
-push 20
+push 12
 lhp
 sw
 push 1
@@ -27,66 +27,54 @@ add
 lw
 sop
 lfp
-push 0
 lfp
-push get3Fabonicci9
+push getThis7Numero27
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getX4Numero6
 js
 print
 halt
 
-get3Fabonicci9:
+getThis7Numero6:
 cfp
 lra
-push 1
-lfp
-add
-lw
-push 20
-beq label2
-push 0
-b label3
-label2:
-push 1
-label3:
-push 1
-beq label0
-lfp
-push 1
-lfp
-add
-lw
-lfp
-push foo3Fabonicci9
-js
-b label1
-label0:
-push 42
-label1:
+lop
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-foo3Fabonicci9:
+getX4Numero6:
 cfp
 lra
-lfp
-push 1
-lfp
+push -3
+lop
 add
 lw
-push 1
-add
-lfp
-push get3Fabonicci9
-js
 srv
 sra
 pop
+sfp
+lrv
+lra
+js
+
+getThis7Numero27:
+cfp
+lra
+lop
+srv
+sra
 pop
 sfp
 lrv

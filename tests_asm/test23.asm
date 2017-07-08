@@ -1,5 +1,16 @@
 push 0
-push 2
+push 4
+push -2
+lfp
+add
+lw
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -14,22 +25,17 @@ lhp
 add
 shp
 lhp
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push get3B1
-js
+push 8
 print
 halt
 
-function0:
+f1Parent6:
 cfp
 lra
-push 5
+push 1
+lfp
+add
+lw
 srv
 sra
 pop
@@ -39,21 +45,16 @@ lrv
 lra
 js
 
-get3B1:
+f1Child5:
 cfp
 lra
-push function0
-lfp
-lop
-lfp
-push -2
+push 1
 lfp
 add
 lw
-js
 srv
-pop
 sra
+pop
 pop
 sfp
 lrv
