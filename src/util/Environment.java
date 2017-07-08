@@ -30,7 +30,7 @@ public class Environment {
 
 	public HashMap<String, String> addObjectEnvHMtoNL(){
 		HashMap<String, String> hm = new HashMap<>();
-		objectEnvironment.add(nestingLevel, hm);
+		objectEnvironment.add(hm);
 		return hm;
 	}
 

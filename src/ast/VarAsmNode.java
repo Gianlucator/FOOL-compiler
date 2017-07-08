@@ -54,12 +54,7 @@ public class VarAsmNode implements Node {
         }
 
         HashMap<String, String> ohm;
-        try {
-            ohm = env.getObjectEnvironment().get(env.getNestingLevel());
-        } catch (Exception e) {
-            ohm = new HashMap<>();
-            env.getObjectEnvironment().add(ohm);
-        }
+        ohm = env.getObjectEnvironment().get(env.getNestingLevel());
         ohm.put(id, classInstance);
 
         return res;

@@ -1,5 +1,5 @@
 push 0
-push function1
+push function2
 lfp
 lfp
 push -2
@@ -34,7 +34,7 @@ lrv
 lra
 js
 
-function1:
+function2:
 cfp
 lra
 push 1
@@ -51,7 +51,7 @@ push 1
 lhp
 add
 shp
-push 20
+push 25
 lhp
 sw
 push 1

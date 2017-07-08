@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 25
+push 30
 lhp
 sw
 push 1
