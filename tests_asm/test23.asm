@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 32
+push 0
 lhp
 sw
 push 1
@@ -21,12 +21,12 @@ lw
 sop
 lfp
 lfp
-push getB
+push getB31
 js
 print
 halt
 
-getB:
+getB31:
 cfp
 lra
 push 2

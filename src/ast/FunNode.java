@@ -194,7 +194,7 @@ public class FunNode implements Node {
         if (self == null)
             funl = FOOLlib.freshFunLabel();
         else
-            funl = id + ((ClassIdNode) self).getClassId();
+            funl = FOOLlib.getMethodLabel(((ClassIdNode) self).getClassId(), id);
 
         FOOLlib.putCode(funl + ":\n" +
                 "cfp\n" + //setta $fp a $sp

@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 11
+push 0
 lhp
 sw
 push 1
@@ -21,7 +21,7 @@ push 1
 lhp
 add
 shp
-push 12
+push 1
 lhp
 sw
 push 1
@@ -36,7 +36,7 @@ lw
 sop
 lfp
 lfp
-push sArea
+push sArea14
 js
 push -3
 lfp
@@ -45,13 +45,13 @@ lw
 sop
 lfp
 lfp
-push tRectangle
+push tRectangle19
 js
 add
 print
 halt
 
-tRectangle:
+tRectangle19:
 cfp
 lra
 push 2
@@ -63,7 +63,7 @@ lrv
 lra
 js
 
-sArea:
+sArea14:
 cfp
 lra
 push 1

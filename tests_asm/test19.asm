@@ -1,5 +1,5 @@
 push 0
-push function2
+push function0
 lfp
 lfp
 push -2
@@ -14,12 +14,12 @@ lw
 sop
 lfp
 lfp
-push getNumNumero
+push getNumNumero66
 js
 print
 halt
 
-getNumNumero:
+getNumNumero66:
 cfp
 lra
 push -3
@@ -34,7 +34,7 @@ lrv
 lra
 js
 
-function2:
+function0:
 cfp
 lra
 push 1
@@ -51,7 +51,7 @@ push 1
 lhp
 add
 shp
-push 27
+push 0
 lhp
 sw
 push 1

@@ -35,7 +35,7 @@ lw
 sop
 lfp
 lfp
-push getX
+push getX31
 js
 lhp
 sw
@@ -62,7 +62,7 @@ push 777
 print
 halt
 
-getX:
+getX31:
 cfp
 lra
 push 2
@@ -183,7 +183,7 @@ lw
 sop
 lfp
 lfp
-push getX
+push getX31
 js
 srv
 sra

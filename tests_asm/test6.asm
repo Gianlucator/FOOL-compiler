@@ -20,7 +20,7 @@ push 1
 lhp
 add
 shp
-push 13
+push 0
 lhp
 sw
 push 1
@@ -37,12 +37,12 @@ lfp
 push 5
 push 3
 lfp
-push calcAreaRectangle
+push calcAreaRectangle89
 js
 print
 halt
 
-areaRectangle:
+areaRectangle49:
 cfp
 lra
 push -3
@@ -62,7 +62,7 @@ lrv
 lra
 js
 
-getL1Rectangle:
+getL1Rectangle59:
 cfp
 lra
 push -3
@@ -77,7 +77,7 @@ lrv
 lra
 js
 
-getL2Rectangle:
+getL2Rectangle59:
 cfp
 lra
 push -4
@@ -92,7 +92,7 @@ lrv
 lra
 js
 
-scaleAreaRectangle:
+scaleAreaRectangle99:
 cfp
 lra
 push 1
@@ -118,7 +118,7 @@ lrv
 lra
 js
 
-calcAreaRectangle:
+calcAreaRectangle89:
 cfp
 lra
 push 1

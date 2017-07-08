@@ -13,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 37
+push 1
 lhp
 sw
 push 1
@@ -28,7 +28,7 @@ lw
 sop
 lfp
 lfp
-push createBA
+push createBA71
 js
 push -3
 lfp
@@ -37,12 +37,12 @@ lw
 sop
 lfp
 lfp
-push getYB
+push getYB41
 js
 print
 halt
 
-createBA:
+createBA71:
 cfp
 lra
 push 2
@@ -69,7 +69,7 @@ push 1
 lhp
 add
 shp
-push 36
+push 0
 lhp
 sw
 push 1
@@ -85,7 +85,7 @@ lrv
 lra
 js
 
-getXB:
+getXB41:
 cfp
 lra
 push -3
@@ -100,7 +100,7 @@ lrv
 lra
 js
 
-getYB:
+getYB41:
 cfp
 lra
 push -4

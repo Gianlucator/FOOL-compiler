@@ -13,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 35
+push 2
 lhp
 sw
 push 1
@@ -41,7 +41,7 @@ push 1
 lhp
 add
 shp
-push 34
+push 1
 lhp
 sw
 push 1
@@ -69,7 +69,7 @@ push 1
 lhp
 add
 shp
-push 33
+push 0
 lhp
 sw
 push 1
@@ -84,7 +84,7 @@ lw
 sop
 lfp
 lfp
-push getAB
+push getAB41
 js
 push -2
 lfp
@@ -93,7 +93,7 @@ lw
 sop
 lfp
 lfp
-push valueA
+push valueA51
 js
 push -3
 lfp
@@ -102,13 +102,13 @@ lw
 sop
 lfp
 lfp
-push valueA
+push valueA51
 js
 add
 print
 halt
 
-valueA:
+valueA51:
 cfp
 lra
 push -3
@@ -123,7 +123,7 @@ lrv
 lra
 js
 
-getAB:
+getAB41:
 cfp
 lra
 push -4

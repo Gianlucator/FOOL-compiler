@@ -13,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 23
+push 1
 lhp
 sw
 push 1
@@ -28,7 +28,7 @@ lw
 sop
 lfp
 lfp
-push unoNumero
+push unoNumero36
 js
 push -3
 lfp
@@ -37,12 +37,12 @@ lw
 sop
 lfp
 lfp
-push dueNumero
+push dueNumero36
 js
 print
 halt
 
-unoNumero:
+unoNumero36:
 cfp
 lra
 push 4
@@ -59,7 +59,7 @@ push 1
 lhp
 add
 shp
-push 22
+push 0
 lhp
 sw
 push 1
@@ -75,7 +75,7 @@ lrv
 lra
 js
 
-dueNumero:
+dueNumero36:
 cfp
 lra
 push -3

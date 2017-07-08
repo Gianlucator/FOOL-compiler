@@ -20,7 +20,7 @@ push 1
 lhp
 add
 shp
-push 28
+push 0
 lhp
 sw
 push 1
@@ -49,7 +49,7 @@ push 1
 lhp
 add
 shp
-push 29
+push 1
 lhp
 sw
 push 1
@@ -64,7 +64,7 @@ lw
 sop
 lfp
 lfp
-push getAgeAnimale
+push getAgeAnimale67
 js
 push -3
 lfp
@@ -73,13 +73,13 @@ lw
 sop
 lfp
 lfp
-push quantoViveAncoraBullDog
+push quantoViveAncoraBullDog167
 js
 add
 print
 halt
 
-getAgeAnimale:
+getAgeAnimale67:
 cfp
 lra
 push -3
@@ -94,7 +94,7 @@ lrv
 lra
 js
 
-isAliveAnimale:
+isAliveAnimale77:
 cfp
 lra
 push -4
@@ -109,7 +109,7 @@ lrv
 lra
 js
 
-quantoViveAncoraCane:
+quantoViveAncoraCane164:
 cfp
 lra
 push -4
@@ -153,7 +153,7 @@ lrv
 lra
 js
 
-quantoViveAncoraBullDog:
+quantoViveAncoraBullDog167:
 cfp
 lra
 push -4

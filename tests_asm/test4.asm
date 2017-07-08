@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 9
+push 0
 lhp
 sw
 push 1
@@ -21,7 +21,7 @@ push 1
 lhp
 add
 shp
-push 10
+push 1
 lhp
 sw
 push 1
@@ -40,12 +40,12 @@ lfp
 add
 lw
 lfp
-push aparamB
+push aparamB61
 js
 print
 halt
 
-aparamB:
+aparamB61:
 cfp
 lra
 push 1
@@ -55,7 +55,7 @@ lw
 sop
 lfp
 lfp
-push bA
+push bA11
 js
 srv
 sra
@@ -66,7 +66,7 @@ lrv
 lra
 js
 
-bA:
+bA11:
 cfp
 lra
 push 2

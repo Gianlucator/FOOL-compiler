@@ -107,7 +107,7 @@ public class CallMetNode implements Node {
 
         //TODO: trovare label univoca per metodo di una classe
         String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId(),
-               mLabel = methodName + selfName,
+               mLabel = FOOLlib.getMethodLabel(selfName, methodName),
                loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");
 
         String parCode = "";

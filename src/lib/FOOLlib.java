@@ -3,6 +3,9 @@ package lib;
 import ast.*;
 import util.TypeTreeNode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class FOOLlib {
 
     private static TypeTreeNode root = new TypeTreeNode("",null,null);
@@ -45,9 +48,19 @@ public class FOOLlib {
         return "function" + (funLabCount++);
     }
 
+    // forse non serve
     public static int freshObjLabel() { return objCount++; }
 
-    public static void resetCode() { funCode = ""; }
+    public static String getMethodLabel(String className, String methodName) {
+        return methodName + className + methodName.length() + className.length();
+    }
+
+    public static void resetCode() {
+        funCode = "";
+        labCount = 0;
+        objCount = 0;
+        funLabCount = 0;
+    }
 
     public static void putCode(String c) {
         funCode += "\n" + c; //aggiunge una linea vuota di separazione prima di funzione

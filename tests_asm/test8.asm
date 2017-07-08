@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 15
+push 0
 lhp
 sw
 push 1
@@ -21,12 +21,12 @@ lw
 sop
 lfp
 lfp
-push kB
+push kB11
 js
 print
 halt
 
-uA:
+uA11:
 cfp
 lra
 push 2
@@ -38,7 +38,7 @@ lrv
 lra
 js
 
-kA:
+kA11:
 cfp
 lra
 push 5
@@ -50,7 +50,7 @@ lrv
 lra
 js
 
-uB:
+uB11:
 cfp
 lra
 push 1
@@ -62,7 +62,7 @@ lrv
 lra
 js
 
-kB:
+kB11:
 cfp
 lra
 push 6
@@ -74,7 +74,7 @@ lrv
 lra
 js
 
-sB:
+sB11:
 cfp
 lra
 push 3

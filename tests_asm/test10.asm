@@ -17,7 +17,7 @@ push 1
 lhp
 add
 shp
-push 17
+push 0
 lhp
 sw
 push 1
@@ -29,7 +29,7 @@ push 8
 print
 halt
 
-fParent:
+fParent16:
 cfp
 lra
 push 1
@@ -45,7 +45,7 @@ lrv
 lra
 js
 
-fChild:
+fChild15:
 cfp
 lra
 push 1

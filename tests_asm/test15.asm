@@ -27,7 +27,7 @@ push 1
 lhp
 add
 shp
-push 21
+push 0
 lhp
 sw
 push 1
@@ -42,12 +42,12 @@ lw
 sop
 lfp
 lfp
-push getterB
+push getterB61
 js
 print
 halt
 
-getAA:
+getAA41:
 cfp
 lra
 push -3
@@ -62,7 +62,7 @@ lrv
 lra
 js
 
-getBA:
+getBA41:
 cfp
 lra
 push -4
@@ -77,12 +77,12 @@ lrv
 lra
 js
 
-getterB:
+getterB61:
 cfp
 lra
 lfp
 lfp
-push getBA
+push getBA41
 js
 srv
 sra
