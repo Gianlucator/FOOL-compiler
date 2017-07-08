@@ -1,5 +1,5 @@
 push 0
-push 20
+push 1
 lhp
 sw
 push 1
@@ -13,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 31
+push 30
 lhp
 sw
 push 1
@@ -27,66 +27,88 @@ add
 lw
 sop
 lfp
-push 0
 lfp
-push getFabonicci
+push createBA
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getYB
 js
 print
 halt
 
-getFabonicci:
+createBA:
 cfp
 lra
+push 2
+lhp
+sw
 push 1
-lfp
+lhp
+add
+shp
+push -3
+lop
 add
 lw
-push 20
-beq label14
-push 0
-b label15
-label14:
+lhp
+sw
 push 1
-label15:
-push 1
-beq label12
-lfp
-push 1
-lfp
+lhp
 add
-lw
-lfp
-push fooFabonicci
-js
-b label13
-label12:
-push 42
-label13:
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 29
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-fooFabonicci:
+getXB:
 cfp
 lra
-lfp
-push 1
-lfp
+push -3
+lop
 add
 lw
-push 1
-add
-lfp
-push getFabonicci
-js
 srv
 sra
 pop
+sfp
+lrv
+lra
+js
+
+getYB:
+cfp
+lra
+push -4
+lop
+add
+lw
+srv
+sra
 pop
 sfp
 lrv

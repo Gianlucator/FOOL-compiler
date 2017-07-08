@@ -1,17 +1,17 @@
 #TODO: scazzo completo, non vede x, risolvere.
-#test55 - Subtyping hell in returntype:
-#-   class A
-#    class B implements A (A a, A b)
-#    class X {
-#       B get() new B(new A, new B(new A, new A));
-#    };
-#    let
-#        X x = new X;
-#        B kek() x.get();
-#        B b2 = new B(x.get(), kek());
-#    in
-#        print(777);
-#-   "777"
+test55 - Subtyping hell in returntype:
+-   class A
+    class B implements A (A a, A b)
+    class X {
+       B get() new B(new A, new B(new A, new A));
+    };
+    let
+        X x = new X;
+        B kek() x.get();
+        B b2 = new B(x.get(), kek());
+    in
+        print(777);
+-   "777"
 
 ti sfotto e ti fotto:
 -   class Numero (int x) {

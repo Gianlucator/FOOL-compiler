@@ -1,53 +1,25 @@
 push 0
-push 7
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+push function0
+lfp
+lfp
 push -2
+lfp
+add
+lw
+js
+push -3
 lfp
 add
 lw
 sop
 lfp
 lfp
-push getCB
+push getNumNumero2
 js
 print
 halt
 
-getAA:
+getNumNumero:
 cfp
 lra
 push -3
@@ -62,13 +34,15 @@ lrv
 lra
 js
 
-getBA:
+getNumNumero2:
 cfp
 lra
-push -4
+push -3
 lop
 add
 lw
+push 1
+add
 srv
 sra
 pop
@@ -77,13 +51,31 @@ lrv
 lra
 js
 
-getCB:
+function0:
 cfp
 lra
-push -5
-lop
+push 1
+lhp
+sw
+push 1
+lhp
 add
-lw
+shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 0
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 srv
 sra
 pop

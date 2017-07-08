@@ -50,8 +50,8 @@ public class VarDecNode implements Node {
 
         //env.setOffset(-2);
         HashMap<String,STentry> hm = env.getSymTable().get(env.getNestingLevel());
-        env.decOffset();
         STentry entry = new STentry(env.getNestingLevel(),type, env.getOffset()); //separo introducendo "entry"
+        env.decOffset();
 
         if (hm.put(id,entry) != null)
             res.add(new SemanticError("Var id " + id + " already declared"));

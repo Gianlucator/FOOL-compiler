@@ -26,6 +26,10 @@ public class ArrowTypeNode implements Node {
         return ret;
     }
 
+    public void setRet(Node ret) {
+        this.ret = ret;
+    }
+
     public ArrayList<Node> getParList() { //
         return parlist;
     }

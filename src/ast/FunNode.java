@@ -94,8 +94,11 @@ public class FunNode implements Node {
                 }
             }
 
-
-
+            //set func type
+            if (self == null)
+                entry.addType(new ArrowTypeNode(parTypes, type));
+            else
+                arrowType = new ArrowTypeNode(parTypes, type);
 
             //check semantics in the dec list
             if (declist.size() > 0) {
@@ -119,14 +122,15 @@ public class FunNode implements Node {
 
             // change returned type into type returned by body.
             try {
-                if ((FOOLlib.isSubtype(body.typeCheck(), type))) type = body.typeCheck();
-            } catch (Exception e) { }
+                if ((FOOLlib.isSubtype(body.typeCheck(), type))){
+                    if (self == null)
+                        entry.setType(new ArrowTypeNode(parTypes, body.typeCheck()));
+                    else
+                        arrowType.setRet(body.typeCheck());
+                }
+            } catch (Exception e) {}
 
-            //set func type
-            if (self == null)
-                entry.addType(new ArrowTypeNode(parTypes, type));
-            else
-                arrowType = new ArrowTypeNode(parTypes, type);
+
             //close scope
 
             env.getSymTable().remove(env.getNestingLevel());

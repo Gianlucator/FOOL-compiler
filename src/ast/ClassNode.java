@@ -78,64 +78,6 @@ public class ClassNode implements Node {
                 }
 
             }
-
-            /*//Override Metodi
-                for (Node newMethod : methods) {
-                    for (Node oldMethod : superClassLayout.getMethods()) {
-                        if (((FunNode) newMethod).getId().equals(((FunNode) oldMethod).getId()) &&
-                                methods.size() == superClassLayout.getMethods().size()) {
-
-                            ArrayList<Node> oldPar = ((FunNode) oldMethod).getArrowType().getParList();
-                            ArrayList<Node> newPar = ((FunNode) newMethod).getArrowType().getParList();
-                            for (int i = 0; i < oldPar.size(); i++) {
-                                // se il parametro è un oggetto
-                                if (((ParNode) oldPar.get(i)).getType() instanceof ClassIdNode &&
-                                        ((ParNode) newPar.get(i)).getType() instanceof ClassIdNode) {
-                                    if (!FOOLlib.isSubtype(((ClassIdNode) oldPar.get(i)).getClassId(),
-                                            ((ClassIdNode) newPar.get(i)).getClassId())) {
-                                        System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                        System.err.println("Fatal error during type checking");
-                                    }
-                                } else {  // se il parametro è int o bool
-                                    try {
-                                        //Nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
-                                        //Catturo dicendo che non è sottotipo.
-                                        if (!FOOLlib.isSubtype(oldPar.get(i), newPar.get(i))) {
-                                            System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                            System.err.println("Fatal error during type checking");
-                                        }
-                                    } catch (Exception e) {
-                                        System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + ((FunNode) newMethod).getId());
-                                        System.err.println("Fatal error during type checking");
-                                    }
-                                }
-                            }
-
-                            Node oldRet = ((FunNode) oldMethod).getArrowType().getRet();
-                            Node newRet = ((FunNode) newMethod).getArrowType().getRet();
-                            // deve valere la covarianza per il tipo di ritorno
-                            if (newRet instanceof ClassIdNode && oldRet instanceof ClassIdNode) {
-                                if (!FOOLlib.isSubtype(((ClassIdNode) newRet).getClassId(), ((ClassIdNode) oldRet).getClassId())) {
-                                    System.out.println("Wrong return type");
-                                    System.err.println("Fatal error during type checking");
-                                }
-                            } else {
-                                try {
-                                    //nel caso in cui un parametro sia un oggetto e l'altro int va in nullpointer.
-                                    //Catturo dicendo che non è sottotipo.
-                                    if (!FOOLlib.isSubtype(newRet, oldRet)) {
-                                        System.out.println("Wrong return type");
-                                        System.err.println("Fatal error during type checking");
-                                    }
-                                } catch (Exception e) {
-                                    System.out.println("Wrong return type");
-                                    System.err.println("Fatal error during type checking");
-                                }
-                            }
-
-                        }
-                    }
-            }*/
         }
 
         for (Node m: methods)
@@ -250,7 +192,6 @@ public class ClassNode implements Node {
         env.decNestingLevel();
         return res;
     }
-
 
     public String getId() {
         return id;
