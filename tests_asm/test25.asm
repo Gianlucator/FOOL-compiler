@@ -17,3 +17,4 @@ lhp
 push 4
 print
 halt
+halt

@@ -47,6 +47,8 @@ public class ClassExpNode implements Node {
 
         code += body.codeGeneration();
 
+        code += "halt\n";
+
         return code;
     }
 

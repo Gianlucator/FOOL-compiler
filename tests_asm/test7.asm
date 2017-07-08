@@ -55,3 +55,4 @@ sfp
 lrv
 lra
 js
+halt
