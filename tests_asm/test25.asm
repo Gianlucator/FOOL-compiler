@@ -1,26 +1,5 @@
 push 0
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
 lhp
 sw
 push 1
@@ -42,49 +21,38 @@ lw
 sop
 lfp
 lfp
-push getter6B1
+push get3B1
 js
 print
 halt
 
-getA4A1:
+function0:
 cfp
 lra
-push -3
-lop
-add
-lw
+push 5
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-getB4A1:
+get3B1:
 cfp
 lra
-push -4
+push function0
+lfp
 lop
+lfp
+push -2
+lfp
 add
 lw
+js
 srv
-sra
 pop
-sfp
-lrv
-lra
-js
-
-getter6B1:
-cfp
-lra
-lfp
-lfp
-push getB4A1
-js
-srv
 sra
 pop
 sfp

@@ -6,14 +6,13 @@ push 1
 lhp
 add
 shp
-push 0
+push 3
 lhp
 sw
 push 1
 lhp
 add
 shp
-lhp
 push 2
 lhp
 sw
@@ -21,7 +20,56 @@ push 1
 lhp
 add
 shp
+lhp
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 10
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 0
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 0
 lhp
 sw
 push 1
@@ -36,7 +84,16 @@ lw
 sop
 lfp
 lfp
-push s1Area4
+push getA4B1
+js
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push value5A1
 js
 push -3
 lfp
@@ -45,16 +102,19 @@ lw
 sop
 lfp
 lfp
-push t1Rectangle9
+push value5A1
 js
 add
 print
 halt
 
-t1Rectangle9:
+value5A1:
 cfp
 lra
-push 2
+push -3
+lop
+add
+lw
 srv
 sra
 pop
@@ -63,10 +123,13 @@ lrv
 lra
 js
 
-s1Area4:
+getA4B1:
 cfp
 lra
-push 1
+push -4
+lop
+add
+lw
 srv
 sra
 pop

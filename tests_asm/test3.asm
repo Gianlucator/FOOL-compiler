@@ -1,26 +1,5 @@
 push 0
-push 7
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 5
 lhp
 sw
 push 1
@@ -42,18 +21,25 @@ lw
 sop
 lfp
 lfp
-push getC4B1
+push k1B1
 js
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push u1B1
+js
+add
 print
 halt
 
-getA4A1:
+u1A1:
 cfp
 lra
-push -3
-lop
-add
-lw
+push 2
 srv
 sra
 pop
@@ -62,13 +48,10 @@ lrv
 lra
 js
 
-getB4A1:
+k1A1:
 cfp
 lra
-push -4
-lop
-add
-lw
+push 5
 srv
 sra
 pop
@@ -77,13 +60,34 @@ lrv
 lra
 js
 
-getC4B1:
+u1B1:
 cfp
 lra
-push -5
-lop
-add
-lw
+push 1
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+k1B1:
+cfp
+lra
+push 6
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+s1B1:
+cfp
+lra
+push 3
 srv
 sra
 pop

@@ -14,80 +14,62 @@ lhp
 add
 shp
 lhp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 push -2
 lfp
 add
 lw
 sop
 lfp
-lfp
-push k1B1
-js
-push -2
+push -3
 lfp
 add
 lw
-sop
 lfp
-lfp
-push u1B1
+push aparam6B1
 js
-add
 print
 halt
 
-u1A1:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-k1A1:
-cfp
-lra
-push 5
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-u1B1:
+aparam6B1:
 cfp
 lra
 push 1
+lfp
+add
+lw
+sop
+lfp
+lfp
+push b1A1
+js
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-k1B1:
+b1A1:
 cfp
 lra
-push 6
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-s1B1:
-cfp
-lra
-push 3
+push 2
 srv
 sra
 pop

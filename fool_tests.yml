@@ -26,6 +26,49 @@ Subtyping hell in returntype:
         print(777);
 -   "777"
 
+Overriding:
+- class A {
+    int u() 2;
+    int k() 5;
+  }
+  class B implements A{
+    bool u() true;
+    int s() 3;
+    int k() 6;
+  };
+  let A x = new B;
+  in print(x.k() + x.u());
+- "7"
+
+Field and method override:
+- class Parent(int a) {
+    int f(int x) 2 * 2;
+    int r(int y) 2 * y;
+  }
+  class Child implements Parent (int a) {
+     int f(int x) 2 * x;
+     int r(int y) 3 * y;
+  };
+
+  let int x = 4; Parent o = new Child(x);
+  in print(o.f(x));
+- "8"
+
+New inside new:
+-   class A (int x) {
+        int value() x;
+    }
+    class B implements A (int x, A a) {
+        A getA() a;
+    }
+    ;
+    let
+        B b = new B(0, new B(10, new A(2)));
+        A a = b.getA();
+    in
+        print(b.value() + a.value());
+-   "10"
+
 ##########################################################
 
 ##########################################################
@@ -245,6 +288,49 @@ Simple method call from different classes:
   in print(p.s() + q.t());
 - "3"
 
+Using this as expression:
+-   class Numero (int x) {
+        Numero getThis() this;
+        int getX() x;
+    };
+    let
+        Numero num = new Numero(8);
+        Numero num2 = num.getThis();
+    in
+        print(num2.getX());
+-   "8"
+
+Using this with subtyping:
+-   class Numero (int x) {
+        Numero getThis() this;
+        int getX() x;
+    }
+    class Numero2 implements Numero (int x) {
+        Numero2 getThis() this;
+    };
+    let
+        Numero2 num = new Numero2(12);
+        Numero num2 = num.getThis();
+    in
+        print(num2.getX());
+-   "12"
+
+This with subtyping:
+-   class A
+    class B implements A {
+        int get()
+            let
+                int nestedGet(A a) 5;
+            in
+                nestedGet(this)
+        ;
+    };
+    let
+        B b = new B;
+    in
+        print(b.get());
+-    "5"
+
 Single class with multiple method:
 - class Rectangle(int l1, int l2) {
     int area() l1 * l2;
@@ -256,34 +342,6 @@ Single class with multiple method:
   let Rectangle r = new Rectangle(2, 4);
   in print(r.calcArea(3, 5));
 - "15"
-
-overriding:
-- class A {
-    int u() 2;
-    int k() 5;
-  }
-  class B implements A{
-    bool u() true;
-    int s() 3;
-    int k() 6;
-  };
-  let A x = new B;
-  in print(x.k() + x.u());
-- "7"
-
-covarianza corr:
-- class Parent(int a) {
-    int f(int x) 2 * 2;
-    int r(int y) 2 * y;
-  }
-  class Child implements Parent (int a) {
-     int f(int x) 2 * x;
-     int r(int y) 3 * y;
-  };
-
-  let int x = 4; Parent o = new Child(x);
-  in print(o.f(x));
-- "8"
 
 covarianza errato 1:
 - class Parent(int a) {
@@ -331,7 +389,7 @@ Call method on object returned by method:
         print(num2.due());
 -   "4"
 
-Call method on object returned by method + stuff:
+Call method on object returned by method2:
 -   class Numero (int x) {
         Numero uno() new Numero(2 * x);
         int due() x;
@@ -355,49 +413,6 @@ Function returning an object:
     in
         print(num.getNum());
 -   "1"
-
-Using this as expression:
--   class Numero (int x) {
-        Numero getThis() this;
-        int getX() x;
-    };
-    let
-        Numero num = new Numero(8);
-        Numero num2 = num.getThis();
-    in
-        print(num2.getX());
--   "8"
-
-Using this with subtyping:
--   class Numero (int x) {
-        Numero getThis() this;
-        int getX() x;
-    }
-    class Numero2 implements Numero (int x) {
-        Numero2 getThis() this;
-    };
-    let
-        Numero2 num = new Numero2(12);
-        Numero num2 = num.getThis();
-    in
-        print(num2.getX());
--   "12"
-
-This with subtyping:
--   class A
-    class B implements A {
-        int get()
-            let
-                int nestedGet(A a) 5;
-            in
-                nestedGet(this)
-        ;
-    };
-    let
-        B b = new B;
-    in
-        print(b.get());
--    "5"
 
 Non-overriden method call:
 -   class Animale(int Age, bool Alive){
@@ -438,21 +453,6 @@ Non-overriden method call:
         print(roger.getAge() + roger.quantoViveAncora());
 -   "7"
 
-New inside new:
--   class A (int x) {
-        int value() x;
-    }
-    class B implements A (int x, A a) {
-        A getA() a;
-    }
-    ;
-    let
-        B b = new B(0, new B(10, new A(2)));
-        A a = b.getA();
-    in
-        print(b.value() + a.value());
--   "10"
-
 Subclass inside superclass:
 -   class A (int x) {
         B createB() new B(x, 2);
@@ -468,8 +468,6 @@ Subclass inside superclass:
     in
         print(b.getY());
 -   "2"
-
-
 
 Subclass inside superclass' constructor:
 -   class A (B b)

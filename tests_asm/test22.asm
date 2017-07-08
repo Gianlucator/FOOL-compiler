@@ -1,16 +1,5 @@
 push 0
-push 4
-push -2
-lfp
-add
-lw
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
+push 2
 lhp
 sw
 push 1
@@ -25,85 +14,61 @@ lhp
 add
 shp
 lhp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push s1Area4
+js
 push -3
 lfp
 add
 lw
 sop
 lfp
-push -2
 lfp
-add
-lw
-lfp
-push f1Child5
+push t1Rectangle9
 js
+add
 print
 halt
 
-f1Parent6:
+s1Area4:
 cfp
 lra
-push 2
-push 2
-mult
+push 1
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-r1Parent6:
+t1Rectangle9:
 cfp
 lra
 push 2
-push 1
-lfp
-add
-lw
-mult
 srv
 sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-f1Child5:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-r1Child5:
-cfp
-lra
-push 3
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
 pop
 sfp
 lrv

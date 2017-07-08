@@ -1,97 +1,9 @@
 push 0
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+push 4
 push -2
 lfp
 add
 lw
-sop
-lfp
-lfp
-push uno3Numero6
-js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push uno3Numero6
-js
-push -4
-lfp
-add
-lw
-sop
-lfp
-lfp
-push due3Numero6
-js
-push -5
-lfp
-add
-lw
-sop
-lfp
-lfp
-push due3Numero6
-js
-add
-print
-halt
-
-uno3Numero6:
-cfp
-lra
-push 2
-push -3
-lop
-add
-lw
-mult
 lhp
 sw
 push 1
@@ -113,23 +25,36 @@ lhp
 add
 shp
 lhp
+push 8
+print
+halt
+
+f1Parent6:
+cfp
+lra
+push 1
+lfp
+add
+lw
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-due3Numero6:
+f1Child5:
 cfp
 lra
-push -3
-lop
+push 1
+lfp
 add
 lw
 srv
 sra
+pop
 pop
 sfp
 lrv
