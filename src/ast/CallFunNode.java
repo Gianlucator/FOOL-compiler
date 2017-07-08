@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import util.Environment;
 import util.SemanticError;
 import lib.FOOLlib;
+import util.TypeError;
 
 
 // chiamata di funzione
@@ -67,20 +68,18 @@ public class CallFunNode implements Node {
         ArrowTypeNode t = null;
         if (entry.getType() instanceof ArrowTypeNode)
             t = (ArrowTypeNode) entry.getType();
-        else {
-            System.out.println("Invocation of a non-function " + id);
-            System.err.println("Fatal error during type checking");
-        }
+        else
+            FOOLlib.addTypeError("Invocation of a non-function " + id);
+
         ArrayList<Node> p = t.getParList();
-        if (!(p.size() == parlist.size())) {
-            System.out.println("Wrong number of parameters in the invocation of " + id);
-            System.err.println("Fatal error during type checking");
+        if (!(p.size() == parlist.size()))
+            FOOLlib.addTypeError("Wrong number of parameters in the invocation of " + id);
+
+        for (int i = 0; i < parlist.size(); i++) {
+            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i))))
+                FOOLlib.addTypeError("Wrong type for " + (i + 1) + " parameter in the invocation of " + id);
         }
-        for (int i = 0; i < parlist.size(); i++)
-            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i)))) {
-                System.out.println("Wrong type for " + (i + 1) + " parameter in the invocation of " + id);
-                System.err.println("Fatal error during type checking");
-            }
+
         return t.getRet();
     }
 
@@ -88,7 +87,7 @@ public class CallFunNode implements Node {
         String parCode = "";
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
-            // fa anche push
+        // fa anche push
 
         String getAR = "";
         for (int i = 0; i < nestinglevel - entry.getNestinglevel(); i++)

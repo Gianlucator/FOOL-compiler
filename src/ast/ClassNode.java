@@ -3,6 +3,7 @@ package ast;
 import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
+import util.TypeError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,9 +47,8 @@ public class ClassNode implements Node {
                 oldType = ((VarDecNode) oldField).getType();
 
                 if (!FOOLlib.isSubtype(newType, oldType)) {
-                    System.out.printf("Field %s of type %s cannot override the old field of type %s.",
-                            ((VarDecNode) newField).getId(), ((VarDecNode) newField).getType().getClass(), ((VarDecNode) oldField).getType().getClass());
-                    System.err.println("Fatal error during type checking");
+                    FOOLlib.addTypeError(String.format("Field %s of type %s cannot override the old field of type %s.",
+                            ((VarDecNode) newField).getId(), ((VarDecNode) newField).getType().getClass(), ((VarDecNode) oldField).getType().getClass()));
                 }
             }
 
@@ -63,20 +63,16 @@ public class ClassNode implements Node {
                     oldType = oldPar.get(j);
 
                     if (!FOOLlib.isSubtype(oldType, newType)) {
-                        System.out.println("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId());
-                        System.out.println("Subclass parameter is " + newType.toPrint("") + ", superclass was " + oldType.toPrint(""));
-                        System.err.println("Fatal error during type checking");
+                        FOOLlib.addTypeError("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId());
+                        FOOLlib.addTypeError("\tSubclass parameter is " + newType.toPrint("") + ", superclass was " + oldType.toPrint(""));
                     }
                 }
 
                 Node oldRet = ((FunNode) superMethods.get(i)).getArrowType().getRet();
                 Node newRet = ((FunNode) methods.get(i)).getArrowType().getRet();
 
-                if (!FOOLlib.isSubtype(newRet, oldRet)) {
-                    System.out.println("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet.getClass());
-                    System.err.println("Fatal error during type checking");
-                }
-
+                if (!FOOLlib.isSubtype(newRet, oldRet))
+                    FOOLlib.addTypeError("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet.getClass());
             }
         }
 
@@ -215,10 +211,8 @@ public class ClassNode implements Node {
 
         for (Node method: methods) {
             ownMethodName = ((FunNode) method).getId();
-            if (ownMethodName.equals(methodName)){
-                //System.out.println(((FunNode) method).getId());
+            if (ownMethodName.equals(methodName))
                 return method;
-            }
         }
 
         return null;

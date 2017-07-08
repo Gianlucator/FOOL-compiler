@@ -3,6 +3,7 @@ package ast;
 import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
+import util.TypeError;
 
 import java.util.ArrayList;
 
@@ -38,16 +39,12 @@ public class CallMetNode implements Node {
         ArrowTypeNode t = methodNode.getArrowType();
         ArrayList<Node> p = t.getParList();
 
-        if (!(p.size() == (parlist.size() - 1))) {
-            System.out.println("Wrong number of parameters in the invocation of " + methodName);
-            System.err.println("Fatal error during type checking");
-        }
+        if (!(p.size() == (parlist.size() - 1)))
+            FOOLlib.addTypeError("Wrong number of parameters in the invocation of " + methodName);
 
         for (int i = 1; i < parlist.size(); i++) {
-            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i - 1)))) {
-                System.out.println("Wrong type for " + i + " parameter in the invocation of " + methodName);
-                System.err.println("Fatal error during type checking");
-            }
+            if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i - 1))))
+                FOOLlib.addTypeError("Wrong type for " + i + " parameter in the invocation of " + methodName);
         }
         return t.getRet();
     }

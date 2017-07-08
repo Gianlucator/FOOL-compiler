@@ -17,5 +17,5 @@ public interface Node {
   String codeGeneration();
   
   ArrayList<SemanticError> checkSemantics(Environment env);
-  
+
 }  

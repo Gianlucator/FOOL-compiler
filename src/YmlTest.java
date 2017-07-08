@@ -11,6 +11,7 @@ import org.yaml.snakeyaml.Yaml;
 import parser.*;
 import util.Environment;
 import util.SemanticError;
+import util.TypeError;
 import util.VMResult;
 
 import java.io.*;
@@ -21,9 +22,10 @@ public class YmlTest {
 
     private static int testNumber = 0;
 
-    private static final String SEMANTIC_ERRORS = "semantic errors";
-    private static final String CODEGEN_ERRORS = "code generation errors";
     private static final String LEXICAL_ERRORS = "lexical errors";
+    private static final String SEMANTIC_ERRORS = "semantic errors";
+    private static final String TYPE_ERRORS = "type errors";
+    private static final String CODEGEN_ERRORS = "code generation errors";
 
     // Colors to print fancy stuff
     private static final String ANSI_RESET = "\u001B[0m";
@@ -108,8 +110,15 @@ public class YmlTest {
                 System.out.println(ANSI_GREEN + "Semantic analysis passed." + ANSI_RESET);
 
                 Node type = ast.typeCheck(); //type-checking bottom-up
-                System.out.print(ANSI_GREEN + "Type checking passed: " + type.toPrint("") + ANSI_RESET);
+                ArrayList<TypeError> typeErrors = FOOLlib.getTypeErrors();
+                if (typeErrors.size() == 0)
+                    System.out.print(ANSI_GREEN + "Type checking passed: " + type.toPrint("") + ANSI_RESET);
+                else {
+                    for (TypeError e : typeErrors)
+                        System.out.println("\t" + e);
 
+                    return TYPE_ERRORS;
+                }
 
                 // CODE GENERATION
                 String asmFileName = "tests_asm/test" + (testNumber + 1) + ".asm";

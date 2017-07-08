@@ -34,18 +34,15 @@ public class NewExpNode implements Node {
             Node varNodeType = ((VarDecNode) classEntry.getFields().get(i)).getType();
             Node arg = args.get(i).typeCheck();
             if ( arg instanceof ClassIdNode && varNodeType instanceof ClassIdNode) {
-                if (!FOOLlib.isSubtype(((ClassIdNode) arg).getClassId(), ((ClassIdNode) varNodeType).getClassId())) {
-                    System.out.println("Incompatible parameter at position " + i + " during instantiation of class " + classId);
-                    System.err.println("Fatal error during type checking");
-                }
+                if (!FOOLlib.isSubtype(((ClassIdNode) arg).getClassId(), ((ClassIdNode) varNodeType).getClassId()))
+                    FOOLlib.addTypeError("Incompatible parameter at position " + i + " during instantiation of class " + classId);
+
                //if(arg != varNodeType)
                //   ((VarDecNode) classEntry.getFields().get(i)).setType(arg);
             }
             else {
-                if (!(FOOLlib.isSubtype(arg, varNodeType))) {
-                    System.out.println("Incompatible value for parameter at position " + i);
-                    System.err.println("Fatal error during type checking");
-                }
+                if (!(FOOLlib.isSubtype(arg, varNodeType)))
+                    FOOLlib.addTypeError("Incompatible value for parameter at position " + i);
             }
         }
         return new ClassIdNode(classId);

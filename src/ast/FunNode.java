@@ -6,6 +6,7 @@ import java.util.HashMap;
 import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
+import util.TypeError;
 
 // dichiarazione di funzione
 // vedi CallFunNode per chiamata di funzione
@@ -169,8 +170,7 @@ public class FunNode implements Node {
                 dec.typeCheck();
 
         if (!(FOOLlib.isSubtype(body.typeCheck(), type))) {
-            System.out.println("Wrong return type for function " + id);
-            System.err.println("Fatal error during type checking");
+            FOOLlib.addTypeError("Wrong return type for function " + id);
         }
         return null;
     }

@@ -69,19 +69,15 @@ public class VarAsmNode implements Node {
     //valore di ritorno non utilizzato
     public Node typeCheck() {
         if (exp.typeCheck() instanceof ClassIdNode && type instanceof ClassIdNode) {
-            if (!FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId())) {
-                System.out.println("Incompatible class for object " + id);
-                System.err.println("Fatal error during type checking");
-            }
+            if (!FOOLlib.isSubtype(((ClassIdNode) exp.typeCheck()).getClassId(), ((ClassIdNode) type).getClassId()))
+                FOOLlib.addTypeError("Incompatible class for object " + id);
 
             //Imposto il tipo dell'oggetto con il tipo con cui è stato istanziato
             //se è sottotipo del tipo con cui è stato dichiarato.
             entry.setType(exp.typeCheck());
         } else {
-            if (!(FOOLlib.isSubtype(exp.typeCheck(), type))) {
-                System.out.println("Incompatible value for variable " + id);
-                System.err.println("Fatal error during type checking");
-            }
+            if (!(FOOLlib.isSubtype(exp.typeCheck(), type)))
+                FOOLlib.addTypeError("Incompatible value for variable " + id);
         }
         return null;
     }

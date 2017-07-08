@@ -1,6 +1,7 @@
 package lib;
 
 import ast.*;
+import util.TypeError;
 import util.TypeTreeNode;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class FOOLlib {
     private static int funLabCount = 0;
 
     private static String funCode = "";
+
+    private static ArrayList<TypeError> typeErrors = new ArrayList<>();
 
     //valuta se il tipo "a" è <= del tipo "b", dove "a" e "b" sono tipi di base: int o bool
     public static boolean isSubtype(Node a, Node b) {
@@ -48,7 +51,7 @@ public class FOOLlib {
         return "function" + (funLabCount++);
     }
 
-    // forse non serve
+    //TODO: controllare se serve
     public static int freshObjLabel() { return objCount++; }
 
     public static String getMethodLabel(String className, String methodName) {
@@ -76,5 +79,13 @@ public class FOOLlib {
 
     public static void setRoot(TypeTreeNode root) {
         FOOLlib.root = root;
+    }
+
+    public static ArrayList<TypeError> getTypeErrors() {
+        return typeErrors;
+    }
+
+    public static void addTypeError(String msg) {
+        typeErrors.add(new TypeError(msg));
     }
 }

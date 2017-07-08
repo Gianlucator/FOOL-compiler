@@ -2,6 +2,7 @@ package ast;
 
 import java.util.ArrayList;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -69,10 +70,8 @@ public class IdNode implements Node {
         if (id.equals("this"))
             return thisType;
         else {
-            if (entry.getType() instanceof ArrowTypeNode) { //
-                System.out.println("Wrong usage of function identifier");
-                System.err.println("Fatal error during type checking");
-            }
+            if (entry.getType() instanceof ArrowTypeNode)
+                FOOLlib.addTypeError("Wrong usage of function identifier");
 
             return entry.getType();
         }
