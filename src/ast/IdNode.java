@@ -12,6 +12,7 @@ public class IdNode implements Node {
     private int nestinglevel;
     private int fieldOffset;
     private boolean isField;
+    private ClassIdNode thisType;
 
     public IdNode(String i) {
         id = i;
@@ -56,17 +57,25 @@ public class IdNode implements Node {
                     isField = true;
                 }
             }
+        } else {
+            thisType = new ClassIdNode(env.getClassEnvironment());
         }
 
         return res;
     }
 
     public Node typeCheck() {
-        if (entry.getType() instanceof ArrowTypeNode) { //
-            System.out.println("Wrong usage of function identifier");
-            System.err.println("Fatal error during type checking");
+
+        if (id.equals("this"))
+            return thisType;
+        else {
+            if (entry.getType() instanceof ArrowTypeNode) { //
+                System.out.println("Wrong usage of function identifier");
+                System.err.println("Fatal error during type checking");
+            }
+
+            return entry.getType();
         }
-        return entry.getType();
     }
 
     public String codeGeneration() {
@@ -75,6 +84,8 @@ public class IdNode implements Node {
                     "lop\n" +                       // carichi hp che punta all'oggetto sullo heap
                     "add\n" +                       // calcoli il ptr al campo
                     "lw\n";                         // carichi il valore del campo
+        } else if (id.equals("this")) {
+            return "lop\n";
         } else {
             String getAR = "";
             for (int i = 0; i < nestinglevel - entry.getNestinglevel(); i++)

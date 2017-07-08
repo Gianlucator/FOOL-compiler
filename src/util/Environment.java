@@ -15,6 +15,7 @@ public class Environment {
 	private int offset = 0;
 	private final int GLOBAL_SCOPE = 0;
 	private String classEnvironment = "";
+	public String thisEnvironment = "";
 	//private String self_type = "";	//Tipo della dichiarazione di classe in cui ci troviamo
 
 

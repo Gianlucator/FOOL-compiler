@@ -233,7 +233,8 @@ public class FOOLVisitorImpl extends FOOLBaseVisitor<Node> {
 
 	@Override
 	public Node visitThisExp(ThisExpContext ctx) {
-		return super.visitThisExp(ctx);
+		return new IdNode("this");
+		//return super.visitThisExp(ctx);
 	}
 
 	@Override

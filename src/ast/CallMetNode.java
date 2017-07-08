@@ -93,6 +93,7 @@ public class CallMetNode implements Node {
 
             // si aggiunge ai parametri il self
             parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
+            env.thisEnvironment = objectName;
         }
 
         //create object ID node

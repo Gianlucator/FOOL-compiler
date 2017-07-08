@@ -291,17 +291,17 @@ test23 - Function returning an object:
 -   "1"
 
 # TODO non deve dare null pointer
-#test25 - Using this as expression:
-#-   class Numero (int x) {
-#        Numero getThis() this;
-#        int getX() x;
-#    };
-#    let
-#        Numero num = new Numero(8);
-#        Numero num2 = num.getThis();
-#    in
-#        print(num2.getX());
-#-   "8"
+test25 - Using this as expression:
+-   class Numero (int x) {
+        Numero getThis() this;
+        int getX() x;
+    };
+    let
+        Numero num = new Numero(8);
+        Numero num2 = num.getThis();
+    in
+        print(num2.getX());
+-   "8"
 
 # da un errore di typecheck non so perche'
 test27 - Non-overwritted method call:
