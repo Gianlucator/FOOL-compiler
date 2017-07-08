@@ -64,7 +64,7 @@ public class ClassNode implements Node {
 
                     if (!FOOLlib.isSubtype(oldType, newType)) {
                         FOOLlib.addTypeError("Parameter " + j + " not contravariant in definition of " + ((FunNode) methods.get(i)).getId());
-                        FOOLlib.addTypeError("\tSubclass parameter is " + newType.toPrint("") + ", superclass was " + oldType.toPrint(""));
+                        FOOLlib.addTypeError("\tSubclass parameter is " + newType + ", superclass was " + oldType);
                     }
                 }
 
@@ -72,7 +72,7 @@ public class ClassNode implements Node {
                 Node newRet = ((FunNode) methods.get(i)).getArrowType().getRet();
 
                 if (!FOOLlib.isSubtype(newRet, oldRet))
-                    FOOLlib.addTypeError("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet.getClass());
+                    FOOLlib.addTypeError("Return type: " + oldRet + " is not covariant wrt its superclass definition " + newRet);
             }
         }
 

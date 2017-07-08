@@ -39,8 +39,7 @@ public class NewExpNode implements Node {
 
                //if(arg != varNodeType)
                //   ((VarDecNode) classEntry.getFields().get(i)).setType(arg);
-            }
-            else {
+            } else {
                 if (!(FOOLlib.isSubtype(arg, varNodeType)))
                     FOOLlib.addTypeError("Incompatible value for parameter at position " + i);
             }

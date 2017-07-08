@@ -23,6 +23,16 @@ lfp
 lfp
 push k1B1
 js
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push u1B1
+js
+add
 print
 halt
 

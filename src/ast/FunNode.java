@@ -91,7 +91,6 @@ public class FunNode implements Node {
                 if (hmn.put(arg.getId(), new STentry(env.getNestingLevel(), arg.getType(), paroffset++)) != null) {
                     // warning, non errore!
                     // la prima dichiarazione viene sovrascritta dalla seconda
-                    System.out.println("Parameter id " + arg.getId() + " already declared");
                 }
             }
 
@@ -119,7 +118,6 @@ public class FunNode implements Node {
             //</CAUTION>
 
             //check body
-            System.out.println(body);
             res.addAll(body.checkSemantics(env));
 
             // change returned type into type returned by body.

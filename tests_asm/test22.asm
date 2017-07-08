@@ -1,5 +1,12 @@
 push 0
-push 2
+push 12
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -21,38 +28,52 @@ lw
 sop
 lfp
 lfp
-push get3B1
+push getThis7Numero27
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getX4Numero6
 js
 print
 halt
 
-function0:
+getThis7Numero6:
 cfp
 lra
-push 5
+lop
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-get3B1:
+getX4Numero6:
 cfp
 lra
-push function0
-lfp
+push -3
 lop
-lfp
-push -2
-lfp
 add
 lw
-js
 srv
+sra
 pop
+sfp
+lrv
+lra
+js
+
+getThis7Numero27:
+cfp
+lra
+lop
+srv
 sra
 pop
 sfp

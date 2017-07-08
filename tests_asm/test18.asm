@@ -21,28 +21,6 @@ lhp
 add
 shp
 lhp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
@@ -59,39 +37,15 @@ lw
 sop
 lfp
 lfp
-push uno3Numero6
-js
-push -4
-lfp
-add
-lw
-sop
-lfp
-lfp
 push due3Numero6
 js
-push -5
-lfp
-add
-lw
-sop
-lfp
-lfp
-push due3Numero6
-js
-add
 print
 halt
 
 uno3Numero6:
 cfp
 lra
-push 2
-push -3
-lop
-add
-lw
-mult
+push 4
 lhp
 sw
 push 1

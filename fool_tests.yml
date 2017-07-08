@@ -97,7 +97,7 @@ overriding:
   };
   let A x = new B;
   in print(x.k() + x.u());
-- "6"
+- "7"
 
 covarianza corr:
 - class Parent(int a) {
@@ -211,43 +211,34 @@ Self extending:
 
 ##########FINE TEST GIANLUCA
 
-#covarianza errato 5:
-#- class GranParent(int a) {
-#      Parent p(Parent o) o;
-#  }
-#
-#  class Parent implements GrandParent(int a){
-#      GrandParent p(GrandParent c) c;
-#  };
-#
-#  let int x = 4; Parent o = new Parent(x); in o.p(x);
-#- ""
+covarianza errato 5:
+- class GrandParent(int a) {
+      Parent p(Parent o) o;
+  }
+  class Parent implements GrandParent(int a){
+      GrandParent p(GrandParent c) c;
+  };
+
+  let int x = 4; Parent o = new Parent(x); in o.p(x);
+- "type errors"
 
 #covarianza corr:
-#- class GranParent(int a) {
-#    Parent p(Parent o) o;
-#  }
-#
-#  class Parent implements GrandParent(int a){
-#    Child p(Child c) c;
-#  }
-#
-#  class Child implements GrandParent(int x){
-#    int f(int x) 2 * x;
-#  };
-#
-#  let
-#  int x = 4;
-#  Child c = new Child(x);
-#  Parent o = new Parent(x);
-#  in o.p(c);
-#- ""
+- class GranParent(int a) {
+    Parent p(Parent o) o;
+  }
+  class Parent implements GrandParent(int a){
+    Child p(Child c) c;
+  }
+  class Child implements GrandParent(int x){
+    int f(int x) 2 * x;
+  };
+  let
+    int x = 4;
+    Child c = new Child(x);
+    Parent o = new Parent(x);
+  in o.p(c);
+- ""
 
-## DA RISOLVERE ##
-# Sintassi
-
-
-# ritorna oggetti e non va bbene
 test21 - Call method on object returned by method:
 -   class Numero (int x) {
         Numero uno() new Numero(4);
@@ -260,7 +251,6 @@ test21 - Call method on object returned by method:
         print(num2.due());
 -   "4"
 
-# ritorna oggetti e non va bbene
 test22 - Call method on object returned by method + stuff:
 -   class Numero (int x) {
         Numero uno() new Numero(2 * x);
@@ -275,7 +265,6 @@ test22 - Call method on object returned by method + stuff:
         print(num2.due() + num3.due());
 -   "10"
 
-# TODO: da risolvere
 test23 - Function returning an object:
 -   class Numero (int x) {
         int getNum() x;
@@ -382,7 +371,7 @@ test27 - Non-overriden method call:
         C c = new C;
     in
         print(c.f(false));
--   "0"
+-   "type errors"
 
 # non si blocca col type check
 test44 - Incompatible object types assignment:
@@ -392,7 +381,7 @@ test44 - Incompatible object types assignment:
         A a = new N;
     in
         print(4);
--   "4"
+-   "type errors"
 
 # non si blocca col type check e se ne fotte
 test45 - Implicit cast to supertype and method invocation:
@@ -404,7 +393,7 @@ test45 - Implicit cast to supertype and method invocation:
         A a = new B;
     in
         print(a.get());
--   "2"
+-   "type errors"
 
 test49 - New inside new:
 -   class A (int x) {
@@ -457,7 +446,7 @@ controvarianza err:
      int r(bool y) 3 * y;
   };
   let bool x = 4; Parent o = new Child(x); in o.r(x);
-- "12"
+- "type errors"
 
 test52 - Subclass inside superclass' constructor:
 -   class A (B b)

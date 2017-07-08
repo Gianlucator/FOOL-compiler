@@ -58,11 +58,13 @@ public class FOOLlib {
         return methodName + methodName.length() + className + className.length();
     }
 
-    public static void resetCode() {
+    public static void reset() {
         funCode = "";
         labCount = 0;
         objCount = 0;
         funLabCount = 0;
+
+        typeErrors = new ArrayList<>();
     }
 
     public static void putCode(String c) {

@@ -1,5 +1,43 @@
 push 0
-push 8
+push function0
+lfp
+lfp
+push -2
+lfp
+add
+lw
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getNum6Numero6
+js
+print
+halt
+
+getNum6Numero6:
+cfp
+lra
+push -3
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+function0:
+cfp
+lra
+push 1
 lhp
 sw
 push 1
@@ -21,46 +59,6 @@ lhp
 add
 shp
 lhp
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getThis7Numero6
-js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getX4Numero6
-js
-print
-halt
-
-getThis7Numero6:
-cfp
-lra
-lop
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getX4Numero6:
-cfp
-lra
-push -3
-lop
-add
-lw
 srv
 sra
 pop

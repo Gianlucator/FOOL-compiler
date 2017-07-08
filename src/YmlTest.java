@@ -77,6 +77,7 @@ public class YmlTest {
     }
 
     public static String codeTest(String testName, String foolCode) throws Exception {
+        FOOLlib.reset();
 
         ANTLRInputStream input = new ANTLRInputStream(foolCode);
         FOOLLexer lexer = new FOOLLexer(input);
@@ -96,11 +97,11 @@ public class YmlTest {
             ArrayList<SemanticError> err = ast.checkSemantics(env);
 
             if (err.size() > 0) {
-                String errorStr = "error";
+                String errorStr = "semantic error";
                 if (err.size() > 1)
                     errorStr += "s";
 
-                System.out.printf("%d %s found:%n", err.size(), errorStr);
+                System.out.printf("%d %s found:\n", err.size(), errorStr);
                 for (SemanticError e : err)
                     System.out.println("\t" + e);
 
@@ -114,6 +115,11 @@ public class YmlTest {
                 if (typeErrors.size() == 0)
                     System.out.print(ANSI_GREEN + "Type checking passed: " + type.toPrint("") + ANSI_RESET);
                 else {
+                    String errorStr = "type error";
+                    if (typeErrors.size() > 1)
+                        errorStr += "s";
+
+                    System.out.printf("%d %s found:\n", typeErrors.size(), errorStr);
                     for (TypeError e : typeErrors)
                         System.out.println("\t" + e);
 
@@ -123,7 +129,6 @@ public class YmlTest {
                 // CODE GENERATION
                 String asmFileName = "tests_asm/test" + (testNumber + 1) + ".asm";
 
-                FOOLlib.resetCode();
                 String code = ast.codeGeneration();
 
                 if (code == null) {
