@@ -29,5 +29,9 @@ public class IntTypeNode implements Node {
 
 	  return new ArrayList<SemanticError>();
 	}
-  
-}  
+
+    @Override
+    public String toString() {
+        return "Int";
+    }
+}

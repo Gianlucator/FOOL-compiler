@@ -30,5 +30,8 @@ public class BoolTypeNode implements Node {
 		return "";
   }
 
-    
-}  
+    @Override
+    public String toString() {
+        return "Bool";
+    }
+}

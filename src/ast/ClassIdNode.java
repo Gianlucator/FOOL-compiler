@@ -40,4 +40,9 @@ public class ClassIdNode implements Node{
     public ArrayList<SemanticError> checkSemantics(Environment env) {
         return new ArrayList<SemanticError>();
     }
+
+    @Override
+    public String toString() {
+        return classId;
+    }
 }
