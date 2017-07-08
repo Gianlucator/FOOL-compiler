@@ -14,64 +14,42 @@ lhp
 add
 shp
 lhp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
 lw
 sop
 lfp
-push -3
 lfp
-add
-lw
-lfp
-push aparam6B1
+push u1A1
 js
 print
 halt
 
-aparam6B1:
+u1A1:
 cfp
 lra
 push 1
-lfp
-add
-lw
-sop
-lfp
-lfp
-push b1A1
-js
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-b1A1:
+s1B1:
 cfp
 lra
-push 2
+push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 sfp
 lrv

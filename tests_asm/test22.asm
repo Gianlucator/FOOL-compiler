@@ -14,21 +14,6 @@ lhp
 add
 shp
 lhp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
@@ -36,22 +21,12 @@ lw
 sop
 lfp
 lfp
-push s1Area4
+push u1A1
 js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push t1Rectangle9
-js
-add
 print
 halt
 
-s1Area4:
+u1A1:
 cfp
 lra
 push 1
@@ -63,12 +38,18 @@ lrv
 lra
 js
 
-t1Rectangle9:
+s1B1:
 cfp
 lra
-push 2
+push 1
+lfp
+add
+lw
+push 1
+add
 srv
 sra
+pop
 pop
 sfp
 lrv

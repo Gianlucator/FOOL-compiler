@@ -13,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 5
+push 1
 lhp
 sw
 push 1
@@ -42,7 +42,7 @@ lw
 sop
 lfp
 lfp
-push getter6B1
+push getC4B1
 js
 print
 halt
@@ -77,13 +77,13 @@ lrv
 lra
 js
 
-getter6B1:
+getC4B1:
 cfp
 lra
-lfp
-lfp
-push getB4A1
-js
+push -5
+lop
+add
+lw
 srv
 sra
 pop

@@ -21,39 +21,35 @@ lw
 sop
 lfp
 lfp
-push get3B1
+push u1A1
 js
 print
 halt
 
-function0:
+u1A1:
 cfp
 lra
-push 5
+push 1
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-get3B1:
+s1B1:
 cfp
 lra
-push function0
-lfp
-lop
-lfp
-push -2
+push 1
 lfp
 add
 lw
-js
+push 1
+add
 srv
-pop
 sra
+pop
 pop
 sfp
 lrv

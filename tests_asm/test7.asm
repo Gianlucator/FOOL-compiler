@@ -6,6 +6,13 @@ push 1
 lhp
 add
 shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
 push 0
 lhp
 sw
@@ -21,15 +28,18 @@ lw
 sop
 lfp
 lfp
-push u1A1
+push due3Numero6
 js
 print
 halt
 
-u1A1:
+uno3Numero6:
 cfp
 lra
-push 1
+push -3
+lop
+add
+lw
 srv
 sra
 pop
@@ -38,18 +48,15 @@ lrv
 lra
 js
 
-s1B1:
+due3Numero6:
 cfp
 lra
-push 1
 lfp
-add
-lw
-push 1
-add
+lfp
+push uno3Numero6
+js
 srv
 sra
-pop
 pop
 sfp
 lrv

@@ -14,7 +14,7 @@ lw
 sop
 lfp
 lfp
-push getNum6Numero27
+push getNum6Numero6
 js
 print
 halt
@@ -26,23 +26,6 @@ push -3
 lop
 add
 lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getNum6Numero27:
-cfp
-lra
-push -3
-lop
-add
-lw
-push 1
-add
 srv
 sra
 pop

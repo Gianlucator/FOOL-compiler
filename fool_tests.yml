@@ -40,6 +40,20 @@ Overriding:
   in print(x.k() + x.u());
 - "7"
 
+Overriding2:
+-   class A {
+        int f() 1;
+    }
+    class B implements A {
+        int f() 3;
+    };
+    let
+        A a = new A;
+        A b = new B;
+    in
+        print(a.f() + b.f());
+-   "4"
+
 Field and method override:
 - class Parent(int a) {
     int f(int x) 2 * 2;
@@ -68,6 +82,102 @@ New inside new:
     in
         print(b.value() + a.value());
 -   "10"
+
+Method calling method:
+-   class Numero (int x){
+        int uno() x;
+        int due() this.uno();
+    };
+    let
+        Numero num = new Numero(2);
+    in
+        print(num.due());
+-   "2"
+
+Scope Hell inside Class:
+-   class Numero (int x) {
+        int getX()
+            let
+                int y = 3;
+            in
+                x;
+        int getRedefinedX()
+            let
+                int x = 3;
+            in
+                x;
+        int getParamX(int x)
+            x;
+        int getXInsideFun()
+            let
+                int f() x;
+            in
+                f();
+    };
+    let
+        Numero num = new Numero(5);
+    in
+        print(num.getX() + num.getRedefinedX() + num.getParamX(10) + num.getXInsideFun());
+-   "23"
+
+Overriding methods with compatible class subtypes:
+-   class A
+    class B implements A
+    class C {
+        int g(B b) 1;
+    }
+    class D implements C{
+        int g(A a) 2;
+    };
+    let
+        A a = new A;
+        D d = new D;
+    in
+        print(d.g(a));
+-   "2"
+
+Subtyping in method call:
+-   class A (int x) {
+        int getX() x;
+    }
+    class B implements A (int x)
+    class C {
+        int get(A x) x.getX();
+    };
+    let
+        A a = new A(3);
+        B b = new B(7);
+        C c = new C;
+    in
+        print(c.get(a) + c.get(b));
+-   "10"
+
+Method visibility inside class scope:
+-   class A {
+        int f() this.g();
+        int g() 1;
+    };
+    let
+      A a = new A;
+    in
+      print(a.f());
+-   "1"
+
+Class declaration visibility inside global scope 3:
+-   class C implements B (A a)
+    class B implements A (A a)
+    class A {
+      int foo(F f) 9;
+    }
+    class F {
+      int foo(F f) 6;
+    };
+    let
+      B b = new B(new A);
+      F f = new F;
+    in
+      print(b.foo(f));
+-   "9"
 
 ##########################################################
 
@@ -122,11 +232,41 @@ Method not declared:
   let int x = 4; Parent o = new Child(x); in o.f(x);
 - "semantic errors"
 
+Undefined var in method:
+- class A {
+      int id(int x) x;
+  };
+  let
+      A a = new A;
+  in
+      print(a.id(i));
+- "semantic errors"
+
+Use of undeclared variable as constructor parameter:
+- class A(int a, int b);
+  let
+      int foo(int x)
+              if (true) then { new A(1, pluto) } else { print(x) };
+  in
+      foo(1);
+- "semantic errors"
+
 ##########################################################
 
 ##########################################################
 #					TYPE CHECKING ERRORS                 #
 ##########################################################
+
+Incompatible class error:
+-   class A
+    class B {
+        int get() 2;
+    };
+    let
+        A a = new B;
+    in
+        print(a.get());
+-   "type errors"
 
 #Funziona: dà errore di tipo di ritorno incompatibile
 Wrong contravariance with standard types:

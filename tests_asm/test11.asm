@@ -1,16 +1,5 @@
 push 0
-push 4
-push -2
-lfp
-add
-lw
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
+push 2
 lhp
 sw
 push 1
@@ -25,38 +14,42 @@ lhp
 add
 shp
 lhp
-push 8
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push f1A1
+js
 print
 halt
 
-f1Parent6:
+f1A1:
 cfp
 lra
-push 1
 lfp
-add
-lw
+lfp
+push g1A1
+js
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-f1Child5:
+g1A1:
 cfp
 lra
 push 1
-lfp
-add
-lw
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
+halt

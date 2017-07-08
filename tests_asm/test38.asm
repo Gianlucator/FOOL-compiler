@@ -1,5 +1,5 @@
 push 0
-push 8
+push 5
 lhp
 sw
 push 1
@@ -21,31 +21,41 @@ lhp
 add
 shp
 lhp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 push -2
 lfp
 add
 lw
 sop
 lfp
-lfp
-push getThis7Numero6
-js
 push -3
 lfp
 add
 lw
-sop
 lfp
-lfp
-push getX4Numero6
+push aparam6B1
 js
 print
 halt
 
-getThis7Numero6:
+afun4A1:
 cfp
 lra
-lop
+push 2
 srv
 sra
 pop
@@ -54,15 +64,26 @@ lrv
 lra
 js
 
-getX4Numero6:
+aparam6B1:
 cfp
 lra
 push -3
 lop
 add
 lw
+push 1
+lfp
+add
+lw
+sop
+lfp
+lfp
+push afun4A1
+js
+mult
 srv
 sra
+pop
 pop
 sfp
 lrv

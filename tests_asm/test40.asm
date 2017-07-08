@@ -1,5 +1,51 @@
 push 0
-push 8
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push uno3Numero6
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push due3Numero6
+js
+print
+halt
+
+uno3Numero6:
+cfp
+lra
+push 4
 lhp
 sw
 push 1
@@ -21,31 +67,6 @@ lhp
 add
 shp
 lhp
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getThis7Numero6
-js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getX4Numero6
-js
-print
-halt
-
-getThis7Numero6:
-cfp
-lra
-lop
 srv
 sra
 pop
@@ -54,7 +75,7 @@ lrv
 lra
 js
 
-getX4Numero6:
+due3Numero6:
 cfp
 lra
 push -3
