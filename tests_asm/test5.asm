@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 9
+push 11
 lhp
 sw
 push 1
@@ -21,7 +21,7 @@ push 1
 lhp
 add
 shp
-push 10
+push 12
 lhp
 sw
 push 1
@@ -51,10 +51,10 @@ add
 print
 halt
 
-sArea:
+tRectangle:
 cfp
 lra
-push 1
+push 2
 srv
 sra
 pop
@@ -63,10 +63,10 @@ lrv
 lra
 js
 
-tRectangle:
+sArea:
 cfp
 lra
-push 2
+push 1
 srv
 sra
 pop

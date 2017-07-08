@@ -189,6 +189,7 @@ public class ClassNode implements Node {
         }
 
         env.getSymTable().remove(env.getNestingLevel());
+        env.getObjectEnvironment().remove(env.getNestingLevel());
         env.decNestingLevel();
         return res;
     }

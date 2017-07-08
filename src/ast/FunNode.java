@@ -134,6 +134,7 @@ public class FunNode implements Node {
             //close scope
 
             env.getSymTable().remove(env.getNestingLevel());
+            env.getObjectEnvironment().remove(env.getNestingLevel());
             env.decNestingLevel();
         }
         return res;

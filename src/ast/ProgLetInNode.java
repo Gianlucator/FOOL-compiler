@@ -45,6 +45,7 @@ public class ProgLetInNode implements Node {
       
       //clean the scope, we are leaving a let scope
       env.getSymTable().remove(env.getNestingLevel());
+      env.getObjectEnvironment().remove(env.getNestingLevel());
       env.decNestingLevel();
 
       //return the result

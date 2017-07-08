@@ -20,7 +20,7 @@ push 1
 lhp
 add
 shp
-push 26
+push 28
 lhp
 sw
 push 1
@@ -49,7 +49,7 @@ push 1
 lhp
 add
 shp
-push 27
+push 29
 lhp
 sw
 push 1

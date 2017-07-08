@@ -89,6 +89,7 @@ public class ClassExpNode implements Node {
         res.addAll(body.checkSemantics(env));
 
         //env.getSymTable().remove(env.getNestingLevel());
+        env.getObjectEnvironment().remove(env.getNestingLevel());
         env.decNestingLevel();
 
         //return the result

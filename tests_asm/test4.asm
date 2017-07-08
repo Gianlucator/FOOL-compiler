@@ -6,7 +6,7 @@ push 1
 lhp
 add
 shp
-push 2
+push 9
 lhp
 sw
 push 1
@@ -21,7 +21,7 @@ push 1
 lhp
 add
 shp
-push 3
+push 10
 lhp
 sw
 push 1
@@ -45,18 +45,6 @@ js
 print
 halt
 
-bA:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
 aparamB:
 cfp
 lra
@@ -72,6 +60,18 @@ js
 srv
 sra
 pop
+pop
+sfp
+lrv
+lra
+js
+
+bA:
+cfp
+lra
+push 2
+srv
+sra
 pop
 sfp
 lrv
