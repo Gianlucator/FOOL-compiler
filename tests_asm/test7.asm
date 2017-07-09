@@ -13,6 +13,62 @@ push 1
 lhp
 add
 shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 10
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 0
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
+lhp
+sw
+push 1
+lhp
+add
+shp
 push 0
 lhp
 sw
@@ -28,12 +84,31 @@ lw
 sop
 lfp
 lfp
-push due3Numero6
+push getA4B1
 js
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push value5A1
+js
+push -3
+lfp
+add
+lw
+sop
+lfp
+lfp
+push value5A1
+js
+add
 print
 halt
 
-uno3Numero6:
+value5A1:
 cfp
 lra
 push -3
@@ -48,13 +123,13 @@ lrv
 lra
 js
 
-due3Numero6:
+getA4B1:
 cfp
 lra
-lfp
-lfp
-push uno3Numero6
-js
+push -4
+lop
+add
+lw
 srv
 sra
 pop
