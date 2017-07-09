@@ -211,7 +211,9 @@ public class FunNode implements Node {
                 "lra\n" + "js\n" //load from ra e salta a $ra
         );
 
-        return "push " + funl + "\n";
+        if (self == null)
+            return "push " + funl + "\n";
+        else return "";
     }
 
 }  

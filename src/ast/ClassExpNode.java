@@ -86,15 +86,15 @@ public class ClassExpNode implements Node {
         for (Node cl : classes)
             res.addAll(cl.checkSemantics(env));
 
+        //Esco dallo scope delle dichiarazioni di classe, imposto il
         env.setClassEnvironment("");
 
         res.addAll(body.checkSemantics(env));
 
-        //env.getSymTable().remove(env.getNestingLevel());
+        //Non rimuovo la symbol table generata da questo nodo, dato che servirà nel resto del programma.
         env.getObjectEnvironment().remove(env.getNestingLevel());
         env.decNestingLevel();
 
-        //return the result
         return res;
     }
 }

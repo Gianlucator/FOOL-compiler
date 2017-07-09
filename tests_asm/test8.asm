@@ -1,19 +1,12 @@
 push 0
-push 5
+push 2
 lhp
 sw
 push 1
 lhp
 add
 shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
+push 2
 lhp
 sw
 push 1
@@ -28,96 +21,15 @@ lw
 sop
 lfp
 lfp
-push getX4Numero6
+push due3Numero6
 js
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getRedefinedX13Numero6
-js
-push -2
-lfp
-add
-lw
-sop
-lfp
-push 10
-lfp
-push getParamX9Numero6
-js
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getXInsideFun13Numero6
-js
-add
-add
-add
 print
 halt
 
-getX4Numero6:
+uno3Numero6:
 cfp
 lra
-push 3
-push -3
-lop
-add
-lw
-srv
-pop
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getRedefinedX13Numero6:
-cfp
-lra
-push 3
 push -2
-lfp
-add
-lw
-srv
-pop
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getParamX9Numero6:
-cfp
-lra
-push 1
-lfp
-add
-lw
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function0:
-cfp
-lra
-push -3
 lop
 add
 lw
@@ -129,19 +41,14 @@ lrv
 lra
 js
 
-getXInsideFun13Numero6:
+due3Numero6:
 cfp
 lra
-push function0
 lfp
 lfp
-push -2
-lfp
-add
-lw
+push uno3Numero6
 js
 srv
-pop
 sra
 pop
 sfp

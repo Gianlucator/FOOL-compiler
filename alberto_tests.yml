@@ -174,15 +174,15 @@ test17 - Dispatch Table:
     class NumeroV implements Numero(int x) {
         int getX() x;
         int getY() x;
-    }
-    class NumeroX implements NumeroV(int x) {
-        int getX() x;
-    };
-    let
-        Numero num = new Numero(2);
-    in
-        print(num.getX());
--   "2"
+           }
+           class NumeroX implements NumeroV(int x) {
+               int getX() x;
+           };
+           let
+               Numero num = new Numero(2);
+           in
+               print(num.getX());
+       -   "2"
 
 test18 - Let Inside Func Redefines Function Param:
 -   let

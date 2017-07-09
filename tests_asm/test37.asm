@@ -1,9 +1,12 @@
 push 0
 push 4
-push -2
-lfp
+lhp
+sw
+push 1
+lhp
 add
-lw
+shp
+push 2
 lhp
 sw
 push 1
@@ -17,25 +20,88 @@ push 1
 lhp
 add
 shp
-push 0
 lhp
-sw
-push 1
-lhp
+push -2
+lfp
 add
-shp
-lhp
-push 8
+lw
+sop
+lfp
+push 5
+push 3
+lfp
+push calcArea8Rectangle9
+js
 print
 halt
 
-f1Parent6:
+area4Rectangle9:
+cfp
+lra
+push -2
+lop
+add
+lw
+push -3
+lop
+add
+lw
+mult
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getL15Rectangle9:
+cfp
+lra
+push -2
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getL25Rectangle9:
+cfp
+lra
+push -3
+lop
+add
+lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+scaleArea9Rectangle9:
 cfp
 lra
 push 1
 lfp
 add
 lw
+push -2
+lop
+add
+lw
+push -3
+lop
+add
+lw
+mult
+mult
 srv
 sra
 pop
@@ -45,15 +111,21 @@ lrv
 lra
 js
 
-f1Child5:
+calcArea8Rectangle9:
 cfp
 lra
 push 1
 lfp
 add
 lw
+push 2
+lfp
+add
+lw
+mult
 srv
 sra
+pop
 pop
 pop
 sfp
