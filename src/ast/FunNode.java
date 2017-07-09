@@ -88,10 +88,7 @@ public class FunNode implements Node {
                 if ( arg.getType() instanceof ClassIdNode) {
                     ohm.put(arg.getId(), ((ClassIdNode) arg.getType()).getClassId());
                 }
-                if (hmn.put(arg.getId(), new STentry(env.getNestingLevel(), arg.getType(), paroffset++)) != null) {
-                    // warning, non errore!
-                    // la prima dichiarazione viene sovrascritta dalla seconda
-                }
+                hmn.put(arg.getId(), new STentry(env.getNestingLevel(), arg.getType(), paroffset++));
             }
 
             //set func type
