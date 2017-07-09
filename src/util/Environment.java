@@ -54,16 +54,8 @@ public class Environment {
 		return symTable;
 	}
 
-	public void setSymTable(ArrayList<HashMap<String, STentry>> symTable) {
-		this.symTable = symTable;
-	}
-
 	public int getNestingLevel() {
 		return nestingLevel;
-	}
-
-	public void setNestingLevel(int nestingLevel) {
-		this.nestingLevel = nestingLevel;
 	}
 
 	public void incNestingLevel(){
@@ -100,10 +92,6 @@ public class Environment {
 
 	public STentry insertClassEntry(String s, STentry e) {
 		return symTable.get(GLOBAL_SCOPE).put(s, e);
-	}
-
-	public void printNestingLevel() {
-		System.out.println(nestingLevel);
 	}
 
 	//livello ambiente con dichiarazioni piu' esterno � 0 (prima posizione ArrayList) invece che 1 (slides)

@@ -10,13 +10,12 @@ import java.util.Iterator;
  * Created by Stef@no on 29/06/2017.
  */
 public class TypeTreeBuilder {
-    private static ArrayList<String> nodeNames = new ArrayList<>();
 
     public static TypeTreeNode buildTypeTree(ArrayList<Node> cls) {
         ArrayList<Node> classes = new ArrayList<>(cls);
 
         TypeTreeNode rootNode = new TypeTreeNode("", null,null);
-        nodeNames = new ArrayList<>();
+        ArrayList<String> nodeNames = new ArrayList<>();
         nodeNames.add("");
 
         int lastSize = -1;

@@ -18,7 +18,7 @@ public class FOOLlib {
 
     private static ArrayList<TypeError> typeErrors = new ArrayList<>();
 
-    //valuta se il tipo "a" è <= del tipo "b", dove "a" e "b" sono tipi di base: int o bool
+    //valuta se il tipo "a" è <: del tipo "b", dove "a" e "b" sono tipi di base: int o bool
     public static boolean isSubtype(Node a, Node b) {
         if (a instanceof ClassIdNode && b instanceof ClassIdNode){
             return FOOLlib.isSubtype(((ClassIdNode) a).getClassId(), ((ClassIdNode) b).getClassId());
@@ -35,8 +35,8 @@ public class FOOLlib {
         TypeTreeNode typeOfA = root.findNode(A);
         TypeTreeNode typeOfB = root.findNode(B);
 
-        try { //tamarro ma funziona
-            return typeOfB.isSubtype(typeOfA) ;
+        try {
+            return typeOfB.isSubtype(typeOfA);
         } catch (Exception e){
             return false;
         }
@@ -50,7 +50,6 @@ public class FOOLlib {
         return "function" + (funLabCount++);
     }
 
-
     public static String getMethodLabel(String className, String methodName) {
         return methodName + methodName.length() + className + className.length();
     }
@@ -59,7 +58,6 @@ public class FOOLlib {
         funCode = "";
         labCount = 0;
         funLabCount = 0;
-
         typeErrors = new ArrayList<>();
     }
 

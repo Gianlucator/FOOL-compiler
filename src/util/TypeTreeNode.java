@@ -35,14 +35,6 @@ public class TypeTreeNode {
         return this.equals(sup) || this.superTypes.contains(sup);
     }
 
-    public HashSet<TypeTreeNode> getSuperTypes() {
-        return superTypes;
-    }
-
-    public void addSubtype(TypeTreeNode subtype) {
-        subTypes.add(subtype);
-    }
-
     public TypeTreeNode findNode(String classId) {
 
         if (currentType.equals(classId))
@@ -73,6 +65,10 @@ public class TypeTreeNode {
             classNodes.add(0, currentClassNode);
 
         return classNodes;
+    }
+
+    public void addSubtype(TypeTreeNode subtype) {
+        subTypes.add(subtype);
     }
 
     public String toString() {
