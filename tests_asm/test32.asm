@@ -31,6 +31,18 @@ js
 print
 halt
 
+b1A1:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
 aparam6B1:
 cfp
 lra
@@ -46,18 +58,6 @@ js
 srv
 sra
 pop
-pop
-sfp
-lrv
-lra
-js
-
-b1A1:
-cfp
-lra
-push 2
-srv
-sra
 pop
 sfp
 lrv

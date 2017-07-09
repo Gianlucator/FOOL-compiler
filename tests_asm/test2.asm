@@ -131,6 +131,23 @@ lrv
 lra
 js
 
+getY4NumeroI7:
+cfp
+lra
+push -2
+lop
+add
+lw
+push 1
+add
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
 getX4NumeroV7:
 cfp
 lra
@@ -173,23 +190,6 @@ lop
 add
 lw
 push 3
-add
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getY4NumeroI7:
-cfp
-lra
-push -2
-lop
-add
-lw
-push 1
 add
 srv
 sra

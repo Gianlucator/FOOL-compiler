@@ -45,10 +45,10 @@ js
 print
 halt
 
-foo3A1:
+foo3F1:
 cfp
 lra
-push 9
+push 6
 srv
 sra
 pop
@@ -58,10 +58,10 @@ lrv
 lra
 js
 
-foo3F1:
+foo3A1:
 cfp
 lra
-push 6
+push 9
 srv
 sra
 pop
