@@ -38,6 +38,18 @@ js
 print
 halt
 
+afun4A1:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
 aparam6B1:
 cfp
 lra
@@ -58,18 +70,6 @@ mult
 srv
 sra
 pop
-pop
-sfp
-lrv
-lra
-js
-
-afun4A1:
-cfp
-lra
-push 2
-srv
-sra
 pop
 sfp
 lrv

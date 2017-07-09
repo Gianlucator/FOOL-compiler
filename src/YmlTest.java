@@ -17,6 +17,7 @@ import util.VMResult;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class YmlTest {
 
@@ -66,6 +67,9 @@ public class YmlTest {
         } else {
             System.out.printf("%s%d/%d tests passed, you are a failure.%s%n", ANSI_RED, testsPassed, testNumber, ANSI_RESET);
         }
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Press Enter to close. ");
+        sc.nextLine();
     }
 
     public static HashMap<String, ArrayList<String>> loadYmlFromFile(String fileName) throws IOException {
