@@ -67,21 +67,6 @@ add
 print
 halt
 
-getX4A1:
-cfp
-lra
-push -2
-lop
-add
-lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
 get3C1:
 cfp
 lra
@@ -97,6 +82,21 @@ js
 srv
 sra
 pop
+pop
+sfp
+lrv
+lra
+js
+
+getX4A1:
+cfp
+lra
+push -2
+lop
+add
+lw
+srv
+sra
 pop
 sfp
 lrv

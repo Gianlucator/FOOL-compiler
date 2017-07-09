@@ -49,10 +49,13 @@ public class IdNode implements Node {
                     ClassNode ownerCl = env.getClassLayout(env.getClassEnvironment());
                     ArrayList<Node> fields = ownerCl.getFields();
 
-                    for (int i = 0; i < fields.size(); i++) {
+                    boolean found = false;
+                    for (int i = 0; i < fields.size() && !found; i++) {
                         Node fl = fields.get(i);
-                        if (((VarDecNode) fl).getId().equals(id))
+                        if (((VarDecNode) fl).getId().equals(id)) {
                             fieldOffset = -i -2;
+                            found = true;
+                        }
                     }
 
                     isField = true;

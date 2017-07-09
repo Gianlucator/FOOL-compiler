@@ -31,18 +31,19 @@ public class NewExpNode implements Node {
     @Override
     public Node typeCheck() {
         for (int i = 0; i < classEntry.getFields().size(); i++){
-            Node varNodeType = ((VarDecNode) classEntry.getFields().get(i)).getType();
             Node arg = args.get(i).typeCheck();
+            Node varNodeType = ((VarDecNode) classEntry.getFields().get(i)).getType();
 
             if (!FOOLlib.isSubtype(arg, varNodeType))
                 FOOLlib.addTypeError("Incompatible parameter at position " + i + " during instantiation of class " + classId);
         }
+
         return new ClassIdNode(classId);
     }
 
     @Override
     public String codeGeneration() {
-        String code = "";                           //NON CI INTERESSA SALVARE L'HP, NON CI PENSARE.
+        String code = "";
         String saveToHPThenIncHP =  "lhp\n" +
                                     "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
                                     "push 1\n" +
