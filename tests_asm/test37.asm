@@ -13,14 +13,7 @@ push 1
 lhp
 add
 shp
-push 4
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
+push 3
 lhp
 sw
 push 1
@@ -45,11 +38,11 @@ halt
 area4Rectangle9:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
-push -4
+push -3
 lop
 add
 lw
@@ -65,7 +58,7 @@ js
 getL15Rectangle9:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -80,7 +73,7 @@ js
 getL25Rectangle9:
 cfp
 lra
-push -4
+push -3
 lop
 add
 lw
@@ -99,11 +92,11 @@ push 1
 lfp
 add
 lw
-push -3
+push -2
 lop
 add
 lw
-push -4
+push -3
 lop
 add
 lw

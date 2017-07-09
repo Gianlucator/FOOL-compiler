@@ -6,13 +6,6 @@ push 1
 lhp
 add
 shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 2
 lhp
 sw
@@ -34,14 +27,7 @@ push 1
 lhp
 add
 shp
-push 4
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
+push 3
 lhp
 sw
 push 1
@@ -62,14 +48,7 @@ push 1
 lhp
 add
 shp
-push 4
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
+push 3
 lhp
 sw
 push 1
@@ -111,7 +90,7 @@ halt
 value5A1:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -126,7 +105,7 @@ js
 getA4B1:
 cfp
 lra
-push -4
+push -3
 lop
 add
 lw

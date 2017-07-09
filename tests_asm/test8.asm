@@ -6,14 +6,7 @@ push 1
 lhp
 add
 shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
+push 2
 lhp
 sw
 push 1
@@ -36,7 +29,7 @@ halt
 uno3Numero6:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw

@@ -88,7 +88,7 @@ public class CallMetNode implements Node {
             for (Node arg : parlist)
                 res.addAll(arg.checkSemantics(env));
 
-            // si aggiunge ai parametri il self
+            //si aggiunge ai parametri il self
             parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
         }
 
@@ -102,7 +102,6 @@ public class CallMetNode implements Node {
     @Override
     public String codeGeneration() {
 
-        //TODO: trovare label univoca per metodo di una classe
         String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId(),
                mLabel = FOOLlib.getMethodLabel(selfName, methodName),
                loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");

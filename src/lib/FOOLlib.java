@@ -12,7 +12,6 @@ public class FOOLlib {
     private static TypeTreeNode root = new TypeTreeNode("",null,null);
 
     private static int labCount = 0;
-    private static int objCount = 0;
     private static int funLabCount = 0;
 
     private static String funCode = "";
@@ -51,8 +50,6 @@ public class FOOLlib {
         return "function" + (funLabCount++);
     }
 
-    //TODO: controllare se serve
-    public static int freshObjLabel() { return objCount++; }
 
     public static String getMethodLabel(String className, String methodName) {
         return methodName + methodName.length() + className + className.length();
@@ -61,7 +58,6 @@ public class FOOLlib {
     public static void reset() {
         funCode = "";
         labCount = 0;
-        objCount = 0;
         funLabCount = 0;
 
         typeErrors = new ArrayList<>();

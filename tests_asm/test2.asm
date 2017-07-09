@@ -6,14 +6,7 @@ push 1
 lhp
 add
 shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
+push 2
 lhp
 sw
 push 1
@@ -22,35 +15,6 @@ add
 shp
 lhp
 push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
 lhp
 sw
 push 1
@@ -72,14 +36,22 @@ push 1
 lhp
 add
 shp
-push 3
+push 2
 lhp
 sw
 push 1
 lhp
 add
 shp
-push 3
+lhp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -132,7 +104,7 @@ halt
 getX4Numero6:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -147,7 +119,7 @@ js
 getY4Numero6:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -162,7 +134,7 @@ js
 getY4NumeroI7:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -179,7 +151,7 @@ js
 getX4NumeroV7:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -196,7 +168,7 @@ js
 getY4NumeroV7:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
@@ -213,7 +185,7 @@ js
 getX4NumeroX7:
 cfp
 lra
-push -3
+push -2
 lop
 add
 lw
