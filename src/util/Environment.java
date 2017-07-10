@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ast.ClassNode;
+import ast.IdNode;
 import ast.STentry;
 import org.stringtemplate.v4.ST;
 
@@ -15,6 +16,20 @@ public class Environment {
 	private int offset = 0;
 	private final int GLOBAL_SCOPE = 0;
 	private String classEnvironment = "";
+
+	private HashMap<String, ArrayList<IdNode>> fieldTypes = new HashMap<>();
+
+	public HashMap<String, ArrayList<IdNode>> getFieldTypes() {
+		return fieldTypes;
+	}
+
+	public void createArrayListorAdd(String c, IdNode idn) {
+		if (fieldTypes.get(c) == null){
+			ArrayList<IdNode> a = new ArrayList<>();
+			fieldTypes.put(c, a);
+		}
+		fieldTypes.get(c).add(idn);
+	}
 
 	public ClassNode getClassLayout(String className){
 		ClassNode cn = null;

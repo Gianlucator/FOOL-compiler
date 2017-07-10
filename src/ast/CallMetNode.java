@@ -16,6 +16,8 @@ public class CallMetNode implements Node {
     private ArrayList<Node> parlist;
     private FunNode methodNode;
     private IdNode objectEntry;
+    private ArrayList<IdNode> objectIDsInClass = new ArrayList<>();
+
 
     // chiamata del metodo di una classe
     public CallMetNode(String objectName, String methodName, ArrayList<Node> parlist) {
@@ -95,6 +97,11 @@ public class CallMetNode implements Node {
         //create object ID node
         objectEntry = new IdNode(objectName);
         res.addAll(objectEntry.checkSemantics(env));
+        if (!env.getClassEnvironment().equals("") && !objectName.equals("this") ){
+            env.createArrayListorAdd(env.getClassEnvironment(), objectEntry);
+            objectIDsInClass = env.getFieldTypes().get(env.getClassEnvironment());
+        }
+
 
         return res;
     }
@@ -102,9 +109,14 @@ public class CallMetNode implements Node {
     @Override
     public String codeGeneration() {
 
-        String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId(),
-               mLabel = FOOLlib.getMethodLabel(selfName, methodName),
-               loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");
+        String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId();
+        for (IdNode idn : objectIDsInClass){
+            if(objectName.equals(idn.getId()) ){
+                selfName = ((ClassIdNode) idn.getEntry().getType()).getClassId();
+            }
+        }
+        String mLabel = FOOLlib.getMethodLabel(selfName, methodName);
+        String loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");
 
         String parCode = "";
         for (int i = parlist.size() - 1; i >= 0; i--)

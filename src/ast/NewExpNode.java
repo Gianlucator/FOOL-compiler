@@ -51,13 +51,16 @@ public class NewExpNode implements Node {
                                     "add\n" +       //vado all'indirizzo successivo
                                     "shp\n";        //modifico l'hp //fa già la pop
 
-        for (int i = args.size() - 1; i >= 0; i--)
-            code += args.get(i).codeGeneration() + saveToHPThenIncHP;
+        if (args.size() > 0){
 
-        // salviamo la dimensione arg.size() + 1
-        int size = args.size() + 1;
-        code += "push " + size + "\n" + saveToHPThenIncHP;
+            for (int i = args.size() - 1; i >= 0; i--)
+                code += args.get(i).codeGeneration() + saveToHPThenIncHP;
 
+            // salviamo la dimensione arg.size() + 1
+            int size = args.size() + 1;
+            code += "push " + size + "\n" + saveToHPThenIncHP;
+
+        }
         // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
         code += "lhp\n";
 
@@ -83,8 +86,25 @@ public class NewExpNode implements Node {
                         fewOrMany, classId, constructorArguments, args.size())));
             }
         }
-        for (Node arg : args)
-            res.addAll(arg.checkSemantics(env));
+        for (int i = 0; i < args.size(); i++){
+            res.addAll(args.get(i).checkSemantics(env));
+            if (args.get(i) instanceof NewExpNode){
+                String argClass = ((NewExpNode) args.get(i)).getClassId();
+
+                ClassNode cn = env.getClassLayout(classId);
+                String id = ((VarDecNode) cn.getFields().get(i)).getId();
+
+                ArrayList<IdNode> nodes = new ArrayList<>();
+                if (env.getFieldTypes().get(classId) != null){
+                     nodes = env.getFieldTypes().get(classId);
+                }
+                for (IdNode idn : nodes){
+                    if (idn.getId().equals(id)){
+                        idn.getEntry().setType(new ClassIdNode(argClass));
+                    }
+                }
+            }
+        }
 
         return res;
     }

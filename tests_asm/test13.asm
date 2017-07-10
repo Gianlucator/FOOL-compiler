@@ -1,45 +1,42 @@
 push 0
-push 1
 lhp
-sw
-push 1
 lhp
-add
-shp
-lhp
-push -2
+push -3
 lfp
 add
 lw
 sop
 lfp
+push -2
 lfp
-push f1A1
+add
+lw
+lfp
+push g1D1
 js
 print
 halt
 
-f1A1:
+g1C1:
 cfp
 lra
-lfp
-lfp
-push g1A1
-js
+push 1
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-g1A1:
+g1D1:
 cfp
 lra
-push 1
+push 2
 srv
 sra
+pop
 pop
 sfp
 lrv

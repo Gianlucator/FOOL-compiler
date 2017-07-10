@@ -13,6 +13,35 @@ claudio:
   in print(y.ooo());
 - "555"
 
+claudio2:
+- class A {
+    int get() 44;
+  }
+  class B implements A{
+    int get() 555;
+  }
+  class C (A ogg, int ii){
+    int ooo() ogg.get() + ii;
+  };
+  let C y = new C(new B, 1);
+  in print(y.ooo());
+- "556"
+
+claudio3:
+- class A {
+    int get() 44;
+  }
+  class B implements A{
+    int get() 555;
+  }
+  class C (A ogg){
+    int ooo() ogg.get();
+  };
+  let C y2 = new C(new A);
+      C y = new C(new B);
+  in print(y2.ooo());
+- "44"
+
 ##########################################################
 #					     MAIN TESTS                      #
 ##########################################################
