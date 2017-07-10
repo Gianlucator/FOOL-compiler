@@ -7,14 +7,6 @@ lhp
 add
 shp
 lhp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
@@ -22,22 +14,46 @@ lw
 sop
 lfp
 lfp
-push f1A1
+push k1B1
 js
-push -3
+push -2
 lfp
 add
 lw
 sop
 lfp
 lfp
-push f1B1
+push u1B1
 js
 add
 print
 halt
 
-f1A1:
+u1A1:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+k1A1:
+cfp
+lra
+push 5
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+u1B1:
 cfp
 lra
 push 1
@@ -49,7 +65,19 @@ lrv
 lra
 js
 
-f1B1:
+k1B1:
+cfp
+lra
+push 6
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+s1B1:
 cfp
 lra
 push 3

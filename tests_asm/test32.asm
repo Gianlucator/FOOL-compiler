@@ -1,40 +1,31 @@
 push 0
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+push function0
+lfp
+lfp
 push -2
+lfp
+add
+lw
+js
+push -3
 lfp
 add
 lw
 sop
 lfp
-push -3
 lfp
-add
-lw
-lfp
-push aparam6B1
+push getNum6Numero27
 js
 print
 halt
 
-b1A1:
+getNum6Numero6:
 cfp
 lra
-push 2
+push -2
+lop
+add
+lw
 srv
 sra
 pop
@@ -43,21 +34,43 @@ lrv
 lra
 js
 
-aparam6B1:
+getNum6Numero27:
 cfp
 lra
-push 1
-lfp
+push -2
+lop
 add
 lw
-sop
-lfp
-lfp
-push b1A1
-js
+push 1
+add
 srv
 sra
 pop
+sfp
+lrv
+lra
+js
+
+function0:
+cfp
+lra
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+srv
+sra
 pop
 sfp
 lrv
