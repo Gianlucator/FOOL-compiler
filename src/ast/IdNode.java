@@ -21,14 +21,6 @@ public class IdNode implements Node {
         fieldOffset = 0;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public STentry getEntry() {
-        return entry;
-    }
-
     public String toPrint(String s) {
         return s + "Id:" + id + " at nestlev " + nestinglevel + "\n" + entry.toPrint(s + "  ");
     }

@@ -1,5 +1,5 @@
 push 0
-push 2
+push 5
 lhp
 sw
 push 1
@@ -14,56 +14,33 @@ lhp
 add
 shp
 lhp
-lhp
-sw
-push 1
-lhp
+push -2
+lfp
 add
-shp
+lw
+sop
+lfp
+lfp
+push getX4Numero6
+js
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getRedefinedX13Numero6
+js
+push -2
+lfp
+add
+lw
+sop
+lfp
 push 10
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push -2
 lfp
-add
-lw
-sop
-lfp
-lfp
-push getA4B1
+push getParamX9Numero6
 js
 push -2
 lfp
@@ -72,22 +49,65 @@ lw
 sop
 lfp
 lfp
-push value5A1
+push getXInsideFun13Numero6
 js
-push -3
-lfp
 add
-lw
-sop
-lfp
-lfp
-push value5A1
-js
+add
 add
 print
 halt
 
-value5A1:
+getX4Numero6:
+cfp
+lra
+push 3
+push -2
+lop
+add
+lw
+srv
+pop
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getRedefinedX13Numero6:
+cfp
+lra
+push 3
+push -2
+lfp
+add
+lw
+srv
+pop
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getParamX9Numero6:
+cfp
+lra
+push 1
+lfp
+add
+lw
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+function0:
 cfp
 lra
 push -2
@@ -102,14 +122,19 @@ lrv
 lra
 js
 
-getA4B1:
+getXInsideFun13Numero6:
 cfp
 lra
-push -3
-lop
+push function0
+lfp
+lfp
+push -2
+lfp
 add
 lw
+js
 srv
+pop
 sra
 pop
 sfp

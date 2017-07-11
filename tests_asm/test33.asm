@@ -1,18 +1,4 @@
 push 0
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
 push 1
 lhp
 sw
@@ -20,7 +6,8 @@ push 1
 lhp
 add
 shp
-push 4
+lhp
+push 1
 lhp
 sw
 push 1
@@ -34,19 +21,20 @@ add
 lw
 sop
 lfp
+push -3
 lfp
-push getC4B1
+add
+lw
+lfp
+push aparam6B1
 js
 print
 halt
 
-getA4A1:
+b1A1:
 cfp
 lra
-push -2
-lop
-add
-lw
+push 2
 srv
 sra
 pop
@@ -55,30 +43,21 @@ lrv
 lra
 js
 
-getB4A1:
+aparam6B1:
 cfp
 lra
-push -3
-lop
+push 1
+lfp
 add
 lw
+sop
+lfp
+lfp
+push b1A1
+js
 srv
 sra
 pop
-sfp
-lrv
-lra
-js
-
-getC4B1:
-cfp
-lra
-push -4
-lop
-add
-lw
-srv
-sra
 pop
 sfp
 lrv

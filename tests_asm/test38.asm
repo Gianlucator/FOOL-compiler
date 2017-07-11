@@ -1,5 +1,5 @@
 push 0
-push 12
+push 4
 lhp
 sw
 push 1
@@ -13,6 +13,13 @@ push 1
 lhp
 add
 shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
 lhp
 push -2
 lfp
@@ -20,25 +27,26 @@ add
 lw
 sop
 lfp
+push 5
+push 3
 lfp
-push getThis7Numero27
-js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push getX4Numero6
+push calcArea8Rectangle9
 js
 print
 halt
 
-getThis7Numero6:
+area4Rectangle9:
 cfp
 lra
+push -2
 lop
+add
+lw
+push -3
+lop
+add
+lw
+mult
 srv
 sra
 pop
@@ -47,7 +55,7 @@ lrv
 lra
 js
 
-getX4Numero6:
+getL15Rectangle9:
 cfp
 lra
 push -2
@@ -62,12 +70,63 @@ lrv
 lra
 js
 
-getThis7Numero27:
+getL25Rectangle9:
 cfp
 lra
+push -3
 lop
+add
+lw
 srv
 sra
+pop
+sfp
+lrv
+lra
+js
+
+scaleArea9Rectangle9:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push -2
+lop
+add
+lw
+push -3
+lop
+add
+lw
+mult
+mult
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+js
+
+calcArea8Rectangle9:
+cfp
+lra
+push 1
+lfp
+add
+lw
+push 2
+lfp
+add
+lw
+mult
+srv
+sra
+pop
+pop
 pop
 sfp
 lrv

@@ -1,5 +1,5 @@
 push 0
-push 5
+push 2
 lhp
 sw
 push 1
@@ -14,53 +14,60 @@ lhp
 add
 shp
 lhp
-lhp
 push -2
 lfp
 add
 lw
 sop
 lfp
+lfp
+push uno3Numero6
+js
 push -3
 lfp
 add
 lw
+sop
 lfp
-push aparam6B1
+lfp
+push due3Numero6
 js
 print
 halt
 
-aparam6B1:
+uno3Numero6:
 cfp
 lra
-push -2
-lop
-add
-lw
+push 4
+lhp
+sw
 push 1
-lfp
+lhp
 add
-lw
-sop
-lfp
-lfp
-push afun4A1
-js
-mult
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-afun4A1:
+due3Numero6:
 cfp
 lra
-push 2
+push -2
+lop
+add
+lw
 srv
 sra
 pop

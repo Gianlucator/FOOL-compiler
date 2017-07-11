@@ -1,19 +1,20 @@
 push 0
-lhp
-push function0
-lfp
-lfp
-push -3
-lfp
-add
-lw
-js
+push 1
 lhp
 sw
 push 1
 lhp
 add
 shp
+lhp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 push -2
 lfp
 add
@@ -21,72 +22,25 @@ lw
 sop
 lfp
 lfp
-push get3X1
+push f1A1
 js
-lhp
-sw
-push 1
-lhp
+push -3
+lfp
 add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
+lw
+sop
+lfp
+lfp
+push f1B1
+js
 add
-shp
-lhp
-push 777
 print
 halt
 
-get3X1:
+f1A1:
 cfp
 lra
-lhp
-lhp
-sw
 push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 srv
 sra
 pop
@@ -95,19 +49,10 @@ lrv
 lra
 js
 
-function0:
+f1B1:
 cfp
 lra
-push -2
-lfp
-lw
-add
-lw
-sop
-lfp
-lfp
-push get3X1
-js
+push 3
 srv
 sra
 pop

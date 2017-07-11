@@ -1,9 +1,5 @@
 push 0
-push 4
-push -2
-lfp
-add
-lw
+push 2
 lhp
 sw
 push 1
@@ -18,85 +14,42 @@ lhp
 add
 shp
 lhp
-push -3
+push -2
 lfp
 add
 lw
 sop
 lfp
-push -2
 lfp
-add
-lw
-lfp
-push f1Child5
+push due3Numero6
 js
 print
 halt
 
-f1Parent6:
+uno3Numero6:
 cfp
 lra
-push 2
-push 2
-mult
+push -2
+lop
+add
+lw
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-r1Parent6:
+due3Numero6:
 cfp
 lra
-push 2
-push 1
 lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
+lfp
+push uno3Numero6
 js
-
-f1Child5:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
 srv
 sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-r1Child5:
-cfp
-lra
-push 3
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
 pop
 sfp
 lrv
