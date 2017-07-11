@@ -1,5 +1,27 @@
 push 0
+push 3
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push 7
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -15,7 +37,7 @@ lhp
 add
 shp
 lhp
-push -3
+push -4
 lfp
 add
 lw
@@ -26,28 +48,52 @@ lfp
 add
 lw
 lfp
-push g1D1
+push get3C1
 js
+push -4
+lfp
+add
+lw
+sop
+lfp
+push -3
+lfp
+add
+lw
+lfp
+push get3C1
+js
+add
 print
 halt
 
-g1C1:
+getX4A1:
 cfp
 lra
-push 1
+push -2
+lop
+add
+lw
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-g1D1:
+get3C1:
 cfp
 lra
-push 2
+push 1
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getX4A1
+js
 srv
 sra
 pop

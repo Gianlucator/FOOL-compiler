@@ -1,5 +1,5 @@
 push 0
-push 7
+push 3
 lhp
 sw
 push 1

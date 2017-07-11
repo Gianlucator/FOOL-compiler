@@ -1,5 +1,5 @@
 push 0
-push 4
+push 5
 lhp
 sw
 push 1
@@ -13,7 +13,8 @@ push 1
 lhp
 add
 shp
-push 3
+lhp
+push 1
 lhp
 sw
 push 1
@@ -27,80 +28,32 @@ add
 lw
 sop
 lfp
-push 5
-push 3
+push -3
 lfp
-push calcArea8Rectangle9
+add
+lw
+lfp
+push aparam6B1
 js
 print
 halt
 
-area4Rectangle9:
+aparam6B1:
 cfp
 lra
 push -2
 lop
 add
 lw
-push -3
-lop
-add
-lw
-mult
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getL15Rectangle9:
-cfp
-lra
-push -2
-lop
-add
-lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-getL25Rectangle9:
-cfp
-lra
-push -3
-lop
-add
-lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-scaleArea9Rectangle9:
-cfp
-lra
 push 1
 lfp
 add
 lw
-push -2
-lop
-add
-lw
-push -3
-lop
-add
-lw
-mult
+sop
+lfp
+lfp
+push afun4A1
+js
 mult
 srv
 sra
@@ -111,22 +64,12 @@ lrv
 lra
 js
 
-calcArea8Rectangle9:
+afun4A1:
 cfp
 lra
-push 1
-lfp
-add
-lw
 push 2
-lfp
-add
-lw
-mult
 srv
 sra
-pop
-pop
 pop
 sfp
 lrv

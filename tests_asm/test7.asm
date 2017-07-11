@@ -1,9 +1,5 @@
 push 0
-push 4
-push -2
-lfp
-add
-lw
+push 2
 lhp
 sw
 push 1
@@ -18,85 +14,103 @@ lhp
 add
 shp
 lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 10
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 0
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push getA4B1
+js
+push -2
+lfp
+add
+lw
+sop
+lfp
+lfp
+push value5A1
+js
 push -3
 lfp
 add
 lw
 sop
 lfp
-push -2
 lfp
-add
-lw
-lfp
-push f1Child5
+push value5A1
 js
+add
 print
 halt
 
-f1Parent6:
+value5A1:
 cfp
 lra
-push 2
-push 2
-mult
+push -2
+lop
+add
+lw
 srv
 sra
-pop
 pop
 sfp
 lrv
 lra
 js
 
-r1Parent6:
+getA4B1:
 cfp
 lra
-push 2
-push 1
-lfp
+push -3
+lop
 add
 lw
-mult
 srv
 sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-f1Child5:
-cfp
-lra
-push 2
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-r1Child5:
-cfp
-lra
-push 3
-push 1
-lfp
-add
-lw
-mult
-srv
-sra
-pop
 pop
 sfp
 lrv

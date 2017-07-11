@@ -1,13 +1,12 @@
 push 0
-push 1
+push 8
 lhp
 sw
 push 1
 lhp
 add
 shp
-lhp
-push 1
+push 2
 lhp
 sw
 push 1
@@ -22,7 +21,7 @@ lw
 sop
 lfp
 lfp
-push s1Area4
+push getThis7Numero6
 js
 push -3
 lfp
@@ -31,16 +30,15 @@ lw
 sop
 lfp
 lfp
-push t1Rectangle9
+push getX4Numero6
 js
-add
 print
 halt
 
-t1Rectangle9:
+getThis7Numero6:
 cfp
 lra
-push 2
+lop
 srv
 sra
 pop
@@ -49,10 +47,13 @@ lrv
 lra
 js
 
-s1Area4:
+getX4Numero6:
 cfp
 lra
-push 1
+push -2
+lop
+add
+lw
 srv
 sra
 pop

@@ -14,48 +14,6 @@ lhp
 add
 shp
 lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 10
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 0
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
@@ -63,31 +21,12 @@ lw
 sop
 lfp
 lfp
-push getA4B1
+push due3Numero6
 js
-push -2
-lfp
-add
-lw
-sop
-lfp
-lfp
-push value5A1
-js
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push value5A1
-js
-add
 print
 halt
 
-value5A1:
+uno3Numero6:
 cfp
 lra
 push -2
@@ -102,13 +41,13 @@ lrv
 lra
 js
 
-getA4B1:
+due3Numero6:
 cfp
 lra
-push -3
-lop
-add
-lw
+lfp
+lfp
+push uno3Numero6
+js
 srv
 sra
 pop

@@ -7,39 +7,64 @@ lhp
 add
 shp
 lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 2
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
 push -2
 lfp
 add
 lw
 sop
 lfp
+push -3
 lfp
-push f1A1
+add
+lw
+lfp
+push foo3A1
 js
 print
 halt
 
-f1A1:
+foo3F1:
 cfp
 lra
-lfp
-lfp
-push g1A1
-js
+push 6
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-g1A1:
+foo3A1:
 cfp
 lra
-push 1
+push 9
 srv
 sra
+pop
 pop
 sfp
 lrv

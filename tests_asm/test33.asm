@@ -21,20 +21,26 @@ add
 lw
 sop
 lfp
+lfp
+push s1Area4
+js
 push -3
 lfp
 add
 lw
+sop
 lfp
-push aparam6B1
+lfp
+push t1Rectangle9
 js
+add
 print
 halt
 
-b1A1:
+s1Area4:
 cfp
 lra
-push 2
+push 1
 srv
 sra
 pop
@@ -43,21 +49,12 @@ lrv
 lra
 js
 
-aparam6B1:
+t1Rectangle9:
 cfp
 lra
-push 1
-lfp
-add
-lw
-sop
-lfp
-lfp
-push b1A1
-js
+push 2
 srv
 sra
-pop
 pop
 sfp
 lrv

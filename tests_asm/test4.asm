@@ -7,20 +7,6 @@ lhp
 add
 shp
 lhp
-push function0
-lfp
-lfp
-push -3
-lfp
-add
-lw
-js
-lhp
-sw
-push 1
-lhp
-add
-shp
 push -2
 lfp
 add
@@ -28,93 +14,25 @@ lw
 sop
 lfp
 lfp
-push get3X1
+push k1B1
 js
-lhp
-sw
-push 1
-lhp
+push -2
+lfp
 add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
+lw
+sop
+lfp
+lfp
+push u1B1
+js
 add
-shp
-lhp
-push 777
 print
 halt
 
-get3X1:
+u1A1:
 cfp
 lra
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+push 2
 srv
 sra
 pop
@@ -123,19 +41,46 @@ lrv
 lra
 js
 
-function0:
+k1A1:
 cfp
 lra
-push -2
-lfp
-lw
-add
-lw
-sop
-lfp
-lfp
-push get3X1
+push 5
+srv
+sra
+pop
+sfp
+lrv
+lra
 js
+
+u1B1:
+cfp
+lra
+push 1
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+k1B1:
+cfp
+lra
+push 6
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+s1B1:
+cfp
+lra
+push 3
 srv
 sra
 pop

@@ -1,5 +1,5 @@
 push 0
-push 8
+push 12
 lhp
 sw
 push 1
@@ -21,7 +21,7 @@ lw
 sop
 lfp
 lfp
-push getThis7Numero6
+push getThis7Numero27
 js
 push -3
 lfp
@@ -54,6 +54,18 @@ push -2
 lop
 add
 lw
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+getThis7Numero27:
+cfp
+lra
+lop
 srv
 sra
 pop
