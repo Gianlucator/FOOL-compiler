@@ -13,11 +13,11 @@ import java.util.HashMap;
  */
 public class ClassNode implements Node {
 
-    private String id;
-    private String superclass;
+    private String id;  // nome della classe
+    private String superclass;  // nome della superclasse della classe
     private ArrayList<Node> fields;
     private ArrayList<Node> methods;
-    private ClassNode superClassLayout;
+    private ClassNode superClassLayout;  // nodo che si riferisce alla superclasse della classe
 
     public ClassNode(String id, String superclass, ArrayList<Node> fields, ArrayList<Node> methods) {
         this.id = id;
@@ -85,8 +85,13 @@ public class ClassNode implements Node {
     @Override
     public String codeGeneration() {
 
+        // viene chiamata la cgen per ogni metodo definito nella classe
         for (Node method : methods)  {
+            // il self è il nome della classe in cui è dichiarato
             String selfName = ((ClassIdNode) ((FunNode) method).getSelf()).getClassId();
+
+            //id : nome della classe
+            // quindi il self deve essere in effetti uguale al nome della classe
             if (id.equals(selfName))
                 method.codeGeneration();
         }
@@ -97,65 +102,118 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         env.setClassEnvironment(id);
+
+        // siamo all'interno della dichiarazione di una classe
+        // si sta accedendo a un nuovo scope, allora bisogna incrementare il nesting level a 1
         env.incNestingLevel();
+
+        // nuova hp per nl 1 nella symbol table
         env.addSymTableHMtoNL();
+
         env.addObjectEnvHMtoNL();
 
         ArrayList<SemanticError> res = new ArrayList<>();
 
+        for (Node field : fields) {
+            System.out.println("campo " + field.toPrint("") + "classe " + id);
+            //res.addAll(field.checkSemantics(env));
+        }
+
         //controllare ID
+        // se il nome della classe è uguale al nome della superclasse
         if (id.equals(superclass)) {
+            // si lancia un errore semantico
             res.add(new SemanticError(id + " cannot extend itself."));
         } else {
 
+            // la classe estende una superclasse oppure no
             boolean extendsSomething = !superclass.equals("");
 
+            // se sì
             // inheritance e overriding dei campi
             if (extendsSomething) {
+
+                 /*
+                    attributi
+                 */
+
+                // si recupera il class layout della superclasse
                 superClassLayout = env.getClassLayout(superclass);
+
+                // si prendono i metodi della superclasse
                 ArrayList<Node> supFields = new ArrayList<>(superClassLayout.getFields());
 
+                // si cicla sugli attributi della classe corrente
                 boolean override = false;
                 for (Node field : fields) {
                     for (int j = 0; j < supFields.size(); j++) {
+                        // se l'attributo fa override dell'attributo della superclasse
                         if (((VarDecNode) supFields.get(j)).getId().equals(((VarDecNode) field).getId())) {
+                            // si fa l'override
                             supFields.set(j, field);
                             override = true;
                         }
                     }
 
+                    // se non fa override, si aggiunge l'attributo extra della classe corrente
                     if (!override) 
                         supFields.add(field);
 
                     override = false;
                 }
+
+                // alla fine si ha che l'object layout della classe corrente è uguale a quello della
+                // superclasse a cui sono stati però sostituiti gli attributi di cui si fa ovverride
+                // e a cui sono stati aggiunti i campi extra della classe corrente.
                 fields = supFields;
             }
 
             //checksemantics field e methods classe attuale
             env.setOffset(0);
+
+            // dopo il controllo dell'override
+            // si ciclano gli attributi e ricorsivamente si chiama su di essi la checksemantics
             for (Node field : fields) {
                 res.addAll(field.checkSemantics(env));
             }
 
+            /*
+            metodi
+             */
+
             // processing di tutti i nomi dei metodi ==> uso prima delle dichiarazioni è possibile
             String methodName;
+
+            // si ciclano i metodi dichiarati all'interno della classe
+            // nota. funNode si usa sia per i metodi che per le funzioni semplici
             for (Node method : methods) {
                 //Imposto il self all'inizio dei parametri nel FunNode.
+                // il self non è altro che un classid node corrispondente alla classe correntr
                 ((FunNode) method).setSelf(new ClassIdNode(id));
+
+                // nome del metodo
                 methodName = ((FunNode) method).getId();
 
+                // si prende da hm al level 1
+                // al hm bisogna aggiungere tutte i metodi
                 HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
-                env.decOffset();
-                STentry entry = new STentry(env.getNestingLevel(), env.getOffset());
-                env.incOffset();
 
+                env.decOffset();
+
+                // st entry per il metodo
+                STentry entry = new STentry(env.getNestingLevel(), env.getOffset());
+
+                env.incOffset();  // ?
+
+                // si aggiunge il metodo alla hm nl 1
                 // se la st contiene già l'id ==> error
                 if (hm.put(methodName, entry) != null)
+                    // si lancia un errore semantico
                     res.add(new SemanticError("Method id " + methodName + " already declared"));
             }
 
-            // processing effettivo ==> essendo gia' presenti tutti i nomi possiamo fare mutua ricorsione e boiate varie
+            // processing effettivo ==> essendo gia' presenti tutti i nomi possiamo fare mutua ricorsione
+            // si ciclano i metodi e ricorsivamente si chiama su di essi la checksemantics
             for (Node method : methods) {
                 res.addAll(method.checkSemantics(env));
             }
@@ -183,9 +241,15 @@ public class ClassNode implements Node {
             }
         }
 
+        // rimossa la hp per il nl corrente
         env.getSymTable().remove(env.getNestingLevel());
+
         env.getObjectEnvironment().remove(env.getNestingLevel());
+
+        // decrementare nl
+        // ricorda: va fatto dopo aver rimosso la hp dalla symbol table
         env.decNestingLevel();
+
         return res;
     }
 

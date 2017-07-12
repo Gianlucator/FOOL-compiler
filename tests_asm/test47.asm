@@ -7,14 +7,6 @@ lhp
 add
 shp
 lhp
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
 push -2
 lfp
 add
@@ -22,25 +14,19 @@ lw
 sop
 lfp
 lfp
-push s1Area4
+push get3B1
 js
 push -3
 lfp
 add
 lw
-sop
-lfp
-lfp
-push t1Rectangle9
-js
-add
 print
 halt
 
-t1Rectangle9:
+get3A1:
 cfp
 lra
-push 2
+push 44
 srv
 sra
 pop
@@ -49,10 +35,10 @@ lrv
 lra
 js
 
-s1Area4:
+get3B1:
 cfp
 lra
-push 1
+push 555
 srv
 sra
 pop

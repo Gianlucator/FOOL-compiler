@@ -9,10 +9,19 @@ import org.stringtemplate.v4.ST;
 
 public class Environment {
 
+	// symbol table implementata come lista di hashmap
+	// c'è un hashmap per ogni scope innestato
 	private ArrayList<HashMap<String, STentry>> symTable = new ArrayList<>();
+
+	// objectEnvironment = struttura uguale ala symbol table
+	// sevre per ...
 	private ArrayList<HashMap<String, String>> objectEnvironment = new ArrayList<>();
+
+	// valore iniziale del nesting level, il nl è di fatto lo scope corrente.
 	private int nestingLevel = -1;
 	private int offset = 0;
+
+	// scope a cui sono dichiarate tutte le classi
 	private final int GLOBAL_SCOPE = 0;
 	private String classEnvironment = "";
 

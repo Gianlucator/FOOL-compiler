@@ -29,7 +29,7 @@ public class VarDecNode implements Node {
 
     @Override
     public String toPrint(String indent) {
-        return null;
+        return id;
     }
 
     @Override

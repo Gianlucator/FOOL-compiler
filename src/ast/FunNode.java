@@ -8,18 +8,21 @@ import util.Environment;
 import util.SemanticError;
 import util.TypeError;
 
-// dichiarazione di funzione
-// vedi CallFunNode per chiamata di funzione
+// dichiarazione di funzione o di metodo
+// CallFunNode per chiamata di funzione
+// CallMetNode per chiamata di metodo
 public class FunNode implements Node {
 
-    private String id;
-    private Node type;
+    private String id;  // nome funzione / metodo
+    private Node type;  // tipo di ritorno
     private ArrayList<Node> parlist = new ArrayList<>();
     private ArrayList<Node> declist;
     private Node body;
+
+    // argomenti e tipo di ritorno
     private ArrowTypeNode arrowType;
 
-    //Se rimane null è una funzione, altrimenti indica la classe di appartenenza del metodo
+    //Se rimane null è una funzione, altrimenti indica la classe di appartenenza del metodo (Classidnode)
     private Node self = null;
 
     public Node getSelf() {
@@ -55,7 +58,7 @@ public class FunNode implements Node {
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
         //env.offset = -2;
-        // mh = Symbol table = lista di hashmap
+        // hm = Symbol table = lista di hashmap
         HashMap<String, STentry> hm = env.getSymTable().get(env.getNestingLevel());
         HashMap<String, String> ohm = env.addObjectEnvHMtoNL();
 
@@ -67,7 +70,6 @@ public class FunNode implements Node {
             res.add(new SemanticError("Fun id " + id + " already declared"));
         } else {
             // se la st non contiene ancora l'id ==> lo si aggiunge e
-            // si crea una nuova hashmap per la symTable
 
             // nuovo livello innestato
             env.incNestingLevel();
@@ -167,7 +169,7 @@ public class FunNode implements Node {
     }
 
     public String codeGeneration() {
-//che altro dovrebbe mancare?
+        //che altro dovrebbe mancare?
         String declCode = "", popDecl = "";
         if (declist != null) {
             for (Node dec : declist) {
@@ -183,10 +185,12 @@ public class FunNode implements Node {
             popParl += "pop\n";
         }
 
+        // label
         String funl;
+        // funzione
         if (self == null)
             funl = FOOLlib.freshFunLabel();
-        else
+        else // metodo
             funl = FOOLlib.getMethodLabel(((ClassIdNode) self).getClassId(), id);
 
         FOOLlib.putCode(funl + ":\n" +

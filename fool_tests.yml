@@ -626,4 +626,79 @@ Subclass inside superclass' constructor:
     print(1);
 -   "1"
 
+
+##########################################################
+
+##########################################################
+#			                                             #
+##########################################################
+
+
+Esempio Claudio:
+-  class A {
+      int get() 44;
+   }
+   class B implements A{
+      int get() 555;
+   }
+   class C (A ogg)
+   {
+      int ooo() ogg.get();
+   };
+   let C y = new C(new B);
+   in print(y.ooo());
+- "555"
+
+
+Valore di ritorno metodo corretto:
+-     class A {
+         int get() 44;
+      }
+      class B implements A{
+         int get() 555;
+      };
+      let B objb = new B;
+      int y = objb.get();
+      in print(y);
+- "555"
+
+Valore di ritorno metodo corretto 2:
+-     class A(B object) {
+         B get() object;
+      }
+      class B {
+         int get() 555;
+      };
+      let B objb = new B;
+      A obja = new A(objb);
+      B objb2 = obja.get();
+      in print(objb2);
+- "1"
+
+Valore di ritorno metodo errato:
+-     class A {
+         int get() 44;
+      }
+      class B implements A{
+         int get() 555;
+      };
+      let B objb = new B;
+      bool y = objb.get();
+      in print(y);
+- "semantic errors"
+
+Valore di ritorno metodo errato 2:
+-     class B(C object){
+         C get() object;
+      }
+      class C {
+         int get() 44;
+      };
+      let
+      C objc = new C;
+      B objb = new B(objc);
+      int y = objb.get();
+      in print(y);
+- "semantic errors"
+
 ##########################################################

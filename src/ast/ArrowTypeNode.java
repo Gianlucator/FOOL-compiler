@@ -7,7 +7,10 @@ import util.SemanticError;
 
 public class ArrowTypeNode implements Node {
 
+    // lista parametri della funzione/metodo
     private ArrayList<Node> parlist;
+
+    // tipo di ritorno della funzione/metodo
     private Node ret;
 
     public ArrowTypeNode(ArrayList<Node> p, Node r) {
@@ -15,14 +18,14 @@ public class ArrowTypeNode implements Node {
         ret = r;
     }
 
-    public String toPrint(String s) { //
+    public String toPrint(String s) {
         String parlstr = "";
         for (Node par : parlist)
             parlstr += par.toPrint(s + "  ");
         return s + "ArrowType\n" + parlstr + ret.toPrint(s + "  ->");
     }
 
-    public Node getRet() { //
+    public Node getRet() {
         return ret;
     }
 
@@ -36,7 +39,7 @@ public class ArrowTypeNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        return new ArrayList<SemanticError>();
+        return new ArrayList<>();
     }
 
     //non utilizzato

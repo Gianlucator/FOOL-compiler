@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Created by crist on 14/06/2017.
  */
 public class NewExpNode implements Node {
-    private String classId;
-    private ArrayList<Node> args;
-    private ClassNode classEntry;
+    private String classId; // nome oggetto
+    private ArrayList<Node> args;  // argomenti passati al costruttore
+    private ClassNode classEntry;  // classe di cui è istanza
 
     public NewExpNode(String classId, ArrayList<Node> args) {
         this.classId = classId;
@@ -66,23 +66,35 @@ public class NewExpNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+        // lista di errori semantici
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        // controllare che la classe esista
+        // controllare che la classe (di cui è istanza) esista
+        // si cerca a nl 0 nella st
         classEntry = env.getClassLayout(classId);
 
+        // se non è stata dichiarata la classe con cui viene istanziato l'oggetto
         if (classEntry == null)
+            // si lancia un errore semantico
             res.add(new SemanticError("Class " + classId + " not declared."));
         else {
+            // se invece, correttamente, è stata dichiarata la classe di cui l' oggetto è istanza
+
             // controllare che il costruttore sia chiamato col corretto numero di argomenti
+            // cioè che sia passato al costruttore il corretto NUMERO di argomenti
             int constructorArguments = classEntry.getFields().size();
 
+            // se il numero si argomenti che il costruttore accetta è diverso dal numero
+            // di argomenti attualmente passati
             if (constructorArguments != args.size()) {
+                // si lancia errore semantico
                 String fewOrMany = (constructorArguments > args.size()) ? "few" : "many";
                 res.add(new SemanticError(String.format("Too %s arguments arguments for %s constructor. Need %d, %d given.",
                         fewOrMany, classId, constructorArguments, args.size())));
             }
         }
+
+        // si ciclano gli argomenti e si chiama ricorsivamente la check semantics su di essi
         for (Node arg : args)
             res.addAll(arg.checkSemantics(env));
 

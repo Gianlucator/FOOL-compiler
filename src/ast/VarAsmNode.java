@@ -38,24 +38,44 @@ public class VarAsmNode implements Node {
 
         String classInstance = "";
         // Memorizzo nel method environment il tipo con cui istanzio l'oggetto.
+
+        // se si sta facendo: NomeClasse nomeOggetto = new NomeClasse()
+        // e quindi la exp è una newExpNode
         if (exp instanceof NewExpNode) {
             classInstance = ((NewExpNode) exp).getClassId();
+            HashMap<String, String> ohm;
+            ohm = env.getObjectEnvironment().get(env.getNestingLevel());
+            ohm.put(id, classInstance);
+
         } else if (exp instanceof CallMetNode || exp instanceof CallFunNode) {
+            // altrimenti se si assegna alla varabile il valore di ritorno di un metodo/funzione
+
+            // si recupera l'arrowtype del metodo/funzione
+            // per poter sapere il tipo del valore di ritorno del metodo/funzione
             ArrowTypeNode arrowType = null;
 
-            if (exp instanceof CallMetNode) {
+            if (exp instanceof CallMetNode) {  // metodo
                 arrowType = ((CallMetNode) exp).getArrowType();
-            } else if (exp instanceof CallFunNode) {
+            } else if (exp instanceof CallFunNode) {  // funzione
                 arrowType = ((CallFunNode) exp).getArrowType();
             }
 
-            type = arrowType.getRet();
-            classInstance = ((ClassIdNode) type).getClassId();
+            // tipo del valore di ritorno del metodo/funzione
+            Node returnType = arrowType.getRet();
+
+            // se il metodo/funzione ritorna un oggetto
+            if (returnType instanceof ClassIdNode && FOOLlib.isSubtype(returnType,type)) {
+                type = returnType;
+                classInstance = ((ClassIdNode) type).getClassId();
+                HashMap<String, String> ohm;
+                ohm = env.getObjectEnvironment().get(env.getNestingLevel());
+                ohm.put(id, classInstance);
+            }
+
+            if(!(type.toString()).equals(returnType.toString()))
+                res.add(new SemanticError("Cannot assign type " + returnType + " value to variable declared as " + type));
         }
 
-        HashMap<String, String> ohm;
-        ohm = env.getObjectEnvironment().get(env.getNestingLevel());
-        ohm.put(id, classInstance);
 
         return res;
     }
