@@ -41,6 +41,8 @@ public class VarAsmNode implements Node {
 
         // se si sta facendo: NomeClasse nomeOggetto = new NomeClasse()
         // e quindi la exp è una newExpNode
+
+
         if (exp instanceof NewExpNode) {
             classInstance = ((NewExpNode) exp).getClassId();
             HashMap<String, String> ohm;

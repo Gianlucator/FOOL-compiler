@@ -114,11 +114,6 @@ public class ClassNode implements Node {
 
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        for (Node field : fields) {
-            System.out.println("campo " + field.toPrint("") + "classe " + id);
-            //res.addAll(field.checkSemantics(env));
-        }
-
         //controllare ID
         // se il nome della classe è uguale al nome della superclasse
         if (id.equals(superclass)) {
@@ -244,6 +239,7 @@ public class ClassNode implements Node {
         // rimossa la hp per il nl corrente
         env.getSymTable().remove(env.getNestingLevel());
 
+        // rimossa la hp per il nl corrente
         env.getObjectEnvironment().remove(env.getNestingLevel());
 
         // decrementare nl

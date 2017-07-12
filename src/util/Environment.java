@@ -14,7 +14,6 @@ public class Environment {
 	private ArrayList<HashMap<String, STentry>> symTable = new ArrayList<>();
 
 	// objectEnvironment = struttura uguale ala symbol table
-	// sevre per ...
 	private ArrayList<HashMap<String, String>> objectEnvironment = new ArrayList<>();
 
 	// valore iniziale del nesting level, il nl è di fatto lo scope corrente.
