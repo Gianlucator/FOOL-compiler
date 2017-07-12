@@ -55,6 +55,9 @@ public class VarDecNode implements Node {
         if (hm.put(id,entry) != null)
             res.add(new SemanticError("Var id " + id + " already declared"));
 
+        if (type instanceof ClassIdNode)
+            env.getObjectEnvironment().get(env.getNestingLevel()).putIfAbsent(id, ((ClassIdNode) type).getClassId());
+
         res.addAll(type.checkSemantics(env));
 
         return res;

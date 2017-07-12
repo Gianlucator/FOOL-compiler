@@ -1,4 +1,18 @@
 push 0
+push 1
+lhp
+sw
+push 1
+lhp
+add
+shp
+lhp
+lhp
+sw
+push 1
+lhp
+add
+shp
 push 2
 lhp
 sw
@@ -6,7 +20,8 @@ push 1
 lhp
 add
 shp
-push 0
+lhp
+push 1
 lhp
 sw
 push 1
@@ -20,33 +35,33 @@ add
 lw
 sop
 lfp
+push -3
 lfp
-push u1A1
+add
+lw
+lfp
+push foo3A1
 js
 print
 halt
 
-u1A1:
+foo3F1:
 cfp
 lra
-push 1
+push 6
 srv
 sra
+pop
 pop
 sfp
 lrv
 lra
 js
 
-s1B1:
+foo3A1:
 cfp
 lra
-push 1
-lfp
-add
-lw
-push 1
-add
+push 9
 srv
 sra
 pop

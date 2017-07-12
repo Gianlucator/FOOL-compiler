@@ -119,8 +119,6 @@ public class ClassExpNode implements Node {
             if (env.insertClassEntry(clsName, sTentry) != null) {
                 // se c'è già allora la classe con quel nome è gia stata dichiarata e si lancia errore semantico
                 res.add(new SemanticError("Multiple declarations of class " + clsName));
-            } else {
-                System.out.println("ok"+ clsName);
             }
         }
 
