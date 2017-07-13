@@ -56,7 +56,7 @@ public class NewExpNode implements Node {
 
         code += "push " + classId + "\n" + saveToHPThenIncHP;
 
-        // salviamo la dimensione arg.size() + 1
+        // salviamo la dimensione arg.size() + 2
         int size = args.size() + 2;
         code += "push " + size + "\n" + saveToHPThenIncHP;
 

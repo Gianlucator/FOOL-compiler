@@ -1,21 +1,5 @@
 push 0
-push A
-lhp
-sw
 push 1
-lhp
-add
-shp
-push 2
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-lhp
-sop
 lhp
 sw
 push 1
@@ -29,7 +13,7 @@ push 1
 lhp
 add
 shp
-push 3
+push 2
 lhp
 sw
 push 1
@@ -39,14 +23,20 @@ shp
 lhp
 lhp
 sop
-push F
 lhp
 sw
 push 1
 lhp
 add
 shp
-push 2
+push C
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -64,10 +54,6 @@ add
 lw
 sop
 lfp
-push -3
-lfp
-add
-lw
 lfp
 push 0
 smo
@@ -79,13 +65,12 @@ js
 print
 halt
 
-foo3A1:
+get3A1:
 cfp
 lra
-push 9
+push 44
 srv
 sra
-pop
 pop
 sfp
 lrv
@@ -97,25 +82,14 @@ js
 A:
 lmo
 push 0
-beq foo3A1
+beq get3A1
 
-B:
-lmo
-push 0
-beq foo3A1
-
-C:
-lmo
-push 0
-beq foo3A1
-
-foo3F1:
+get3B1:
 cfp
 lra
-push 6
+push 555
 srv
 sra
-pop
 pop
 sfp
 lrv
@@ -124,8 +98,47 @@ lro
 sop
 js
 
-F:
+B:
 lmo
 push 0
-beq foo3F1
+beq get3B1
+
+ooo3C1:
+cfp
+lra
+lop
+sro
+push -3
+lop
+add
+lw
+sop
+lfp
+lfp
+push 0
+smo
+lop
+push -2
+add
+lw
+js
+push -4
+lop
+add
+lw
+add
+srv
+sra
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+C:
+lmo
+push 0
+beq ooo3C1
 halt

@@ -202,7 +202,7 @@ public class FunNode implements Node {
         else // metodo
             funl = FOOLlib.getMethodLabel(((ClassIdNode) self).getClassId(), id);
 
-        FOOLlib.putCode(funl + ":\n" +
+        String fCode = funl + ":\n" +
                 "cfp\n" + //setta $fp a $sp
                 "lra\n" + //inserimento return address
                 declCode + //inserimento dichiarazioni locali
@@ -217,8 +217,15 @@ public class FunNode implements Node {
                 // Control Link (o Dynamic Link) = %fp precedente settato dal chiamante
                 "sfp\n" +  // setto $fp a valore del Control Link  -  store top into frame pointer
                 "lrv\n" + // risultato della funzione (=rv) on top dello stack - load from rv
-                "lra\n" + "js\n" //load from ra e salta a $ra
-        );
+                "lra\n" ;
+
+        if( self != null)
+            fCode +=    "lro\n" +   //ricarico l'object pointer precedente
+                        "sop\n";
+
+        fCode += "js\n"; //load from ra e salta a $ra
+
+        FOOLlib.putCode(fCode);
 
         if (self == null)
             return "push " + funl + "\n";

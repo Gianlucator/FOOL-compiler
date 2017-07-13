@@ -14,6 +14,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -34,6 +38,8 @@ halt
 f1A1:
 cfp
 lra
+lop
+sro
 lfp
 lfp
 push 1
@@ -49,6 +55,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 g1A1:
@@ -61,6 +69,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 A:

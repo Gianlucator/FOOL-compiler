@@ -21,6 +21,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -35,6 +39,8 @@ push -2
 add
 lw
 js
+lop
+sro
 push -3
 lfp
 add
@@ -87,12 +93,16 @@ lhp
 add
 shp
 lhp
+lhp
+sop
 srv
 sra
 pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 A:
@@ -113,6 +123,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 getY4B1:
@@ -128,6 +140,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 B:

@@ -25,6 +25,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -3
 lfp
 add
@@ -59,6 +63,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 r1Parent6:
@@ -77,6 +83,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Parent:
@@ -103,6 +111,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 r1Child5:
@@ -121,6 +131,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Child:

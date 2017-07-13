@@ -15,26 +15,9 @@ add
 shp
 lhp
 lhp
-sw
-push 1
-lhp
-add
-shp
-push C
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -49,38 +32,12 @@ push -2
 add
 lw
 js
+push -3
+lfp
+add
+lw
 print
 halt
-
-ooo3C1:
-cfp
-lra
-push -3
-lop
-add
-lw
-sop
-lfp
-lfp
-push 0
-smo
-lop
-push -2
-add
-lw
-js
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-C:
-lmo
-push 0
-beq ooo3C1
 
 get3A1:
 cfp
@@ -92,6 +49,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 A:
@@ -109,6 +68,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 B:

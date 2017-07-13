@@ -21,6 +21,7 @@ public class ExecuteVM {
     private int hp = 0;
     private int op = 0;
     private int mo = 0;
+    private int ro = 0;
     private int fp = MEMSIZE;
     private int ra;
     private int rv;
@@ -129,6 +130,12 @@ public class ExecuteVM {
                         break;
                     case SVMParser.STOREMO:
                         mo = pop();
+                        break;
+                    case SVMParser.LOADRO:
+                        push(ro);
+                        break;
+                    case SVMParser.STORERO:
+                        ro = pop();
                         break;
                     case SVMParser.PRINT:
                         System.out.println((sp < MEMSIZE) ? memory[sp] : "Empty stack!");

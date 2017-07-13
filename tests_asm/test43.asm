@@ -28,6 +28,8 @@ lhp
 add
 shp
 lhp
+lhp
+sop
 push 1
 lhp
 sw
@@ -57,6 +59,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -3
 lfp
 add
@@ -71,6 +77,8 @@ push -2
 add
 lw
 js
+lop
+sro
 push -3
 lfp
 add
@@ -102,6 +110,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 isAlive7Animale7:
@@ -117,6 +127,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Animale:
@@ -169,6 +181,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Cane:
@@ -224,6 +238,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 BullDog:

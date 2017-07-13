@@ -21,6 +21,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -55,6 +59,8 @@ push 1
 label3:
 push 1
 beq label0
+lop
+sro
 lfp
 push 1
 lfp
@@ -79,11 +85,15 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 foo3Fabonicci9:
 cfp
 lra
+lop
+sro
 lfp
 push 1
 lfp
@@ -106,6 +116,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Fabonicci:

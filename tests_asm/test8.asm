@@ -21,6 +21,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -51,11 +55,15 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 due3Numero6:
 cfp
 lra
+lop
+sro
 lfp
 lfp
 push 0
@@ -71,6 +79,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Numero:

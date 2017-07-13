@@ -35,6 +35,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -65,6 +69,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 getB4A1:
@@ -80,6 +86,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 A:
@@ -93,6 +101,8 @@ beq getB4A1
 getter6B1:
 cfp
 lra
+lop
+sro
 lfp
 lfp
 push 1
@@ -108,6 +118,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 B:

@@ -14,6 +14,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -65,6 +69,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 B:

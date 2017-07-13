@@ -14,32 +14,9 @@ lhp
 add
 shp
 lhp
+lop
+sro
 push -2
-lfp
-add
-lw
-lhp
-sw
-push 1
-lhp
-add
-shp
-push A
-lhp
-sw
-push 1
-lhp
-add
-shp
-push 3
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push -3
 lfp
 add
 lw
@@ -53,12 +30,31 @@ push -2
 add
 lw
 js
-push -4
+push -3
 lfp
 add
 lw
 print
 halt
+
+get3A1:
+cfp
+lra
+push 44
+srv
+sra
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+A:
+lmo
+push 0
+beq get3A1
 
 get3B1:
 cfp
@@ -70,30 +66,12 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 B:
 lmo
 push 0
 beq get3B1
-
-get3A1:
-cfp
-lra
-push -3
-lop
-add
-lw
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-A:
-lmo
-push 0
-beq get3A1
 halt

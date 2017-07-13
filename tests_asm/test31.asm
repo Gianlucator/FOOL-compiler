@@ -7,6 +7,8 @@ lfp
 add
 lw
 js
+lop
+sro
 push -3
 lfp
 add
@@ -37,6 +39,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Numero:
@@ -59,6 +63,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Numero2:
@@ -91,6 +97,8 @@ lhp
 add
 shp
 lhp
+lhp
+sop
 srv
 sra
 pop

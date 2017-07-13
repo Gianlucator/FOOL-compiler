@@ -133,7 +133,9 @@ public class CallMetNode implements Node {
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
 
-        return  loadObject +
+        return  "lop\n" +
+                "sro\n" +
+                loadObject +
                 "lfp\n" +
                 parCode +
                 "lfp\n" +

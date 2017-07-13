@@ -54,6 +54,8 @@ assembly:
 	  | STOREOP                 {code[i++] = STOREOP;}
 	  | LOADMO                  {code[i++] = LOADMO;}
 	  | STOREMO                 {code[i++] = STOREMO;}
+      | LOADRO                  {code[i++] = LOADRO;}
+      | STORERO                 {code[i++] = STORERO;}
 	  | PRINT                   {code[i++] = PRINT;}
 	  | HALT                    {code[i++] = HALT;}
 	  // cicla sulle label e le sostituisce alla riga di codice corrispondente
@@ -91,6 +93,8 @@ LOADOP	    : 'lop' ;	    // load object pointer on the stack
 STOREOP	    : 'sop' ;	// store top into object pointer
 LOADMO      : 'lmo' ;
 STOREMO     : 'smo' ;
+LOADRO      : 'lro' ;
+STORERO     : 'sro' ;
 PRINT	    : 'print' ; // print top of stack
 HALT	    : 'halt' ;	    // stop execution
 

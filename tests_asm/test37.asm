@@ -28,6 +28,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -65,6 +69,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 getL15Rectangle9:
@@ -80,6 +86,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 getL25Rectangle9:
@@ -95,6 +103,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 scaleArea9Rectangle9:
@@ -121,6 +131,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 calcArea8Rectangle9:
@@ -143,6 +155,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 Rectangle:

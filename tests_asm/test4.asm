@@ -14,6 +14,10 @@ lhp
 add
 shp
 lhp
+lhp
+sop
+lop
+sro
 push -2
 lfp
 add
@@ -28,6 +32,8 @@ push -2
 add
 lw
 js
+lop
+sro
 push -2
 lfp
 add
@@ -56,6 +62,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 k1A1:
@@ -68,6 +76,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 A:
@@ -88,6 +98,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 k1B1:
@@ -100,6 +112,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 s1B1:
@@ -112,6 +126,8 @@ pop
 sfp
 lrv
 lra
+lro
+sop
 js
 
 B:
