@@ -26,10 +26,16 @@ lfp
 add
 lw
 lfp
-push g1D1
+push 0
+smo
+push D
 js
 print
 halt
+
+A:
+
+B:
 
 g1C1:
 cfp
@@ -44,6 +50,11 @@ lrv
 lra
 js
 
+C:
+lmo
+push 0
+beq g1C1
+
 g1D1:
 cfp
 lra
@@ -56,4 +67,9 @@ sfp
 lrv
 lra
 js
+
+D:
+lmo
+push 0
+beq g1D1
 halt

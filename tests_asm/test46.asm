@@ -28,30 +28,12 @@ lw
 sop
 lfp
 lfp
-push ooo3C1
+push 0
+smo
+push C
 js
 print
 halt
-
-ooo3C1:
-cfp
-lra
-push -2
-lop
-add
-lw
-sop
-lfp
-lfp
-push get3A1
-js
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
 
 get3A1:
 cfp
@@ -65,6 +47,11 @@ lrv
 lra
 js
 
+A:
+lmo
+push 0
+beq get3A1
+
 get3B1:
 cfp
 lra
@@ -76,4 +63,36 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq get3B1
+
+ooo3C1:
+cfp
+lra
+push -2
+lop
+add
+lw
+sop
+lfp
+lfp
+push 0
+smo
+push A
+js
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+C:
+lmo
+push 0
+beq ooo3C1
 halt

@@ -14,7 +14,9 @@ lw
 sop
 lfp
 lfp
-push getNum6Numero6
+push 0
+smo
+push Numero
 js
 print
 halt
@@ -33,6 +35,11 @@ sfp
 lrv
 lra
 js
+
+Numero:
+lmo
+push 0
+beq getNum6Numero6
 
 function0:
 cfp

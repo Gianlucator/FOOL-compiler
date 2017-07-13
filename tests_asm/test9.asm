@@ -21,7 +21,9 @@ lw
 sop
 lfp
 lfp
-push getX4Numero6
+push 0
+smo
+push Numero
 js
 push -2
 lfp
@@ -30,7 +32,9 @@ lw
 sop
 lfp
 lfp
-push getRedefinedX13Numero6
+push 1
+smo
+push Numero
 js
 push -2
 lfp
@@ -40,7 +44,9 @@ sop
 lfp
 push 10
 lfp
-push getParamX9Numero6
+push 2
+smo
+push Numero
 js
 push -2
 lfp
@@ -49,7 +55,9 @@ lw
 sop
 lfp
 lfp
-push getXInsideFun13Numero6
+push 3
+smo
+push Numero
 js
 add
 add
@@ -141,4 +149,18 @@ sfp
 lrv
 lra
 js
+
+Numero:
+lmo
+push 0
+beq getX4Numero6
+lmo
+push 1
+beq getRedefinedX13Numero6
+lmo
+push 2
+beq getParamX9Numero6
+lmo
+push 3
+beq getXInsideFun13Numero6
 halt

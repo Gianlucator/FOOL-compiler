@@ -28,7 +28,9 @@ lw
 sop
 lfp
 lfp
-push get3X1
+push 0
+smo
+push X
 js
 lhp
 sw
@@ -123,6 +125,15 @@ lrv
 lra
 js
 
+X:
+lmo
+push 0
+beq get3X1
+
+A:
+
+B:
+
 function0:
 cfp
 lra
@@ -134,7 +145,9 @@ lw
 sop
 lfp
 lfp
-push get3X1
+push 0
+smo
+push X
 js
 srv
 sra

@@ -21,7 +21,9 @@ lw
 sop
 lfp
 lfp
-push getThis7Numero6
+push 0
+smo
+push Numero
 js
 push -3
 lfp
@@ -30,7 +32,9 @@ lw
 sop
 lfp
 lfp
-push getX4Numero6
+push 1
+smo
+push Numero
 js
 print
 halt
@@ -61,4 +65,12 @@ sfp
 lrv
 lra
 js
+
+Numero:
+lmo
+push 0
+beq getThis7Numero6
+lmo
+push 1
+beq getX4Numero6
 halt

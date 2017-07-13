@@ -35,7 +35,9 @@ lw
 sop
 lfp
 lfp
-push getC4B1
+push 2
+smo
+push B
 js
 print
 halt
@@ -70,6 +72,14 @@ lrv
 lra
 js
 
+A:
+lmo
+push 0
+beq getA4A1
+lmo
+push 1
+beq getB4A1
+
 getC4B1:
 cfp
 lra
@@ -84,4 +94,15 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq getA4A1
+lmo
+push 1
+beq getB4A1
+lmo
+push 2
+beq getC4B1
 halt

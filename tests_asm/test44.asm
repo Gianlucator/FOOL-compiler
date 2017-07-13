@@ -21,7 +21,9 @@ lw
 sop
 lfp
 lfp
-push createB7A1
+push 0
+smo
+push A
 js
 push -3
 lfp
@@ -30,7 +32,9 @@ lw
 sop
 lfp
 lfp
-push getY4B1
+push 2
+smo
+push B
 js
 print
 halt
@@ -71,6 +75,11 @@ lrv
 lra
 js
 
+A:
+lmo
+push 0
+beq createB7A1
+
 getX4B1:
 cfp
 lra
@@ -100,4 +109,15 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq createB7A1
+lmo
+push 1
+beq getX4B1
+lmo
+push 2
+beq getY4B1
 halt

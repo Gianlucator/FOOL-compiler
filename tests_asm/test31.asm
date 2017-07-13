@@ -14,7 +14,9 @@ lw
 sop
 lfp
 lfp
-push getNum6Numero27
+push 0
+smo
+push Numero2
 js
 print
 halt
@@ -34,6 +36,11 @@ lrv
 lra
 js
 
+Numero:
+lmo
+push 0
+beq getNum6Numero6
+
 getNum6Numero27:
 cfp
 lra
@@ -50,6 +57,11 @@ sfp
 lrv
 lra
 js
+
+Numero2:
+lmo
+push 0
+beq getNum6Numero27
 
 function0:
 cfp

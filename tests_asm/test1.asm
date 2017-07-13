@@ -22,7 +22,9 @@ sop
 lfp
 push 0
 lfp
-push get3Fabonicci9
+push 0
+smo
+push Fabonicci
 js
 print
 halt
@@ -49,7 +51,9 @@ lfp
 add
 lw
 lfp
-push foo3Fabonicci9
+push 1
+smo
+push Fabonicci
 js
 b label1
 label0:
@@ -75,7 +79,9 @@ lw
 push 1
 add
 lfp
-push get3Fabonicci9
+push 0
+smo
+push Fabonicci
 js
 srv
 sra
@@ -85,4 +91,12 @@ sfp
 lrv
 lra
 js
+
+Fabonicci:
+lmo
+push 0
+beq get3Fabonicci9
+lmo
+push 1
+beq foo3Fabonicci9
 halt

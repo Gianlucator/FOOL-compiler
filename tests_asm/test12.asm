@@ -14,7 +14,9 @@ lw
 sop
 lfp
 lfp
-push f1A1
+push 0
+smo
+push A
 js
 print
 halt
@@ -24,7 +26,9 @@ cfp
 lra
 lfp
 lfp
-push g1A1
+push 1
+smo
+push A
 js
 srv
 sra
@@ -45,4 +49,12 @@ sfp
 lrv
 lra
 js
+
+A:
+lmo
+push 0
+beq f1A1
+lmo
+push 1
+beq g1A1
 halt

@@ -84,9 +84,11 @@ public class ClassNode implements Node {
 
     @Override
     public String codeGeneration() {
+        String classCode = id + ":\n";
 
         // viene chiamata la cgen per ogni metodo definito nella classe
-        for (Node method : methods)  {
+        for (int i = 0; i < methods.size(); i++) {
+            Node method = methods.get(i);
             // il self è il nome della classe in cui è dichiarato
             String selfName = ((ClassIdNode) ((FunNode) method).getSelf()).getClassId();
 
@@ -94,7 +96,15 @@ public class ClassNode implements Node {
             // quindi il self deve essere in effetti uguale al nome della classe
             if (id.equals(selfName))
                 method.codeGeneration();
+
+            String label = FOOLlib.freshLabel();
+
+            classCode += "lmo\n" +
+                         "push " + i + "\n" +
+                         "beq " + FOOLlib.getMethodLabel(selfName, ((FunNode) method).getId()) + "\n";
         }
+
+        FOOLlib.putCode(classCode);
         return "";
     }
 
@@ -209,6 +219,7 @@ public class ClassNode implements Node {
 
             // processing effettivo ==> essendo gia' presenti tutti i nomi possiamo fare mutua ricorsione
             // si ciclano i metodi e ricorsivamente si chiama su di essi la checksemantics
+            env.setOffset(0);
             for (Node method : methods) {
                 res.addAll(method.checkSemantics(env));
             }
@@ -219,7 +230,8 @@ public class ClassNode implements Node {
                 ArrayList<Node> supMethods = new ArrayList<>(superClassLayout.getMethods());
 
                 boolean override = false;
-                for (Node method : methods) {
+                for (int i = 0; i < methods.size(); i++) {
+                    Node method = methods.get(i);
                     for (int j = 0; j < supMethods.size(); j++) {
                         if (((FunNode) supMethods.get(j)).getId().equals(((FunNode) method).getId())) {
                             supMethods.set(j, method);
@@ -234,6 +246,10 @@ public class ClassNode implements Node {
                 }
                 methods = supMethods;
             }
+
+
+            for (int i = 0; i < methods.size() ; i++)
+                ((FunNode) methods.get(i)).setMethodOffset(i);
         }
 
         // rimossa la hp per il nl corrente

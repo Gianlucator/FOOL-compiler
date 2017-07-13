@@ -14,7 +14,9 @@ lw
 sop
 lfp
 lfp
-push get3B1
+push 0
+smo
+push B
 js
 push -3
 lfp
@@ -35,6 +37,11 @@ lrv
 lra
 js
 
+A:
+lmo
+push 0
+beq get3A1
+
 get3B1:
 cfp
 lra
@@ -46,4 +53,9 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq get3B1
 halt

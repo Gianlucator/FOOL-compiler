@@ -29,7 +29,9 @@ lfp
 add
 lw
 lfp
-push f1Child5
+push 0
+smo
+push Child
 js
 print
 halt
@@ -67,6 +69,14 @@ lrv
 lra
 js
 
+Parent:
+lmo
+push 0
+beq f1Parent6
+lmo
+push 1
+beq r1Parent6
+
 f1Child5:
 cfp
 lra
@@ -102,4 +112,12 @@ sfp
 lrv
 lra
 js
+
+Child:
+lmo
+push 0
+beq f1Child5
+lmo
+push 1
+beq r1Child5
 halt

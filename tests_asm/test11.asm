@@ -48,7 +48,9 @@ lfp
 add
 lw
 lfp
-push get3C1
+push 0
+smo
+push C
 js
 push -4
 lfp
@@ -61,7 +63,9 @@ lfp
 add
 lw
 lfp
-push get3C1
+push 0
+smo
+push C
 js
 add
 print
@@ -77,7 +81,9 @@ lw
 sop
 lfp
 lfp
-push getX4A1
+push 0
+smo
+push A
 js
 srv
 sra
@@ -87,6 +93,11 @@ sfp
 lrv
 lra
 js
+
+C:
+lmo
+push 0
+beq get3C1
 
 getX4A1:
 cfp
@@ -102,4 +113,14 @@ sfp
 lrv
 lra
 js
+
+A:
+lmo
+push 0
+beq getX4A1
+
+B:
+lmo
+push 0
+beq getX4A1
 halt

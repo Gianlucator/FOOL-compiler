@@ -18,6 +18,7 @@ public class FunNode implements Node {
     private ArrayList<Node> parlist = new ArrayList<>();
     private ArrayList<Node> declist;
     private Node body;
+    private int methodOffset;
 
     // argomenti e tipo di ritorno
     private ArrowTypeNode arrowType;
@@ -31,6 +32,14 @@ public class FunNode implements Node {
 
     public void setSelf(Node self) {
         this.self = self;
+    }
+
+    public int getMethodOffset() {
+        return methodOffset;
+    }
+
+    public void setMethodOffset(int methodOffset) {
+        this.methodOffset = methodOffset;
     }
 
     public FunNode(String i, Node t) {

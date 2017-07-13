@@ -14,10 +14,14 @@ lw
 sop
 lfp
 lfp
-push get3B1
+push 0
+smo
+push B
 js
 print
 halt
+
+A:
 
 function0:
 cfp
@@ -52,4 +56,9 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq get3B1
 halt

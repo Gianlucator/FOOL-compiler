@@ -22,7 +22,9 @@ lw
 sop
 lfp
 lfp
-push f1A1
+push 0
+smo
+push A
 js
 push -3
 lfp
@@ -31,7 +33,9 @@ lw
 sop
 lfp
 lfp
-push f1B1
+push 0
+smo
+push B
 js
 add
 print
@@ -49,6 +53,11 @@ lrv
 lra
 js
 
+A:
+lmo
+push 0
+beq f1A1
+
 f1B1:
 cfp
 lra
@@ -60,4 +69,9 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq f1B1
 halt

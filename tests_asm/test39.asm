@@ -35,7 +35,9 @@ lw
 sop
 lfp
 lfp
-push getter6B1
+push 2
+smo
+push B
 js
 print
 halt
@@ -70,12 +72,22 @@ lrv
 lra
 js
 
+A:
+lmo
+push 0
+beq getA4A1
+lmo
+push 1
+beq getB4A1
+
 getter6B1:
 cfp
 lra
 lfp
 lfp
-push getB4A1
+push 1
+smo
+push B
 js
 srv
 sra
@@ -84,4 +96,15 @@ sfp
 lrv
 lra
 js
+
+B:
+lmo
+push 0
+beq getA4A1
+lmo
+push 1
+beq getB4A1
+lmo
+push 2
+beq getter6B1
 halt

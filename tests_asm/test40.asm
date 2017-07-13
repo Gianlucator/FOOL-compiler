@@ -21,7 +21,9 @@ lw
 sop
 lfp
 lfp
-push uno3Numero6
+push 0
+smo
+push Numero
 js
 push -3
 lfp
@@ -30,7 +32,9 @@ lw
 sop
 lfp
 lfp
-push due3Numero6
+push 1
+smo
+push Numero
 js
 print
 halt
@@ -75,4 +79,12 @@ sfp
 lrv
 lra
 js
+
+Numero:
+lmo
+push 0
+beq uno3Numero6
+lmo
+push 1
+beq due3Numero6
 halt

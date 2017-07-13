@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class CallMetNode implements Node {
     // nome oggetto su cui è richiamato il metodo
     private String objectName;
+    private String objectClass;
 
     // nome metodo
     private String methodName;
@@ -72,28 +73,28 @@ public class CallMetNode implements Node {
         ArrayList<SemanticError> res = new ArrayList<>();
 
         int j = env.getNestingLevel();  // 1
-        String classId = null;
+        //tring classId = null;
         boolean foundMethod = false;
 
         // se: this.nomeMetodo(..)
         if (objectName.equals("this"))
             // ci si trova all'interno della dichiarazione di una classe
-            classId = env.getClassEnvironment();
+            objectClass = env.getClassEnvironment();
         else {
             // si cerca la dichiarazione dell'oggetto su cui si sta chiamando il metodo
-            while (j >= 0 && classId == null) {
-                classId = env.getObjectEnvironment().get(j--).get(objectName);
+            while (j >= 0 && objectClass == null) {
+                objectClass = env.getObjectEnvironment().get(j--).get(objectName);
             }
         }
 
         // se l'oggetto non viene trovato
-        if (classId == null) {
+        if (objectClass == null) {
             // si lancia errore semantico
             res.add(new SemanticError("Object " + objectName + " not declared"));
         } else {
             // se l'oggetto viene trovato bisogna controllare se il metodo è stato dichiarato
             // dobbiamo essere sicuri che il metodo esista ==> o nella classe o in una superclasse
-            String classToSearch = classId;
+            String classToSearch = objectClass;
 
             while (!classToSearch.equals("") && !foundMethod) {
                 ClassNode objectClass = env.getClassLayout(classToSearch);
@@ -106,7 +107,7 @@ public class CallMetNode implements Node {
 
         // se non viene trovato il metodo nella classe e nelle superclassi
         if (!foundMethod) {
-            res.add(new SemanticError("Method " + methodName + " not declared in class " + classId));
+            res.add(new SemanticError("Method " + methodName + " not declared in class " + objectClass));
         } else {
             // se invece viene trovato il metodo si fa il controllo semantico sui parametri passati al metodo
             for (Node arg : parlist)
@@ -114,7 +115,7 @@ public class CallMetNode implements Node {
 
             // si aggiunge ai parametri il self
             // c'è gia, in classnode gli diamo un classidnode ma ora lo si sostituisce con un parNode
-            parlist.add(0, new ParNode(objectName, new ClassIdNode(classId)));
+            parlist.add(0, new ParNode(objectName, new ClassIdNode(objectClass)));
         }
 
         // create object ID node
@@ -126,12 +127,6 @@ public class CallMetNode implements Node {
 
     @Override
     public String codeGeneration() {
-        // nome classe
-        String selfName = ((ClassIdNode) methodNode.getSelf()).getClassId();
-
-        // label metodo
-        String mLabel = FOOLlib.getMethodLabel(selfName, methodName);
-
         String loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");
 
         String parCode = "";
@@ -142,7 +137,9 @@ public class CallMetNode implements Node {
                 "lfp\n" +
                 parCode +
                 "lfp\n" +
-                "push " + mLabel + "\n" +
+                "push " + methodNode.getMethodOffset() + "\n" +
+                "smo\n" +
+                "push " + objectClass + "\n" +
                 "js\n";
     }
 }

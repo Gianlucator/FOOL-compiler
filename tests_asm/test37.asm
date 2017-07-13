@@ -30,7 +30,9 @@ lfp
 push 5
 push 3
 lfp
-push calcArea8Rectangle9
+push 4
+smo
+push Rectangle
 js
 print
 halt
@@ -132,4 +134,21 @@ sfp
 lrv
 lra
 js
+
+Rectangle:
+lmo
+push 0
+beq area4Rectangle9
+lmo
+push 1
+beq getL15Rectangle9
+lmo
+push 2
+beq getL25Rectangle9
+lmo
+push 3
+beq scaleArea9Rectangle9
+lmo
+push 4
+beq calcArea8Rectangle9
 halt

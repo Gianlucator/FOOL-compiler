@@ -40,7 +40,9 @@ lfp
 add
 lw
 lfp
-push foo3A1
+push 0
+smo
+push B
 js
 print
 halt
@@ -58,6 +60,11 @@ lrv
 lra
 js
 
+F:
+lmo
+push 0
+beq foo3F1
+
 foo3A1:
 cfp
 lra
@@ -70,4 +77,19 @@ sfp
 lrv
 lra
 js
+
+A:
+lmo
+push 0
+beq foo3A1
+
+B:
+lmo
+push 0
+beq foo3A1
+
+C:
+lmo
+push 0
+beq foo3A1
 halt

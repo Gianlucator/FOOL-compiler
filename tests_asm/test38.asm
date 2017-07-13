@@ -33,10 +33,29 @@ lfp
 add
 lw
 lfp
-push aparam6B1
+push 0
+smo
+push B
 js
 print
 halt
+
+afun4A1:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+A:
+lmo
+push 0
+beq afun4A1
 
 aparam6B1:
 cfp
@@ -52,7 +71,9 @@ lw
 sop
 lfp
 lfp
-push afun4A1
+push 0
+smo
+push A
 js
 mult
 srv
@@ -64,15 +85,8 @@ lrv
 lra
 js
 
-afun4A1:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
+B:
+lmo
+push 0
+beq aparam6B1
 halt
