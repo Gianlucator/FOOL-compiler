@@ -54,8 +54,10 @@ public class NewExpNode implements Node {
         for (int i = args.size() - 1; i >= 0; i--)
             code += args.get(i).codeGeneration() + saveToHPThenIncHP;
 
+        code += "push " + classId + "\n" + saveToHPThenIncHP;
+
         // salviamo la dimensione arg.size() + 1
-        int size = args.size() + 1;
+        int size = args.size() + 2;
         code += "push " + size + "\n" + saveToHPThenIncHP;
 
         // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack

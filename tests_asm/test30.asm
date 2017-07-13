@@ -20,7 +20,14 @@ push 1
 lhp
 add
 shp
-push 4
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 5
 lhp
 sw
 push 1
@@ -37,7 +44,10 @@ lfp
 lfp
 push 2
 smo
-push B
+lop
+push -2
+add
+lw
 js
 print
 halt
@@ -45,7 +55,7 @@ halt
 getA4A1:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -60,7 +70,7 @@ js
 getB4A1:
 cfp
 lra
-push -3
+push -4
 lop
 add
 lw
@@ -83,7 +93,7 @@ beq getB4A1
 getC4B1:
 cfp
 lra
-push -4
+push -5
 lop
 add
 lw

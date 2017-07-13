@@ -6,7 +6,14 @@ push 1
 lhp
 add
 shp
-push 2
+push Fabonicci
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -24,7 +31,10 @@ push 0
 lfp
 push 0
 smo
-push Fabonicci
+lop
+push -2
+add
+lw
 js
 print
 halt
@@ -53,7 +63,10 @@ lw
 lfp
 push 1
 smo
-push Fabonicci
+lop
+push -2
+add
+lw
 js
 b label1
 label0:
@@ -81,7 +94,10 @@ add
 lfp
 push 0
 smo
-push Fabonicci
+lop
+push -2
+add
+lw
 js
 srv
 sra

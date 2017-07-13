@@ -6,7 +6,14 @@ push 1
 lhp
 add
 shp
-push 2
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -14,7 +21,14 @@ lhp
 add
 shp
 lhp
+push A
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -35,7 +49,10 @@ lw
 lfp
 push 0
 smo
-push B
+lop
+push -2
+add
+lw
 js
 print
 halt
@@ -60,7 +77,7 @@ beq afun4A1
 aparam6B1:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -73,7 +90,10 @@ lfp
 lfp
 push 0
 smo
-push A
+lop
+push -2
+add
+lw
 js
 mult
 srv

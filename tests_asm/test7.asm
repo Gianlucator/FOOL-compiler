@@ -6,7 +6,14 @@ push 1
 lhp
 add
 shp
-push 2
+push A
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -27,7 +34,14 @@ push 1
 lhp
 add
 shp
-push 3
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -48,7 +62,14 @@ push 1
 lhp
 add
 shp
-push 3
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -65,7 +86,10 @@ lfp
 lfp
 push 1
 smo
-push B
+lop
+push -2
+add
+lw
 js
 push -2
 lfp
@@ -76,7 +100,10 @@ lfp
 lfp
 push 0
 smo
-push B
+lop
+push -2
+add
+lw
 js
 push -3
 lfp
@@ -87,7 +114,10 @@ lfp
 lfp
 push 0
 smo
-push A
+lop
+push -2
+add
+lw
 js
 add
 print
@@ -96,7 +126,7 @@ halt
 value5A1:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -116,7 +146,7 @@ beq value5A1
 getA4B1:
 cfp
 lra
-push -3
+push -4
 lop
 add
 lw

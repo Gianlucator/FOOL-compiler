@@ -1,16 +1,5 @@
 push 0
-push 1
-lhp
-sw
-push 1
-lhp
-add
-shp
-lhp
-push -2
-lfp
-add
-lw
+push B
 lhp
 sw
 push 1
@@ -25,7 +14,7 @@ lhp
 add
 shp
 lhp
-push -3
+push -2
 lfp
 add
 lw
@@ -34,9 +23,12 @@ lfp
 lfp
 push 0
 smo
-push A
+lop
+push -2
+add
+lw
 js
-push -4
+push -3
 lfp
 add
 lw
@@ -46,10 +38,7 @@ halt
 get3A1:
 cfp
 lra
-push -2
-lop
-add
-lw
+push 44
 srv
 sra
 pop

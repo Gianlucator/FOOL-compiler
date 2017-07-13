@@ -1,5 +1,12 @@
 push 0
+push Area
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -7,7 +14,14 @@ lhp
 add
 shp
 lhp
+push Rectangle
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -24,7 +38,10 @@ lfp
 lfp
 push 0
 smo
-push Area
+lop
+push -2
+add
+lw
 js
 push -3
 lfp
@@ -35,7 +52,10 @@ lfp
 lfp
 push 0
 smo
-push Rectangle
+lop
+push -2
+add
+lw
 js
 add
 print

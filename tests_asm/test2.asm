@@ -6,7 +6,14 @@ push 1
 lhp
 add
 shp
-push 2
+push Numero
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -21,7 +28,14 @@ push 1
 lhp
 add
 shp
-push 2
+push NumeroI
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -36,7 +50,14 @@ push 1
 lhp
 add
 shp
-push 2
+push NumeroV
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -51,7 +72,14 @@ push 1
 lhp
 add
 shp
-push 2
+push NumeroX
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -68,7 +96,10 @@ lfp
 lfp
 push 0
 smo
-push Numero
+lop
+push -2
+add
+lw
 js
 push -3
 lfp
@@ -79,7 +110,10 @@ lfp
 lfp
 push 1
 smo
-push NumeroI
+lop
+push -2
+add
+lw
 js
 push -4
 lfp
@@ -90,7 +124,10 @@ lfp
 lfp
 push 0
 smo
-push NumeroV
+lop
+push -2
+add
+lw
 js
 push -5
 lfp
@@ -101,7 +138,10 @@ lfp
 lfp
 push 1
 smo
-push NumeroX
+lop
+push -2
+add
+lw
 js
 add
 add
@@ -112,7 +152,7 @@ halt
 getX4Numero6:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -127,7 +167,7 @@ js
 getY4Numero6:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -147,10 +187,35 @@ lmo
 push 1
 beq getY4Numero6
 
+getY4NumeroI7:
+cfp
+lra
+push -3
+lop
+add
+lw
+push 1
+add
+srv
+sra
+pop
+sfp
+lrv
+lra
+js
+
+NumeroI:
+lmo
+push 0
+beq getX4Numero6
+lmo
+push 1
+beq getY4NumeroI7
+
 getX4NumeroV7:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -167,7 +232,7 @@ js
 getY4NumeroV7:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -192,7 +257,7 @@ beq getY4NumeroV7
 getX4NumeroX7:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -213,29 +278,4 @@ beq getX4NumeroX7
 lmo
 push 1
 beq getY4NumeroV7
-
-getY4NumeroI7:
-cfp
-lra
-push -2
-lop
-add
-lw
-push 1
-add
-srv
-sra
-pop
-sfp
-lrv
-lra
-js
-
-NumeroI:
-lmo
-push 0
-beq getX4Numero6
-lmo
-push 1
-beq getY4NumeroI7
 halt

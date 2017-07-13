@@ -53,7 +53,7 @@ public class IdNode implements Node {
                     for (int i = 0; i < fields.size() && !found; i++) {
                         Node fl = fields.get(i);
                         if (((VarDecNode) fl).getId().equals(id)) {
-                            fieldOffset = -i -2;
+                            fieldOffset = -i - 3;
                             found = true;
                         }
                     }

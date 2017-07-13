@@ -1,5 +1,12 @@
 push 0
+push X
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -30,7 +37,10 @@ lfp
 lfp
 push 0
 smo
-push X
+lop
+push -2
+add
+lw
 js
 lhp
 sw
@@ -38,7 +48,14 @@ push 1
 lhp
 add
 shp
-push 3
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -53,7 +70,14 @@ halt
 get3X1:
 cfp
 lra
+push A
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -67,7 +91,14 @@ push 1
 lhp
 add
 shp
+push A
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -81,7 +112,14 @@ push 1
 lhp
 add
 shp
-push 3
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -95,7 +133,14 @@ push 1
 lhp
 add
 shp
+push A
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -109,7 +154,14 @@ push 1
 lhp
 add
 shp
-push 3
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -147,7 +199,10 @@ lfp
 lfp
 push 0
 smo
-push X
+lop
+push -2
+add
+lw
 js
 srv
 sra

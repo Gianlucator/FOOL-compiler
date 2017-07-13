@@ -10,7 +10,14 @@ push 1
 lhp
 add
 shp
-push 2
+push Child
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -31,7 +38,10 @@ lw
 lfp
 push 0
 smo
-push Child
+lop
+push -2
+add
+lw
 js
 print
 halt

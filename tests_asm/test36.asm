@@ -1,5 +1,12 @@
 push 0
+push B
+lhp
+sw
 push 1
+lhp
+add
+shp
+push 2
 lhp
 sw
 push 1
@@ -16,7 +23,10 @@ lfp
 lfp
 push 0
 smo
-push B
+lop
+push -2
+add
+lw
 js
 print
 halt

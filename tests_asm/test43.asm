@@ -13,7 +13,14 @@ push 1
 lhp
 add
 shp
-push 3
+push Cane
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -35,7 +42,14 @@ push 1
 lhp
 add
 shp
-push 3
+push BullDog
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -52,7 +66,10 @@ lfp
 lfp
 push 0
 smo
-push BullDog
+lop
+push -2
+add
+lw
 js
 push -3
 lfp
@@ -63,7 +80,10 @@ lfp
 lfp
 push 2
 smo
-push BullDog
+lop
+push -2
+add
+lw
 js
 add
 print
@@ -72,7 +92,7 @@ halt
 getAge6Animale7:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -87,7 +107,7 @@ js
 isAlive7Animale7:
 cfp
 lra
-push -3
+push -4
 lop
 add
 lw
@@ -110,7 +130,7 @@ beq isAlive7Animale7
 quantoViveAncora16Cane4:
 cfp
 lra
-push -3
+push -4
 lop
 add
 lw
@@ -119,7 +139,7 @@ beq label4
 push 0
 b label5
 label4:
-push -2
+push -3
 lop
 add
 lw
@@ -136,7 +156,7 @@ push 1
 b label7
 label6:
 push 15
-push -2
+push -3
 lop
 add
 lw
@@ -165,7 +185,7 @@ beq quantoViveAncora16Cane4
 quantoViveAncora16BullDog7:
 cfp
 lra
-push -3
+push -4
 lop
 add
 lw
@@ -174,7 +194,7 @@ beq label13
 push 0
 b label14
 label13:
-push -2
+push -3
 lop
 add
 lw
@@ -191,7 +211,7 @@ push 1
 b label16
 label15:
 push 8
-push -2
+push -3
 lop
 add
 lw

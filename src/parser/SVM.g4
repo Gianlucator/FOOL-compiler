@@ -52,7 +52,7 @@ assembly:
 	  | STOREHP                 {code[i++] = STOREHP;}   //
 	  | LOADOP                  {code[i++] = LOADOP;}
 	  | STOREOP                 {code[i++] = STOREOP;}
-	  | LOADMO                 {code[i++] = LOADMO;}
+	  | LOADMO                  {code[i++] = LOADMO;}
 	  | STOREMO                 {code[i++] = STOREMO;}
 	  | PRINT                   {code[i++] = PRINT;}
 	  | HALT                    {code[i++] = HALT;}

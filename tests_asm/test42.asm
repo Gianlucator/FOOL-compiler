@@ -16,7 +16,10 @@ lfp
 lfp
 push 0
 smo
-push Numero
+lop
+push -2
+add
+lw
 js
 print
 halt
@@ -24,7 +27,7 @@ halt
 getNum6Numero6:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -51,7 +54,14 @@ push 1
 lhp
 add
 shp
-push 2
+push Numero
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1

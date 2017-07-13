@@ -139,7 +139,10 @@ public class CallMetNode implements Node {
                 "lfp\n" +
                 "push " + methodNode.getMethodOffset() + "\n" +
                 "smo\n" +
-                "push " + objectClass + "\n" +
+                "lop\n" +
+                "push -2\n" +
+                "add\n" +
+                "lw\n" +
                 "js\n";
     }
 }

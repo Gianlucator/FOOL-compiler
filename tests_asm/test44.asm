@@ -6,7 +6,14 @@ push 1
 lhp
 add
 shp
-push 2
+push A
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 3
 lhp
 sw
 push 1
@@ -23,7 +30,10 @@ lfp
 lfp
 push 0
 smo
-push A
+lop
+push -2
+add
+lw
 js
 push -3
 lfp
@@ -34,7 +44,10 @@ lfp
 lfp
 push 2
 smo
-push B
+lop
+push -2
+add
+lw
 js
 print
 halt
@@ -49,7 +62,7 @@ push 1
 lhp
 add
 shp
-push -2
+push -3
 lop
 add
 lw
@@ -59,7 +72,14 @@ push 1
 lhp
 add
 shp
-push 3
+push B
+lhp
+sw
+push 1
+lhp
+add
+shp
+push 4
 lhp
 sw
 push 1
@@ -83,7 +103,7 @@ beq createB7A1
 getX4B1:
 cfp
 lra
-push -2
+push -3
 lop
 add
 lw
@@ -98,7 +118,7 @@ js
 getY4B1:
 cfp
 lra
-push -3
+push -4
 lop
 add
 lw
