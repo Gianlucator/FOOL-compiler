@@ -15,45 +15,26 @@ add
 shp
 lhp
 lhp
+push 1
+add
+sw
+push 1
+lhp
 push 0
-add
-sw
-push B
-lhp
-push 0
-add
-sw
-push 2
-lhp
-push 1
-add
-sw
-lhp
-push 2
-add
-shp
-lhp
-lhp
-push 2
-add
-sw
-push 1
-lhp
-push 1
 add
 sw
 push C
 lhp
+push 2
+add
+sw
+push 4
+lhp
 push 3
 add
 sw
-push 5
 lhp
 push 4
-add
-sw
-lhp
-push 5
 add
 shp
 lhp
@@ -137,23 +118,6 @@ push -4
 lop
 add
 lw
-lop
-sro
-push -5
-lop
-add
-lw
-sop
-lfp
-lfp
-push 0
-smo
-lop
-push -2
-add
-lw
-js
-add
 add
 srv
 sra
