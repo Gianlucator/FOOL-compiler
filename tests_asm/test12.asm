@@ -1,21 +1,19 @@
 push 0
 push A
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push 2
 lhp
-sw
 push 1
+add
+sw
 lhp
+push 2
 add
 shp
 lhp
-lhp
-sop
 lop
 sro
 push -2

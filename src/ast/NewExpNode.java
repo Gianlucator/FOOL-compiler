@@ -43,27 +43,46 @@ public class NewExpNode implements Node {
 
     @Override
     public String codeGeneration() {
+        int hpCounter = 0;
         String code = "";
-        String saveToHPThenIncHP =  "lhp\n" +
-                                    "sw\n"  +       //store all'indirizzo del hp il valore pushato precedentemente //fa 2 pop
-                                    "push 1\n" +
-                                    "lhp\n" +
-                                    "add\n" +       //vado all'indirizzo successivo
-                                    "shp\n";        //modifico l'hp //fa già la pop
 
-        for (int i = args.size() - 1; i >= 0; i--)
-            code += args.get(i).codeGeneration() + saveToHPThenIncHP;
+        for (int i = args.size() - 1; i >= 0; i--) {
+            if (args.get(i) instanceof NewExpNode)
+                code += args.get(i).codeGeneration() + saveToHP(hpCounter); // salvo il valore della new proprio in hpCounter
+            hpCounter++;
+        }
 
-        code += "push " + classId + "\n" + saveToHPThenIncHP;
+        hpCounter = 0;
+        for (int i = args.size() - 1; i >= 0; i--) {
+            if (!(args.get(i) instanceof NewExpNode))
+                code += args.get(i).codeGeneration() + saveToHP(hpCounter); // salvo il valore della variabile proprio in hpCounter
+            hpCounter++;
+        }
+
+        code += "push " + classId + "\n" + saveToHP(hpCounter);
+        hpCounter++;
 
         // salviamo la dimensione arg.size() + 2
         int size = args.size() + 2;
-        code += "push " + size + "\n" + saveToHPThenIncHP;
+        code += "push " + size + "\n" + saveToHP(hpCounter);
 
-        // salviamo indirizzo iniziale dell'oggetto = top heap sullo stack
-        code += "lhp\n";
+        // aggiorniamo l'indirizzo iniziale dell'oggetto sommando i campi che abbiamo aggiunto
+        // alla fine il risultato che rimane sullo stack e' l'indirizzo finale dell'oggetto
+        code += "lhp\n" +
+                "push " + size + "\n" +
+                "add\n" +
+                "shp\n" +
+                "lhp\n";
 
         return code;
+    }
+
+    // dato un indirizzo, ritorna la stringa che permette di salvare un valore in un certo indirizzo a partire dall'hp
+    private String saveToHP(int indexToSaveTo) {
+        return  "lhp\n" +
+                "push " + indexToSaveTo + "\n" +
+                "add\n" +
+                "sw\n";
     }
 
     @Override

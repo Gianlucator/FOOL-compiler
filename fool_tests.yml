@@ -708,9 +708,9 @@ Esempio claudio2:
   class C (A ogg, int ii){
     int ooo()  ogg.get() + ii;
   };
-  let C y = new C(new B, 1);
+  let C y = new C(new B, 2);
   in print(y.ooo());
-- "556"
+- "557"
 
 Esempio claudio3:
 - class A {

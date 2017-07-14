@@ -1,21 +1,19 @@
 push 0
 push X
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push 2
 lhp
-sw
 push 1
+add
+sw
 lhp
+push 2
 add
 shp
 lhp
-lhp
-sop
 push function0
 lfp
 lfp
@@ -25,11 +23,9 @@ add
 lw
 js
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 lop
 sro
 push -2
@@ -47,148 +43,122 @@ add
 lw
 js
 lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push B
 lhp
-sw
-push 1
-lhp
+push 2
 add
-shp
+sw
 push 4
 lhp
+push 3
+add
 sw
-push 1
 lhp
+push 4
 add
 shp
 lhp
-lhp
-sop
 push 777
 print
 halt
-
-A:
-
-B:
 
 get3X1:
 cfp
 lra
 push A
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push 2
 lhp
-sw
 push 1
+add
+sw
 lhp
+push 2
 add
 shp
 lhp
 lhp
-sop
-lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push A
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push 2
 lhp
-sw
 push 1
+add
+sw
 lhp
+push 2
 add
 shp
 lhp
 lhp
-sop
-lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push B
 lhp
-sw
-push 1
-lhp
+push 2
 add
-shp
+sw
 push 4
 lhp
+push 3
+add
 sw
-push 1
 lhp
+push 4
 add
 shp
 lhp
 lhp
-sop
-lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push A
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push 2
 lhp
-sw
 push 1
+add
+sw
 lhp
+push 2
 add
 shp
 lhp
 lhp
-sop
-lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push B
 lhp
-sw
-push 1
-lhp
+push 2
 add
-shp
+sw
 push 4
 lhp
+push 3
+add
 sw
-push 1
 lhp
+push 4
 add
 shp
 lhp
-lhp
-sop
 srv
 sra
 pop
@@ -203,6 +173,10 @@ X:
 lmo
 push 0
 beq get3X1
+
+A:
+
+B:
 
 function0:
 cfp

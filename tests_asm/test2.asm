@@ -1,100 +1,84 @@
 push 0
 push 2
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push Numero
 lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push 3
 lhp
+push 2
+add
 sw
-push 1
 lhp
+push 3
 add
 shp
 lhp
-lhp
-sop
 push 2
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push NumeroI
 lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push 3
 lhp
+push 2
+add
 sw
-push 1
 lhp
+push 3
 add
 shp
 lhp
-lhp
-sop
 push 2
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push NumeroV
 lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push 3
 lhp
+push 2
+add
 sw
-push 1
 lhp
+push 3
 add
 shp
 lhp
-lhp
-sop
 push 2
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push NumeroX
 lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push 3
 lhp
+push 2
+add
 sw
-push 1
 lhp
+push 3
 add
 shp
 lhp
-lhp
-sop
 lop
 sro
 push -2

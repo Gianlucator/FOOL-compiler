@@ -77,28 +77,24 @@ cfp
 lra
 push 1
 lhp
-sw
-push 1
-lhp
+push 0
 add
-shp
+sw
 push Numero2
 lhp
-sw
 push 1
-lhp
 add
-shp
+sw
 push 3
 lhp
+push 2
+add
 sw
-push 1
 lhp
+push 3
 add
 shp
 lhp
-lhp
-sop
 srv
 sra
 pop
