@@ -57,25 +57,6 @@ js
 print
 halt
 
-afun4A1:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-lro
-sop
-js
-
-A:
-lmo
-push 0
-beq afun4A1
-
 aparam6B1:
 cfp
 lra
@@ -115,4 +96,23 @@ B:
 lmo
 push 0
 beq aparam6B1
+
+afun4A1:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+A:
+lmo
+push 0
+beq afun4A1
 halt

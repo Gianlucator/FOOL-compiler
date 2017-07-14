@@ -65,25 +65,6 @@ add
 print
 halt
 
-t1Rectangle9:
-cfp
-lra
-push 2
-srv
-sra
-pop
-sfp
-lrv
-lra
-lro
-sop
-js
-
-Rectangle:
-lmo
-push 0
-beq t1Rectangle9
-
 s1Area4:
 cfp
 lra
@@ -102,4 +83,23 @@ Area:
 lmo
 push 0
 beq s1Area4
+
+t1Rectangle9:
+cfp
+lra
+push 2
+srv
+sra
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+Rectangle:
+lmo
+push 0
+beq t1Rectangle9
 halt

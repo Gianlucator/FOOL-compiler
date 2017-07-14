@@ -60,25 +60,6 @@ lw
 print
 halt
 
-get3B1:
-cfp
-lra
-push 555
-srv
-sra
-pop
-sfp
-lrv
-lra
-lro
-sop
-js
-
-B:
-lmo
-push 0
-beq get3B1
-
 get3A1:
 cfp
 lra
@@ -100,4 +81,23 @@ A:
 lmo
 push 0
 beq get3A1
+
+get3B1:
+cfp
+lra
+push 555
+srv
+sra
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+B:
+lmo
+push 0
+beq get3B1
 halt

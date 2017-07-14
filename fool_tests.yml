@@ -705,12 +705,12 @@ Esempio claudio2:
   class B implements A{
     int get() 555;
   }
-  class C (A ogg, int ii){
-    int ooo()  ogg.get() + ii;
+  class C (A ogg, int ii, A ogg2){
+    int ooo()  ogg.get() + ii + ogg2.get();
   };
-  let C y = new C(new B, 1);
+  let C y = new C(new B, 1, new B);
   in print(y.ooo());
-- "556"
+- "600"
 
 Esempio claudio3:
 - class A {
