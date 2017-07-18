@@ -173,7 +173,7 @@ public class FunNode implements Node {
 
         Node typeBody = body.typeCheck();
         if (!(FOOLlib.isSubtype(typeBody, type))) {
-            FOOLlib.addTypeError("Wrong return type for function " + id + ", expected instance of " + type + " or its subtypes, but got " + typeBody);
+            FOOLlib.addTypeError("Wrong return type for function " + id + ", expected instance of " + type + " or its subtypes");
         }
         return null;
     }

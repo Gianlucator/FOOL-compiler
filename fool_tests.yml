@@ -728,22 +728,6 @@ Esempio claudio3:
 - "44"
 
 
-a test:
-- class A {
-    int f() 44;
-  }
-  class B implements A
-  class C implements B
-  class D implements B;
-  let A a = new A;
-      B b = new B;
-      C c = new C;
-      D d = new D;
-      A foo() b;
-      A robo = foo();
-  in print(robo.f());
-- "44"
-
 If test:
 - class A {
     int f() 44;

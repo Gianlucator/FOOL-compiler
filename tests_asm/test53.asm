@@ -14,21 +14,6 @@ push 2
 add
 shp
 lhp
-push B
-lhp
-push 0
-add
-sw
-push 2
-lhp
-push 1
-add
-sw
-lhp
-push 2
-add
-shp
-lhp
 push C
 lhp
 push 0
@@ -62,14 +47,14 @@ lhp
 push function0
 lfp
 lfp
-push -6
+push -5
 lfp
 add
 lw
 js
 lop
 sro
-push -7
+push -6
 lfp
 add
 lw
@@ -83,7 +68,6 @@ push -2
 add
 lw
 js
-print
 halt
 
 f1A1:
@@ -123,11 +107,22 @@ beq f1A1
 function0:
 cfp
 lra
+push 1
+push 1
+beq label4
+push -4
+lfp
+lw
+add
+lw
+b label5
+label4:
 push -3
 lfp
 lw
 add
 lw
+label5:
 srv
 sra
 pop
