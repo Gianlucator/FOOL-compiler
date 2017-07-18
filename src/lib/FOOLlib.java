@@ -1,6 +1,7 @@
 package lib;
 
 import ast.*;
+import sun.reflect.generics.tree.TypeTree;
 import util.TypeError;
 import util.TypeTreeNode;
 
@@ -83,5 +84,29 @@ public class FOOLlib {
 
     public static void addTypeError(String msg) {
         typeErrors.add(new TypeError(msg));
+    }
+
+    // Restituisce il primo antenato comune tra due id di due classi.
+    public static ClassIdNode firstCommonAncestor(String a, String b) {
+
+        TypeTreeNode typeOfA = root.findNode(a);
+        TypeTreeNode typeOfB = root.findNode(b);
+        ArrayList<TypeTreeNode> superTypesA = typeOfA.getSuperTypes();
+        ArrayList<TypeTreeNode> superTypesB = typeOfB.getSuperTypes();
+        for (int i = 0; i < superTypesA.size(); i++) {
+            for (int j = 0; j < superTypesB.size(); i++) {
+                if (superTypesA.get(i).getCurrentType().equals(superTypesB.get(j).getCurrentType())) {
+                    // Il nodo deve essere di tipo ClassIdNode per il corretto typecheck risalendo l'albero
+                    return new ClassIdNode(superTypesA.get(i).getCurrentClassNode().getId());
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Node firstCommonAncestor(Node e, Node t) {
+        if (e instanceof ClassIdNode && t instanceof ClassIdNode)
+            return firstCommonAncestor(((ClassIdNode)e).getClassId(),((ClassIdNode)t).getClassId());
+        return null;
     }
 }

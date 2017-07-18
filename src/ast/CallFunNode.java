@@ -47,17 +47,21 @@ public class CallFunNode implements Node {
         //create the result
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
+        // Prende il nesting level
         int j = env.getNestingLevel();
         STentry tmp = null;
+        // Controlla i nesting level partendo da j
         while (j >= 0 && tmp == null) {
             tmp = (env.getSymTable().get(j--)).get(id);
         }
+        // Se NON ha trovato l'id lancia errore semantico
         if (tmp == null)
             res.add(new SemanticError("Function " + id + " not declared"));
         else {
             this.entry = tmp;
             this.nestinglevel = env.getNestingLevel();
 
+            // Passa alla check-semantic degli argomenti
             for (Node arg : parlist)
                 res.addAll(arg.checkSemantics(env));
         }
@@ -66,15 +70,18 @@ public class CallFunNode implements Node {
 
     public Node typeCheck() {  //
         ArrowTypeNode t = null;
+        // Verifica se l'entry è effettivamente una funzione
         if (entry.getType() instanceof ArrowTypeNode)
             t = (ArrowTypeNode) entry.getType();
         else
             FOOLlib.addTypeError("Invocation of a non-function " + id);
 
         ArrayList<Node> p = t.getParList();
+        // Controllo semantico dei parametri in input
         if (!(p.size() == parlist.size()))
             FOOLlib.addTypeError("Wrong number of parameters in the invocation of " + id);
 
+        // Controllo controvarianza dei parametri
         for (int i = 0; i < parlist.size(); i++) {
             if (!(FOOLlib.isSubtype((parlist.get(i)).typeCheck(), p.get(i))))
                 FOOLlib.addTypeError("Wrong type for " + (i + 1) + " parameter in the invocation of " + id);
@@ -85,6 +92,7 @@ public class CallFunNode implements Node {
 
     public String codeGeneration() {
         String parCode = "";
+        // Genera il codice dei parametri
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
         // fa anche push

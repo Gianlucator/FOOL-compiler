@@ -293,4 +293,7 @@ public class ClassNode implements Node {
         return null;
     }
 
+    public String toString(){
+        return this.getId();
+    }
 }

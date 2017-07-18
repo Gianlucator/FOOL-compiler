@@ -171,8 +171,9 @@ public class FunNode implements Node {
             for (Node dec : declist)
                 dec.typeCheck();
 
-        if (!(FOOLlib.isSubtype(body.typeCheck(), type))) {
-            FOOLlib.addTypeError("Wrong return type for function " + id);
+        Node typeBody = body.typeCheck();
+        if (!(FOOLlib.isSubtype(typeBody, type))) {
+            FOOLlib.addTypeError("Wrong return type for function " + id + ", expected instance of " + type + " or its subtypes, but got " + typeBody);
         }
         return null;
     }
@@ -180,6 +181,7 @@ public class FunNode implements Node {
     public String codeGeneration() {
         //che altro dovrebbe mancare?
         String declCode = "", popDecl = "";
+        // Coe generation delle dichiarazioni ad inizio funzione
         if (declist != null) {
             for (Node dec : declist) {
                 declCode += dec.codeGeneration();
@@ -187,6 +189,7 @@ public class FunNode implements Node {
             }
         }
 
+        // Pop dei parametri
         String popParl = "";
         int parSize = (self == null) ? parlist.size() : parlist.size() - 1;
         for (int i = 0; i < parSize; i++) {

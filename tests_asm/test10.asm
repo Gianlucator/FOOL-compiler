@@ -52,10 +52,6 @@ js
 print
 halt
 
-A:
-
-B:
-
 g1C1:
 cfp
 lra
@@ -95,4 +91,8 @@ D:
 lmo
 push 0
 beq g1D1
+
+A:
+
+B:
 halt

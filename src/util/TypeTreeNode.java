@@ -1,5 +1,6 @@
 package util;
 
+import ast.ClassIdNode;
 import ast.ClassNode;
 import ast.Node;
 
@@ -12,22 +13,35 @@ import java.util.HashSet;
  */
 public class TypeTreeNode {
     private String currentType;
-    private Node currentClassNode;
+    private ClassNode currentClassNode;
     private TypeTreeNode parentSuperType;
-    private HashSet<TypeTreeNode> superTypes; // contains all ancestors ==> MAXIMUM SPEED, FULL MOMENTUM, HIGH EFFICIENCY
-    private HashSet<TypeTreeNode> subTypes;
+    private ArrayList<TypeTreeNode> superTypes; // contains all ancestors ==> MAXIMUM SPEED, FULL MOMENTUM, HIGH EFFICIENCY
+    private ArrayList<TypeTreeNode> subTypes;
+
+
+    public ArrayList<TypeTreeNode> getSubTypes() {
+        return subTypes;
+    }
+
+    public ArrayList<TypeTreeNode> getSuperTypes(){
+        return superTypes;
+    }
+
+    public ClassNode getCurrentClassNode() {
+        return currentClassNode;
+    }
 
     public TypeTreeNode(String currentType, ClassNode currentClassNode, TypeTreeNode parentSuperType) {
         this.currentType = currentType;
         this.currentClassNode = currentClassNode;
         this.parentSuperType = parentSuperType;
-        this.superTypes = new HashSet<>();
+        this.superTypes = new ArrayList<>();
 
         this.superTypes.add(parentSuperType);
         if (parentSuperType != null)
             this.superTypes.addAll(parentSuperType.superTypes);
 
-        this.subTypes = new HashSet<>();
+        this.subTypes = new ArrayList<>();
     }
 
     // this is sub of sup if this = sup or if sup is its supertype
@@ -72,7 +86,7 @@ public class TypeTreeNode {
     }
 
     public String toString() {
-        return currentType + ": " + subTypes.toString() + "\n";
+        return currentType;
     }
 
     public String getCurrentType() {
@@ -86,5 +100,6 @@ public class TypeTreeNode {
                 return true;
         return false;
     }
+
 
 }

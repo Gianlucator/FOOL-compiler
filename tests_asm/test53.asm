@@ -1,5 +1,5 @@
 push 0
-push Area
+push A
 lhp
 push 0
 add
@@ -14,7 +14,7 @@ push 2
 add
 shp
 lhp
-push Rectangle
+push B
 lhp
 push 0
 add
@@ -29,9 +29,47 @@ push 2
 add
 shp
 lhp
+push C
+lhp
+push 0
+add
+sw
+push 2
+lhp
+push 1
+add
+sw
+lhp
+push 2
+add
+shp
+lhp
+push D
+lhp
+push 0
+add
+sw
+push 2
+lhp
+push 1
+add
+sw
+lhp
+push 2
+add
+shp
+lhp
+push function0
+lfp
+lfp
+push -6
+lfp
+add
+lw
+js
 lop
 sro
-push -2
+push -7
 lfp
 add
 lw
@@ -45,30 +83,13 @@ push -2
 add
 lw
 js
-lop
-sro
-push -3
-lfp
-add
-lw
-sop
-lfp
-lfp
-push 0
-smo
-lop
-push -2
-add
-lw
-js
-add
 print
 halt
 
-t1Rectangle9:
+f1A1:
 cfp
 lra
-push 2
+push 44
 srv
 sra
 pop
@@ -79,27 +100,39 @@ lro
 sop
 js
 
-Rectangle:
+A:
 lmo
 push 0
-beq t1Rectangle9
+beq f1A1
 
-s1Area4:
+B:
+lmo
+push 0
+beq f1A1
+
+D:
+lmo
+push 0
+beq f1A1
+
+C:
+lmo
+push 0
+beq f1A1
+
+function0:
 cfp
 lra
-push 1
+push -3
+lfp
+lw
+add
+lw
 srv
 sra
 pop
 sfp
 lrv
 lra
-lro
-sop
 js
-
-Area:
-lmo
-push 0
-beq s1Area4
 halt

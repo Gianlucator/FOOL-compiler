@@ -71,6 +71,26 @@ js
 print
 halt
 
+foo3F1:
+cfp
+lra
+push 6
+srv
+sra
+pop
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+F:
+lmo
+push 0
+beq foo3F1
+
 foo3A1:
 cfp
 lra
@@ -100,24 +120,4 @@ C:
 lmo
 push 0
 beq foo3A1
-
-foo3F1:
-cfp
-lra
-push 6
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-lro
-sop
-js
-
-F:
-lmo
-push 0
-beq foo3F1
 halt

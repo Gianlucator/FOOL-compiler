@@ -34,6 +34,7 @@ public class NewExpNode implements Node {
             Node arg = args.get(i).typeCheck();
             Node varNodeType = ((VarDecNode) classEntry.getFields().get(i)).getType();
 
+            // Controllo controvarianza valori campi
             if (!FOOLlib.isSubtype(arg, varNodeType))
                 FOOLlib.addTypeError("Incompatible parameter at position " + i + " during instantiation of class " + classId);
         }
@@ -46,19 +47,23 @@ public class NewExpNode implements Node {
         int hpCounter = 0;
         String code = "";
 
+        // Generazione del codice degli argomenti del costruttore
         for (int i = args.size() - 1; i >= 0; i--) {
             if (args.get(i) instanceof NewExpNode)
-                code += args.get(i).codeGeneration() + saveToHP(hpCounter); // salvo il valore della new proprio in hpCounter
+                code += args.get(i).codeGeneration() + saveToHP(hpCounter);
+            // salvo il valore della new proprio in hpCounter
             hpCounter++;
         }
 
         hpCounter = 0;
         for (int i = args.size() - 1; i >= 0; i--) {
             if (!(args.get(i) instanceof NewExpNode))
-                code += args.get(i).codeGeneration() + saveToHP(hpCounter); // salvo il valore della variabile proprio in hpCounter
+                code += args.get(i).codeGeneration() + saveToHP(hpCounter);
+            // salvo il valore della variabile proprio in hpCounter
             hpCounter++;
         }
 
+        // Pusha il nome della classe
         code += "push " + classId + "\n" + saveToHP(hpCounter);
         hpCounter++;
 
@@ -68,8 +73,8 @@ public class NewExpNode implements Node {
 
         // aggiorniamo l'indirizzo iniziale dell'oggetto sommando i campi che abbiamo aggiunto
         // alla fine il risultato che rimane sullo stack e' l'indirizzo finale dell'oggetto
-        code += "lhp\n" +
-                "push " + size + "\n" +
+        code += "lhp\n" +                   // Caricamento heap pointer
+                "push " + size + "\n" +     // Push della dimensione dell'oggetto
                 "add\n" +
                 "shp\n" +
                 "lhp\n";

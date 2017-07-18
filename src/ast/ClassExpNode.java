@@ -34,7 +34,7 @@ public class ClassExpNode implements Node {
     public Node typeCheck() {
         // si ciclano le classi dichiarate
         for (Node cls: classes)
-            // si chiama su di essere il typecheck ricorsivamente
+            // si chiama su di essere il typecheck innestatamente
             cls.typeCheck();
 
         // typecheck sul body del programma (= sul resto del programma)

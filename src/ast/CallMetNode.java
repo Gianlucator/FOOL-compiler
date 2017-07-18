@@ -127,11 +127,15 @@ public class CallMetNode implements Node {
 
     @Override
     public String codeGeneration() {
+        // Carica l'oggetto su cui è chiamato il metodo
         String loadObject = (objectName.equals("this") ? "" : objectEntry.codeGeneration() + "sop\n");
 
+        // Stringa per il codice dei parametri
         String parCode = "";
+        // Codice dei parametri generato innestatamente
         for (int i = parlist.size() - 1; i >= 0; i--)
             parCode += parlist.get(i).codeGeneration();
+
 
         return  "lop\n" +
                 "sro\n" +
@@ -139,7 +143,7 @@ public class CallMetNode implements Node {
                 "lfp\n" +
                 parCode +
                 "lfp\n" +
-                "push " + methodNode.getMethodOffset() + "\n" +
+                "push " + methodNode.getMethodOffset() + "\n" +         // offset del metodo
                 "smo\n" +
                 "lop\n" +
                 "push -2\n" +

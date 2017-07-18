@@ -52,6 +52,40 @@ js
 print
 halt
 
+ooo3C1:
+cfp
+lra
+lop
+sro
+push -3
+lop
+add
+lw
+sop
+lfp
+lfp
+push 0
+smo
+lop
+push -2
+add
+lw
+js
+srv
+sra
+pop
+sfp
+lrv
+lra
+lro
+sop
+js
+
+C:
+lmo
+push 0
+beq ooo3C1
+
 get3A1:
 cfp
 lra
@@ -89,38 +123,4 @@ B:
 lmo
 push 0
 beq get3B1
-
-ooo3C1:
-cfp
-lra
-lop
-sro
-push -3
-lop
-add
-lw
-sop
-lfp
-lfp
-push 0
-smo
-lop
-push -2
-add
-lw
-js
-srv
-sra
-pop
-sfp
-lrv
-lra
-lro
-sop
-js
-
-C:
-lmo
-push 0
-beq ooo3C1
 halt

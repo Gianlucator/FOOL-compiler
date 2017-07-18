@@ -65,10 +65,6 @@ push 777
 print
 halt
 
-A:
-
-B:
-
 get3X1:
 cfp
 lra
@@ -177,6 +173,10 @@ X:
 lmo
 push 0
 beq get3X1
+
+A:
+
+B:
 
 function0:
 cfp
