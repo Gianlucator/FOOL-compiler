@@ -1,52 +1,28 @@
 push 0
-push 20
-lhp
-push 0
-add
-sw
-push Fabonicci
-lhp
+push function0
+lfp
 push 1
-add
-sw
-push 3
-lhp
-push 2
-add
-sw
-lhp
-push 3
-add
-shp
-lhp
-lop
-sro
+push 5
+lfp
 push -2
 lfp
-add
-lw
-sop
-lfp
-push 0
-lfp
-push 0
-smo
-lop
-push -2
 add
 lw
 js
 print
 halt
 
-get3Fabonicci9:
+function0:
 cfp
 lra
 push 1
 lfp
 add
 lw
-push 20
+push 2
+lfp
+add
+lw
 beq label2
 push 0
 b label3
@@ -55,72 +31,43 @@ push 1
 label3:
 push 1
 beq label0
-lop
-sro
-lfp
 push 1
 lfp
 add
 lw
 lfp
+push 2
+lfp
+add
+lw
 push 1
-smo
-lop
+lfp
+add
+lw
+push 1
+add
+lfp
+lw
 push -2
+lfp
+lw
 add
 lw
 js
+mult
 b label1
 label0:
-push 42
+push 2
+lfp
+add
+lw
 label1:
 srv
 sra
 pop
 pop
-sfp
-lrv
-lra
-lro
-sop
-js
-
-foo3Fabonicci9:
-cfp
-lra
-lop
-sro
-lfp
-push 1
-lfp
-add
-lw
-push 1
-add
-lfp
-push 0
-smo
-lop
-push -2
-add
-lw
-js
-srv
-sra
-pop
 pop
 sfp
 lrv
 lra
-lro
-sop
 js
-
-Fabonicci:
-lmo
-push 0
-beq get3Fabonicci9
-lmo
-push 1
-beq foo3Fabonicci9
-halt

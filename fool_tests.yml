@@ -733,15 +733,11 @@ If test:
     int f() 44;
   }
   class B implements A
-  class C implements B
-  class D implements B;
-  let A a = new A;
-      C c = new C;
-      D d = new D;
-      A foo() if true then {c} else {d};
-      A robo = foo();
-  in robo.f();
-- "44"
+  class C implements A
+  ;
+  let A a = if (2 == 1) then { new B } else { new C};
+  in print(73) ;
+- "73"
 
 If test 2:
 - class A {
@@ -757,3 +753,4 @@ If test 2:
       C robo = foo();
   in robo.f();
 - "type errors"
+

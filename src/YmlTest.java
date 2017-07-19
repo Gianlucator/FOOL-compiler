@@ -36,7 +36,7 @@ public class YmlTest {
     private static final String ANSI_BLUE = "\u001B[34m";
 
     public static void main(String[] args) throws Exception {
-        String fileName = "fool_tests.yml";
+        String fileName = "testesame.yml";
 
         HashMap<String, ArrayList<String>> testFile = loadYmlFromFile(fileName);
 

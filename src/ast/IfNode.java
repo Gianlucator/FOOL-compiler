@@ -48,6 +48,7 @@ public class IfNode implements Node {
         Node t = th.typeCheck();
         Node e = el.typeCheck();
         Node commonAncestor = FOOLlib.firstCommonAncestor(e, t);
+
         if (FOOLlib.isSubtype(t, e))
             return e;
         if (FOOLlib.isSubtype(e, t))
